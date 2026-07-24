@@ -1,0 +1,1856 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments Teams API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Teams
+  description: Team management operations
+paths:
+  /teams/filter:
+    post:
+      summary: Filter teams
+      description: 'Filter teams using comprehensive query criteria with AND/OR logic and multiple operators.
+
+        Supports complex filtering similar to GraphQL capabilities.
+
+        Note: Soft-deleted teams are excluded by default (deletedAt defaults to { isNull: true }).
+
+        '
+      operationId: filterTeams
+      tags:
+      - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamFilterRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Filter teams using comprehensive query criteria with AND/OR logic and multiple operators.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Supports complex filtering similar to GraphQL capabilities.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Note: Soft-deleted teams are excluded by default (deletedAt defaults to { isNull: true }).'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  /teams:
+    post:
+      summary: Create team
+      description: Create a new team in your organization
+      operationId: createTeam
+      tags:
+      - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamInput'
+      responses:
+        '201':
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /teams/{id}:
+    get:
+      summary: Get team
+      description: Retrieve a team by ID or client key
+      operationId: getTeam
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+    patch:
+      summary: Update team
+      description: Partially update a team. Only provided fields will be updated.
+      operationId: updateTeam
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamPatch'
+      responses:
+        '200':
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+    delete:
+      summary: Delete team
+      description: Soft delete a team (sets deletedAt timestamp)
+      operationId: deleteTeam
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '204':
+          description: Team deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+components:
+  schemas:
+    UserStatus:
+      type: string
+      enum:
+      - PENDING
+      - ACTIVE
+      - INACTIVE
+      description: 'User account status:
+
+        - `PENDING`: User invited but has not completed onboarding
+
+        - `ACTIVE`: User account is active and can access the system
+
+        - `INACTIVE`: User account is deactivated
+
+        '
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 1
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 1
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: true
+              attributes:
+                content: 'User account status:'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 1
+          - 4
+          inline: false
+          attributes:
+            ordered: false
+            marker: '-'
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 1
+            - 2
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 1
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: PENDING
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: ': User invited but has not completed onboarding'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 2
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 2
+              - 3
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: ACTIVE
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: ': User account is active and can access the system'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 3
+            - 4
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 3
+              - 4
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: INACTIVE
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: ': User account is deactivated'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          type: list
+          annotations: []
+          slots: {}
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    UserRole:
+      type: string
+      enum:
+      - CUSTOMER_REP
+      - CARRIER_REP
+      - AR_AP
+      - COMPLIANCE
+      - ADMIN
+      description: 'User role within the organization:
+
+        - `CUSTOMER_REP`: Customer service representative
+
+        - `CARRIER_REP`: Carrier service representative
+
+        - `AR_AP`: Accounts receivable/payable
+
+        - `COMPLIANCE`: Compliance officer
+
+        - `ADMIN`: System administrator
+
+        '
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 1
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 1
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: true
+              attributes:
+                content: 'User role within the organization:'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 1
+          - 6
+          inline: false
+          attributes:
+            ordered: false
+            marker: '-'
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 1
+            - 2
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 1
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: CUSTOMER_REP
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: ': Customer service representative'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 2
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 2
+              - 3
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: CARRIER_REP
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: ': Carrier service representative'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 3
+            - 4
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 3
+              - 4
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: AR_AP
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: ': Accounts receivable/payable'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 4
+            - 5
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 4
+              - 5
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 4
+                - 5
+                inline: true
+                attributes:
+                  content: COMPLIANCE
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 4
+                - 5
+                inline: true
+                attributes:
+                  content: ': Compliance officer'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 5
+              - 6
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 5
+                - 6
+                inline: true
+                attributes:
+                  content: ADMIN
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 5
+                - 6
+                inline: true
+                attributes:
+                  content: ': System administrator'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          type: list
+          annotations: []
+          slots: {}
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    ClientKeyFilter:
+      type: object
+      description: Filter options for client key fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        in:
+          type: array
+          description: Matches any value in the array
+          items:
+            type: string
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    TeamFilter:
+      type: object
+      description: Filter criteria for teams with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/TeamFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/TeamFilter'
+        not:
+          $ref: '#/components/schemas/TeamFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    TeamPatch:
+      type: object
+      description: 'Partial team update. All fields are optional.
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Team name
+          example: Sales Team - West Coast
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-TEAM-WEST
+        users:
+          type: array
+          description: Team members (replaces all existing memberships)
+          items:
+            $ref: '#/components/schemas/ResourceReferenceInput'
+          example:
+          - id: 550e8400-e29b-41d4-a716-446655440000
+          - key: ERP-USER-12345
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 1
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 1
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: true
+              attributes:
+                content: Partial team update. All fields are optional.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 1
+          - 4
+          inline: false
+          attributes:
+            ordered: false
+            marker: '-'
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 1
+            - 2
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 1
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 1
+                  - 2
+                  inline: true
+                  attributes:
+                    content: Omitted fields
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: ': Not modified (current value preserved)'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 2
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 2
+              - 3
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 2
+                  - 3
+                  inline: true
+                  attributes:
+                    content: Provided fields
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: ': Updated to the new value'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 3
+            - 4
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 3
+              - 4
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 3
+                  - 4
+                  inline: true
+                  attributes:
+                    content: Null values
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: ': Clear the field (set to null) where applicable'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          type: list
+          annotations: []
+          slots: {}
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    Team:
+      type: object
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        object:
+          type: string
+          enum:
+          - TEAM
+          readOnly: true
+          description: Object type identifier
+          example: TEAM
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique team identifier
+          example: 123e4567-e89b-12d3-a456-426614174000
+        name:
+          type: string
+          description: Team name
+          example: Sales Team - West Coast
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier for this team
+          example: ERP-TEAM-WEST
+        users:
+          type: array
+          description: Users who are members of this team
+          items:
+            $ref: '#/components/schemas/users_UserReference'
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when team was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when team was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: Timestamp when team was soft-deleted (null if active)
+          example: null
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    TeamInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Team name (required)
+          example: Sales Team - West Coast
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-TEAM-WEST
+        users:
+          type: array
+          description: Users to add to this team
+          items:
+            $ref: '#/components/schemas/ResourceReferenceInput'
+          example:
+          - id: 550e8400-e29b-41d4-a716-446655440000
+          - key: ERP-USER-12345
+    TeamFilterRequest:
+      type: object
+      description: Request body for filtering teams
+      properties:
+        filter:
+          $ref: '#/components/schemas/TeamFilter'
+          description: 'Filter criteria (optional - omit to return all teams).
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 2
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes:
+                    content: Filter criteria (optional - omit to return all teams).
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes: {}
+                  children: []
+                  type: softbreak
+                  annotations: []
+                  slots: {}
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes:
+                    content: 'Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.'
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          name:
+            includes: Sales
+        pageSize: 50
+    users_UserReference:
+      type: object
+      description: 'User reference for embedding in Team responses.
+
+        Identical to User but excludes the teams array to avoid circular references.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - roles
+      - createdAt
+      - updatedAt
+      properties:
+        object:
+          type: string
+          enum:
+          - USER
+          readOnly: true
+          description: Object type identifier
+          example: USER
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique user identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        roles:
+          type: array
+          description: User's roles within the organization
+          items:
+            $ref: '#/components/schemas/UserRole'
+          example:
+          - CUSTOMER_REP
+          - ADMIN
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier for this user
+          example: ERP-USER-12345
+        datUsername:
+          type:
+          - string
+          - 'null'
+          description: DAT (Load Board) integration username
+          example: johndoe_dat
+        mcpUsername:
+          type:
+          - string
+          - 'null'
+          description: MyCarrierPortal integration username
+          example: johndoe_mcp
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: Timestamp when user was soft-deleted (null if active)
+          example: null
+    ResourceReferenceInput:
+      type: object
+      description: Reference to another resource by either ID or client key (used in create/update requests)
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type: string
+          description: Client-defined reference ID
+      oneOf:
+      - required:
+        - id
+      - required:
+        - key
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: rate_limit_exceeded
+            message: Too many requests. Please retry after 60 seconds.
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per minute
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Remaining requests in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Unix timestamp when rate limit resets
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema:
+            type: integer
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+    LookupBy:
+      name: by
+      in: query
+      description: 'Specify lookup type for faster retrieval.
+
+        If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+
+        Use `by=key` when you know you''re providing a client key for best performance.
+
+        '
+      schema:
+        type: string
+        enum:
+        - id
+        - key
+      example: key
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Specify lookup type for faster retrieval.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Use '
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: by=key
+              children: []
+              type: code
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: ' when you know you''re providing a client key for best performance.'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

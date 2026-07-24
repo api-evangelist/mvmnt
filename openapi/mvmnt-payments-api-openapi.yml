@@ -1,0 +1,1264 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Payments
+  description: 'AR payment management operations.
+
+    Payments represent received customer payments applied to invoices.
+
+    '
+paths:
+  /payments/filter:
+    post:
+      summary: Filter payments
+      description: 'Search for AR payments using filter criteria.
+
+
+        ## Common Filters
+
+
+        - By customer: `{ "filter": { "customerId": { "equalTo": "uuid" } } }`
+
+        - By invoice: `{ "filter": { "invoiceId": { "equalTo": "uuid" } } }`
+
+        - By date range: `{ "filter": { "paymentDate": { "greaterThanOrEqualTo": "2025-01-01" } } }`
+
+        - By method: `{ "filter": { "paymentMethodType": { "equalTo": "check" } } }`
+
+        '
+      operationId: filterPayments
+      tags:
+      - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentFilterRequest'
+            examples:
+              byCustomer:
+                summary: Filter by customer
+                value:
+                  filter:
+                    customerId:
+                      equalTo: 550e8400-e29b-41d4-a716-446655440000
+              byDateRange:
+                summary: Filter by date range
+                value:
+                  filter:
+                    paymentDate:
+                      greaterThanOrEqualTo: '2025-01-01'
+                      lessThanOrEqualTo: '2025-01-31'
+      responses:
+        '200':
+          description: Payments matching filter criteria
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - pagination
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payment'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /payments:
+    post:
+      summary: Create a payment
+      description: 'Record a customer payment applied to invoices.
+
+
+        ## What happens
+
+
+        - Payment record is created
+
+        - Specified amounts are applied to invoices
+
+        - Invoice/order status updated to `PAID` when fully paid
+
+        - Overpayment creates a credit memo automatically
+
+
+        ## Validations
+
+
+        - Payment date must be >= invoice date for all applied invoices
+
+        - Application amounts must not exceed invoice open balances
+
+        - Customer must match invoice customer
+
+        '
+      operationId: createPayment
+      tags:
+      - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentInput'
+            examples:
+              singleInvoice:
+                summary: Single invoice payment
+                value:
+                  customerId: 550e8400-e29b-41d4-a716-446655440000
+                  paymentDate: '2025-01-15'
+                  paymentMethodType: check
+                  reference: CHK-12345
+                  applications:
+                  - invoiceId: 660e8400-e29b-41d4-a716-446655440001
+                    amount: 2500
+              multipleInvoices:
+                summary: Multiple invoices
+                value:
+                  customerId: 550e8400-e29b-41d4-a716-446655440000
+                  paymentDate: '2025-01-15'
+                  paymentMethodType: ach_wire
+                  reference: ACH-98765
+                  notes: January payment batch
+                  applications:
+                  - invoiceId: 660e8400-e29b-41d4-a716-446655440001
+                    amount: 1500
+                  - invoiceId: 660e8400-e29b-41d4-a716-446655440002
+                    amount: 2500
+              withCredits:
+                summary: With credits applied
+                value:
+                  customerId: 550e8400-e29b-41d4-a716-446655440000
+                  paymentDate: '2025-01-15'
+                  paymentMethodType: check
+                  reference: CHK-12345
+                  applications:
+                  - invoiceId: 660e8400-e29b-41d4-a716-446655440001
+                    amount: 2000
+                  creditApplications:
+                  - creditMemoId: 770e8400-e29b-41d4-a716-446655440003
+                    amount: 500
+      responses:
+        '201':
+          description: Payment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /payments/{id}:
+    get:
+      summary: Get a payment
+      description: 'Retrieve a payment by ID.
+
+
+        The response includes all invoice applications and credit applications.
+
+        '
+      operationId: getPayment
+      tags:
+      - Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Payment retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    patch:
+      summary: Update a payment
+      description: 'Update payment details or reassign invoice applications.
+
+
+        ## What happens
+
+
+        - Payment fields are updated
+
+        - Invoice applications are replaced if provided
+
+        - Order statuses are recalculated
+
+
+        ## Note
+
+
+        Updating applications replaces all existing applications.
+
+        Include all desired applications in the request.
+
+        '
+      operationId: updatePayment
+      tags:
+      - Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentPatch'
+            examples:
+              updateReference:
+                summary: Update reference
+                value:
+                  reference: CHK-12345-REV
+                  notes: Corrected check number
+              updateMethod:
+                summary: Update method
+                value:
+                  paymentMethodType: ACH_WIRE
+              reassignApplications:
+                summary: Reassign to different invoices
+                value:
+                  applications:
+                  - invoiceId: 660e8400-e29b-41d4-a716-446655440001
+                    amount: 1500
+      responses:
+        '200':
+          description: Payment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      summary: Delete a payment
+      description: 'Delete a payment and remove all invoice applications.
+
+
+        ## What happens
+
+
+        - Payment record is deleted
+
+        - Invoice applications are removed
+
+        - Order statuses revert if needed (PAID → UNPAID)
+
+
+        ## Note
+
+
+        This action cannot be undone. Consider voiding instead
+
+        if you need to maintain a record.
+
+        '
+      operationId: deletePayment
+      tags:
+      - Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '204':
+          description: Payment deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          description: Cannot delete - payment is synced to QBO
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payments/{id}/applications:
+    get:
+      summary: Get payment applications
+      description: List all invoice applications for a payment.
+      operationId: getPaymentApplications
+      tags:
+      - Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Applications retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaymentApplication'
+                  totalApplied:
+                    type: number
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    PaymentFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/PaymentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    PaymentInput:
+      type: object
+      required:
+      - customerId
+      - paymentDate
+      - applications
+      properties:
+        customerId:
+          type: string
+          format: uuid
+          description: Customer making the payment
+        paymentDate:
+          type: string
+          format: date
+          description: Date payment was received
+        paymentMethodType:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        reference:
+          type: string
+          maxLength: 500
+          description: Check number, transaction ID, etc.
+        notes:
+          type: string
+          maxLength: 2000
+          description: Payment notes
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentApplicationInput'
+          minItems: 1
+          description: Invoices to apply payment to
+        creditApplications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCreditApplicationInput'
+          description: Credits to apply in this payment
+    PaymentPatch:
+      type: object
+      properties:
+        paymentDate:
+          type: string
+          format: date
+        paymentMethodType:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        reference:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentApplicationInput'
+          description: Replace all invoice applications
+        creditApplications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCreditApplicationInput'
+          description: Replace all credit applications
+    PaymentCreditApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        creditMemoId:
+          type: string
+          format: uuid
+        creditMemoReference:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          description: Credit amount applied in this payment
+    PaymentCreditApplicationInput:
+      type: object
+      required:
+      - creditMemoId
+      - amount
+      properties:
+        creditMemoId:
+          type: string
+          format: uuid
+          description: Credit memo to apply
+        amount:
+          type: number
+          minimum: 0.01
+          description: Credit amount to apply
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentApplication:
+      type: object
+      required:
+      - id
+      - invoiceId
+      - amount
+      properties:
+        id:
+          type: string
+          format: uuid
+        invoiceId:
+          type: string
+          format: uuid
+        invoiceFriendlyId:
+          type:
+          - string
+          - 'null'
+        invoiceAmount:
+          type:
+          - number
+          - 'null'
+          description: Total invoice amount
+        invoiceOpenBalance:
+          type:
+          - number
+          - 'null'
+          description: Invoice balance before this payment
+        amount:
+          type: number
+          description: Amount applied to this invoice
+    CustomerReference:
+      type: object
+      description: 'Enhanced reference to a customer resource (returned in responses).
+
+        Includes full customer details in addition to id/key.
+
+
+        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - friendlyId
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CUSTOMER-ACME
+        name:
+          type: string
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          description: Human-readable customer identifier
+          example: A123456
+        status:
+          type: string
+          description: Customer status
+          enum:
+          - PROSPECT
+          - ACTIVE
+          - INACTIVE
+          - CHURNED
+          example: ACTIVE
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        website:
+          type:
+          - string
+          - 'null'
+          description: Customer website URL
+          example: https://acme-manufacturing.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the customer was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the customer was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer was soft deleted (null if active)
+          example: null
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    payments_PaymentMethodTypeFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        notEqualTo:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/payments_PaymentMethodType'
+    PaymentFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        invoiceId:
+          $ref: '#/components/schemas/UUIDFilter'
+        shipmentId:
+          $ref: '#/components/schemas/UUIDFilter'
+        paymentDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        paymentMethodType:
+          $ref: '#/components/schemas/payments_PaymentMethodTypeFilter'
+        totalAmount:
+          $ref: '#/components/schemas/FloatFilter'
+        reference:
+          $ref: '#/components/schemas/StringFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentFilter'
+        not:
+          $ref: '#/components/schemas/PaymentFilter'
+    payments_PaymentMethodType:
+      type: string
+      enum:
+      - ACH_WIRE
+      - ZELLE
+      - VENMO
+      - CHECK
+      - EFT_DIRECT_DEPOSIT
+      - E_TRANSFER
+      - CREDIT_CARD
+      description: 'Payment method type.
+
+        - `ACH_WIRE`: ACH or wire transfer
+
+        - `ZELLE`: Zelle payment
+
+        - `VENMO`: Venmo payment
+
+        - `CHECK`: Paper check
+
+        - `EFT_DIRECT_DEPOSIT`: EFT direct deposit
+
+        - `E_TRANSFER`: Electronic transfer
+
+        - `CREDIT_CARD`: Credit card payment
+
+        '
+    PaymentApplicationInput:
+      type: object
+      required:
+      - invoiceId
+      - amount
+      properties:
+        invoiceId:
+          type: string
+          format: uuid
+          description: Invoice to apply payment to
+        amount:
+          type: number
+          minimum: 0.01
+          description: Amount to apply to this invoice
+    Payment:
+      type: object
+      required:
+      - id
+      - paymentDate
+      - totalAmount
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          description: Human-readable payment key
+          example: PMT-00001
+        customer:
+          $ref: '#/components/schemas/CustomerReference'
+        paymentDate:
+          type: string
+          format: date
+          description: Date payment was received
+        paymentMethodType:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Check number, transaction ID, etc.
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Payment notes
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency code
+          example: USD
+        totalAmount:
+          type: number
+          description: Total payment amount
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentApplication'
+          description: Invoices this payment is applied to
+        creditApplications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCreditApplication'
+          description: Credits applied in this payment
+        overpaymentAmount:
+          type:
+          - number
+          - 'null'
+          description: Amount in excess of invoice totals
+        overpaymentCreditMemoId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Credit memo created from overpayment
+        shipmentIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Related shipment IDs
+        shipmentKeys:
+          type: array
+          items:
+            type: string
+          description: Related shipment friendly IDs
+        qboId:
+          type:
+          - string
+          - 'null'
+          description: QuickBooks Online payment ID
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+    LookupBy:
+      name: by
+      in: query
+      description: 'Specify lookup type for faster retrieval.
+
+        If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+
+        Use `by=key` when you know you''re providing a client key for best performance.
+
+        '
+      schema:
+        type: string
+        enum:
+        - id
+        - key
+      example: key
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Specify lookup type for faster retrieval.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Use '
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: by=key
+              children: []
+              type: code
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: ' when you know you''re providing a client key for best performance.'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

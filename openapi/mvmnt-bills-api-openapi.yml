@@ -1,0 +1,1783 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments Bills API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Bills
+  description: 'AP bill management operations.
+
+    Bills represent carrier and vendor invoices to be paid.
+
+    '
+paths:
+  /bills/filter:
+    post:
+      summary: Filter bills
+      description: 'Search for AP bills using filter criteria.
+
+
+        ## Common Filters
+
+
+        - By carrier: `{ "filter": { "carrierId": { "equalTo": "uuid" } } }`
+
+        - By vendor: `{ "filter": { "vendorId": { "equalTo": "uuid" } } }`
+
+        - Awaiting approval: `{ "filter": { "status": { "equalTo": "IN_REVIEW" } } }`
+
+        - By shipment: `{ "filter": { "shipmentId": { "equalTo": "uuid" } } }`
+
+        - Overdue: `{ "filter": { "overdue": true } }`
+
+        '
+      operationId: filterBills
+      tags:
+      - Bills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillFilterRequest'
+            examples:
+              awaitingApproval:
+                summary: Bills awaiting approval
+                value:
+                  filter:
+                    status:
+                      equalTo: IN_REVIEW
+              byCarrier:
+                summary: Bills by carrier
+                value:
+                  filter:
+                    carrierId:
+                      equalTo: 550e8400-e29b-41d4-a716-446655440000
+                    entityType:
+                      equalTo: CARRIER
+              approvedToPay:
+                summary: Bills approved to pay
+                value:
+                  filter:
+                    status:
+                      equalTo: APPROVED_TO_PAY
+      responses:
+        '200':
+          description: Bills matching filter criteria
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - pagination
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Bill'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /bills:
+    post:
+      summary: Record a bill
+      description: 'Record a carrier or vendor bill (invoice).
+
+
+        ## What happens
+
+
+        - Bill record is created for the load carrier or vended service
+
+        - Entity status updates to `IN_REVIEW`
+
+        - Due date calculated from payment term if not provided
+
+
+        ## Prerequisites
+
+
+        - LoadCarrier or VendedService must exist
+
+        - Entity must be in `AWAITING_INVOICE` status
+
+        '
+      operationId: createBill
+      tags:
+      - Bills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillInput'
+            examples:
+              carrierBill:
+                summary: Record carrier bill
+                value:
+                  entityType: CARRIER
+                  entityId: 550e8400-e29b-41d4-a716-446655440000
+                  invoiceDate: '2025-01-15'
+                  dueDate: '2025-02-14'
+                  amount: 2500
+                  reference: INV-CARRIER-123
+                  currency: USD
+              vendorBill:
+                summary: Record vendor bill
+                value:
+                  entityType: VENDOR
+                  entityId: 660e8400-e29b-41d4-a716-446655440001
+                  invoiceDate: '2025-01-15'
+                  amount: 500
+                  reference: VS-2025-001
+      responses:
+        '201':
+          description: Bill created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '409':
+          description: Entity already has a bill or is not in correct status
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /bills/{id}:
+    get:
+      summary: Get a bill
+      description: 'Retrieve a bill by ID.
+
+
+        The response includes payments applied and carrier/vendor details.
+
+        '
+      operationId: getBill
+      tags:
+      - Bills
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Bill retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    patch:
+      summary: Update a bill
+      description: 'Update bill fields.
+
+
+        ## Constraints
+
+
+        - Cannot change amount if payments have been applied
+
+        - Status changes use action endpoints
+
+        '
+      operationId: updateBill
+      tags:
+      - Bills
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillPatch'
+            examples:
+              updateDueDate:
+                summary: Update due date
+                value:
+                  dueDate: '2025-02-28'
+              updateReference:
+                summary: Update reference
+                value:
+                  reference: INV-CARRIER-123-REV
+      responses:
+        '200':
+          description: Bill updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          description: Cannot update - bill has payments
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      summary: Delete a bill
+      description: 'Delete a bill.
+
+
+        ## Prerequisites
+
+
+        - Bill must not have any payments applied
+
+
+        ## What happens
+
+
+        - Bill record is deleted
+
+        - Entity status reverts to `AWAITING_INVOICE`
+
+        '
+      operationId: deleteBill
+      tags:
+      - Bills
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '204':
+          description: Bill deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          description: Cannot delete - bill has payments
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /bills/{id}/approve:
+    post:
+      summary: Approve bill for payment
+      description: 'Approve a bill for payment.
+
+
+        ## What happens
+
+
+        - Bill status changes to `APPROVED_TO_PAY`
+
+        - Bill is now ready for payment
+
+
+        ## Prerequisites
+
+
+        - Bill must be in `IN_REVIEW` status
+
+        '
+      operationId: approveBill
+      tags:
+      - Bills
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Bill approved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          description: Bill is not in valid status for approval
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /bills/batch-approve:
+    post:
+      summary: Batch approve bills
+      description: 'Approve multiple bills for payment in a single request.
+
+
+        Bills that cannot be approved will be returned in the `failed` array.
+
+        '
+      operationId: batchApproveBills
+      tags:
+      - Bills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApproveBillsRequest'
+            examples:
+              approveBills:
+                summary: Approve multiple bills
+                value:
+                  billIds:
+                  - 550e8400-e29b-41d4-a716-446655440000
+                  - 550e8400-e29b-41d4-a716-446655440001
+      responses:
+        '200':
+          description: Batch approval completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApproveBillsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /bills/{id}/unapprove:
+    post:
+      summary: Unapprove bill
+      description: 'Revert bill from approved back to in review.
+
+
+        ## What happens
+
+
+        - Bill status changes to `IN_REVIEW`
+
+
+        ## Prerequisites
+
+
+        - Bill must be in `APPROVED_TO_PAY` status
+
+        - Bill must not have any payments
+
+        '
+      operationId: unapproveBill
+      tags:
+      - Bills
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Bill unapproved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          description: Bill is not in valid status or has payments
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /bills/{id}/revert:
+    post:
+      summary: Revert bill to awaiting invoice
+      description: 'Revert bill completely back to awaiting invoice state.
+
+
+        ## What happens
+
+
+        - Bill record is deleted
+
+        - Any payments are deleted
+
+        - Entity status reverts to `AWAITING_INVOICE`
+
+
+        ## Use case
+
+
+        Use when a bill was recorded incorrectly and needs to start over.
+
+        '
+      operationId: revertBill
+      tags:
+      - Bills
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevertBillRequest'
+            examples:
+              withReason:
+                summary: Revert with reason
+                value:
+                  reason: Invoice amount was incorrect
+      responses:
+        '200':
+          description: Bill reverted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  entityStatus:
+                    type: string
+                    description: New status of the load carrier or vended service
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /bills/{id}/payments:
+    get:
+      summary: Get bill payments
+      description: List all payments applied to a specific bill.
+      operationId: getBillPayments
+      tags:
+      - Bills
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Payments retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BillPaymentApplied'
+                  totalPaid:
+                    type: number
+                  openBalance:
+                    type: number
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /bills/aging-report:
+    get:
+      summary: Get AP aging report
+      description: 'Generate accounts payable aging report.
+
+
+        ## Report buckets
+
+
+        By default: Current, 1-30, 31-60, 61-90, 90+ days
+
+
+        ## Export formats
+
+
+        - JSON (default)
+
+        - CSV (set Accept header to text/csv)
+
+        '
+      operationId: getApAgingReport
+      tags:
+      - Bills
+      parameters:
+      - name: carrierId
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: Filter by specific carrier
+      - name: vendorId
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: Filter by specific vendor
+      - name: entityType
+        in: query
+        schema:
+          $ref: '#/components/schemas/BillEntityType'
+        description: Filter by entity type
+      - name: daysPerBucket
+        in: query
+        schema:
+          type: integer
+          default: 30
+        description: Days per aging bucket
+      - name: maxDays
+        in: query
+        schema:
+          type: integer
+          default: 120
+        description: Maximum days to track
+      responses:
+        '200':
+          description: AP aging report generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApAgingReportResponse'
+            text/csv:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+components:
+  schemas:
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    CarrierFactorReference:
+      type: object
+      description: 'Enhanced reference to a carrier factor (factoring company).
+
+        Includes full carrier factor details in addition to id/key.
+
+        '
+      required:
+      - id
+      - companyName
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier factor UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-FACTOR-001
+        companyName:
+          type: string
+          description: Factoring company legal name
+          example: Capital Factoring Services Inc
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: accounting@capitalfactoring.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-234-5678
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier factor was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier factor was last updated
+          example: '2025-01-15T14:30:00Z'
+    CarrierReference:
+      type: object
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
+          type: string
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the carrier was soft deleted (null if active)
+          example: null
+    BillFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        loadCarrierId:
+          $ref: '#/components/schemas/UUIDFilter'
+        vendedServiceId:
+          $ref: '#/components/schemas/UUIDFilter'
+        carrierId:
+          $ref: '#/components/schemas/UUIDFilter'
+        vendorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        loadId:
+          $ref: '#/components/schemas/UUIDFilter'
+        shipmentId:
+          $ref: '#/components/schemas/UUIDFilter'
+        status:
+          $ref: '#/components/schemas/BillStatusFilter'
+        entityType:
+          $ref: '#/components/schemas/BillEntityTypeFilter'
+        invoiceDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        dueDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        amount:
+          $ref: '#/components/schemas/FloatFilter'
+        overdue:
+          type: boolean
+          description: Filter to overdue bills only
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillFilter'
+        not:
+          $ref: '#/components/schemas/BillFilter'
+    Bill:
+      type: object
+      required:
+      - id
+      - friendlyId
+      - status
+      - entityType
+      - amount
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        friendlyId:
+          type: string
+          description: Human-readable bill ID
+          example: BILL-00001
+        key:
+          type:
+          - string
+          - 'null'
+          description: Client-defined key
+        entityType:
+          $ref: '#/components/schemas/BillEntityType'
+        loadCarrierId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated load carrier ID (if carrier bill)
+        vendedServiceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated vended service ID (if vendor bill)
+        carrier:
+          $ref: '#/components/schemas/CarrierReference'
+        vendor:
+          $ref: '#/components/schemas/VendorReference'
+        loadId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        loadKey:
+          type:
+          - string
+          - 'null'
+        shipmentId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        shipmentKey:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/BillStatus'
+        invoiceDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Date of carrier/vendor invoice
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Payment due date
+        amount:
+          type: number
+          description: Bill amount
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency code
+          example: USD
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Carrier/vendor invoice reference number
+        amountPaid:
+          type: number
+          description: Total payments received
+        amountOwed:
+          type: number
+          description: Outstanding balance
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentApplied'
+          description: Payments applied to this bill
+        paymentTerm:
+          $ref: '#/components/schemas/PaymentTermReference'
+        carrierFactor:
+          $ref: '#/components/schemas/CarrierFactorReference'
+        factorJobId:
+          type:
+          - string
+          - 'null'
+          description: External factoring job ID
+        factorStatus:
+          type:
+          - string
+          - 'null'
+          description: Current factoring status
+        qboId:
+          type:
+          - string
+          - 'null'
+          description: QuickBooks Online bill ID
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    BillPaymentApplied:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        paymentGroupId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          description: Amount applied to this bill
+        paymentDate:
+          type: string
+          format: date
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Check number, transaction ID, etc.
+    BillFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/BillFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    RevertBillRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          maxLength: 1000
+          description: Reason for reverting
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    PaymentTermReference:
+      type: object
+      description: 'Enhanced reference to a payment term resource (returned in responses).
+
+        Includes full payment term details in addition to id/key.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Payment term UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-PAYTERM-NET30
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type:
+          - string
+          - 'null'
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type:
+          - integer
+          - 'null'
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          description: When the payment term was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the payment term was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the payment term was soft deleted (null if active)
+          example: null
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    BillStatus:
+      type: string
+      enum:
+      - AWAITING_INVOICE
+      - IN_REVIEW
+      - APPROVED_TO_PAY
+      - PAID
+      description: 'Current status of the bill (AP invoice).
+
+        - `AWAITING_INVOICE`: Waiting for carrier/vendor to submit invoice
+
+        - `IN_REVIEW`: Invoice received, under review
+
+        - `APPROVED_TO_PAY`: Approved and ready for payment
+
+        - `PAID`: Fully paid
+
+        '
+    BillEntityType:
+      type: string
+      enum:
+      - CARRIER
+      - VENDOR
+      description: 'Type of entity the bill is for.
+
+        - `CARRIER`: Bill for a carrier (LoadCarrier)
+
+        - `VENDOR`: Bill for a vendor service (VendedService)
+
+        '
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    BillInput:
+      type: object
+      required:
+      - entityType
+      - entityId
+      - invoiceDate
+      - amount
+      properties:
+        entityType:
+          $ref: '#/components/schemas/BillEntityType'
+        entityId:
+          type: string
+          format: uuid
+          description: LoadCarrier ID or VendedService ID
+        invoiceDate:
+          type: string
+          format: date
+          description: Invoice date from carrier/vendor
+        dueDate:
+          type: string
+          format: date
+          description: Payment due date
+        amount:
+          type: number
+          description: Invoice amount
+        reference:
+          type: string
+          maxLength: 500
+          description: Carrier/vendor invoice reference number
+        currency:
+          type: string
+          description: Currency code (defaults to carrier/vendor currency)
+        paymentTermId:
+          type: string
+          format: uuid
+          description: Payment term
+    ApproveBillsResponse:
+      type: object
+      properties:
+        approved:
+          type: array
+          items:
+            type: object
+            properties:
+              billId:
+                type: string
+                format: uuid
+              status:
+                $ref: '#/components/schemas/BillStatus'
+        failed:
+          type: array
+          items:
+            type: object
+            properties:
+              billId:
+                type: string
+                format: uuid
+              error:
+                type: string
+    ApproveBillsRequest:
+      type: object
+      required:
+      - billIds
+      properties:
+        billIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+          description: Bill IDs to approve
+    BillStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/BillStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/BillStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillStatus'
+    ApAgingReportResponse:
+      type: object
+      required:
+      - asOfDate
+      - buckets
+      - payees
+      - totals
+      properties:
+        asOfDate:
+          type: string
+          format: date
+        buckets:
+          type: array
+          items:
+            type: string
+          example:
+          - Current
+          - 1-30
+          - 31-60
+          - 61-90
+          - 90+
+        payees:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              friendlyId:
+                type:
+                - string
+                - 'null'
+              entityType:
+                $ref: '#/components/schemas/BillEntityType'
+              current:
+                type: number
+              days1to30:
+                type: number
+              days31to60:
+                type: number
+              days61to90:
+                type: number
+              over90:
+                type: number
+              total:
+                type: number
+        totals:
+          type: object
+          properties:
+            current:
+              type: number
+            days1to30:
+              type: number
+            days31to60:
+              type: number
+            days61to90:
+              type: number
+            over90:
+              type: number
+            total:
+              type: number
+    BillPatch:
+      type: object
+      properties:
+        invoiceDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        amount:
+          type: number
+        reference:
+          type:
+          - string
+          - 'null'
+        paymentTermId:
+          type: string
+          format: uuid
+    VendorReference:
+      type: object
+      description: 'Enhanced reference to a vendor profile.
+
+        Includes full vendor details in addition to id/key.
+
+        '
+      required:
+      - id
+      - friendlyId
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vendor UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-VENDOR-ABC-001
+        friendlyId:
+          type: string
+          description: Human-readable vendor identifier
+          example: V123456
+        name:
+          type: string
+          description: Vendor legal name
+          example: ABC Warehouse Services
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: billing@abcwarehouse.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        status:
+          type:
+          - string
+          - 'null'
+          description: Vendor status
+          example: ACTIVE
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        createdAt:
+          type: string
+          format: date-time
+          description: When the vendor was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the vendor was last updated
+          example: '2025-01-15T14:30:00Z'
+    BillEntityTypeFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/BillEntityType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillEntityType'
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+    LookupBy:
+      name: by
+      in: query
+      description: 'Specify lookup type for faster retrieval.
+
+        If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+
+        Use `by=key` when you know you''re providing a client key for best performance.
+
+        '
+      schema:
+        type: string
+        enum:
+        - id
+        - key
+      example: key
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Specify lookup type for faster retrieval.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Use '
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: by=key
+              children: []
+              type: code
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: ' when you know you''re providing a client key for best performance.'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

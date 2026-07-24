@@ -1,0 +1,1734 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments Invoices API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Invoices
+  description: 'AR invoice management operations.
+
+    Invoices represent customer billing for shipment services.
+
+    '
+paths:
+  /invoices/filter:
+    post:
+      summary: Filter invoices
+      description: 'Search for AR invoices using filter criteria.
+
+
+        ## Common Filters
+
+
+        - By customer: `{ "filter": { "customerId": { "equalTo": "uuid" } } }`
+
+        - Unpaid: `{ "filter": { "status": { "in": ["AWAITING_PAYMENT", "PARTIALLY_PAID"] } } }`
+
+        - Overdue: `{ "filter": { "overdue": true } }`
+
+        - By shipment: `{ "filter": { "shipmentId": { "equalTo": "uuid" } } }`
+
+        '
+      operationId: filterInvoices
+      tags:
+      - Invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceFilterRequest'
+            examples:
+              unpaidInvoices:
+                summary: Unpaid invoices
+                value:
+                  filter:
+                    status:
+                      in:
+                      - AWAITING_PAYMENT
+                      - PARTIALLY_PAID
+              overdueByCustomer:
+                summary: Overdue invoices for customer
+                value:
+                  filter:
+                    customerId:
+                      equalTo: 550e8400-e29b-41d4-a716-446655440000
+                    overdue: true
+      responses:
+        '200':
+          description: Invoices matching filter criteria
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - pagination
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /invoices:
+    post:
+      summary: Create an invoice
+      description: 'Create a new invoice for an order.
+
+
+        ## What happens
+
+
+        - Invoice record is created for the order
+
+        - Order status updates to `DELIVERED_UNPAID`
+
+        - Due date calculated from payment term if not provided
+
+
+        ## Note
+
+
+        Each shipment can have only one AR invoice. Use `POST /shipments/{id}/invoice/generate`
+
+        to generate the invoice PDF document.
+
+        '
+      operationId: createInvoice
+      tags:
+      - Invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceInput'
+            examples:
+              basic:
+                summary: Create invoice
+                value:
+                  orderId: 550e8400-e29b-41d4-a716-446655440000
+                  invoiceDate: '2025-01-15'
+                  dueDate: '2025-02-14'
+                  amount: 2500
+                  currency: USD
+              withTerm:
+                summary: With payment term
+                value:
+                  orderId: 550e8400-e29b-41d4-a716-446655440000
+                  invoiceDate: '2025-01-15'
+                  amount: 2500
+                  paymentTermId: 660e8400-e29b-41d4-a716-446655440001
+      responses:
+        '201':
+          description: Invoice created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '409':
+          description: Order already has an invoice
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /invoices/{id}:
+    get:
+      summary: Get an invoice
+      description: 'Retrieve an invoice by ID.
+
+
+        The response includes payments, credits, and document info.
+
+        '
+      operationId: getInvoice
+      tags:
+      - Invoices
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Invoice retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    patch:
+      summary: Update an invoice
+      description: 'Update invoice fields.
+
+
+        **Note:** Amount cannot be changed directly. Update order charges instead.
+
+        '
+      operationId: updateInvoice
+      tags:
+      - Invoices
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoicePatch'
+            examples:
+              updateDueDate:
+                summary: Update due date
+                value:
+                  dueDate: '2025-02-28'
+              updateReference:
+                summary: Update reference
+                value:
+                  reference: INV-CUST-123-REV
+      responses:
+        '200':
+          description: Invoice updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      summary: Void an invoice
+      description: 'Void/cancel an invoice.
+
+
+        ## Prerequisites
+
+
+        - Invoice must not have any payments applied
+
+        - Invoice must not be factored
+
+        '
+      operationId: voidInvoice
+      tags:
+      - Invoices
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '204':
+          description: Invoice voided successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          description: Cannot void - invoice has payments or is factored
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /invoices/{id}/mark-awaiting:
+    post:
+      summary: Mark invoice as awaiting payment
+      description: 'Mark invoice as awaiting payment.
+
+
+        ## What happens
+
+
+        - Sets invoice date and due date
+
+        - Updates order status to `DELIVERED_UNPAID`
+
+        - Invoice is now ready for payment collection
+
+        '
+      operationId: markInvoiceAwaiting
+      tags:
+      - Invoices
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarkAwaitingPaymentRequest'
+            examples:
+              withDates:
+                summary: With dates
+                value:
+                  invoiceDate: '2025-01-15'
+                  dueDate: '2025-02-14'
+      responses:
+        '200':
+          description: Invoice marked as awaiting payment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /invoices/{id}/send:
+    post:
+      summary: Email invoice
+      description: 'Send invoice to customer via email.
+
+
+        ## What happens
+
+
+        - Generates invoice PDF if not already generated
+
+        - Sends email with PDF attachment
+
+        - Logs email in activity feed
+
+        '
+      operationId: sendInvoiceEmail
+      tags:
+      - Invoices
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendInvoiceEmailRequest'
+            examples:
+              basic:
+                summary: Basic email
+                value:
+                  toEmails:
+                  - billing@customer.com
+              withMessage:
+                summary: With custom message
+                value:
+                  toEmails:
+                  - billing@customer.com
+                  ccEmails:
+                  - accounts@broker.com
+                  subject: Invoice INV-00001 for Shipment SHP-00123
+                  message: Please find attached your invoice for recent shipment services.
+      responses:
+        '200':
+          description: Email sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  emailId:
+                    type: string
+                    format: uuid
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /invoices/{id}/payments:
+    get:
+      summary: Get invoice payments
+      description: List all payments applied to a specific invoice.
+      operationId: getInvoicePayments
+      tags:
+      - Invoices
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Payments retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InvoicePayment'
+                  totalPaid:
+                    type: number
+                  openBalance:
+                    type: number
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /invoices/batch-generate:
+    post:
+      summary: Batch generate invoices
+      description: 'Generate invoices for multiple shipments in a single request.
+
+
+        ## What happens
+
+
+        - Creates invoice records for each shipment
+
+        - Generates PDF documents
+
+        - Optionally sends emails grouped by customer
+
+
+        ## Note
+
+
+        Shipments that already have invoices or are missing requirements
+
+        will be skipped and returned in the `failed` array.
+
+        '
+      operationId: batchGenerateInvoices
+      tags:
+      - Invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGenerateInvoicesRequest'
+            examples:
+              basic:
+                summary: Generate only
+                value:
+                  shipmentIds:
+                  - 550e8400-e29b-41d4-a716-446655440000
+                  - 550e8400-e29b-41d4-a716-446655440001
+              withEmail:
+                summary: Generate and email
+                value:
+                  shipmentIds:
+                  - 550e8400-e29b-41d4-a716-446655440000
+                  - 550e8400-e29b-41d4-a716-446655440001
+                  sendEmail: true
+                  emailConfig:
+                    groupByCustomer: true
+      responses:
+        '200':
+          description: Batch generation completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGenerateInvoicesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /invoices/aging-report:
+    get:
+      summary: Get aging report
+      description: 'Generate accounts receivable aging report.
+
+
+        ## Report buckets
+
+
+        By default: Current, 1-30, 31-60, 61-90, 90+ days
+
+
+        ## Export formats
+
+
+        - JSON (default)
+
+        - CSV (set Accept header to text/csv)
+
+        '
+      operationId: getAgingReport
+      tags:
+      - Invoices
+      parameters:
+      - name: customerId
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: Filter by specific customer
+      - name: daysPerBucket
+        in: query
+        schema:
+          type: integer
+          default: 30
+        description: Days per aging bucket
+      - name: maxDays
+        in: query
+        schema:
+          type: integer
+          default: 120
+        description: Maximum days to track
+      responses:
+        '200':
+          description: Aging report generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgingReportResponse'
+            text/csv:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /invoices/{id}/available-credits:
+    get:
+      summary: Get available credits for invoice
+      description: 'List credit memos that can be applied to an invoice.
+
+
+        Returns credits for the same customer with remaining balance
+
+        and matching currency.
+
+        '
+      operationId: getAvailableCreditsForInvoice
+      tags:
+      - Invoices
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Available credits retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailableCreditsResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    AgingReportResponse:
+      type: object
+      required:
+      - asOfDate
+      - buckets
+      - customers
+      - totals
+      properties:
+        asOfDate:
+          type: string
+          format: date
+        buckets:
+          type: array
+          items:
+            type: string
+          example:
+          - Current
+          - 1-30
+          - 31-60
+          - 61-90
+          - 90+
+        customers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              friendlyId:
+                type: string
+              current:
+                type: number
+              days1to30:
+                type: number
+              days31to60:
+                type: number
+              days61to90:
+                type: number
+              over90:
+                type: number
+              total:
+                type: number
+        totals:
+          type: object
+          properties:
+            current:
+              type: number
+            days1to30:
+              type: number
+            days31to60:
+              type: number
+            days61to90:
+              type: number
+            over90:
+              type: number
+            total:
+              type: number
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    AvailableCreditsResponse:
+      type: object
+      required:
+      - availableCredits
+      - totalAvailable
+      properties:
+        availableCredits:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              reference:
+                type:
+                - string
+                - 'null'
+              remainingBalance:
+                type: number
+              currency:
+                type: string
+              memoDate:
+                type: string
+                format: date
+              notes:
+                type:
+                - string
+                - 'null'
+        totalAvailable:
+          type: number
+          description: Total available credit balance
+    InvoiceCredit:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        creditMemoId:
+          type: string
+          format: uuid
+        creditMemoReference:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          description: Credit amount applied
+        appliedAt:
+          type: string
+          format: date-time
+    InvoicePayment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        paymentGroupId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          description: Amount applied to this invoice
+        paymentDate:
+          type: string
+          format: date
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Check number, transaction ID, etc.
+        paymentMethodType:
+          type:
+          - string
+          - 'null'
+          description: Payment method (check, ach_wire, etc.)
+    InvoicePatch:
+      type: object
+      properties:
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        reference:
+          type:
+          - string
+          - 'null'
+        paymentTermId:
+          type: string
+          format: uuid
+    InvoiceStatus:
+      type: string
+      enum:
+      - DRAFT
+      - AWAITING_PAYMENT
+      - PARTIALLY_PAID
+      - PAID
+      - VOIDED
+      description: 'Current status of the invoice.
+
+        - `DRAFT`: Invoice record exists but not finalized
+
+        - `AWAITING_PAYMENT`: Invoice finalized, awaiting payment
+
+        - `PARTIALLY_PAID`: Some payments received, balance remains
+
+        - `PAID`: Fully paid
+
+        - `VOIDED`: Invoice cancelled/voided
+
+        '
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    PaymentTermReference:
+      type: object
+      description: 'Enhanced reference to a payment term resource (returned in responses).
+
+        Includes full payment term details in addition to id/key.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Payment term UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-PAYTERM-NET30
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type:
+          - string
+          - 'null'
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type:
+          - integer
+          - 'null'
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          description: When the payment term was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the payment term was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the payment term was soft deleted (null if active)
+          example: null
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    MarkAwaitingPaymentRequest:
+      type: object
+      properties:
+        invoiceDate:
+          type: string
+          format: date
+          description: Invoice date (defaults to today)
+        dueDate:
+          type: string
+          format: date
+          description: Due date (defaults based on payment term)
+    FactoringProvider:
+      type: string
+      enum:
+      - DENIM
+      - HAULPAY
+      description: 'Factoring provider for invoice financing.
+
+        - `DENIM`: Denim factoring
+
+        - `HAULPAY`: HaulPay factoring
+
+        '
+    InvoiceInput:
+      type: object
+      required:
+      - orderId
+      - invoiceDate
+      - amount
+      properties:
+        orderId:
+          type: string
+          format: uuid
+          description: Order to invoice
+        invoiceDate:
+          type: string
+          format: date
+          description: Invoice date
+        dueDate:
+          type: string
+          format: date
+          description: Payment due date
+        amount:
+          type: number
+          description: Invoice amount (typically calculated from order charges)
+        reference:
+          type: string
+          maxLength: 500
+          description: External reference number
+        currency:
+          type: string
+          description: Currency code (defaults to customer currency)
+        paymentTermId:
+          type: string
+          format: uuid
+          description: Payment term (defaults to customer default)
+    InvoiceFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/InvoiceFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    CustomerReference:
+      type: object
+      description: 'Enhanced reference to a customer resource (returned in responses).
+
+        Includes full customer details in addition to id/key.
+
+
+        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - friendlyId
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CUSTOMER-ACME
+        name:
+          type: string
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          description: Human-readable customer identifier
+          example: A123456
+        status:
+          type: string
+          description: Customer status
+          enum:
+          - PROSPECT
+          - ACTIVE
+          - INACTIVE
+          - CHURNED
+          example: ACTIVE
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        website:
+          type:
+          - string
+          - 'null'
+          description: Customer website URL
+          example: https://acme-manufacturing.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the customer was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the customer was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer was soft deleted (null if active)
+          example: null
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    SendInvoiceEmailRequest:
+      type: object
+      required:
+      - toEmails
+      properties:
+        toEmails:
+          type: array
+          items:
+            type: string
+            format: email
+          minItems: 1
+        ccEmails:
+          type: array
+          items:
+            type: string
+            format: email
+        subject:
+          type: string
+          description: Email subject (defaults to standard invoice subject)
+        message:
+          type: string
+          description: Email body message
+    InvoiceStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/InvoiceStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/InvoiceStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceStatus'
+    Invoice:
+      type: object
+      required:
+      - id
+      - friendlyId
+      - status
+      - invoiceDate
+      - amount
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        friendlyId:
+          type: string
+          description: Human-readable invoice ID
+          example: INV-00001
+        key:
+          type:
+          - string
+          - 'null'
+          description: Client-defined key
+        orderId:
+          type: string
+          format: uuid
+          description: Associated order ID
+        orderKey:
+          type:
+          - string
+          - 'null'
+          description: Order friendly ID
+        shipmentId:
+          type: string
+          format: uuid
+          description: Associated shipment ID
+        shipmentKey:
+          type:
+          - string
+          - 'null'
+          description: Shipment friendly ID
+        customer:
+          $ref: '#/components/schemas/CustomerReference'
+        status:
+          $ref: '#/components/schemas/InvoiceStatus'
+        invoiceDate:
+          type: string
+          format: date
+          description: Date invoice was issued
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Payment due date
+        amount:
+          type: number
+          description: Total invoice amount
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency code (USD, CAD)
+          example: USD
+        reference:
+          type:
+          - string
+          - 'null'
+          description: External reference number
+        amountPaid:
+          type: number
+          description: Total payments received
+        amountOwed:
+          type: number
+          description: Outstanding balance
+        creditsApplied:
+          type:
+          - number
+          - 'null'
+          description: Total credits applied
+        paymentTerm:
+          $ref: '#/components/schemas/PaymentTermReference'
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoicePayment'
+          description: Payments applied to this invoice
+        credits:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceCredit'
+          description: Credits applied to this invoice
+        factorName:
+          $ref: '#/components/schemas/FactoringProvider'
+        factorJobId:
+          type:
+          - string
+          - 'null'
+          description: External factoring job ID
+        factorStatus:
+          type:
+          - string
+          - 'null'
+          description: Current factoring status
+        qboId:
+          type:
+          - string
+          - 'null'
+          description: QuickBooks Online invoice ID
+        documentId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Generated invoice PDF document ID
+        documentUrl:
+          type:
+          - string
+          - 'null'
+          description: Download URL for invoice PDF
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    BatchGenerateInvoicesRequest:
+      type: object
+      required:
+      - orderIds
+      properties:
+        orderIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Order IDs to generate invoices for
+          maxItems: 100
+        sendEmail:
+          type: boolean
+          default: false
+          description: Email invoices to customers after generation
+        emailConfig:
+          type: object
+          properties:
+            ccEmails:
+              type: array
+              items:
+                type: string
+                format: email
+            groupByCustomer:
+              type: boolean
+              default: true
+              description: Group invoices by customer in emails
+    BatchGenerateInvoicesResponse:
+      type: object
+      properties:
+        generated:
+          type: array
+          items:
+            type: object
+            properties:
+              orderId:
+                type: string
+                format: uuid
+              invoiceId:
+                type: string
+                format: uuid
+              documentId:
+                type: string
+                format: uuid
+        failed:
+          type: array
+          items:
+            type: object
+            properties:
+              orderId:
+                type: string
+                format: uuid
+              error:
+                type: string
+        emailsSent:
+          type: integer
+    InvoiceFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        orderId:
+          $ref: '#/components/schemas/UUIDFilter'
+        shipmentId:
+          $ref: '#/components/schemas/UUIDFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        status:
+          $ref: '#/components/schemas/InvoiceStatusFilter'
+        invoiceDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        dueDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        amount:
+          $ref: '#/components/schemas/FloatFilter'
+        amountOwed:
+          $ref: '#/components/schemas/FloatFilter'
+        overdue:
+          type: boolean
+          description: Filter to overdue invoices only
+        factored:
+          type: boolean
+          description: Filter to factored invoices only
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceFilter'
+        not:
+          $ref: '#/components/schemas/InvoiceFilter'
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+    LookupBy:
+      name: by
+      in: query
+      description: 'Specify lookup type for faster retrieval.
+
+        If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+
+        Use `by=key` when you know you''re providing a client key for best performance.
+
+        '
+      schema:
+        type: string
+        enum:
+        - id
+        - key
+      example: key
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Specify lookup type for faster retrieval.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Use '
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: by=key
+              children: []
+              type: code
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: ' when you know you''re providing a client key for best performance.'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

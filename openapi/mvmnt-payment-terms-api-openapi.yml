@@ -1,0 +1,1448 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments Payment Terms API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Payment Terms
+  description: Payment term management operations
+paths:
+  /payment-terms/filter:
+    post:
+      summary: Filter payment terms
+      description: 'Filter payment terms using comprehensive query criteria with AND/OR logic and multiple operators.
+
+        Supports complex filtering similar to GraphQL capabilities.
+
+        Note: Soft-deleted payment terms are excluded by default (deletedAt defaults to { isNull: true }).
+
+        '
+      operationId: filterPaymentTerms
+      tags:
+      - Payment Terms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentTermFilterRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaymentTerm'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Filter payment terms using comprehensive query criteria with AND/OR logic and multiple operators.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Supports complex filtering similar to GraphQL capabilities.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Note: Soft-deleted payment terms are excluded by default (deletedAt defaults to { isNull: true }).'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  /payment-terms:
+    post:
+      summary: Create payment term
+      description: Create a new payment term configuration in your organization
+      operationId: createPaymentTerm
+      tags:
+      - Payment Terms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentTermInput'
+      responses:
+        '201':
+          description: Payment term created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTerm'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /payment-terms/{id}:
+    get:
+      summary: Get payment term
+      description: Retrieve a payment term by ID or client key
+      operationId: getPaymentTerm
+      tags:
+      - Payment Terms
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTerm'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+    patch:
+      summary: Update payment term
+      description: Partially update a payment term. Only provided fields will be updated.
+      operationId: updatePaymentTerm
+      tags:
+      - Payment Terms
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentTermPatch'
+      responses:
+        '200':
+          description: Payment term updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTerm'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+    delete:
+      summary: Delete payment term
+      description: Soft delete a payment term (sets deletedAt timestamp)
+      operationId: deletePaymentTerm
+      tags:
+      - Payment Terms
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '204':
+          description: Payment term deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+components:
+  schemas:
+    PaymentTerm:
+      type: object
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique payment term identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type:
+          - string
+          - 'null'
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type:
+          - integer
+          - 'null'
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-PAYTERM-NET30
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the payment term was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the payment term was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: When the payment term was soft deleted (null if active)
+          example: null
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    BooleanFilter:
+      type: object
+      description: Filter options for boolean fields
+      properties:
+        equalTo:
+          type: boolean
+          description: Exact match
+        notEqualTo:
+          type: boolean
+          description: Not equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    ClientKeyFilter:
+      type: object
+      description: Filter options for client key fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        in:
+          type: array
+          description: Matches any value in the array
+          items:
+            type: string
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    IntFilter:
+      type: object
+      description: Filter options for integer fields
+      properties:
+        equalTo:
+          type: integer
+          description: Exact match
+        notEqualTo:
+          type: integer
+          description: Not equal to
+        lessThan:
+          type: integer
+          description: Less than
+        lessThanOrEqualTo:
+          type: integer
+          description: Less than or equal to
+        greaterThan:
+          type: integer
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: integer
+          description: Greater than or equal to
+        in:
+          type: array
+          items:
+            type: integer
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: integer
+          description: Does not match any value in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentTermPatch:
+      type: object
+      description: 'Partial payment term update. All fields are optional.
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type:
+          - string
+          - 'null'
+          description: Payment term description
+          example: Payment due 30 days from invoice date
+        days:
+          type:
+          - integer
+          - 'null'
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Quick pay fee percentage
+          example: 0.05
+        apOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term
+          example: false
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-PAYTERM-NET30
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 1
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 1
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: true
+              attributes:
+                content: Partial payment term update. All fields are optional.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 1
+          - 4
+          inline: false
+          attributes:
+            ordered: false
+            marker: '-'
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 1
+            - 2
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 1
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 1
+                  - 2
+                  inline: true
+                  attributes:
+                    content: Omitted fields
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: ': Not modified (current value preserved)'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 2
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 2
+              - 3
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 2
+                  - 3
+                  inline: true
+                  attributes:
+                    content: Provided fields
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: ': Updated to the new value'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 3
+            - 4
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 3
+              - 4
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 3
+                  - 4
+                  inline: true
+                  attributes:
+                    content: Null values
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: ': Clear the field (set to null) where applicable'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          type: list
+          annotations: []
+          slots: {}
+    PaymentTermFilter:
+      type: object
+      description: Filter criteria for payment terms with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/PaymentTermFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/PaymentTermFilter'
+        not:
+          $ref: '#/components/schemas/PaymentTermFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        description:
+          $ref: '#/components/schemas/StringFilter'
+        days:
+          $ref: '#/components/schemas/IntFilter'
+        quickPayFee:
+          $ref: '#/components/schemas/FloatFilter'
+        apOnly:
+          $ref: '#/components/schemas/BooleanFilter'
+        doNotUse:
+          $ref: '#/components/schemas/BooleanFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
+    PaymentTermFilterRequest:
+      type: object
+      description: Request body for filtering payment terms
+      properties:
+        filter:
+          $ref: '#/components/schemas/PaymentTermFilter'
+          description: 'Filter criteria (optional - omit to return all payment terms).
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 2
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes:
+                    content: Filter criteria (optional - omit to return all payment terms).
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes: {}
+                  children: []
+                  type: softbreak
+                  annotations: []
+                  slots: {}
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes:
+                    content: 'Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.'
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - doNotUse:
+              equalTo: false
+          - days:
+              greaterThan: 0
+        pageSize: 50
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentTermInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type: string
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type: integer
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type: number
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type: boolean
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type: boolean
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-PAYTERM-NET30
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: rate_limit_exceeded
+            message: Too many requests. Please retry after 60 seconds.
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per minute
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Remaining requests in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Unix timestamp when rate limit resets
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema:
+            type: integer
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+    LookupBy:
+      name: by
+      in: query
+      description: 'Specify lookup type for faster retrieval.
+
+        If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+
+        Use `by=key` when you know you''re providing a client key for best performance.
+
+        '
+      schema:
+        type: string
+        enum:
+        - id
+        - key
+      example: key
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Specify lookup type for faster retrieval.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Use '
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: by=key
+              children: []
+              type: code
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: ' when you know you''re providing a client key for best performance.'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

@@ -1,0 +1,1439 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments Vendor Payment Methods API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Vendor Payment Methods
+  description: Vendor payment method management operations
+paths:
+  /vendor-payment-methods/filter:
+    post:
+      tags:
+      - Vendor Payment Methods
+      summary: Filter vendor payment methods
+      description: 'Query vendor payment methods using flexible filter criteria with AND/OR logic.
+
+
+        By default, only non-deleted payment methods are returned (deletedAt: { isNull: true }).
+
+        Override this by explicitly setting deletedAt filter criteria.
+
+
+        Vendor payment methods define how and where payments are sent for a specific vendor.
+
+        '
+      operationId: filterVendorPaymentMethods
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorPaymentMethodFilterRequest'
+      responses:
+        '200':
+          description: Filtered vendor payment methods with pagination
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - pageInfo
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VendorPaymentMethod'
+                  pageInfo:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /vendor-payment-methods:
+    post:
+      tags:
+      - Vendor Payment Methods
+      summary: Create vendor payment method
+      description: 'Create a new vendor payment method.
+
+
+        **Important**: The `vendorId` cannot be changed after creation.
+
+        '
+      operationId: createVendorPaymentMethod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorPaymentMethodInput'
+            examples:
+              achPayment:
+                summary: ACH payment to vendor
+                value:
+                  vendorId: 770e8400-e29b-41d4-a716-446655440000
+                  paymentMethodType: ACH
+                  isPreferred: true
+                  bankName: Chase Bank
+                  accountName: Vendor Services Inc
+                  accountNumber: '1234567890'
+                  abaAch: '021000021'
+                  currency: USD
+              zelle:
+                summary: Zelle payment
+                value:
+                  vendorId: 770e8400-e29b-41d4-a716-446655440000
+                  paymentMethodType: ZELLE
+                  email: payments@vendor.com
+                  phone: +1-555-123-4567
+                  username: vendor_payments
+              check:
+                summary: Check payment
+                value:
+                  vendorId: 770e8400-e29b-41d4-a716-446655440000
+                  paymentMethodType: CHECK
+                  companyName: Vendor Services Inc
+                  isPreferred: false
+      responses:
+        '201':
+          description: Vendor payment method created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorPaymentMethod'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '409':
+          $ref: '#/components/responses/ConflictError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /vendor-payment-methods/{id}:
+    get:
+      tags:
+      - Vendor Payment Methods
+      summary: Get vendor payment method
+      description: 'Retrieve a single vendor payment method by its unique identifier.
+
+
+        Returns full details including banking information and associated vendor references.
+
+        '
+      operationId: getVendorPaymentMethodById
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      responses:
+        '200':
+          description: Vendor payment method found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorPaymentMethod'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+      - Vendor Payment Methods
+      summary: Update vendor payment method
+      description: 'Partially update a vendor payment method. Only provided fields will be updated.
+
+
+        **IMPORTANT**: The `vendorId` field cannot be changed after creation.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      operationId: updateVendorPaymentMethod
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorPaymentMethodPatch'
+            examples:
+              updateBanking:
+                summary: Update banking details
+                value:
+                  bankName: Bank of America
+                  accountNumber: '9876543210'
+                  abaAch: 026009593
+              makePreferred:
+                summary: Set as preferred payment method
+                value:
+                  isPreferred: true
+              updateContact:
+                summary: Update contact information
+                value:
+                  email: newemail@vendor.com
+                  phone: +1-555-999-8888
+      responses:
+        '200':
+          description: Vendor payment method updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorPaymentMethod'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/ConflictError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+      - Vendor Payment Methods
+      summary: Delete vendor payment method
+      description: 'Soft delete a vendor payment method (sets deletedAt timestamp).
+
+
+        The payment method will no longer appear in default queries but can be retrieved
+
+        by explicitly filtering for deleted records.
+
+        '
+      operationId: deleteVendorPaymentMethod
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      responses:
+        '204':
+          description: Vendor payment method deleted successfully
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    VendorPaymentMethodInput:
+      type: object
+      required:
+      - vendorId
+      - paymentMethodType
+      properties:
+        vendorId:
+          type: string
+          format: uuid
+          description: 'Vendor profile ID.
+
+
+            **IMPORTANT**: This field cannot be changed after creation.
+
+            '
+          example: 770e8400-e29b-41d4-a716-446655440000
+        paymentMethodType:
+          $ref: '#/components/schemas/PaymentMethodType'
+          description: How payment is made
+        status:
+          type: string
+          description: Payment method status
+          example: ACTIVE
+        isPreferred:
+          type: boolean
+          description: Whether this is the preferred payment method
+          example: true
+        email:
+          type: string
+          format: email
+          description: Email address for payment notifications
+          example: payments@vendor.com
+        phone:
+          type: string
+          description: Phone number for payment contact
+          example: +1-555-123-4567
+        companyName:
+          type: string
+          description: Company name for this payment method
+          example: Vendor Payments LLC
+        username:
+          type: string
+          description: Username for payment platforms
+          example: vendor_payments
+        bankName:
+          type: string
+          description: Bank name
+          example: Chase Bank
+        bankAddress:
+          type: string
+          description: Bank address
+          example: 123 Bank Street, Dallas, TX 75201
+        accountName:
+          type: string
+          description: Bank account holder name
+          example: Vendor Services Inc
+        accountNumber:
+          type: string
+          description: Bank account number
+          example: '1234567890'
+        abaAch:
+          type: string
+          description: ABA/ACH routing number
+          example: '021000021'
+        wire:
+          type: string
+          description: Wire transfer routing number
+          example: 026009593
+        swiftCode:
+          type: string
+          description: SWIFT/BIC code for international transfers
+          example: CHASUS33
+        eftInstitution:
+          type: string
+          description: EFT institution number (Canadian banking)
+          example: '001'
+        eftTransit:
+          type: string
+          description: EFT transit number (Canadian banking)
+          example: '00010'
+        clabe:
+          type: string
+          description: CLABE number (Mexican banking)
+          example: 012180001234567897
+        currency:
+          type: string
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        paymentTermId:
+          type: string
+          format: uuid
+          description: Payment term ID
+          example: 550e8400-e29b-41d4-a716-446655440002
+    BooleanFilter:
+      type: object
+      description: Filter options for boolean fields
+      properties:
+        equalTo:
+          type: boolean
+          description: Exact match
+        notEqualTo:
+          type: boolean
+          description: Not equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    PaymentMethodType:
+      type: string
+      description: Payment method type
+      enum:
+      - ACH_WIRE
+      - ZELLE
+      - VENMO
+      - ACH
+      - CHECK
+      - WIRE
+      - CAD_EFT
+      - TRIUMPH_PAY
+      - COMCHECK
+      - EFS
+      - ECHECK
+      example: ACH
+    PaymentTermReference:
+      type: object
+      description: 'Enhanced reference to a payment term resource (returned in responses).
+
+        Includes full payment term details in addition to id/key.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Payment term UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-PAYTERM-NET30
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type:
+          - string
+          - 'null'
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type:
+          - integer
+          - 'null'
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          description: When the payment term was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the payment term was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the payment term was soft deleted (null if active)
+          example: null
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentMethodTypeFilter:
+      type: object
+      description: Filter for payment method type
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/PaymentMethodType'
+        notEqualTo:
+          $ref: '#/components/schemas/PaymentMethodType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodType'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodType'
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    UserReference:
+      type: object
+      description: 'Enhanced reference to a user resource (returned in responses).
+
+        Includes full user details in addition to id/key.
+
+
+        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-USER-12345
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          type: string
+          description: User account status
+          enum:
+          - PENDING
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the user was soft deleted (null if active)
+          example: null
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
+    VendorPaymentMethod:
+      type: object
+      required:
+      - id
+      - vendorId
+      - vendor
+      - paymentMethodType
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique vendor payment method identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        vendorId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: 'Vendor profile ID (read-only after creation).
+
+
+            This field cannot be changed after the payment method is created.
+
+            '
+          example: 770e8400-e29b-41d4-a716-446655440000
+        vendor:
+          $ref: '#/components/schemas/VendorReference'
+          description: Vendor profile reference with full details
+        paymentMethodType:
+          $ref: '#/components/schemas/PaymentMethodType'
+          description: How payment is made
+        status:
+          type:
+          - string
+          - 'null'
+          description: Payment method status
+          example: ACTIVE
+        isPreferred:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this is the preferred payment method for the vendor
+          example: true
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address for payment notifications
+          example: payments@vendor.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number for payment contact
+          example: +1-555-123-4567
+        companyName:
+          type:
+          - string
+          - 'null'
+          description: Company name for this payment method (may differ from vendor name)
+          example: Vendor Payments LLC
+        username:
+          type:
+          - string
+          - 'null'
+          description: Username for payment platforms (e.g., Zelle, Venmo)
+          example: vendor_payments
+        bankName:
+          type:
+          - string
+          - 'null'
+          description: Bank name
+          example: Chase Bank
+        bankAddress:
+          type:
+          - string
+          - 'null'
+          description: Bank address
+          example: 123 Bank Street, Dallas, TX 75201
+        accountName:
+          type:
+          - string
+          - 'null'
+          description: Bank account holder name
+          example: Vendor Services Inc
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: Bank account number (masked in responses)
+          example: '****1234'
+        abaAch:
+          type:
+          - string
+          - 'null'
+          description: ABA/ACH routing number for electronic transfers
+          example: '021000021'
+        wire:
+          type:
+          - string
+          - 'null'
+          description: Wire transfer routing number
+          example: 026009593
+        swiftCode:
+          type:
+          - string
+          - 'null'
+          description: SWIFT/BIC code for international transfers
+          example: CHASUS33
+        eftInstitution:
+          type:
+          - string
+          - 'null'
+          description: EFT institution number (Canadian banking)
+          example: '001'
+        eftTransit:
+          type:
+          - string
+          - 'null'
+          description: EFT transit number (Canadian banking)
+          example: '00010'
+        clabe:
+          type:
+          - string
+          - 'null'
+          description: CLABE number (Mexican banking identifier)
+          example: 012180001234567897
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        paymentTerm:
+          anyOf:
+          - $ref: '#/components/schemas/PaymentTermReference'
+          - type: 'null'
+          description: Payment terms for this payment method
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the payment method was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the payment method was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: When the payment method was soft deleted (null if active)
+          example: null
+        deletedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User who deleted this payment method
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    VendorPaymentMethodFilter:
+      type: object
+      description: Filter criteria for vendor payment methods with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/VendorPaymentMethodFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/VendorPaymentMethodFilter'
+        not:
+          $ref: '#/components/schemas/VendorPaymentMethodFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        vendorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        paymentMethodType:
+          $ref: '#/components/schemas/PaymentMethodTypeFilter'
+        status:
+          $ref: '#/components/schemas/StringFilter'
+        isPreferred:
+          $ref: '#/components/schemas/BooleanFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        companyName:
+          $ref: '#/components/schemas/StringFilter'
+        bankName:
+          $ref: '#/components/schemas/StringFilter'
+        currency:
+          $ref: '#/components/schemas/StringFilter'
+        paymentTermId:
+          $ref: '#/components/schemas/UUIDFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    VendorPaymentMethodFilterRequest:
+      type: object
+      description: Request body for filtering vendor payment methods
+      properties:
+        filter:
+          $ref: '#/components/schemas/VendorPaymentMethodFilter'
+          description: 'Filter criteria (optional - omit to return all vendor payment methods).
+
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - vendorId:
+              equalTo: 770e8400-e29b-41d4-a716-446655440000
+          - isPreferred:
+              equalTo: true
+        pageSize: 50
+    VendorReference:
+      type: object
+      description: 'Enhanced reference to a vendor profile.
+
+        Includes full vendor details in addition to id/key.
+
+        '
+      required:
+      - id
+      - friendlyId
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vendor UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-VENDOR-ABC-001
+        friendlyId:
+          type: string
+          description: Human-readable vendor identifier
+          example: V123456
+        name:
+          type: string
+          description: Vendor legal name
+          example: ABC Warehouse Services
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: billing@abcwarehouse.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        status:
+          type:
+          - string
+          - 'null'
+          description: Vendor status
+          example: ACTIVE
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        createdAt:
+          type: string
+          format: date-time
+          description: When the vendor was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the vendor was last updated
+          example: '2025-01-15T14:30:00Z'
+    VendorPaymentMethodPatch:
+      type: object
+      description: 'Partial vendor payment method update. All fields are optional.
+
+
+        **IMPORTANT**: The `vendorId` field cannot be changed after creation.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        paymentMethodType:
+          $ref: '#/components/schemas/PaymentMethodType'
+          description: How payment is made
+        status:
+          type:
+          - string
+          - 'null'
+          description: Payment method status
+          example: ACTIVE
+        isPreferred:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this is the preferred payment method
+          example: true
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address for payment notifications
+          example: payments@vendor.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number for payment contact
+          example: +1-555-123-4567
+        companyName:
+          type:
+          - string
+          - 'null'
+          description: Company name for this payment method
+          example: Vendor Payments LLC
+        username:
+          type:
+          - string
+          - 'null'
+          description: Username for payment platforms
+          example: vendor_payments
+        bankName:
+          type:
+          - string
+          - 'null'
+          description: Bank name
+          example: Chase Bank
+        bankAddress:
+          type:
+          - string
+          - 'null'
+          description: Bank address
+          example: 123 Bank Street, Dallas, TX 75201
+        accountName:
+          type:
+          - string
+          - 'null'
+          description: Bank account holder name
+          example: Vendor Services Inc
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: Bank account number
+          example: '1234567890'
+        abaAch:
+          type:
+          - string
+          - 'null'
+          description: ABA/ACH routing number
+          example: '021000021'
+        wire:
+          type:
+          - string
+          - 'null'
+          description: Wire transfer routing number
+          example: 026009593
+        swiftCode:
+          type:
+          - string
+          - 'null'
+          description: SWIFT/BIC code
+          example: CHASUS33
+        eftInstitution:
+          type:
+          - string
+          - 'null'
+          description: EFT institution number
+          example: '001'
+        eftTransit:
+          type:
+          - string
+          - 'null'
+          description: EFT transit number
+          example: '00010'
+        clabe:
+          type:
+          - string
+          - 'null'
+          description: CLABE number
+          example: 012180001234567897
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code
+          example: USD
+        paymentTermId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Payment term ID
+          example: 550e8400-e29b-41d4-a716-446655440002
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ConflictError:
+      description: Conflict - resource already exists or constraint violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: conflict
+            message: A resource with this identifier already exists
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: internal_server_error
+            message: An unexpected error occurred
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

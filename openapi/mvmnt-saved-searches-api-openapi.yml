@@ -1,0 +1,1020 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments Saved Searches API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Saved Searches
+  description: Saved search management operations
+paths:
+  /saved-searches/filter:
+    post:
+      summary: Filter saved searches
+      description: 'Filter saved searches using comprehensive query criteria with AND/OR logic and multiple operators.
+
+        Supports complex filtering similar to GraphQL capabilities.
+
+        Returns only saved searches accessible to the authenticated user (either owned by them or public).
+
+        '
+      operationId: filterSavedSearches
+      tags:
+      - Saved Searches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedSearchFilterRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SavedSearch'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /saved-searches:
+    post:
+      summary: Create saved search
+      description: 'Create a new saved search configuration in your organization.
+
+        The saved search can be used to quickly apply predefined search criteria, sorting, and display preferences.
+
+
+        The saved search will be owned by the authenticated user unless otherwise specified.
+
+        '
+      operationId: createSavedSearch
+      tags:
+      - Saved Searches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedSearchInput'
+      responses:
+        '201':
+          description: Saved search created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedSearch'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /saved-searches/{id}:
+    get:
+      summary: Get saved search
+      description: 'Retrieve a saved search by ID.
+
+        You can only retrieve saved searches that you own or that are public in your organization.
+
+        '
+      operationId: getSavedSearch
+      tags:
+      - Saved Searches
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Saved search UUID
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedSearch'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+    patch:
+      summary: Update saved search
+      description: 'Partially update a saved search. Only provided fields will be updated.
+
+        You can only update saved searches that you own.
+
+        '
+      operationId: updateSavedSearch
+      tags:
+      - Saved Searches
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Saved search UUID
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedSearchPatch'
+      responses:
+        '200':
+          description: Saved search updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedSearch'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+    delete:
+      summary: Delete saved search
+      description: 'Permanently delete a saved search.
+
+        You can only delete saved searches that you own.
+
+        '
+      operationId: deleteSavedSearch
+      tags:
+      - Saved Searches
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Saved search UUID
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: Saved search deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+components:
+  schemas:
+    SearchConfigurationState:
+      type: object
+      description: 'The saved search configuration state containing criteria, sorting, and display preferences.
+
+        This is stored in the jsonValue field.
+
+        '
+      properties:
+        searchCriteria:
+          type: object
+          description: Search criteria configuration
+          properties:
+            filters:
+              type: array
+              description: Array of field-level search filters
+              items:
+                type: object
+                required:
+                - field
+                - searchCriteria
+                properties:
+                  field:
+                    type: string
+                    description: The field name to filter on
+                    example: status
+                  searchCriteria:
+                    type: object
+                    description: The search criteria for this field
+                    required:
+                    - operator
+                    properties:
+                      operator:
+                        type: string
+                        description: Search operator (e.g., EQUALS, ONE_OF, BETWEEN)
+                        example: ONE_OF
+                      values:
+                        type: array
+                        description: Array of values for multi-value operators
+                        items:
+                          oneOf:
+                          - type: string
+                          - type: number
+                          - type: boolean
+                        example:
+                        - ACTIVE
+                        - PENDING
+                      value:
+                        oneOf:
+                        - type: string
+                        - type: number
+                        - type: boolean
+                        description: Single value for single-value operators
+                      min:
+                        oneOf:
+                        - type: string
+                        - type: number
+                        description: Minimum value for range operators
+                      max:
+                        oneOf:
+                        - type: string
+                        - type: number
+                        description: Maximum value for range operators
+                      minRelative:
+                        type: integer
+                        description: Relative minimum (e.g., -7 for 7 units ago)
+                      minRelativeUnit:
+                        type: string
+                        description: Time unit for minRelative
+                        enum:
+                        - YEAR
+                        - MONTH
+                        - WEEK
+                        - DAY
+                        - HOUR
+                        - MINUTE
+                        - SECOND
+                      maxRelative:
+                        type: integer
+                        description: Relative maximum
+                      maxRelativeUnit:
+                        type: string
+                        description: Time unit for maxRelative
+                        enum:
+                        - YEAR
+                        - MONTH
+                        - WEEK
+                        - DAY
+                        - HOUR
+                        - MINUTE
+                        - SECOND
+                      valueRelative:
+                        type: integer
+                        description: Relative value
+                      valueRelativeUnit:
+                        type: string
+                        description: Time unit for valueRelative
+                        enum:
+                        - YEAR
+                        - MONTH
+                        - WEEK
+                        - DAY
+                        - HOUR
+                        - MINUTE
+                        - SECOND
+        sorting:
+          type: array
+          description: Sort configuration
+          items:
+            type: object
+            required:
+            - id
+            - desc
+            properties:
+              id:
+                type: string
+                description: Field name to sort by
+                example: createdAt
+              desc:
+                type: boolean
+                description: Sort in descending order if true
+                example: true
+        columnVisibility:
+          type: object
+          description: Column visibility settings (key is column name, value is visibility)
+          additionalProperties:
+            type: boolean
+          example:
+            status: true
+            createdAt: true
+            updatedAt: false
+        columnOrder:
+          type: array
+          description: Order of columns for display
+          items:
+            type: string
+          example:
+          - id
+          - name
+          - status
+          - createdAt
+      example:
+        searchCriteria:
+          filters:
+          - field: status
+            searchCriteria:
+              operator: ONE_OF
+              values:
+              - ACTIVE
+              - PENDING
+        sorting:
+        - id: createdAt
+          desc: true
+        columnVisibility:
+          status: true
+          createdAt: true
+        columnOrder:
+        - id
+        - status
+        - createdAt
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    SavedSearchFilter:
+      type: object
+      description: Filter criteria for saved searches with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/SavedSearchFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/SavedSearchFilter'
+        not:
+          $ref: '#/components/schemas/SavedSearchFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        preferenceType:
+          $ref: '#/components/schemas/StringFilter'
+        isPublic:
+          $ref: '#/components/schemas/BooleanFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    BooleanFilter:
+      type: object
+      description: Filter options for boolean fields
+      properties:
+        equalTo:
+          type: boolean
+          description: Exact match
+        notEqualTo:
+          type: boolean
+          description: Not equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    SavedSearchInput:
+      type: object
+      required:
+      - name
+      - preferenceType
+      - jsonValue
+      description: Input for creating a new saved search
+      properties:
+        name:
+          type: string
+          description: Display name for the saved search (required)
+          example: Active Shipments - West Coast
+        preferenceType:
+          allOf:
+          - $ref: '#/components/schemas/SavedSearchType'
+          description: 'The entity type this saved search applies to (required).
+
+            Determines which search endpoint can use this saved search.
+
+            '
+        jsonValue:
+          allOf:
+          - $ref: '#/components/schemas/SearchConfigurationState'
+          description: The saved search configuration (required)
+        isPublic:
+          type: boolean
+          description: Whether this saved search is visible to all users in the organization
+          default: false
+          example: true
+        groupId:
+          type: string
+          format: uuid
+          description: Optional group this saved search belongs to
+      example:
+        name: Active Shipments - West Coast
+        preferenceType: SHIPMENT
+        jsonValue:
+          searchCriteria:
+            filters:
+            - field: status
+              searchCriteria:
+                operator: ONE_OF
+                values:
+                - ACTIVE
+                - PENDING
+          sorting:
+          - id: createdAt
+            desc: true
+        isPublic: true
+    SavedSearchFilterRequest:
+      type: object
+      description: Request body for filtering saved searches
+      properties:
+        filter:
+          $ref: '#/components/schemas/SavedSearchFilter'
+          description: 'Filter criteria (optional - omit to return all saved searches).
+
+            Returns only saved searches accessible to the authenticated user.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          preferenceType:
+            equalTo: SHIPMENT
+          isPublic:
+            equalTo: true
+        pageSize: 50
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    SavedSearch:
+      type: object
+      required:
+      - id
+      - name
+      - preferenceType
+      - createdAt
+      - updatedAt
+      description: 'A saved search configuration that can be used to quickly apply predefined search criteria,
+
+        sorting, and display preferences. Saved searches are stored per organization and can be
+
+        shared publicly or kept private to a specific user.
+
+        '
+      properties:
+        object:
+          type: string
+          enum:
+          - SAVED_SEARCH
+          readOnly: true
+          description: Object type identifier
+          example: SAVED_SEARCH
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique saved search identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        name:
+          type: string
+          description: Display name for the saved search
+          example: Active Shipments - West Coast
+        preferenceType:
+          allOf:
+          - $ref: '#/components/schemas/SavedSearchType'
+          description: 'The entity type this saved search applies to.
+
+            Must match the search endpoint where this saved search will be used.
+
+            '
+        jsonValue:
+          allOf:
+          - $ref: '#/components/schemas/SearchConfigurationState'
+          description: The saved search configuration (criteria, sorting, display preferences)
+        isPublic:
+          type:
+          - boolean
+          - 'null'
+          description: 'Whether this saved search is visible to all users in the organization.
+
+            If false or null, only the owner can see it.
+
+            '
+          example: true
+        ownedByUser:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          readOnly: true
+          description: 'User ID who owns this saved search.
+
+            Null means it''s an organization-level saved search.
+
+            '
+          example: 550e8400-e29b-41d4-a716-446655440001
+        groupId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Optional group this saved search belongs to
+          example: null
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when saved search was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when saved search was last updated
+          example: '2025-01-15T14:30:00Z'
+    SavedSearchType:
+      type: string
+      description: 'Type of entity this saved search applies to. Each type corresponds to a specific entity''s search view.
+
+
+        **Entity Mapping:**
+
+        - `INVOICE`: Customer invoices (AR Invoices) - money owed to you
+
+        - `BILL`: Vendor/Carrier bills (AP Invoices) - money you owe
+
+        - `INVOICE_PAYMENT`: Customer payment groups (AR Payment Groups)
+
+        - `BILL_PAYMENT`: Vendor/Carrier payment groups (AP Payment Groups)
+
+        '
+      enum:
+      - SHIPMENT
+      - INVOICE
+      - BILL
+      - USER
+      - CUSTOMER
+      - VENDOR
+      - QUOTE
+      - COMMISSION
+      - CARRIER
+      - INVOICE_PAYMENT
+      - BILL_PAYMENT
+      - LOAD
+      - TRUCK_POSTING
+      - LOCATION
+      example: SHIPMENT
+    SavedSearchPatch:
+      type: object
+      description: 'Partial saved search update. All fields are optional.
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Display name for the saved search
+          example: Updated Shipments View
+        jsonValue:
+          allOf:
+          - $ref: '#/components/schemas/SearchConfigurationState'
+          description: The saved search configuration
+        isPublic:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this saved search is visible to all users
+          example: true
+        groupId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Optional group this saved search belongs to
+          example: null
+      example:
+        name: Updated Shipments View
+        isPublic: true
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: rate_limit_exceeded
+            message: Too many requests. Please retry after 60 seconds.
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per minute
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Remaining requests in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Unix timestamp when rate limit resets
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema:
+            type: integer
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

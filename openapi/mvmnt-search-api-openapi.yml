@@ -1,0 +1,586 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments Search API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Search
+  description: Global search operations
+paths:
+  /global-search:
+    post:
+      summary: Search globally
+      description: 'Search across multiple entity types simultaneously (shipments, customers, carriers, users, vendors).
+
+
+        **Use Cases:**
+
+        - Unified search bar for finding any type of record
+
+        - Quick lookup by name, ID, or reference number
+
+        - Cross-entity discovery
+
+
+        **Search Behavior:**
+
+        - Searches across default searchable fields for each entity type
+
+        - Results are sorted by object type priority: SHIPMENT → CUSTOMER → CARRIER → USER → VENDOR
+
+        - Within each object type, results are sorted by most recently updated
+
+
+        **Prefix Filtering:**
+
+        Use "type:query" syntax to search specific object types:
+
+        - `carrier:acme` - searches only carriers
+
+        - `shipment:12345` - searches only shipments
+
+        - `customer:west` - searches only customers
+
+
+        **IMPORTANT: Eventually Consistent**
+
+        This endpoint queries OpenSearch indices which are updated asynchronously.
+
+        Changes typically appear within 2 seconds, but this is not guaranteed.
+
+        '
+      operationId: globalSearch
+      tags:
+      - Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalSearchRequest'
+            examples:
+              simpleSearch:
+                summary: Simple search
+                value:
+                  query: acme
+              filteredSearch:
+                summary: Filter by object types
+                value:
+                  query: acme
+                  objects:
+                  - SHIPMENT
+                  - CUSTOMER
+                  pagination:
+                    pageNumber: 1
+                    pageSize: 20
+              prefixSearch:
+                summary: Prefix-filtered search
+                value:
+                  query: carrier:trucking
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalSearchResponse'
+              example:
+                data:
+                - object: SHIPMENT
+                  id: 550e8400-e29b-41d4-a716-446655440001
+                  key: ERP-SHIP-001
+                  entityName: SHIPMENT
+                  title: SHIP-12345
+                  subtitle: Acme Corporation
+                  field: Customer
+                  highlight: <em>Acme</em> Corporation
+                - object: CUSTOMER
+                  id: 550e8400-e29b-41d4-a716-446655440002
+                  key: ERP-CUST-001
+                  entityName: SHIPPER_PROFILE
+                  title: Acme Corporation
+                  subtitle: CUST-001
+                  field: Name
+                  highlight: <em>Acme</em> Corporation
+                pagination:
+                  pageNumber: 1
+                  pageSize: 20
+                  totalPages: 3
+                totalResults: 42
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+components:
+  schemas:
+    GlobalSearchObjectType:
+      type: string
+      enum:
+      - SHIPMENT
+      - CUSTOMER
+      - CARRIER
+      - USER
+      - VENDOR
+      description: 'Object types available for global search:
+
+        - `SHIPMENT`: Shipment records
+
+        - `CUSTOMER`: Customer/shipper profiles
+
+        - `CARRIER`: Carrier profiles
+
+        - `USER`: User accounts
+
+        - `VENDOR`: Vendor profiles
+
+        '
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    GlobalSearchResponse:
+      type: object
+      description: Response for global search requests
+      required:
+      - data
+      - pagination
+      - totalResults
+      properties:
+        data:
+          type: array
+          description: 'Search results sorted by object type priority:
+
+            SHIPMENT → CUSTOMER → CARRIER → USER → VENDOR
+
+            '
+          items:
+            $ref: '#/components/schemas/GlobalSearchRow'
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInfo'
+        totalResults:
+          type: integer
+          description: Total number of matching results across all object types
+          minimum: 0
+          example: 42
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    GlobalSearchRequest:
+      type: object
+      description: Request body for global search across multiple entity types
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: 'Search query string. Searches across default searchable fields for each entity type.
+
+
+            Supports prefix filtering using "type:query" syntax:
+
+            - `carrier:acme` - searches only carriers for "acme"
+
+            - `shipment:12345` - searches only shipments for "12345"
+
+            - `user:john` - searches only users for "john"
+
+            '
+          example: acme corp
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalSearchObjectType'
+          description: 'Optional filter to limit search to specific object types.
+
+            If not provided, searches across all object types.
+
+            '
+          example:
+          - SHIPMENT
+          - CUSTOMER
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInput'
+    GlobalSearchRow:
+      type: object
+      description: 'A single global search result row.
+
+        Results are sorted by object type priority: SHIPMENT, CUSTOMER, CARRIER, USER, VENDOR.
+
+        '
+      required:
+      - object
+      - id
+      - entityName
+      - title
+      - field
+      properties:
+        object:
+          $ref: '#/components/schemas/GlobalSearchObjectType'
+          description: The type of object this result represents
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the matched record
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier if set
+          example: ERP-CUST-12345
+        entityName:
+          type: string
+          description: 'Internal entity type name (for backwards compatibility).
+
+            Prefer using the `object` field instead.
+
+            '
+          example: SHIPPER_PROFILE
+        title:
+          type: string
+          description: Primary display text for the result (e.g., name, friendlyId)
+          example: Acme Corporation
+        subtitle:
+          type:
+          - string
+          - 'null'
+          description: Secondary display text (varies by entity type)
+          example: CUST-12345
+        field:
+          type: string
+          description: Name of the field that matched the search query
+          example: Name
+        highlight:
+          type:
+          - string
+          - 'null'
+          description: 'Matched text with highlight markers.
+
+            Contains HTML &lt;em&gt; tags around matched portions.
+
+            '
+          example: <em>Acme</em> Corporation
+    SearchPaginationInput:
+      type: object
+      description: Pagination options for search requests
+      properties:
+        pageNumber:
+          type: integer
+          minimum: 1
+          default: 1
+          description: Page number (1-based)
+          example: 1
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page (max 250)
+          example: 50
+      example:
+        pageNumber: 1
+        pageSize: 50
+    SearchPaginationInfo:
+      type: object
+      required:
+      - pageNumber
+      - pageSize
+      - totalPages
+      description: Pagination information for search results
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of results returned on this page
+          example: 50
+        totalPages:
+          type: integer
+          description: Total number of pages available
+          example: 25
+      example:
+        pageNumber: 1
+        pageSize: 50
+        totalPages: 25
+  responses:
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: rate_limit_exceeded
+            message: Too many requests. Please retry after 60 seconds.
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per minute
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Remaining requests in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Unix timestamp when rate limit resets
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema:
+            type: integer
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

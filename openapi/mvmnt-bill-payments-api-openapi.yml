@@ -1,0 +1,1491 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Bill Payments
+  description: 'AP bill payment management operations.
+
+    Bill payments record payments made to carriers and vendors.
+
+    '
+paths:
+  /bill-payments/filter:
+    post:
+      summary: Filter bill payments
+      description: 'Search for bill payments using filter criteria.
+
+
+        ## Common Filters
+
+
+        - By carrier: `{ "filter": { "carrierId": { "equalTo": "uuid" } } }`
+
+        - By vendor: `{ "filter": { "vendorId": { "equalTo": "uuid" } } }`
+
+        - By factor: `{ "filter": { "carrierFactorId": { "equalTo": "uuid" } } }`
+
+        - By date range: `{ "filter": { "paymentDate": { "gte": "2025-01-01", "lte": "2025-01-31" } } }`
+
+        - By method: `{ "filter": { "paymentMethodType": { "equalTo": "check" } } }`
+
+        '
+      operationId: filterBillPayments
+      tags:
+      - Bill Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillPaymentFilterRequest'
+            examples:
+              byCarrier:
+                summary: Payments by carrier
+                value:
+                  filter:
+                    carrierId:
+                      equalTo: 550e8400-e29b-41d4-a716-446655440000
+              byDateRange:
+                summary: Payments in date range
+                value:
+                  filter:
+                    paymentDate:
+                      greaterThanOrEqualTo: '2025-01-01'
+                      lessThanOrEqualTo: '2025-01-31'
+              byMethod:
+                summary: Check payments
+                value:
+                  filter:
+                    paymentMethodType:
+                      equalTo: CHECK
+      responses:
+        '200':
+          description: Bill payments matching filter criteria
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - pagination
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BillPayment'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /bill-payments:
+    post:
+      summary: Create a bill payment
+      description: 'Record a payment for one or more carrier/vendor bills.
+
+
+        ## What happens
+
+
+        - PaymentGroup record is created
+
+        - Payment applications are created for each bill
+
+        - Bill open balances are reduced
+
+        - Load/service status updates to PAID when fully paid
+
+
+        ## Carrier factor payments
+
+
+        To pay a carrier''s factor instead of the carrier directly,
+
+        specify `carrierFactorId` in the request.
+
+
+        ## Overpayments
+
+
+        If `allowOverpayment` is true and payment exceeds bill totals,
+
+        a credit memo is automatically created for the difference.
+
+        '
+      operationId: createBillPayment
+      tags:
+      - Bill Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillPaymentInput'
+            examples:
+              singleBill:
+                summary: Pay single bill
+                value:
+                  paymentDate: '2025-01-15'
+                  paymentMethodType: CHECK
+                  reference: CHK-12345
+                  applications:
+                  - billId: 550e8400-e29b-41d4-a716-446655440000
+                    amount: 2500
+              multipleBills:
+                summary: Pay multiple bills
+                value:
+                  paymentDate: '2025-01-15'
+                  paymentMethodType: ACH_WIRE
+                  reference: ACH-2025-001
+                  notes: January carrier payments
+                  applications:
+                  - billId: 550e8400-e29b-41d4-a716-446655440000
+                    amount: 2500
+                  - billId: 550e8400-e29b-41d4-a716-446655440001
+                    amount: 3500
+              factorPayment:
+                summary: Pay carrier factor
+                value:
+                  paymentDate: '2025-01-15'
+                  paymentMethodType: ACH_WIRE
+                  carrierFactorId: 770e8400-e29b-41d4-a716-446655440002
+                  reference: ACH-FACTOR-001
+                  applications:
+                  - billId: 550e8400-e29b-41d4-a716-446655440000
+                    amount: 2500
+      responses:
+        '201':
+          description: Bill payment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillPayment'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '409':
+          description: Conflict - bill already paid or invalid state
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /bill-payments/{id}:
+    get:
+      summary: Get a bill payment
+      description: 'Retrieve a bill payment by ID.
+
+
+        The response includes all payment applications and their associated bills.
+
+        '
+      operationId: getBillPayment
+      tags:
+      - Bill Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Bill payment retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillPayment'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    patch:
+      summary: Update a bill payment
+      description: 'Update bill payment fields.
+
+
+        ## Constraints
+
+
+        - Cannot change carrier factor after creation
+
+        - Can add/remove/update payment applications
+
+
+        ## Updating applications
+
+
+        In the `applications` array:
+
+        - Include `id` to update an existing application
+
+        - Omit `id` and include `billId` to add a new application
+
+        - Set `delete: true` with `id` to remove an application
+
+        '
+      operationId: updateBillPayment
+      tags:
+      - Bill Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillPaymentPatch'
+            examples:
+              updateReference:
+                summary: Update reference
+                value:
+                  reference: CHK-12345-UPDATED
+              updateAmounts:
+                summary: Update payment amounts
+                value:
+                  applications:
+                  - id: 660e8400-e29b-41d4-a716-446655440001
+                    amount: 2600
+              addApplication:
+                summary: Add new bill to payment
+                value:
+                  applications:
+                  - billId: 770e8400-e29b-41d4-a716-446655440002
+                    amount: 1000
+              removeApplication:
+                summary: Remove bill from payment
+                value:
+                  applications:
+                  - id: 660e8400-e29b-41d4-a716-446655440001
+                    delete: true
+      responses:
+        '200':
+          description: Bill payment updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillPayment'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          description: Conflict - invalid state for update
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      summary: Delete a bill payment
+      description: 'Delete a bill payment and all its applications.
+
+
+        ## What happens
+
+
+        - PaymentGroup record is deleted
+
+        - All Payment applications are deleted
+
+        - Bill open balances are restored
+
+        - Load/service status may revert if payment made them PAID
+
+        '
+      operationId: deleteBillPayment
+      tags:
+      - Bill Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '204':
+          description: Bill payment deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /bill-payments/{id}/applications:
+    get:
+      summary: Get bill payment applications
+      description: List all bills paid by this payment group.
+      operationId: getBillPaymentApplications
+      tags:
+      - Bill Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Applications retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BillPaymentApplication'
+                  totalAmount:
+                    type: number
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /bill-payments/{id}/remittance-advice:
+    get:
+      summary: Generate remittance advice
+      description: 'Generate a remittance advice document for a bill payment.
+
+
+        ## Formats
+
+
+        - PDF (default): Set Accept header to application/pdf
+
+        - JSON: Set Accept header to application/json
+
+        '
+      operationId: getBillPaymentRemittanceAdvice
+      tags:
+      - Bill Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Remittance advice generated
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentDate:
+                    type: string
+                    format: date
+                  paymentMethod:
+                    type: string
+                  reference:
+                    type: string
+                  payee:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      address:
+                        type: string
+                  applications:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        billFriendlyId:
+                          type: string
+                        shipmentFriendlyId:
+                          type: string
+                        invoiceDate:
+                          type: string
+                          format: date
+                        amount:
+                          type: number
+                  totalAmount:
+                    type: number
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /bill-payments/{id}/send-remittance:
+    post:
+      summary: Send remittance advice email
+      description: 'Email the remittance advice to the carrier or vendor.
+
+
+        Uses the recipient''s default email from their profile.
+
+        '
+      operationId: sendBillPaymentRemittance
+      tags:
+      - Bill Payments
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                toEmail:
+                  type: string
+                  format: email
+                  description: Override recipient email
+                ccEmails:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+                  description: CC recipients
+                message:
+                  type: string
+                  maxLength: 2000
+                  description: Additional message in email body
+            examples:
+              defaultEmail:
+                summary: Send to default contact
+                value: {}
+              customRecipient:
+                summary: Send to specific email
+                value:
+                  toEmail: accounts@carrier.com
+                  message: Please find attached remittance advice for recent payments.
+      responses:
+        '200':
+          description: Remittance advice sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  sentTo:
+                    type: string
+                    format: email
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          description: No email address available
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    BillPaymentApplicationPatch:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Existing application ID (for update)
+        billId:
+          type: string
+          format: uuid
+          description: Bill ID (for new applications)
+        amount:
+          type: number
+          minimum: 0.01
+        delete:
+          type: boolean
+          description: Set to true to remove this application
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    BillPaymentRecipientType:
+      type: string
+      enum:
+      - CARRIER
+      - VENDOR
+      description: 'Type of recipient for the payment.
+
+        - `CARRIER`: Payment to a carrier
+
+        - `VENDOR`: Payment to a vendor
+
+        '
+    CarrierReference:
+      type: object
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
+          type: string
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the carrier was soft deleted (null if active)
+          example: null
+    bill-payments_CarrierFactorReference:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        companyName:
+          type: string
+        bankName:
+          type:
+          - string
+          - 'null'
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    BillPaymentApplicationInput:
+      type: object
+      required:
+      - billId
+      - amount
+      properties:
+        billId:
+          type: string
+          format: uuid
+          description: Bill (invoice) to apply payment to
+        amount:
+          type: number
+          minimum: 0.01
+          description: Amount to apply to this bill
+    BillPaymentFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/BillPaymentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    BillPaymentFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        carrierId:
+          $ref: '#/components/schemas/UUIDFilter'
+        vendorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        carrierFactorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        recipientType:
+          type: object
+          properties:
+            equalTo:
+              $ref: '#/components/schemas/BillPaymentRecipientType'
+            in:
+              type: array
+              items:
+                $ref: '#/components/schemas/BillPaymentRecipientType'
+        paymentMethodType:
+          $ref: '#/components/schemas/BillPaymentMethodTypeFilter'
+        paymentDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        totalAmount:
+          $ref: '#/components/schemas/FloatFilter'
+        reference:
+          $ref: '#/components/schemas/StringFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentFilter'
+        not:
+          $ref: '#/components/schemas/BillPaymentFilter'
+    BillPayment:
+      type: object
+      required:
+      - id
+      - paymentDate
+      - recipientType
+      - totalAmount
+      - applications
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          description: Client-defined key
+        recipientType:
+          $ref: '#/components/schemas/BillPaymentRecipientType'
+        carrier:
+          $ref: '#/components/schemas/CarrierReference'
+        vendor:
+          $ref: '#/components/schemas/VendorReference'
+        carrierFactor:
+          $ref: '#/components/schemas/bill-payments_CarrierFactorReference'
+        paymentDate:
+          type: string
+          format: date
+          description: Date the payment was made
+        paymentMethodType:
+          $ref: '#/components/schemas/BillPaymentMethodType'
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Check number, transaction ID, etc.
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes
+        totalAmount:
+          type: number
+          description: Total payment amount (sum of all applications)
+        overpayment:
+          type:
+          - number
+          - 'null'
+          description: Amount paid in excess of invoice totals
+        overpaymentCreditMemoId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Credit memo created for overpayment
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentApplication'
+          description: Individual bill payments in this group
+        qboId:
+          type:
+          - string
+          - 'null'
+          description: QuickBooks Online bill payment ID
+        syncStatus:
+          type:
+          - string
+          - 'null'
+          enum:
+          - pending
+          - synced
+          - error
+          description: QuickBooks sync status
+        syncError:
+          type:
+          - string
+          - 'null'
+          description: QuickBooks sync error message
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    BillPaymentMethodType:
+      type: string
+      enum:
+      - ACH_WIRE
+      - CHECK
+      - CREDIT_CARD
+      - EFT_DIRECT_DEPOSIT
+      - E_TRANSFER
+      - VENMO
+      description: 'Payment method used for the bill payment.
+
+        - `ACH_WIRE`: ACH wire transfer
+
+        - `CHECK`: Paper check
+
+        - `CREDIT_CARD`: Credit card payment
+
+        - `EFT_DIRECT_DEPOSIT`: EFT direct deposit
+
+        - `E_TRANSFER`: Electronic transfer
+
+        - `VENMO`: Venmo payment
+
+        '
+    BillPaymentPatch:
+      type: object
+      properties:
+        paymentDate:
+          type: string
+          format: date
+        paymentMethodType:
+          $ref: '#/components/schemas/BillPaymentMethodType'
+        reference:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentApplicationPatch'
+          description: Update payment applications
+    BillPaymentMethodTypeFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/BillPaymentMethodType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentMethodType'
+    BillPaymentApplication:
+      type: object
+      required:
+      - id
+      - billId
+      - amount
+      properties:
+        id:
+          type: string
+          format: uuid
+        billId:
+          type: string
+          format: uuid
+          description: Bill (invoice) this payment applies to
+        billFriendlyId:
+          type:
+          - string
+          - 'null'
+          description: Human-readable bill ID
+        amount:
+          type: number
+          description: Amount applied to this bill
+        loadCarrierId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated load carrier (for carrier bills)
+        vendedServiceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated vended service (for vendor bills)
+        shipmentId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        shipmentFriendlyId:
+          type:
+          - string
+          - 'null'
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    VendorReference:
+      type: object
+      description: 'Enhanced reference to a vendor profile.
+
+        Includes full vendor details in addition to id/key.
+
+        '
+      required:
+      - id
+      - friendlyId
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vendor UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-VENDOR-ABC-001
+        friendlyId:
+          type: string
+          description: Human-readable vendor identifier
+          example: V123456
+        name:
+          type: string
+          description: Vendor legal name
+          example: ABC Warehouse Services
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: billing@abcwarehouse.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        status:
+          type:
+          - string
+          - 'null'
+          description: Vendor status
+          example: ACTIVE
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        createdAt:
+          type: string
+          format: date-time
+          description: When the vendor was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the vendor was last updated
+          example: '2025-01-15T14:30:00Z'
+    BillPaymentInput:
+      type: object
+      required:
+      - paymentDate
+      - applications
+      properties:
+        paymentDate:
+          type: string
+          format: date
+          description: Date of payment
+        paymentMethodType:
+          $ref: '#/components/schemas/BillPaymentMethodType'
+        carrierFactorId:
+          type: string
+          format: uuid
+          description: Carrier factor to pay (for factored payments)
+        reference:
+          type: string
+          maxLength: 500
+          description: Check number, transaction ID, etc.
+        notes:
+          type: string
+          maxLength: 2000
+          description: Additional notes
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentApplicationInput'
+          minItems: 1
+          description: Bills to pay
+        allowOverpayment:
+          type: boolean
+          default: false
+          description: Allow payment amount to exceed bill totals
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+    LookupBy:
+      name: by
+      in: query
+      description: 'Specify lookup type for faster retrieval.
+
+        If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+
+        Use `by=key` when you know you''re providing a client key for best performance.
+
+        '
+      schema:
+        type: string
+        enum:
+        - id
+        - key
+      example: key
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Specify lookup type for faster retrieval.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Use '
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: by=key
+              children: []
+              type: code
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: ' when you know you''re providing a client key for best performance.'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

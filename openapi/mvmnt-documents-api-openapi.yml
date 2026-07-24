@@ -1,0 +1,1083 @@
+openapi: 3.1.0
+info:
+  title: MVMNT Bill Payments Documents API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Documents
+  description: 'Document management operations.
+
+    Documents are files (PDFs, images) that can be attached to orders, loads, or services.
+
+    '
+paths:
+  /documents/filter:
+    post:
+      summary: Filter documents
+      description: 'Search for documents using filter criteria.
+
+
+        ## Usage
+
+
+        Documents are typically associated with other entities (orders, loads, services).
+
+        Use filters to find documents by type, status, or date range.
+
+
+        ## Example Filters
+
+
+        - Find all invoices: `{ "filter": { "type": { "equalTo": "INVOICE" } } }`
+
+        - Find uploaded documents: `{ "filter": { "status": { "equalTo": "UPLOADED" } } }`
+
+        - Find documents created today: `{ "filter": { "createdAt": { "greaterThanOrEqualTo": "2025-01-15T00:00:00Z" } } }`
+
+        '
+      operationId: filterDocuments
+      tags:
+      - Documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentFilterRequest'
+            examples:
+              filterByType:
+                summary: Filter by document type
+                value:
+                  filter:
+                    type:
+                      equalTo: INVOICE
+                  pageSize: 50
+              filterByStatus:
+                summary: Filter by upload status
+                value:
+                  filter:
+                    status:
+                      equalTo: UPLOADED
+              filterByDateRange:
+                summary: Filter by creation date
+                value:
+                  filter:
+                    createdAt:
+                      greaterThanOrEqualTo: '2025-01-01T00:00:00Z'
+                      lessThanOrEqualTo: '2025-01-31T23:59:59Z'
+      responses:
+        '200':
+          description: Documents matching filter criteria
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                - pagination
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Document'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /documents:
+    post:
+      summary: Create a document
+      description: "Create a new document record and receive a pre-signed URL for uploading the file.\n\n## Workflow\n\n1. Call this endpoint with document metadata (type, fileName, contentType)\n2. Receive the created document with an `uploadUrl`\n3. Upload the file directly to S3 using the `uploadUrl` (PUT request)\n4. Document status changes from `PENDING_UPLOAD` to `UPLOADED` automatically\n\n## Upload Instructions\n\nThe `uploadUrl` is a pre-signed S3 URL. Upload your file with:\n\n```bash\ncurl -X PUT -H \"Content-Type: application/pdf\" \\\n  --data-binary @your-file.pdf \\\n  \"https://s3.amazonaws.com/bucket/key?signature=...\"\n```\n\n**Important:**\n- The `uploadUrl` expires after 15 minutes\n- Use the exact `contentType` specified in the request\n- Maximum file size: 100MB\n"
+      operationId: createDocument
+      tags:
+      - Documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentInput'
+            examples:
+              pdfInvoice:
+                summary: Create PDF invoice document
+                value:
+                  type: INVOICE
+                  fileName: invoice-2025-001.pdf
+                  contentType: application/pdf
+                  fileSize: 102400
+                  tags:
+                    invoiceNumber: INV-2025-001
+              podImage:
+                summary: Create POD image
+                value:
+                  type: PROOF_OF_DELIVERY
+                  fileName: pod-delivery-photo.jpg
+                  contentType: image/jpeg
+      responses:
+        '201':
+          description: Document created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+              examples:
+                created:
+                  summary: Newly created document with upload URL
+                  value:
+                    id: 550e8400-e29b-41d4-a716-446655440000
+                    type: INVOICE
+                    fileName: invoice-2025-001.pdf
+                    extension: pdf
+                    contentType: application/pdf
+                    fileSize: 102400
+                    status: PENDING_UPLOAD
+                    uploadUrl: https://s3.amazonaws.com/bucket/key?X-Amz-Signature=...
+                    downloadUrl: null
+                    tags:
+                      invoiceNumber: INV-2025-001
+                    createdAt: '2025-01-15T10:30:00Z'
+                    updatedAt: null
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /documents/{id}:
+    get:
+      summary: Get a document
+      description: 'Retrieve a document by ID or key.
+
+
+        Returns the document metadata including a fresh `downloadUrl` if the file is uploaded.
+
+
+        **Note:** The `downloadUrl` is a pre-signed S3 URL that expires after 1 hour.
+
+        Each GET request generates a fresh URL.
+
+        '
+      operationId: getDocument
+      tags:
+      - Documents
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '200':
+          description: Document retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+              examples:
+                uploaded:
+                  summary: Document with download URL
+                  value:
+                    id: 550e8400-e29b-41d4-a716-446655440000
+                    key: doc-inv-2025-001
+                    type: INVOICE
+                    fileName: invoice-2025-001.pdf
+                    extension: pdf
+                    contentType: application/pdf
+                    fileSize: 102400
+                    status: UPLOADED
+                    uploadUrl: null
+                    downloadUrl: https://s3.amazonaws.com/bucket/key?X-Amz-Signature=...
+                    tags:
+                      invoiceNumber: INV-2025-001
+                    createdAt: '2025-01-15T10:30:00Z'
+                    updatedAt: '2025-01-15T10:35:00Z'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    patch:
+      summary: Update a document
+      description: 'Update document metadata.
+
+
+        **Note:** File content cannot be changed after upload.
+
+        To replace a file, create a new document.
+
+        '
+      operationId: updateDocument
+      tags:
+      - Documents
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentPatch'
+            examples:
+              updateTags:
+                summary: Update document tags
+                value:
+                  tags:
+                    invoiceNumber: INV-2025-001-REVISED
+                    approved: true
+              updateType:
+                summary: Change document type
+                value:
+                  type: PROOF_OF_DELIVERY
+      responses:
+        '200':
+          description: Document updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      summary: Delete a document
+      description: 'Soft delete a document.
+
+
+        The document record is marked as deleted but not permanently removed.
+
+        Associated files in S3 may be cleaned up asynchronously.
+
+        '
+      operationId: deleteDocument
+      tags:
+      - Documents
+      parameters:
+      - $ref: '#/components/parameters/IdOrClientKey'
+      - $ref: '#/components/parameters/LookupBy'
+      responses:
+        '204':
+          description: Document deleted successfully
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+components:
+  schemas:
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    DocumentFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        type:
+          $ref: '#/components/schemas/DocumentTypeFilter'
+        status:
+          $ref: '#/components/schemas/DocumentStatusFilter'
+        fileName:
+          $ref: '#/components/schemas/StringFilter'
+        contentType:
+          $ref: '#/components/schemas/StringFilter'
+        extension:
+          $ref: '#/components/schemas/StringFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentFilter'
+        not:
+          $ref: '#/components/schemas/DocumentFilter'
+      description: Filter criteria for documents
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    DocumentFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/DocumentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor from previous response
+      description: Request body for filtering documents
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    DocumentTypeFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/DocumentType'
+        notEqualTo:
+          $ref: '#/components/schemas/DocumentType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentType'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentType'
+      description: Filter for document type field
+    Document:
+      type: object
+      required:
+      - id
+      - type
+      - fileName
+      - contentType
+      - status
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the document
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined key for external reference
+          example: doc-inv-2025-001
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        fileName:
+          type: string
+          description: Original file name
+          example: invoice-2025-001.pdf
+        extension:
+          type: string
+          description: File extension (without dot)
+          example: pdf
+        contentType:
+          type: string
+          description: MIME content type
+          example: application/pdf
+        fileSize:
+          type:
+          - integer
+          - 'null'
+          description: File size in bytes
+          example: 102400
+        status:
+          $ref: '#/components/schemas/DocumentStatus'
+        uploadUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: 'Pre-signed URL for uploading the file.
+
+            Only present immediately after document creation.
+
+            Expires after 15 minutes.
+
+            '
+          example: https://s3.amazonaws.com/bucket/key?signature=...
+        downloadUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: 'Pre-signed URL for downloading the file.
+
+            Present when document status is UPLOADED.
+
+            Expires after 1 hour.
+
+            '
+          example: https://s3.amazonaws.com/bucket/key?signature=...
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+          description: Arbitrary key-value tags for the document
+          example:
+            invoiceNumber: INV-2025-001
+            customerPO: PO-12345
+        createdAt:
+          type: string
+          format: date-time
+          description: When the document was created
+          example: '2025-01-15T10:30:00Z'
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the document was last updated
+          example: '2025-01-15T10:35:00Z'
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    DocumentInput:
+      type: object
+      required:
+      - type
+      - fileName
+      - contentType
+      properties:
+        key:
+          type: string
+          maxLength: 512
+          description: Optional client-defined key for external reference
+          example: doc-inv-2025-001
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        fileName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: File name (including extension)
+          example: invoice-2025-001.pdf
+        contentType:
+          type: string
+          description: MIME content type of the file
+          example: application/pdf
+        fileSize:
+          type: integer
+          minimum: 1
+          description: File size in bytes (optional, for validation)
+          example: 102400
+        tags:
+          type: object
+          additionalProperties: true
+          description: Optional key-value tags
+          example:
+            invoiceNumber: INV-2025-001
+    DocumentStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/DocumentStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/DocumentStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentStatus'
+      description: Filter for document status field
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    DocumentStatus:
+      type: string
+      enum:
+      - PENDING_UPLOAD
+      - UPLOADED
+      description: 'Upload status of the document.
+
+        - `PENDING_UPLOAD`: Document record created, file not yet uploaded
+
+        - `UPLOADED`: File has been uploaded to storage
+
+        '
+    DocumentPatch:
+      type: object
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Update client-defined key
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        fileName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Update file name
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+          description: Update or clear tags (null to clear)
+      description: Partial update fields for a document
+    DocumentType:
+      type: string
+      enum:
+      - INVOICE
+      - BILL_OF_LADING
+      - RATE_CON
+      - PROOF_OF_DELIVERY
+      - CERTIFICATE_OF_INSURANCE
+      - W9
+      - CARRIER_INVOICE
+      - LUMPER_RECEIPT
+      - DETENTION
+      - DELIVERY_ORDER
+      - LOAD_TENDER
+      - HOUSE_AIRWAY_BILL
+      - MASTER_AIRWAY_BILL
+      - QUOTE
+      - OTHER
+      description: 'Type of document.
+
+
+        Common types:
+
+        - `INVOICE`: Customer invoice
+
+        - `BILL_OF_LADING`: Bill of lading document
+
+        - `RATE_CON`: Rate confirmation
+
+        - `PROOF_OF_DELIVERY`: Proof of delivery (POD)
+
+        - `CERTIFICATE_OF_INSURANCE`: Certificate of insurance (COI)
+
+        - `W9`: W-9 tax form
+
+        - `CARRIER_INVOICE`: Carrier invoice/bill
+
+        - `LUMPER_RECEIPT`: Lumper receipt
+
+        - `DETENTION`: Detention documentation
+
+        - `DELIVERY_ORDER`: Delivery order
+
+        - `LOAD_TENDER`: Load tender
+
+        - `HOUSE_AIRWAY_BILL`: House airway bill (HAWB)
+
+        - `MASTER_AIRWAY_BILL`: Master airway bill (MAWB)
+
+        - `QUOTE`: Quote document
+
+        - `OTHER`: Other document type
+
+        '
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+    LookupBy:
+      name: by
+      in: query
+      description: 'Specify lookup type for faster retrieval.
+
+        If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+
+        Use `by=key` when you know you''re providing a client key for best performance.
+
+        '
+      schema:
+        type: string
+        enum:
+        - id
+        - key
+      example: key
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 3
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: Specify lookup type for faster retrieval.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: If omitted, defaults to looking up by ID first, then falls back to client key if not found.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes: {}
+              children: []
+              type: softbreak
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: 'Use '
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: by=key
+              children: []
+              type: code
+              annotations: []
+              slots: {}
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 3
+              inline: true
+              attributes:
+                content: ' when you know you''re providing a client key for best performance.'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow
