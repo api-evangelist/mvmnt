@@ -147,3 +147,13 @@ x-generated:
   method: generated
   source: openapi/mvmnt-openapi-original.yml
   date: '2026-07-20'
+
+# --- API Evangelist provenance -------------------------------------------
+x-superseded-by:
+  reason: >-
+    Provider publishes this event surface themselves in as-published OpenAPI; this document was authored by API Evangelist before that source was harvested.
+  published_spec: all/mvmnt/openapi/_original/mvmnt-openapi-original.yml
+  published_event_object: webhooks
+  published_events: 1
+  status: superseded
+  reviewed: '2026-07-31'
