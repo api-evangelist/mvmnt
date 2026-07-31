@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mvmnt-openapi-original.yml
+standards:
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: OAuth 2.0 client credentials flow documented; bearer JWT access tokens (BearerAuth http bearer
+    scheme).
+- id: openapi-3.1
+  conforms: true
+  evidence: Publishes an OpenAPI 3.1.0 description at docs.mvmnt.io.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error envelope is a custom {error,message,details[]} shape; some responses advertise application/problem+json
+    but the documented envelope is non-standard.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation/sunset policy documented.
+- id: cursor-pagination
+  conforms: true
+  evidence: List/filter responses return {data, pageInfo} cursor-style pagination.
+- id: webhooks
+  conforms: true
+  evidence: OpenAPI 3.1 top-level webhooks object defines an event callback with a documented event catalog.
+- id: semantic-versioning
+  conforms: true
+  evidence: Changelog follows Keep a Changelog + SemVer (v1.0.0).
+- id: json-api
+  conforms: false
+- id: fhir
+  conforms: false
+- id: scim
+  conforms: false

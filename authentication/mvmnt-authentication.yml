@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mvmnt.io/getting-started/authentication
+spec_source: openapi/mvmnt-openapi-original.yml
+docs: https://docs.mvmnt.io/getting-started/authentication
+summary:
+  types:
+  - oauth2
+  - http
+  oauth2_flows:
+  - clientCredentials
+model:
+  flow: oauth2-client-credentials
+  token_endpoint: https://api.mvmnt.io/oauth2/token
+  token_type: Bearer
+  token_format: JWT
+  token_lifetime_seconds: 3600
+  scope: mvmnt-api
+  request_header: 'Authorization: Bearer <access_token>'
+  credentials: Client ID + Client Secret, provisioned by an MVMNT account manager.
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth 2.0 access token obtained via the client-credentials flow at https://api.mvmnt.io/oauth2/token
+  sources:
+  - openapi/mvmnt-openapi-original.yml
+webhook_auth:
+  header: x-api-key
+  note: Inbound webhook deliveries carry an x-api-key header holding the webhook token configured in the MVMNT UI.

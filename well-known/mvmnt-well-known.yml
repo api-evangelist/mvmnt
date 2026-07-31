@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: probed
+source: live probes of MVMNT hosts
+note: >-
+  No /.well-known/ discovery documents were served (all probes returned 404). Recorded so
+  re-runs do not re-probe. No WellKnown/SecurityTxt pointer is emitted because nothing was found.
+hosts:
+  - host: https://api.mvmnt.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+  - host: https://mvmnt.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404

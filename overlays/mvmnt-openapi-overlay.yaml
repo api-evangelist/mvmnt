@@ -1,0 +1,38 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for MVMNT API
+  version: 1.0.0
+extends: openapi/mvmnt-openapi-original.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-20'
+      x-apievangelist-provider: mvmnt
+      x-apievangelist-category: freight-brokerage-tms
+      x-apievangelist-artifacts:
+        - authentication/mvmnt-authentication.yml
+        - conventions/mvmnt-conventions.yml
+        - errors/mvmnt-problem-types.yml
+        - lifecycle/mvmnt-lifecycle.yml
+        - data-model/mvmnt-data-model.yml
+        - asyncapi/mvmnt-webhooks-asyncapi.yml
+        - skills/_index.yml
+  - target: $.info
+    update:
+      x-authentication:
+        model: oauth2-client-credentials
+        token_endpoint: https://api.mvmnt.io/oauth2/token
+        token_lifetime_seconds: 3600
+        scope: mvmnt-api
+        docs: https://docs.mvmnt.io/getting-started/authentication
+  - target: $.info
+    update:
+      x-conventions:
+        pagination: cursor
+        pagination_response_fields: [data, pageInfo]
+        partial_updates: PATCH
+        soft_deletes: true
+        client_keys: true
+        rate_limit_headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+        error_envelope: [error, message, details]
+        versioning: uri-path

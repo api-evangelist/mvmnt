@@ -1,0 +1,539 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/mvmnt-openapi-original.yml
+note: No official MVMNT MCP server was found via search (docs, npm @modelcontextprotocol, MCP registries).
+  Tool list derived one-per-operation from the OpenAPI as a candidate surface.
+server:
+  name: mvmnt
+  transport: http
+  url: null
+tools:
+- name: filterCompanies
+  description: Filter companies
+  source_operation: openapi/mvmnt-openapi-original.yml#filterCompanies
+- name: createCompany
+  description: Create a new company
+  source_operation: openapi/mvmnt-openapi-original.yml#createCompany
+- name: getCompanyById
+  description: Get a company by ID
+  source_operation: openapi/mvmnt-openapi-original.yml#getCompanyById
+- name: updateCompany
+  description: Update a company
+  source_operation: openapi/mvmnt-openapi-original.yml#updateCompany
+- name: deleteCompany
+  description: Delete a company
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteCompany
+- name: filterCarrierContacts
+  description: Filter carrier contacts
+  source_operation: openapi/mvmnt-openapi-original.yml#filterCarrierContacts
+- name: createCarrierContact
+  description: Create carrier contact
+  source_operation: openapi/mvmnt-openapi-original.yml#createCarrierContact
+- name: getCarrierContactById
+  description: Get carrier contact
+  source_operation: openapi/mvmnt-openapi-original.yml#getCarrierContactById
+- name: updateCarrierContact
+  description: Update carrier contact
+  source_operation: openapi/mvmnt-openapi-original.yml#updateCarrierContact
+- name: deleteCarrierContact
+  description: Delete carrier contact
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteCarrierContact
+- name: filterCarriers
+  description: Filter carriers
+  source_operation: openapi/mvmnt-openapi-original.yml#filterCarriers
+- name: createCarrier
+  description: Create a new carrier
+  source_operation: openapi/mvmnt-openapi-original.yml#createCarrier
+- name: getCarrierById
+  description: Get a carrier by ID
+  source_operation: openapi/mvmnt-openapi-original.yml#getCarrierById
+- name: updateCarrier
+  description: Update a carrier
+  source_operation: openapi/mvmnt-openapi-original.yml#updateCarrier
+- name: deleteCarrier
+  description: Delete a carrier
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteCarrier
+- name: searchCarriers
+  description: Search carriers
+  source_operation: openapi/mvmnt-openapi-original.yml#searchCarriers
+- name: filterCarrierFactors
+  description: Filter carrier factors
+  source_operation: openapi/mvmnt-openapi-original.yml#filterCarrierFactors
+- name: createCarrierFactor
+  description: Create carrier factor
+  source_operation: openapi/mvmnt-openapi-original.yml#createCarrierFactor
+- name: getCarrierFactorById
+  description: Get carrier factor
+  source_operation: openapi/mvmnt-openapi-original.yml#getCarrierFactorById
+- name: updateCarrierFactor
+  description: Update carrier factor
+  source_operation: openapi/mvmnt-openapi-original.yml#updateCarrierFactor
+- name: deleteCarrierFactor
+  description: Delete carrier factor
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteCarrierFactor
+- name: filterCarrierPaymentMethods
+  description: Filter carrier payment methods
+  source_operation: openapi/mvmnt-openapi-original.yml#filterCarrierPaymentMethods
+- name: createCarrierPaymentMethod
+  description: Create carrier payment method
+  source_operation: openapi/mvmnt-openapi-original.yml#createCarrierPaymentMethod
+- name: getCarrierPaymentMethodById
+  description: Get carrier payment method
+  source_operation: openapi/mvmnt-openapi-original.yml#getCarrierPaymentMethodById
+- name: updateCarrierPaymentMethod
+  description: Update carrier payment method
+  source_operation: openapi/mvmnt-openapi-original.yml#updateCarrierPaymentMethod
+- name: deleteCarrierPaymentMethod
+  description: Delete carrier payment method
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteCarrierPaymentMethod
+- name: filterCustomerContacts
+  description: Filter customer contacts
+  source_operation: openapi/mvmnt-openapi-original.yml#filterCustomerContacts
+- name: createCustomerContact
+  description: Create customer contact
+  source_operation: openapi/mvmnt-openapi-original.yml#createCustomerContact
+- name: getCustomerContactById
+  description: Get customer contact
+  source_operation: openapi/mvmnt-openapi-original.yml#getCustomerContactById
+- name: updateCustomerContact
+  description: Update customer contact
+  source_operation: openapi/mvmnt-openapi-original.yml#updateCustomerContact
+- name: deleteCustomerContact
+  description: Delete customer contact
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteCustomerContact
+- name: filterCustomers
+  description: Filter customers
+  source_operation: openapi/mvmnt-openapi-original.yml#filterCustomers
+- name: createCustomer
+  description: Create customer
+  source_operation: openapi/mvmnt-openapi-original.yml#createCustomer
+- name: getCustomer
+  description: Get customer
+  source_operation: openapi/mvmnt-openapi-original.yml#getCustomer
+- name: updateCustomer
+  description: Update customer
+  source_operation: openapi/mvmnt-openapi-original.yml#updateCustomer
+- name: deleteCustomer
+  description: Delete customer
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteCustomer
+- name: searchCustomers
+  description: Search customers
+  source_operation: openapi/mvmnt-openapi-original.yml#searchCustomers
+- name: filterLocations
+  description: Filter locations
+  source_operation: openapi/mvmnt-openapi-original.yml#filterLocations
+- name: createLocation
+  description: Create a new location
+  source_operation: openapi/mvmnt-openapi-original.yml#createLocation
+- name: getLocationById
+  description: Get a location by ID
+  source_operation: openapi/mvmnt-openapi-original.yml#getLocationById
+- name: updateLocation
+  description: Update a location
+  source_operation: openapi/mvmnt-openapi-original.yml#updateLocation
+- name: deleteLocation
+  description: Delete a location
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteLocation
+- name: searchLocations
+  description: Search locations
+  source_operation: openapi/mvmnt-openapi-original.yml#searchLocations
+- name: filterLocationContacts
+  description: Filter location contacts
+  source_operation: openapi/mvmnt-openapi-original.yml#filterLocationContacts
+- name: createLocationContact
+  description: Create a new location contact
+  source_operation: openapi/mvmnt-openapi-original.yml#createLocationContact
+- name: getLocationContactById
+  description: Get a location contact by ID
+  source_operation: openapi/mvmnt-openapi-original.yml#getLocationContactById
+- name: updateLocationContact
+  description: Update a location contact
+  source_operation: openapi/mvmnt-openapi-original.yml#updateLocationContact
+- name: deleteLocationContact
+  description: Delete a location contact
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteLocationContact
+- name: filterPaymentTerms
+  description: Filter payment terms
+  source_operation: openapi/mvmnt-openapi-original.yml#filterPaymentTerms
+- name: createPaymentTerm
+  description: Create payment term
+  source_operation: openapi/mvmnt-openapi-original.yml#createPaymentTerm
+- name: getPaymentTerm
+  description: Get payment term
+  source_operation: openapi/mvmnt-openapi-original.yml#getPaymentTerm
+- name: updatePaymentTerm
+  description: Update payment term
+  source_operation: openapi/mvmnt-openapi-original.yml#updatePaymentTerm
+- name: deletePaymentTerm
+  description: Delete payment term
+  source_operation: openapi/mvmnt-openapi-original.yml#deletePaymentTerm
+- name: filterTeams
+  description: Filter teams
+  source_operation: openapi/mvmnt-openapi-original.yml#filterTeams
+- name: createTeam
+  description: Create team
+  source_operation: openapi/mvmnt-openapi-original.yml#createTeam
+- name: getTeam
+  description: Get team
+  source_operation: openapi/mvmnt-openapi-original.yml#getTeam
+- name: updateTeam
+  description: Update team
+  source_operation: openapi/mvmnt-openapi-original.yml#updateTeam
+- name: deleteTeam
+  description: Delete team
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteTeam
+- name: filterUsers
+  description: Filter users
+  source_operation: openapi/mvmnt-openapi-original.yml#filterUsers
+- name: createUser
+  description: Create user
+  source_operation: openapi/mvmnt-openapi-original.yml#createUser
+- name: getUser
+  description: Get user
+  source_operation: openapi/mvmnt-openapi-original.yml#getUser
+- name: updateUser
+  description: Update user
+  source_operation: openapi/mvmnt-openapi-original.yml#updateUser
+- name: deleteUser
+  description: Delete user
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteUser
+- name: searchUsers
+  description: Search users
+  source_operation: openapi/mvmnt-openapi-original.yml#searchUsers
+- name: filterVendors
+  description: Filter vendors
+  source_operation: openapi/mvmnt-openapi-original.yml#filterVendors
+- name: createVendor
+  description: Create a new vendor
+  source_operation: openapi/mvmnt-openapi-original.yml#createVendor
+- name: getVendorById
+  description: Get a vendor by ID
+  source_operation: openapi/mvmnt-openapi-original.yml#getVendorById
+- name: updateVendor
+  description: Update a vendor
+  source_operation: openapi/mvmnt-openapi-original.yml#updateVendor
+- name: deleteVendor
+  description: Delete a vendor
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteVendor
+- name: searchVendors
+  description: Search vendors
+  source_operation: openapi/mvmnt-openapi-original.yml#searchVendors
+- name: filterVendorContacts
+  description: Filter vendor contacts
+  source_operation: openapi/mvmnt-openapi-original.yml#filterVendorContacts
+- name: createVendorContact
+  description: Create a new vendor contact
+  source_operation: openapi/mvmnt-openapi-original.yml#createVendorContact
+- name: getVendorContactById
+  description: Get a vendor contact by ID
+  source_operation: openapi/mvmnt-openapi-original.yml#getVendorContactById
+- name: updateVendorContact
+  description: Update a vendor contact
+  source_operation: openapi/mvmnt-openapi-original.yml#updateVendorContact
+- name: deleteVendorContact
+  description: Delete a vendor contact
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteVendorContact
+- name: filterVendorPaymentMethods
+  description: Filter vendor payment methods
+  source_operation: openapi/mvmnt-openapi-original.yml#filterVendorPaymentMethods
+- name: createVendorPaymentMethod
+  description: Create vendor payment method
+  source_operation: openapi/mvmnt-openapi-original.yml#createVendorPaymentMethod
+- name: getVendorPaymentMethodById
+  description: Get vendor payment method
+  source_operation: openapi/mvmnt-openapi-original.yml#getVendorPaymentMethodById
+- name: updateVendorPaymentMethod
+  description: Update vendor payment method
+  source_operation: openapi/mvmnt-openapi-original.yml#updateVendorPaymentMethod
+- name: deleteVendorPaymentMethod
+  description: Delete vendor payment method
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteVendorPaymentMethod
+- name: filterSavedSearches
+  description: Filter saved searches
+  source_operation: openapi/mvmnt-openapi-original.yml#filterSavedSearches
+- name: createSavedSearch
+  description: Create saved search
+  source_operation: openapi/mvmnt-openapi-original.yml#createSavedSearch
+- name: getSavedSearch
+  description: Get saved search
+  source_operation: openapi/mvmnt-openapi-original.yml#getSavedSearch
+- name: updateSavedSearch
+  description: Update saved search
+  source_operation: openapi/mvmnt-openapi-original.yml#updateSavedSearch
+- name: deleteSavedSearch
+  description: Delete saved search
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteSavedSearch
+- name: trackShipments
+  description: Get tracking link
+  source_operation: openapi/mvmnt-openapi-original.yml#trackShipments
+- name: filterDocuments
+  description: Filter documents
+  source_operation: openapi/mvmnt-openapi-original.yml#filterDocuments
+- name: createDocument
+  description: Create a document
+  source_operation: openapi/mvmnt-openapi-original.yml#createDocument
+- name: getDocument
+  description: Get a document
+  source_operation: openapi/mvmnt-openapi-original.yml#getDocument
+- name: updateDocument
+  description: Update a document
+  source_operation: openapi/mvmnt-openapi-original.yml#updateDocument
+- name: deleteDocument
+  description: Delete a document
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteDocument
+- name: filterQuotes
+  description: Filter quotes
+  source_operation: openapi/mvmnt-openapi-original.yml#filterQuotes
+- name: createQuote
+  description: Create a quote
+  source_operation: openapi/mvmnt-openapi-original.yml#createQuote
+- name: getQuote
+  description: Get a quote
+  source_operation: openapi/mvmnt-openapi-original.yml#getQuote
+- name: updateQuote
+  description: Update a quote
+  source_operation: openapi/mvmnt-openapi-original.yml#updateQuote
+- name: deleteQuote
+  description: Delete a quote
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteQuote
+- name: convertQuoteToShipment
+  description: Convert quote to shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#convertQuoteToShipment
+- name: filterShipments
+  description: Filter shipments
+  source_operation: openapi/mvmnt-openapi-original.yml#filterShipments
+- name: createShipment
+  description: Create a shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#createShipment
+- name: getShipment
+  description: Get a shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#getShipment
+- name: updateShipment
+  description: Update a shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#updateShipment
+- name: deleteShipment
+  description: Delete a shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteShipment
+- name: cancelShipment
+  description: Cancel a shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#cancelShipment
+- name: uncancelShipment
+  description: Un-cancel a shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#uncancelShipment
+- name: duplicateShipment
+  description: Duplicate a shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#duplicateShipment
+- name: markShipmentReadyToInvoice
+  description: Mark shipment ready to invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#markShipmentReadyToInvoice
+- name: markShipmentNotReadyToInvoice
+  description: Revert shipment to not ready
+  source_operation: openapi/mvmnt-openapi-original.yml#markShipmentNotReadyToInvoice
+- name: generateShipmentInvoice
+  description: Generate invoice for shipment
+  source_operation: openapi/mvmnt-openapi-original.yml#generateShipmentInvoice
+- name: filterLoads
+  description: Filter loads
+  source_operation: openapi/mvmnt-openapi-original.yml#filterLoads
+- name: createLoad
+  description: Create a load
+  source_operation: openapi/mvmnt-openapi-original.yml#createLoad
+- name: getLoad
+  description: Get a load
+  source_operation: openapi/mvmnt-openapi-original.yml#getLoad
+- name: updateLoad
+  description: Update a load
+  source_operation: openapi/mvmnt-openapi-original.yml#updateLoad
+- name: deleteLoad
+  description: Delete a load
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteLoad
+- name: addCarrierToLoad
+  description: Add carrier to load
+  source_operation: openapi/mvmnt-openapi-original.yml#addCarrierToLoad
+- name: rebookLoad
+  description: Rebook a TONU load
+  source_operation: openapi/mvmnt-openapi-original.yml#rebookLoad
+- name: getLoadCarrier
+  description: Get load carrier
+  source_operation: openapi/mvmnt-openapi-original.yml#getLoadCarrier
+- name: updateLoadCarrier
+  description: Update load carrier
+  source_operation: openapi/mvmnt-openapi-original.yml#updateLoadCarrier
+- name: bounceCarrier
+  description: Bounce carrier
+  source_operation: openapi/mvmnt-openapi-original.yml#bounceCarrier
+- name: reportTonu
+  description: Report TONU
+  source_operation: openapi/mvmnt-openapi-original.yml#reportTonu
+- name: filterServices
+  description: Filter services
+  source_operation: openapi/mvmnt-openapi-original.yml#filterServices
+- name: createService
+  description: Create a service
+  source_operation: openapi/mvmnt-openapi-original.yml#createService
+- name: getService
+  description: Get a service
+  source_operation: openapi/mvmnt-openapi-original.yml#getService
+- name: updateService
+  description: Update a service
+  source_operation: openapi/mvmnt-openapi-original.yml#updateService
+- name: deleteService
+  description: Delete a service
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteService
+- name: filterInvoices
+  description: Filter invoices
+  source_operation: openapi/mvmnt-openapi-original.yml#filterInvoices
+- name: createInvoice
+  description: Create an invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#createInvoice
+- name: getInvoice
+  description: Get an invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#getInvoice
+- name: updateInvoice
+  description: Update an invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#updateInvoice
+- name: voidInvoice
+  description: Void an invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#voidInvoice
+- name: markInvoiceAwaiting
+  description: Mark invoice as awaiting payment
+  source_operation: openapi/mvmnt-openapi-original.yml#markInvoiceAwaiting
+- name: sendInvoiceEmail
+  description: Email invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#sendInvoiceEmail
+- name: getInvoicePayments
+  description: Get invoice payments
+  source_operation: openapi/mvmnt-openapi-original.yml#getInvoicePayments
+- name: batchGenerateInvoices
+  description: Batch generate invoices
+  source_operation: openapi/mvmnt-openapi-original.yml#batchGenerateInvoices
+- name: getAgingReport
+  description: Get aging report
+  source_operation: openapi/mvmnt-openapi-original.yml#getAgingReport
+- name: filterPayments
+  description: Filter payments
+  source_operation: openapi/mvmnt-openapi-original.yml#filterPayments
+- name: createPayment
+  description: Create a payment
+  source_operation: openapi/mvmnt-openapi-original.yml#createPayment
+- name: getPayment
+  description: Get a payment
+  source_operation: openapi/mvmnt-openapi-original.yml#getPayment
+- name: updatePayment
+  description: Update a payment
+  source_operation: openapi/mvmnt-openapi-original.yml#updatePayment
+- name: deletePayment
+  description: Delete a payment
+  source_operation: openapi/mvmnt-openapi-original.yml#deletePayment
+- name: getPaymentApplications
+  description: Get payment applications
+  source_operation: openapi/mvmnt-openapi-original.yml#getPaymentApplications
+- name: getCustomerPayments
+  description: Get customer payments
+  source_operation: openapi/mvmnt-openapi-original.yml#getCustomerPayments
+- name: getCustomerOutstandingInvoices
+  description: Get outstanding invoices
+  source_operation: openapi/mvmnt-openapi-original.yml#getCustomerOutstandingInvoices
+- name: filterCreditMemos
+  description: Filter credit memos
+  source_operation: openapi/mvmnt-openapi-original.yml#filterCreditMemos
+- name: createCreditMemo
+  description: Create a credit memo
+  source_operation: openapi/mvmnt-openapi-original.yml#createCreditMemo
+- name: getCreditMemo
+  description: Get a credit memo
+  source_operation: openapi/mvmnt-openapi-original.yml#getCreditMemo
+- name: updateCreditMemo
+  description: Update a credit memo
+  source_operation: openapi/mvmnt-openapi-original.yml#updateCreditMemo
+- name: voidCreditMemo
+  description: Void a credit memo
+  source_operation: openapi/mvmnt-openapi-original.yml#voidCreditMemo
+- name: applyCreditMemo
+  description: Apply credit to invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#applyCreditMemo
+- name: getCreditMemoApplications
+  description: Get credit applications
+  source_operation: openapi/mvmnt-openapi-original.yml#getCreditMemoApplications
+- name: unapplyCreditMemo
+  description: Unapply credit from invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#unapplyCreditMemo
+- name: getAvailableCreditsForInvoice
+  description: Get available credits for invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#getAvailableCreditsForInvoice
+- name: filterBills
+  description: Filter bills
+  source_operation: openapi/mvmnt-openapi-original.yml#filterBills
+- name: createBill
+  description: Record a bill
+  source_operation: openapi/mvmnt-openapi-original.yml#createBill
+- name: getBill
+  description: Get a bill
+  source_operation: openapi/mvmnt-openapi-original.yml#getBill
+- name: updateBill
+  description: Update a bill
+  source_operation: openapi/mvmnt-openapi-original.yml#updateBill
+- name: deleteBill
+  description: Delete a bill
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteBill
+- name: approveBill
+  description: Approve bill for payment
+  source_operation: openapi/mvmnt-openapi-original.yml#approveBill
+- name: batchApproveBills
+  description: Batch approve bills
+  source_operation: openapi/mvmnt-openapi-original.yml#batchApproveBills
+- name: unapproveBill
+  description: Unapprove bill
+  source_operation: openapi/mvmnt-openapi-original.yml#unapproveBill
+- name: revertBill
+  description: Revert bill to awaiting invoice
+  source_operation: openapi/mvmnt-openapi-original.yml#revertBill
+- name: getBillPayments
+  description: Get bill payments
+  source_operation: openapi/mvmnt-openapi-original.yml#getBillPayments
+- name: getCarrierOutstandingBills
+  description: Get carrier outstanding bills
+  source_operation: openapi/mvmnt-openapi-original.yml#getCarrierOutstandingBills
+- name: getVendorOutstandingBills
+  description: Get vendor outstanding bills
+  source_operation: openapi/mvmnt-openapi-original.yml#getVendorOutstandingBills
+- name: getApAgingReport
+  description: Get AP aging report
+  source_operation: openapi/mvmnt-openapi-original.yml#getApAgingReport
+- name: filterBillPayments
+  description: Filter bill payments
+  source_operation: openapi/mvmnt-openapi-original.yml#filterBillPayments
+- name: createBillPayment
+  description: Create a bill payment
+  source_operation: openapi/mvmnt-openapi-original.yml#createBillPayment
+- name: getBillPayment
+  description: Get a bill payment
+  source_operation: openapi/mvmnt-openapi-original.yml#getBillPayment
+- name: updateBillPayment
+  description: Update a bill payment
+  source_operation: openapi/mvmnt-openapi-original.yml#updateBillPayment
+- name: deleteBillPayment
+  description: Delete a bill payment
+  source_operation: openapi/mvmnt-openapi-original.yml#deleteBillPayment
+- name: getBillPaymentApplications
+  description: Get bill payment applications
+  source_operation: openapi/mvmnt-openapi-original.yml#getBillPaymentApplications
+- name: getCarrierBillsForPayment
+  description: Get carrier bills available for payment
+  source_operation: openapi/mvmnt-openapi-original.yml#getCarrierBillsForPayment
+- name: getVendorBillsForPayment
+  description: Get vendor bills available for payment
+  source_operation: openapi/mvmnt-openapi-original.yml#getVendorBillsForPayment
+- name: getCarrierFactorBillsForPayment
+  description: Get bills payable to a carrier factor
+  source_operation: openapi/mvmnt-openapi-original.yml#getCarrierFactorBillsForPayment
+- name: getBillPaymentRemittanceAdvice
+  description: Generate remittance advice
+  source_operation: openapi/mvmnt-openapi-original.yml#getBillPaymentRemittanceAdvice
+- name: sendBillPaymentRemittance
+  description: Send remittance advice email
+  source_operation: openapi/mvmnt-openapi-original.yml#sendBillPaymentRemittance
+- name: globalSearch
+  description: Search globally
+  source_operation: openapi/mvmnt-openapi-original.yml#globalSearch

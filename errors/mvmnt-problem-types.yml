@@ -1,0 +1,55 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mvmnt.io/getting-started/errors.md
+spec_source: openapi/mvmnt-openapi-original.yml
+docs: https://docs.mvmnt.io/getting-started/errors
+format: custom-json
+note: MVMNT uses a custom JSON error envelope (not RFC 9457). Some responses also advertise application/problem+json
+  in the spec, but the documented and predominant envelope is the custom shape below.
+envelope:
+  fields:
+  - error
+  - message
+  - details[]
+  example:
+    error: VALIDATION_ERROR
+    message: Request failed validation
+    details:
+    - field: weight
+      message: must be greater than 0
+problems:
+- status: 400
+  code: BAD_REQUEST
+  title: Bad Request
+  remediation: Malformed JSON or invalid parameters; validate the request body and query params.
+  operations_using: 125
+- status: 401
+  code: UNAUTHORIZED
+  title: Unauthorized
+  remediation: Missing, expired, or invalid bearer token; obtain a fresh OAuth2 client-credentials token.
+  operations_using: 176
+- status: 404
+  code: NOT_FOUND
+  title: Not Found
+  remediation: Resource does not exist or is not visible to your account; verify the id or client key.
+  operations_using: 113
+- status: 409
+  code: DUPLICATE_KEY
+  title: Conflict
+  remediation: Duplicate key or constraint violation; check for an existing record before creating.
+  operations_using: 45
+- status: 422
+  code: VALIDATION_ERROR
+  title: Unprocessable Entity
+  remediation: Request failed validation rules; inspect error.details[] for field-level messages.
+  operations_using: 61
+- status: 429
+  code: RATE_LIMIT_EXCEEDED
+  title: Too Many Requests
+  remediation: Rate limit exceeded; honor X-RateLimit-Reset and back off before retrying.
+  operations_using: 33
+- status: 500
+  code: INTERNAL_ERROR
+  title: Internal Server Error
+  remediation: Unexpected server error; retry with backoff and contact support@mvmnt.io if it persists.
+  operations_using: 54

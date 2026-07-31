@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mvmnt.io/getting-started/authentication
+docs: https://docs.mvmnt.io/getting-started/authentication
+spec_source: openapi/mvmnt-openapi-original.yml
+note: >-
+  MVMNT uses OAuth 2.0 client-credentials (machine-to-machine). The OpenAPI declares a single
+  http bearer (JWT) scheme rather than granular oauth2 scopes. Tokens are issued with a single
+  default scope; there is no per-resource scope taxonomy published.
+schemes:
+  - name: OAuth2ClientCredentials
+    type: oauth2
+    flow: clientCredentials
+    tokenUrl: https://api.mvmnt.io/oauth2/token
+scopes:
+  - scope: mvmnt-api
+    description: Default scope granting access to the MVMNT API surface authorized for the client.
+    flows: [clientCredentials]

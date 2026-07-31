@@ -1,0 +1,548 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mvmnt-openapi-original.yml
+docs: https://docs.mvmnt.io/getting-started/overview
+note: Entity-relationship graph derived from OpenAPI schema id-reference fields (<entity>Id / <entity>Ids).
+  MVMNT is a freight-brokerage TMS; core entities span CRM (customers/carriers/companies), operations
+  (loads/shipments/quotes), and AR/AP finance (invoices/bills/payments).
+entities:
+- Carriers
+- Carrier Contacts
+- Carrier Factors
+- Carrier Payment Methods
+- Companies
+- Credit Memos
+- Bills
+- Bill Payments
+- Customers
+- Customer Contacts
+- Documents
+- Invoices
+- Loads
+- Locations
+- Location Contacts
+- Payment Terms
+- Payments
+- Quotes
+- Saved Searches
+- Search
+- Services
+- Shipments
+- Teams
+- Users
+- Vendors
+- Vendor Contacts
+- Vendor Payment Methods
+relationships:
+- from: AddCarrierResponse
+  refs:
+  - field: loadId
+    target: Loads
+    kind: belongs_to
+    via: loadId
+- from: ApplyCreditRequest
+  refs:
+  - field: invoiceId
+    target: Invoices
+    kind: belongs_to
+    via: invoiceId
+- from: ApproveBillsRequest
+  refs:
+  - field: billIds
+    target: Bills
+    kind: has_many
+    via: billIds
+- from: Bill
+  refs:
+  - field: loadId
+    target: Loads
+    kind: belongs_to
+    via: loadId
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: BillFilter
+  refs:
+  - field: carrierId
+    target: Carriers
+    kind: belongs_to
+    via: carrierId
+  - field: vendorId
+    target: Vendors
+    kind: belongs_to
+    via: vendorId
+  - field: loadId
+    target: Loads
+    kind: belongs_to
+    via: loadId
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: BillInput
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: BillPatch
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: BillPaymentApplication
+  refs:
+  - field: billId
+    target: Bills
+    kind: belongs_to
+    via: billId
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: BillPaymentApplicationInput
+  refs:
+  - field: billId
+    target: Bills
+    kind: belongs_to
+    via: billId
+- from: BillPaymentApplicationPatch
+  refs:
+  - field: billId
+    target: Bills
+    kind: belongs_to
+    via: billId
+- from: BillPaymentFilter
+  refs:
+  - field: carrierId
+    target: Carriers
+    kind: belongs_to
+    via: carrierId
+  - field: vendorId
+    target: Vendors
+    kind: belongs_to
+    via: vendorId
+- from: CarrierContactFilter
+  refs:
+  - field: carrierId
+    target: Carriers
+    kind: belongs_to
+    via: carrierId
+- from: CarrierContactInput
+  refs:
+  - field: carrierId
+    target: Carriers
+    kind: belongs_to
+    via: carrierId
+- from: CarrierFactorFilter
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: CarrierFactorInput
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: CarrierFactorPatch
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: CarrierFilter
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: CarrierInputBase
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: CarrierPatchBase
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: CarrierPaymentMethod
+  refs:
+  - field: carrierId
+    target: Carriers
+    kind: belongs_to
+    via: carrierId
+- from: CarrierPaymentMethodFilter
+  refs:
+  - field: carrierId
+    target: Carriers
+    kind: belongs_to
+    via: carrierId
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: CarrierPaymentMethodInput
+  refs:
+  - field: carrierId
+    target: Carriers
+    kind: belongs_to
+    via: carrierId
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: CarrierPaymentMethodPatch
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: ConvertToShipmentResponse
+  refs:
+  - field: quoteId
+    target: Quotes
+    kind: belongs_to
+    via: quoteId
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: CreditMemoApplication
+  refs:
+  - field: invoiceId
+    target: Invoices
+    kind: belongs_to
+    via: invoiceId
+  - field: paymentId
+    target: Payments
+    kind: belongs_to
+    via: paymentId
+- from: CreditMemoFilter
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: CreditMemoInput
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: CustomerContactFilter
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: CustomerContactInput
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: CustomerSearchCriteria
+  refs:
+  - field: teamId
+    target: Teams
+    kind: belongs_to
+    via: teamId
+  - field: userIds
+    target: Users
+    kind: has_many
+    via: userIds
+- from: CustomerSearchRow
+  refs:
+  - field: teamId
+    target: Teams
+    kind: belongs_to
+    via: teamId
+  - field: userIds
+    target: Users
+    kind: has_many
+    via: userIds
+- from: Invoice
+  refs:
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+  - field: documentId
+    target: Documents
+    kind: belongs_to
+    via: documentId
+- from: InvoiceCredit
+  refs:
+  - field: creditMemoId
+    target: Credit Memos
+    kind: belongs_to
+    via: creditMemoId
+- from: InvoiceFilter
+  refs:
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: InvoiceInput
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: InvoicePatch
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: Load
+  refs:
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: LoadFilter
+  refs:
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: Location
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: LocationContact
+  refs:
+  - field: locationId
+    target: Locations
+    kind: belongs_to
+    via: locationId
+- from: LocationContactFilter
+  refs:
+  - field: locationId
+    target: Locations
+    kind: belongs_to
+    via: locationId
+- from: LocationContactInput
+  refs:
+  - field: locationId
+    target: Locations
+    kind: belongs_to
+    via: locationId
+- from: LocationContactPatch
+  refs:
+  - field: locationId
+    target: Locations
+    kind: belongs_to
+    via: locationId
+- from: LocationFilter
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: LocationInput
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: LocationPatch
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: LocationSearchCriteria
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: LocationSearchRow
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: OutstandingBill
+  refs:
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: Payment
+  refs:
+  - field: shipmentIds
+    target: Shipments
+    kind: has_many
+    via: shipmentIds
+- from: PaymentApplication
+  refs:
+  - field: invoiceId
+    target: Invoices
+    kind: belongs_to
+    via: invoiceId
+- from: PaymentApplicationInput
+  refs:
+  - field: invoiceId
+    target: Invoices
+    kind: belongs_to
+    via: invoiceId
+- from: PaymentCreditApplication
+  refs:
+  - field: creditMemoId
+    target: Credit Memos
+    kind: belongs_to
+    via: creditMemoId
+- from: PaymentCreditApplicationInput
+  refs:
+  - field: creditMemoId
+    target: Credit Memos
+    kind: belongs_to
+    via: creditMemoId
+- from: PaymentFilter
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+  - field: invoiceId
+    target: Invoices
+    kind: belongs_to
+    via: invoiceId
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: PaymentInput
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: Quote
+  refs:
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: QuoteFilter
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+  - field: carrierId
+    target: Carriers
+    kind: belongs_to
+    via: carrierId
+- from: Service
+  refs:
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+- from: ServiceFilter
+  refs:
+  - field: shipmentId
+    target: Shipments
+    kind: belongs_to
+    via: shipmentId
+  - field: vendorId
+    target: Vendors
+    kind: belongs_to
+    via: vendorId
+- from: ShipmentFilter
+  refs:
+  - field: customerId
+    target: Customers
+    kind: belongs_to
+    via: customerId
+- from: UserSearchCriteria
+  refs:
+  - field: teamIds
+    target: Teams
+    kind: has_many
+    via: teamIds
+- from: UserSearchRow
+  refs:
+  - field: teamIds
+    target: Teams
+    kind: has_many
+    via: teamIds
+- from: VendorContactFilter
+  refs:
+  - field: vendorId
+    target: Vendors
+    kind: belongs_to
+    via: vendorId
+- from: VendorContactInput
+  refs:
+  - field: vendorId
+    target: Vendors
+    kind: belongs_to
+    via: vendorId
+- from: VendorFilter
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: VendorInput
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: VendorPatch
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: VendorPaymentMethod
+  refs:
+  - field: vendorId
+    target: Vendors
+    kind: belongs_to
+    via: vendorId
+- from: VendorPaymentMethodFilter
+  refs:
+  - field: vendorId
+    target: Vendors
+    kind: belongs_to
+    via: vendorId
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: VendorPaymentMethodInput
+  refs:
+  - field: vendorId
+    target: Vendors
+    kind: belongs_to
+    via: vendorId
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId
+- from: VendorPaymentMethodPatch
+  refs:
+  - field: paymentTermId
+    target: Payment Terms
+    kind: belongs_to
+    via: paymentTermId

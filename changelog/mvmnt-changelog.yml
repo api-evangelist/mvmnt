@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mvmnt.io/changelog
+docs: https://docs.mvmnt.io/changelog
+scheme: semver
+convention: keep-a-changelog
+current_version: 1.0.0
+entries:
+  - version: 1.0.0
+    date: '2025-11-01'
+    type: initial
+    breaking: false
+    highlights:
+      - Initial public release of the MVMNT API.
+      - Core REST resources for carriers, customers, companies, loads, shipments, quotes, invoices, bills, payments, and documents.
+      - Real-time webhooks for entity, shipment, and financial events.

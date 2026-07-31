@@ -1,0 +1,69 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mvmnt.io/getting-started/overview
+spec_source: openapi/mvmnt-openapi-original.yml
+docs:
+  overview: https://docs.mvmnt.io/getting-started/overview
+  authentication: https://docs.mvmnt.io/getting-started/authentication
+  pagination: https://docs.mvmnt.io/getting-started/pagination
+  filtering: https://docs.mvmnt.io/getting-started/filtering
+  partial_updates: https://docs.mvmnt.io/getting-started/partial-updates
+  client_keys: https://docs.mvmnt.io/getting-started/client-keys
+  soft_deletes: https://docs.mvmnt.io/getting-started/soft-deletes
+  errors: https://docs.mvmnt.io/getting-started/errors
+  rate_limits: https://docs.mvmnt.io/getting-started/rate-limits
+authentication:
+  style: oauth2-client-credentials
+  token_endpoint: https://api.mvmnt.io/oauth2/token
+  header: 'Authorization: Bearer <token>'
+  token_lifetime_seconds: 3600
+  scope: mvmnt-api
+  ref: authentication/mvmnt-authentication.yml
+idempotency:
+  request_api_key: false
+  note: >-
+    MVMNT does not document a request-side Idempotency-Key header for API writes.
+    Idempotency guidance is published for webhook CONSUMERS only: dedupe deliveries
+    using the event id + timestamp. No canonical Idempotency pointer is emitted for
+    the request API because no idempotency contract is offered.
+pagination:
+  style: cursor
+  request_via: POST /{resource}/filter
+  response_fields: [data, pageInfo]
+  ref: https://docs.mvmnt.io/getting-started/pagination
+filtering:
+  style: filter-endpoints
+  note: List/query is performed via POST /{resource}/filter and POST /{resource}/search rather than GET query strings.
+  ref: https://docs.mvmnt.io/getting-started/filtering
+partial_updates:
+  method: PATCH
+  note: PATCH performs partial updates; only supplied fields are changed.
+  ref: https://docs.mvmnt.io/getting-started/partial-updates
+client_keys:
+  supported: true
+  note: >-
+    Clients may store their own system IDs as client keys; most resource paths accept
+    either the MVMNT id or a client key via the IdOrClientKey / LookupBy parameters.
+  ref: https://docs.mvmnt.io/getting-started/client-keys
+soft_deletes:
+  supported: true
+  note: DELETE performs soft deletes; records are deactivated/retained rather than hard-deleted.
+  ref: https://docs.mvmnt.io/getting-started/soft-deletes
+error_envelope:
+  format: custom-json
+  fields: [error, message, details]
+  ref: errors/mvmnt-problem-types.yml
+rate_limiting:
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  tiers: [Standard, Enterprise]
+  retry_signal: X-RateLimit-Reset
+  note: Exact per-minute limits vary by plan tier and are not published; honor X-RateLimit-Reset on 429.
+  ref: https://docs.mvmnt.io/getting-started/rate-limits
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.mvmnt.io/v1
+  ref: lifecycle/mvmnt-lifecycle.yml
+webhooks:
+  supported: true
+  ref: asyncapi/mvmnt-webhooks.yml

@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/mvmnt-openapi-original.yml
+skills:
+  - file: mvmnt-quote-to-shipment.md
+    name: Quote to shipment
+    api: openapi/mvmnt-openapi-original.yml
+    operations: [createQuote, convertQuoteToShipment, getShipment, trackShipments]
+  - file: mvmnt-onboard-carrier.md
+    name: Onboard a carrier
+    api: openapi/mvmnt-openapi-original.yml
+    operations: [searchCarriers, createCarrier, createCarrierContact, createCarrierPaymentMethod]
+  - file: mvmnt-book-load-with-carrier.md
+    name: Book a load with a carrier
+    api: openapi/mvmnt-openapi-original.yml
+    operations: [createLoad, searchCarriers, addCarrierToLoad, getLoad]
+  - file: mvmnt-invoice-and-collect.md
+    name: Invoice a shipment and collect
+    api: openapi/mvmnt-openapi-original.yml
+    operations: [markShipmentReadyToInvoice, generateShipmentInvoice, sendInvoiceEmail, getCustomerOutstandingInvoices]
