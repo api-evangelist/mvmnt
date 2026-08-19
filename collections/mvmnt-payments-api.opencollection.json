@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/payments/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for AR payments using filter criteria.\n\n## Common Filters\n\n- By customer: `{ \"filter\": { \"customerId\": { \"equalTo\": \"uuid\" } } }`\n- By invoice: `{ \"filter\": { \"invoiceId\": { \"equalTo\": \"uuid\" } } }`\n- By date range: `{ \"filter\": { \"paymentDate\": { \"greaterThanOrEqualTo\": \"2025-01-01\" } } }`\n- By method: `{ \"filter\": { \"paymentMethodType\": { \"equalTo\": \"check\" } } }`\n"
+        },
+        {
+          "info": {
+            "name": "Create a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record a customer payment applied to invoices.\n\n## What happens\n\n- Payment record is created\n- Specified amounts are applied to invoices\n- Invoice/order status updated to `PAID` when fully paid\n- Overpayment creates a credit memo automatically\n\n## Validations\n\n- Payment date must be >= invoice date for all applied invoices\n- Application amounts must not exceed invoice open balances\n- Customer must match invoice customer\n"
+        },
+        {
+          "info": {
+            "name": "Get a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a payment by ID.\n\nThe response includes all invoice applications and credit applications.\n"
+        },
+        {
+          "info": {
+            "name": "Update a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update payment details or reassign invoice applications.\n\n## What happens\n\n- Payment fields are updated\n- Invoice applications are replaced if provided\n- Order statuses are recalculated\n\n## Note\n\nUpdating applications replaces all existing applications.\nInclude all desired applications in the request.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Delete a payment and remove all invoice applications.\n\n## What happens\n\n- Payment record is deleted\n- Invoice applications are removed\n- Order statuses revert if needed (PAID → UNPAID)\n\n## Note\n\nThis action cannot be undone. Consider voiding instead\nif you need to maintain a record.\n"
+        },
+        {
+          "info": {
+            "name": "Get payment applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/payments/:id/applications",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List all invoice applications for a payment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

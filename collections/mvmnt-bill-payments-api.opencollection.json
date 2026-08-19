@@ -1,0 +1,212 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bill Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter bill payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bill-payments/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for bill payments using filter criteria.\n\n## Common Filters\n\n- By carrier: `{ \"filter\": { \"carrierId\": { \"equalTo\": \"uuid\" } } }`\n- By vendor: `{ \"filter\": { \"vendorId\": { \"equalTo\": \"uuid\" } } }`\n- By factor: `{ \"filter\": { \"carrierFactorId\": { \"equalTo\": \"uuid\" } } }`\n- By date range: `{ \"filter\": { \"paymentDate\": { \"gte\": \"2025-01-01\", \"lte\": \"2025-01-31\" } } }`\n- By method: `{ \"filter\": { \"paymentMethodType\": { \"equalTo\": \"check\" } } }`\n"
+        },
+        {
+          "info": {
+            "name": "Create a bill payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bill-payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record a payment for one or more carrier/vendor bills.\n\n## What happens\n\n- PaymentGroup record is created\n- Payment applications are created for each bill\n- Bill open balances are reduced\n- Load/service status updates to PAID when fully paid\n\n## Carrier factor payments\n\nTo pay a carrier's factor instead of the carrier directly,\nspecify `carrierFactorId` in the request.\n\n## Overpayments\n\nIf `allowOverpayment` is true and payment exceeds bill totals,\na credit memo is automatically created for the "
+        },
+        {
+          "info": {
+            "name": "Get a bill payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/bill-payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a bill payment by ID.\n\nThe response includes all payment applications and their associated bills.\n"
+        },
+        {
+          "info": {
+            "name": "Update a bill payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/bill-payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update bill payment fields.\n\n## Constraints\n\n- Cannot change carrier factor after creation\n- Can add/remove/update payment applications\n\n## Updating applications\n\nIn the `applications` array:\n- Include `id` to update an existing application\n- Omit `id` and include `billId` to add a new application\n- Set `delete: true` with `id` to remove an application\n"
+        },
+        {
+          "info": {
+            "name": "Delete a bill payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/bill-payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Delete a bill payment and all its applications.\n\n## What happens\n\n- PaymentGroup record is deleted\n- All Payment applications are deleted\n- Bill open balances are restored\n- Load/service status may revert if payment made them PAID\n"
+        },
+        {
+          "info": {
+            "name": "Get bill payment applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/bill-payments/:id/applications",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List all bills paid by this payment group."
+        },
+        {
+          "info": {
+            "name": "Generate remittance advice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/bill-payments/:id/remittance-advice",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Generate a remittance advice document for a bill payment.\n\n## Formats\n\n- PDF (default): Set Accept header to application/pdf\n- JSON: Set Accept header to application/json\n"
+        },
+        {
+          "info": {
+            "name": "Send remittance advice email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bill-payments/:id/send-remittance",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Email the remittance advice to the carrier or vendor.\n\nUses the recipient's default email from their profile.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

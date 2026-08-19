@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Credit Memos API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Credit Memos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter credit memos",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/credit-memos/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for credit memos using filter criteria.\n\n## Common Filters\n\n- By customer: `{ \"filter\": { \"customerId\": { \"equalTo\": \"uuid\" } } }`\n- With balance: `{ \"filter\": { \"hasRemainingBalance\": true } }`\n- Open credits: `{ \"filter\": { \"status\": { \"in\": [\"OPEN\", \"PARTIALLY_APPLIED\"] } } }`\n"
+        },
+        {
+          "info": {
+            "name": "Create a credit memo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/credit-memos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new credit memo for a customer.\n\n## Use cases\n\n- Customer refunds\n- Service adjustments\n- Promotional credits\n- Manual corrections\n\n## Note\n\nCredit memos from overpayments are created automatically\nwhen a payment exceeds invoice totals.\n"
+        },
+        {
+          "info": {
+            "name": "Get a credit memo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/credit-memos/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a credit memo by ID.\n\nThe response includes all applications showing how the credit has been used.\n"
+        },
+        {
+          "info": {
+            "name": "Update a credit memo",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/credit-memos/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update credit memo fields.\n\n## Constraints\n\n- Amount cannot be changed if any applications exist\n- Customer cannot be changed once created\n"
+        },
+        {
+          "info": {
+            "name": "Void a credit memo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/credit-memos/:id/void",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Void/cancel a credit memo.\n\n## Prerequisites\n\n- Credit memo must have no applications (full balance remaining)\n- Must unapply all applications before voiding\n\n## What happens\n\n- Credit memo status changes to VOIDED\n- Credit is no longer available for application\n- QBO sync will delete the credit memo\n"
+        },
+        {
+          "info": {
+            "name": "Apply credit to invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/credit-memos/:id/apply",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply credit memo amount to an invoice.\n\n## What happens\n\n- Creates credit application record\n- Reduces credit memo remaining balance\n- Reduces invoice open balance\n- Updates order status if invoice is fully paid\n\n## Constraints\n\n- Amount must not exceed remaining balance\n- Invoice must belong to same customer\n- Invoice must have outstanding balance\n- Currency must match\n"
+        },
+        {
+          "info": {
+            "name": "Get credit applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/credit-memos/:id/applications",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List all invoice applications for a credit memo."
+        },
+        {
+          "info": {
+            "name": "Unapply credit from invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/credit-memos/:creditMemoId/applications/:applicationId",
+            "params": [
+              {
+                "name": "creditMemoId",
+                "value": "",
+                "type": "path",
+                "description": "Credit memo ID"
+              },
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "Application ID"
+              }
+            ]
+          },
+          "docs": "Remove a credit application from an invoice.\n\n## What happens\n\n- Application record is deleted\n- Credit memo remaining balance increases\n- Invoice open balance increases\n- Order status may revert if invoice becomes unpaid\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

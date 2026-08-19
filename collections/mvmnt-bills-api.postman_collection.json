@@ -1,0 +1,3011 @@
+{
+  "item": [
+    {
+      "id": "de028dd8-ba91-4793-b9e1-877264f1511f",
+      "name": "Bills",
+      "description": {
+        "content": "AP bill management operations.\nBills represent carrier and vendor invoices to be paid.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c8173cf-ec64-42bd-936e-bc910f345c0d",
+          "name": "Filter bills",
+          "request": {
+            "name": "Filter bills",
+            "description": {
+              "content": "Search for AP bills using filter criteria.\n\n## Common Filters\n\n- By carrier: `{ \"filter\": { \"carrierId\": { \"equalTo\": \"uuid\" } } }`\n- By vendor: `{ \"filter\": { \"vendorId\": { \"equalTo\": \"uuid\" } } }`\n- Awaiting approval: `{ \"filter\": { \"status\": { \"equalTo\": \"IN_REVIEW\" } } }`\n- By shipment: `{ \"filter\": { \"shipmentId\": { \"equalTo\": \"uuid\" } } }`\n- Overdue: `{ \"filter\": { \"overdue\": true } }`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"loadCarrierId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"vendedServiceId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"carrierId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"loadId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"shipmentId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"entityType\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"invoiceDate\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"dueDate\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"amount\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"overdue\": \"<boolean>\",\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/BillFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/BillFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/BillFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/BillFilter detected>\"\n      }\n    ]\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e276190-3ce6-4ae9-bf75-78a2510fd3cf",
+              "name": "Bills matching filter criteria",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"equalTo\": \"IN_REVIEW\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"friendlyId\": \"BILL-00001\",\n      \"status\": \"IN_REVIEW\",\n      \"entityType\": \"CARRIER\",\n      \"amount\": 5082.113108097107,\n      \"createdAt\": \"1995-03-11T12:16:37.878Z\",\n      \"key\": \"string\",\n      \"loadCarrierId\": \"741886e8-12fe-153c-3fc7-0312c786597a\",\n      \"vendedServiceId\": \"0716b06d-00e8-97b0-e688-f989b873e801\",\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"1995-12-05T14:42:46.815Z\"\n      },\n      \"vendor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"friendlyId\": \"V123456\",\n        \"name\": \"ABC Warehouse Services\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-VENDOR-ABC-001\",\n        \"email\": \"billing@abcwarehouse.com\",\n        \"phone\": \"+1-555-123-4567\",\n        \"status\": \"ACTIVE\",\n        \"currency\": \"USD\"\n      },\n      \"loadId\": \"28d679ad-e8c9-e756-474a-6bc74236ecf1\",\n      \"loadKey\": \"string\",\n      \"shipmentId\": \"b05755d0-b244-76fc-a5f2-0baba3785d1a\",\n      \"shipmentKey\": \"string\",\n      \"invoiceDate\": \"2010-03-01\",\n      \"dueDate\": \"2013-10-12\",\n      \"currency\": \"USD\",\n      \"reference\": \"string\",\n      \"amountPaid\": 9576.669313134944,\n      \"amountOwed\": 9576.052134824233,\n      \"payments\": [\n        {\n          \"id\": \"6357fee5-fd41-57a6-411f-33e97cb7a11b\",\n          \"paymentGroupId\": \"c2334908-a52c-d350-fda8-477e49d348cc\",\n          \"amount\": 4128.005600648299,\n          \"paymentDate\": \"1955-10-22\",\n          \"reference\": \"string\"\n        },\n        {\n          \"id\": \"b562c66a-6a7b-7051-7ced-aef38e0bd26c\",\n          \"paymentGroupId\": \"cbf44399-7177-0ddd-7eb0-50f0cc37c67c\",\n          \"amount\": 8572.58127832897,\n          \"paymentDate\": \"2005-05-21\",\n          \"reference\": \"string\"\n        }\n      ],\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1971-04-16T19:04:29.841Z\"\n      },\n      \"carrierFactor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"companyName\": \"Capital Factoring Services Inc\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-FACTOR-001\",\n        \"email\": \"accounting@capitalfactoring.com\",\n        \"phoneNumber\": \"+1-555-234-5678\",\n        \"currency\": \"USD\"\n      },\n      \"factorJobId\": \"string\",\n      \"factorStatus\": \"string\",\n      \"qboId\": \"string\",\n      \"updatedAt\": \"1949-06-23T05:21:53.010Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"friendlyId\": \"BILL-00001\",\n      \"status\": \"APPROVED_TO_PAY\",\n      \"entityType\": \"CARRIER\",\n      \"amount\": 6593.975958532332,\n      \"createdAt\": \"1952-07-30T18:37:53.632Z\",\n      \"key\": \"string\",\n      \"loadCarrierId\": \"607dc343-db17-afdc-f6a5-6946c124ba64\",\n      \"vendedServiceId\": \"b2b47f15-7383-4bba-6de5-19029e057e89\",\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"2000-02-14T11:16:31.279Z\"\n      },\n      \"vendor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"friendlyId\": \"V123456\",\n        \"name\": \"ABC Warehouse Services\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-VENDOR-ABC-001\",\n        \"email\": \"billing@abcwarehouse.com\",\n        \"phone\": \"+1-555-123-4567\",\n        \"status\": \"ACTIVE\",\n        \"currency\": \"USD\"\n      },\n      \"loadId\": \"95a77269-99de-ca47-9b46-09d59b4ca88c\",\n      \"loadKey\": \"string\",\n      \"shipmentId\": \"60858c8c-1d53-facf-8db4-87cac869ba00\",\n      \"shipmentKey\": \"string\",\n      \"invoiceDate\": \"1992-12-02\",\n      \"dueDate\": \"2014-11-29\",\n      \"currency\": \"USD\",\n      \"reference\": \"string\",\n      \"amountPaid\": 2997.513914233805,\n      \"amountOwed\": 5454.726474513305,\n      \"payments\": [\n        {\n          \"id\": \"b6effedd-0492-9408-9cdc-b22f3d2d1269\",\n          \"paymentGroupId\": \"afb6c28b-0075-8f95-cc88-9eb2159f36f8\",\n          \"amount\": 5689.627155738474,\n          \"paymentDate\": \"1994-02-03\",\n          \"reference\": \"string\"\n        },\n        {\n          \"id\": \"50ad7416-763e-72ad-ee7c-dc2c9a30d571\",\n          \"paymentGroupId\": \"e1788611-7a46-d903-76b1-eec2aaa2d375\",\n          \"amount\": 8446.443569177916,\n          \"paymentDate\": \"2021-11-04\",\n          \"reference\": \"string\"\n        }\n      ],\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1989-04-30T08:58:24.873Z\"\n      },\n      \"carrierFactor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"companyName\": \"Capital Factoring Services Inc\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-FACTOR-001\",\n        \"email\": \"accounting@capitalfactoring.com\",\n        \"phoneNumber\": \"+1-555-234-5678\",\n        \"currency\": \"USD\"\n      },\n      \"factorJobId\": \"string\",\n      \"factorStatus\": \"string\",\n      \"qboId\": \"string\",\n      \"updatedAt\": \"2012-12-15T10:21:45.813Z\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da63940a-8ab2-4827-bf50-8fe926d63082",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"equalTo\": \"IN_REVIEW\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8602afdd-45c1-4915-9024-e142530ee910",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"equalTo\": \"IN_REVIEW\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2070bf03-f8db-49f1-a203-177b868d566e",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"equalTo\": \"IN_REVIEW\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "235f86ea-b76b-4102-b6be-d5cb319da8a2",
+          "name": "Record a bill",
+          "request": {
+            "name": "Record a bill",
+            "description": {
+              "content": "Record a carrier or vendor bill (invoice).\n\n## What happens\n\n- Bill record is created for the load carrier or vended service\n- Entity status updates to `IN_REVIEW`\n- Due date calculated from payment term if not provided\n\n## Prerequisites\n\n- LoadCarrier or VendedService must exist\n- Entity must be in `AWAITING_INVOICE` status\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityType\": \"<string>\",\n  \"entityId\": \"<uuid>\",\n  \"invoiceDate\": \"<date>\",\n  \"amount\": \"<number>\",\n  \"dueDate\": \"<date>\",\n  \"reference\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6673167f-dbad-4e06-b033-c9c419826dbc",
+              "name": "Bill created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"CARRIER\",\n  \"entityId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"invoiceDate\": \"2025-01-15\",\n  \"dueDate\": \"2025-02-14\",\n  \"amount\": 2500,\n  \"reference\": \"INV-CARRIER-123\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"friendlyId\": \"BILL-00001\",\n  \"status\": \"IN_REVIEW\",\n  \"entityType\": \"VENDOR\",\n  \"amount\": 699.4903137264863,\n  \"createdAt\": \"1977-10-01T16:26:35.711Z\",\n  \"key\": \"string\",\n  \"loadCarrierId\": \"5b148e71-42df-42c5-489d-7f11268f3fd3\",\n  \"vendedServiceId\": \"05b629f3-bab3-0ec1-8e26-181fd6f0ffda\",\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"1967-10-27T08:47:41.235Z\"\n  },\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"loadId\": \"9c2b6608-a8d8-f484-b415-f32a8ca5f274\",\n  \"loadKey\": \"string\",\n  \"shipmentId\": \"6e25ac3b-01f8-6f17-e9d9-ffae06693360\",\n  \"shipmentKey\": \"string\",\n  \"invoiceDate\": \"2019-06-22\",\n  \"dueDate\": \"1983-05-31\",\n  \"currency\": \"USD\",\n  \"reference\": \"string\",\n  \"amountPaid\": 5653.503112063646,\n  \"amountOwed\": 6709.823900043812,\n  \"payments\": [\n    {\n      \"id\": \"b7423d3d-b97b-0aab-b34a-542b99081b9d\",\n      \"paymentGroupId\": \"5ca1a6b4-bac2-6bbe-4f88-0f4224f86235\",\n      \"amount\": 4081.391899420936,\n      \"paymentDate\": \"1972-02-13\",\n      \"reference\": \"string\"\n    },\n    {\n      \"id\": \"68ce7569-8235-f1b6-f14c-65773d4c9fa8\",\n      \"paymentGroupId\": \"89e0b949-e0db-8908-b64e-28d146b91f64\",\n      \"amount\": 7594.308299253019,\n      \"paymentDate\": \"1971-04-08\",\n      \"reference\": \"string\"\n    }\n  ],\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1968-11-27T02:11:42.816Z\"\n  },\n  \"carrierFactor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"companyName\": \"Capital Factoring Services Inc\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-FACTOR-001\",\n    \"email\": \"accounting@capitalfactoring.com\",\n    \"phoneNumber\": \"+1-555-234-5678\",\n    \"currency\": \"USD\"\n  },\n  \"factorJobId\": \"string\",\n  \"factorStatus\": \"string\",\n  \"qboId\": \"string\",\n  \"updatedAt\": \"1967-02-22T12:02:10.031Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b0bf14a-7a2d-4cb6-b1fa-a3467ece099f",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"CARRIER\",\n  \"entityId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"invoiceDate\": \"2025-01-15\",\n  \"dueDate\": \"2025-02-14\",\n  \"amount\": 2500,\n  \"reference\": \"INV-CARRIER-123\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2177c271-fd80-4cfe-997f-d50df465da5b",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"CARRIER\",\n  \"entityId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"invoiceDate\": \"2025-01-15\",\n  \"dueDate\": \"2025-02-14\",\n  \"amount\": 2500,\n  \"reference\": \"INV-CARRIER-123\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b0e13a0-4317-4e96-9a66-9f344723d134",
+              "name": "Entity already has a bill or is not in correct status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"CARRIER\",\n  \"entityId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"invoiceDate\": \"2025-01-15\",\n  \"dueDate\": \"2025-02-14\",\n  \"amount\": 2500,\n  \"reference\": \"INV-CARRIER-123\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adb69e1b-b6d5-4b0b-955e-2ca516c47dd1",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"CARRIER\",\n  \"entityId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"invoiceDate\": \"2025-01-15\",\n  \"dueDate\": \"2025-02-14\",\n  \"amount\": 2500,\n  \"reference\": \"INV-CARRIER-123\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "887760a0-f6d0-4af0-89c9-39642a96b8e6",
+          "name": "Get a bill",
+          "request": {
+            "name": "Get a bill",
+            "description": {
+              "content": "Retrieve a bill by ID.\n\nThe response includes payments applied and carrier/vendor details.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c42cebc-d552-4645-b261-818e66526768",
+              "name": "Bill retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"friendlyId\": \"BILL-00001\",\n  \"status\": \"IN_REVIEW\",\n  \"entityType\": \"VENDOR\",\n  \"amount\": 699.4903137264863,\n  \"createdAt\": \"1977-10-01T16:26:35.711Z\",\n  \"key\": \"string\",\n  \"loadCarrierId\": \"5b148e71-42df-42c5-489d-7f11268f3fd3\",\n  \"vendedServiceId\": \"05b629f3-bab3-0ec1-8e26-181fd6f0ffda\",\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"1967-10-27T08:47:41.235Z\"\n  },\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"loadId\": \"9c2b6608-a8d8-f484-b415-f32a8ca5f274\",\n  \"loadKey\": \"string\",\n  \"shipmentId\": \"6e25ac3b-01f8-6f17-e9d9-ffae06693360\",\n  \"shipmentKey\": \"string\",\n  \"invoiceDate\": \"2019-06-22\",\n  \"dueDate\": \"1983-05-31\",\n  \"currency\": \"USD\",\n  \"reference\": \"string\",\n  \"amountPaid\": 5653.503112063646,\n  \"amountOwed\": 6709.823900043812,\n  \"payments\": [\n    {\n      \"id\": \"b7423d3d-b97b-0aab-b34a-542b99081b9d\",\n      \"paymentGroupId\": \"5ca1a6b4-bac2-6bbe-4f88-0f4224f86235\",\n      \"amount\": 4081.391899420936,\n      \"paymentDate\": \"1972-02-13\",\n      \"reference\": \"string\"\n    },\n    {\n      \"id\": \"68ce7569-8235-f1b6-f14c-65773d4c9fa8\",\n      \"paymentGroupId\": \"89e0b949-e0db-8908-b64e-28d146b91f64\",\n      \"amount\": 7594.308299253019,\n      \"paymentDate\": \"1971-04-08\",\n      \"reference\": \"string\"\n    }\n  ],\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1968-11-27T02:11:42.816Z\"\n  },\n  \"carrierFactor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"companyName\": \"Capital Factoring Services Inc\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-FACTOR-001\",\n    \"email\": \"accounting@capitalfactoring.com\",\n    \"phoneNumber\": \"+1-555-234-5678\",\n    \"currency\": \"USD\"\n  },\n  \"factorJobId\": \"string\",\n  \"factorStatus\": \"string\",\n  \"qboId\": \"string\",\n  \"updatedAt\": \"1967-02-22T12:02:10.031Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ea57256-e4fa-4b41-94b3-f414dcdf1d71",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0159d9c6-7505-42cf-bfee-deb0efd7e2f7",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1bb667a3-14a1-49ee-a8dc-7659aa9dc7a4",
+          "name": "Update a bill",
+          "request": {
+            "name": "Update a bill",
+            "description": {
+              "content": "Update bill fields.\n\n## Constraints\n\n- Cannot change amount if payments have been applied\n- Status changes use action endpoints\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoiceDate\": \"<string,null-date>\",\n  \"dueDate\": \"<string,null-date>\",\n  \"amount\": \"<number>\",\n  \"reference\": \"<string,null>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd8df9c3-1260-4246-82f7-736e44f61df3",
+              "name": "Bill updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dueDate\": \"2025-02-28\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"friendlyId\": \"BILL-00001\",\n  \"status\": \"IN_REVIEW\",\n  \"entityType\": \"VENDOR\",\n  \"amount\": 699.4903137264863,\n  \"createdAt\": \"1977-10-01T16:26:35.711Z\",\n  \"key\": \"string\",\n  \"loadCarrierId\": \"5b148e71-42df-42c5-489d-7f11268f3fd3\",\n  \"vendedServiceId\": \"05b629f3-bab3-0ec1-8e26-181fd6f0ffda\",\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"1967-10-27T08:47:41.235Z\"\n  },\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"loadId\": \"9c2b6608-a8d8-f484-b415-f32a8ca5f274\",\n  \"loadKey\": \"string\",\n  \"shipmentId\": \"6e25ac3b-01f8-6f17-e9d9-ffae06693360\",\n  \"shipmentKey\": \"string\",\n  \"invoiceDate\": \"2019-06-22\",\n  \"dueDate\": \"1983-05-31\",\n  \"currency\": \"USD\",\n  \"reference\": \"string\",\n  \"amountPaid\": 5653.503112063646,\n  \"amountOwed\": 6709.823900043812,\n  \"payments\": [\n    {\n      \"id\": \"b7423d3d-b97b-0aab-b34a-542b99081b9d\",\n      \"paymentGroupId\": \"5ca1a6b4-bac2-6bbe-4f88-0f4224f86235\",\n      \"amount\": 4081.391899420936,\n      \"paymentDate\": \"1972-02-13\",\n      \"reference\": \"string\"\n    },\n    {\n      \"id\": \"68ce7569-8235-f1b6-f14c-65773d4c9fa8\",\n      \"paymentGroupId\": \"89e0b949-e0db-8908-b64e-28d146b91f64\",\n      \"amount\": 7594.308299253019,\n      \"paymentDate\": \"1971-04-08\",\n      \"reference\": \"string\"\n    }\n  ],\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1968-11-27T02:11:42.816Z\"\n  },\n  \"carrierFactor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"companyName\": \"Capital Factoring Services Inc\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-FACTOR-001\",\n    \"email\": \"accounting@capitalfactoring.com\",\n    \"phoneNumber\": \"+1-555-234-5678\",\n    \"currency\": \"USD\"\n  },\n  \"factorJobId\": \"string\",\n  \"factorStatus\": \"string\",\n  \"qboId\": \"string\",\n  \"updatedAt\": \"1967-02-22T12:02:10.031Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "418bf420-95e9-446e-b883-d913a69219d8",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dueDate\": \"2025-02-28\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6cbc076-c7ce-42c5-9273-6a4454bf978e",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dueDate\": \"2025-02-28\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa32dc76-479a-4638-b245-fc23a7cb11af",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dueDate\": \"2025-02-28\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c192db71-450e-4b83-ac6d-b3b306f8013f",
+              "name": "Cannot update - bill has payments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dueDate\": \"2025-02-28\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e886d6de-8da2-4c37-88ac-82c3babb4a24",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dueDate\": \"2025-02-28\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3842dd9-68f3-46fe-b882-91dff049af30",
+          "name": "Delete a bill",
+          "request": {
+            "name": "Delete a bill",
+            "description": {
+              "content": "Delete a bill.\n\n## Prerequisites\n\n- Bill must not have any payments applied\n\n## What happens\n\n- Bill record is deleted\n- Entity status reverts to `AWAITING_INVOICE`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8276d577-f79c-4376-beaf-069fd0355660",
+              "name": "Bill deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f566ddd-7263-4935-8d6f-55a2b1cc0a78",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef65c66c-305a-4da2-b096-83a0fd4f015e",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7566177-0c30-4357-a368-4b78f0ac7da9",
+              "name": "Cannot delete - bill has payments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ad2e35e-5972-4525-a4b5-517799415c2f",
+          "name": "Approve bill for payment",
+          "request": {
+            "name": "Approve bill for payment",
+            "description": {
+              "content": "Approve a bill for payment.\n\n## What happens\n\n- Bill status changes to `APPROVED_TO_PAY`\n- Bill is now ready for payment\n\n## Prerequisites\n\n- Bill must be in `IN_REVIEW` status\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                ":id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f70c65b-b3b7-4d8a-80f7-5e9ba5efed37",
+              "name": "Bill approved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"friendlyId\": \"BILL-00001\",\n  \"status\": \"IN_REVIEW\",\n  \"entityType\": \"VENDOR\",\n  \"amount\": 699.4903137264863,\n  \"createdAt\": \"1977-10-01T16:26:35.711Z\",\n  \"key\": \"string\",\n  \"loadCarrierId\": \"5b148e71-42df-42c5-489d-7f11268f3fd3\",\n  \"vendedServiceId\": \"05b629f3-bab3-0ec1-8e26-181fd6f0ffda\",\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"1967-10-27T08:47:41.235Z\"\n  },\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"loadId\": \"9c2b6608-a8d8-f484-b415-f32a8ca5f274\",\n  \"loadKey\": \"string\",\n  \"shipmentId\": \"6e25ac3b-01f8-6f17-e9d9-ffae06693360\",\n  \"shipmentKey\": \"string\",\n  \"invoiceDate\": \"2019-06-22\",\n  \"dueDate\": \"1983-05-31\",\n  \"currency\": \"USD\",\n  \"reference\": \"string\",\n  \"amountPaid\": 5653.503112063646,\n  \"amountOwed\": 6709.823900043812,\n  \"payments\": [\n    {\n      \"id\": \"b7423d3d-b97b-0aab-b34a-542b99081b9d\",\n      \"paymentGroupId\": \"5ca1a6b4-bac2-6bbe-4f88-0f4224f86235\",\n      \"amount\": 4081.391899420936,\n      \"paymentDate\": \"1972-02-13\",\n      \"reference\": \"string\"\n    },\n    {\n      \"id\": \"68ce7569-8235-f1b6-f14c-65773d4c9fa8\",\n      \"paymentGroupId\": \"89e0b949-e0db-8908-b64e-28d146b91f64\",\n      \"amount\": 7594.308299253019,\n      \"paymentDate\": \"1971-04-08\",\n      \"reference\": \"string\"\n    }\n  ],\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1968-11-27T02:11:42.816Z\"\n  },\n  \"carrierFactor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"companyName\": \"Capital Factoring Services Inc\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-FACTOR-001\",\n    \"email\": \"accounting@capitalfactoring.com\",\n    \"phoneNumber\": \"+1-555-234-5678\",\n    \"currency\": \"USD\"\n  },\n  \"factorJobId\": \"string\",\n  \"factorStatus\": \"string\",\n  \"qboId\": \"string\",\n  \"updatedAt\": \"1967-02-22T12:02:10.031Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e9c9572-2eb4-4cc6-a032-015b91a36a5c",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "775b693b-3949-4f77-b429-b037d2ad9066",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc7e0a56-8e89-4876-a2ab-8d18058452c9",
+              "name": "Bill is not in valid status for approval",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93a748b5-e572-4db7-a2d6-175b78289552",
+          "name": "Batch approve bills",
+          "request": {
+            "name": "Batch approve bills",
+            "description": {
+              "content": "Approve multiple bills for payment in a single request.\n\nBills that cannot be approved will be returned in the `failed` array.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                "batch-approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billIds\": [\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e67814a-3441-42b8-a841-72adcf759f22",
+              "name": "Batch approval completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "batch-approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billIds\": [\n    \"550e8400-e29b-41d4-a716-446655440000\",\n    \"550e8400-e29b-41d4-a716-446655440001\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"approved\": [\n    {\n      \"billId\": \"9c1a02eb-8036-4aa0-a72a-33e046b0f5fe\",\n      \"status\": \"AWAITING_INVOICE\"\n    },\n    {\n      \"billId\": \"5239ece8-6e89-b658-b4bd-d547034b9687\",\n      \"status\": \"APPROVED_TO_PAY\"\n    }\n  ],\n  \"failed\": [\n    {\n      \"billId\": \"48bc788f-b324-a9d1-1d1e-a5044b81aac9\",\n      \"error\": \"string\"\n    },\n    {\n      \"billId\": \"74bb14a4-9bd5-a6fd-1f75-4656ceaef8ef\",\n      \"error\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1a68d9c-e712-48a9-8efd-2888930dfec6",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "batch-approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billIds\": [\n    \"550e8400-e29b-41d4-a716-446655440000\",\n    \"550e8400-e29b-41d4-a716-446655440001\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3ebe391-9fd0-46f8-84a0-2645e3b1e98a",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "batch-approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billIds\": [\n    \"550e8400-e29b-41d4-a716-446655440000\",\n    \"550e8400-e29b-41d4-a716-446655440001\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "980127b4-9846-4a5b-9815-04073b36b390",
+          "name": "Unapprove bill",
+          "request": {
+            "name": "Unapprove bill",
+            "description": {
+              "content": "Revert bill from approved back to in review.\n\n## What happens\n\n- Bill status changes to `IN_REVIEW`\n\n## Prerequisites\n\n- Bill must be in `APPROVED_TO_PAY` status\n- Bill must not have any payments\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                ":id",
+                "unapprove"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e22172c-7bb8-437d-92a4-f722053aa1a5",
+              "name": "Bill unapproved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "unapprove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"friendlyId\": \"BILL-00001\",\n  \"status\": \"IN_REVIEW\",\n  \"entityType\": \"VENDOR\",\n  \"amount\": 699.4903137264863,\n  \"createdAt\": \"1977-10-01T16:26:35.711Z\",\n  \"key\": \"string\",\n  \"loadCarrierId\": \"5b148e71-42df-42c5-489d-7f11268f3fd3\",\n  \"vendedServiceId\": \"05b629f3-bab3-0ec1-8e26-181fd6f0ffda\",\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"1967-10-27T08:47:41.235Z\"\n  },\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"loadId\": \"9c2b6608-a8d8-f484-b415-f32a8ca5f274\",\n  \"loadKey\": \"string\",\n  \"shipmentId\": \"6e25ac3b-01f8-6f17-e9d9-ffae06693360\",\n  \"shipmentKey\": \"string\",\n  \"invoiceDate\": \"2019-06-22\",\n  \"dueDate\": \"1983-05-31\",\n  \"currency\": \"USD\",\n  \"reference\": \"string\",\n  \"amountPaid\": 5653.503112063646,\n  \"amountOwed\": 6709.823900043812,\n  \"payments\": [\n    {\n      \"id\": \"b7423d3d-b97b-0aab-b34a-542b99081b9d\",\n      \"paymentGroupId\": \"5ca1a6b4-bac2-6bbe-4f88-0f4224f86235\",\n      \"amount\": 4081.391899420936,\n      \"paymentDate\": \"1972-02-13\",\n      \"reference\": \"string\"\n    },\n    {\n      \"id\": \"68ce7569-8235-f1b6-f14c-65773d4c9fa8\",\n      \"paymentGroupId\": \"89e0b949-e0db-8908-b64e-28d146b91f64\",\n      \"amount\": 7594.308299253019,\n      \"paymentDate\": \"1971-04-08\",\n      \"reference\": \"string\"\n    }\n  ],\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1968-11-27T02:11:42.816Z\"\n  },\n  \"carrierFactor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"companyName\": \"Capital Factoring Services Inc\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-FACTOR-001\",\n    \"email\": \"accounting@capitalfactoring.com\",\n    \"phoneNumber\": \"+1-555-234-5678\",\n    \"currency\": \"USD\"\n  },\n  \"factorJobId\": \"string\",\n  \"factorStatus\": \"string\",\n  \"qboId\": \"string\",\n  \"updatedAt\": \"1967-02-22T12:02:10.031Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1307b28-d1a0-4044-b706-b715aef33eda",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "unapprove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92b6033f-363b-4102-9fbb-e68d4477575b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "unapprove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ae556e2-66e9-4695-af98-af437ea8bef9",
+              "name": "Bill is not in valid status or has payments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "unapprove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70c059e6-0bc8-4cde-8b04-4dd2e491299d",
+          "name": "Revert bill to awaiting invoice",
+          "request": {
+            "name": "Revert bill to awaiting invoice",
+            "description": {
+              "content": "Revert bill completely back to awaiting invoice state.\n\n## What happens\n\n- Bill record is deleted\n- Any payments are deleted\n- Entity status reverts to `AWAITING_INVOICE`\n\n## Use case\n\nUse when a bill was recorded incorrectly and needs to start over.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                ":id",
+                "revert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "15a407f1-a28d-4de7-8726-4d7ff30ceb3d",
+              "name": "Bill reverted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"Invoice amount was incorrect\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"entityStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "185856ec-eb15-4d1e-8ec1-25815556302a",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"Invoice amount was incorrect\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33e9220e-8edb-4f05-8755-0c8f7866a212",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "revert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"Invoice amount was incorrect\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b800a7db-0781-4a95-a65f-c96583cd11e2",
+          "name": "Get bill payments",
+          "request": {
+            "name": "Get bill payments",
+            "description": {
+              "content": "List all payments applied to a specific bill.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                ":id",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7eb2c72-f96b-4a37-bd59-e6f6cc49bf6b",
+              "name": "Payments retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"138a6656-0b75-fd1b-4f80-547aea6db73a\",\n      \"paymentGroupId\": \"69b9510e-828b-f0aa-45b7-22c9a12343d6\",\n      \"amount\": 3948.9651490119672,\n      \"paymentDate\": \"1964-10-03\",\n      \"reference\": \"string\"\n    },\n    {\n      \"id\": \"35b4a0d3-2d96-16a3-3d1a-fffaf82055ea\",\n      \"paymentGroupId\": \"6ac5feb6-655a-9d06-8c56-e7d4a8c22bf4\",\n      \"amount\": 3103.084157827327,\n      \"paymentDate\": \"2015-10-26\",\n      \"reference\": \"string\"\n    }\n  ],\n  \"totalPaid\": 6169.046061671106,\n  \"openBalance\": 6940.78559122755\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b6ebc98-4feb-4cf9-ba7f-3a2624ac4c7b",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be1908a2-5460-4fa1-8ef8-b1c556cdf28d",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    ":id",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6a8a3da-8147-4542-b319-9e76ea656e7a",
+          "name": "Get AP aging report",
+          "request": {
+            "name": "Get AP aging report",
+            "description": {
+              "content": "Generate accounts payable aging report.\n\n## Report buckets\n\nBy default: Current, 1-30, 31-60, 61-90, 90+ days\n\n## Export formats\n\n- JSON (default)\n- CSV (set Accept header to text/csv)\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bills",
+                "aging-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrierId",
+                  "value": "<uuid>",
+                  "description": "Filter by specific carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "vendorId",
+                  "value": "<uuid>",
+                  "description": "Filter by specific vendor"
+                },
+                {
+                  "disabled": false,
+                  "key": "entityType",
+                  "value": "<string>",
+                  "description": "Filter by entity type"
+                },
+                {
+                  "disabled": false,
+                  "key": "daysPerBucket",
+                  "value": "30",
+                  "description": "Days per aging bucket"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxDays",
+                  "value": "120",
+                  "description": "Maximum days to track"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74fcc059-7783-4166-a282-299f3898c66e",
+              "name": "AP aging report generated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "aging-report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrierId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "vendorId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "entityType",
+                      "value": "VENDOR"
+                    },
+                    {
+                      "key": "daysPerBucket",
+                      "value": "30"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "120"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"asOfDate\": \"1957-02-12\",\n  \"buckets\": [\n    \"Current\",\n    \"1-30\",\n    \"31-60\",\n    \"61-90\",\n    \"90+\"\n  ],\n  \"payees\": [\n    {\n      \"id\": \"8965522e-3cd8-24b8-e2b6-53dcc86745c9\",\n      \"name\": \"string\",\n      \"friendlyId\": \"string\",\n      \"entityType\": \"VENDOR\",\n      \"current\": 7015.106087782067,\n      \"days1to30\": 3989.889932737647,\n      \"days31to60\": 2805.286614589757,\n      \"days61to90\": 3699.281873904082,\n      \"over90\": 5131.895122747382,\n      \"total\": 9587.835998471346\n    },\n    {\n      \"id\": \"73d0edd7-dde8-6403-fc38-d7d61d1ad044\",\n      \"name\": \"string\",\n      \"friendlyId\": \"string\",\n      \"entityType\": \"CARRIER\",\n      \"current\": 5148.097955710152,\n      \"days1to30\": 167.8968509380252,\n      \"days31to60\": 6606.270656187302,\n      \"days61to90\": 1154.2958257442938,\n      \"over90\": 250.51557325075356,\n      \"total\": 2503.7179733724292\n    }\n  ],\n  \"totals\": {\n    \"current\": 7350.0028274998585,\n    \"days1to30\": 8520.995736504869,\n    \"days31to60\": 7603.986982057411,\n    \"days61to90\": 3329.1100030262055,\n    \"over90\": 8461.023021788485,\n    \"total\": 2606.5324263914345\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6434d54f-71fd-4ca6-a3d9-d3bd6a8b10e9",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bills",
+                    "aging-report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrierId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "vendorId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "entityType",
+                      "value": "VENDOR"
+                    },
+                    {
+                      "key": "daysPerBucket",
+                      "value": "30"
+                    },
+                    {
+                      "key": "maxDays",
+                      "value": "120"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ca54244d-a09f-4130-a33d-0cf3c6e7bfae",
+    "name": "MVMNT Bill Payments Bills API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1733 @@
+{
+  "item": [
+    {
+      "id": "7e077ede-f7a0-4782-a3ed-30490b7e5f6f",
+      "name": "Carrier Payment Methods",
+      "description": {
+        "content": "Carrier payment method management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1712d32-fc36-4ffa-8c5d-df4eaaebfc48",
+          "name": "Filter carrier payment methods",
+          "request": {
+            "name": "Filter carrier payment methods",
+            "description": {
+              "content": "Query carrier payment methods using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted payment methods are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n\nCarrier payment methods define how and where payments are sent for a specific carrier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "carrier-payment-methods",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"carrierId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentRecipientType\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPreferred\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"companyName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"bankName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"currency\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"carrierFactorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1f81ff9-1a08-423a-b00e-9aad86c891ed",
+              "name": "Filtered carrier payment methods with pagination",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"10872158-2add-c184-812c-2fa07bcff0ba\",\n      \"in\": [\n        \"9ac71915-4064-bb3d-e239-90789903ff41\",\n        \"dc8d8e54-c2f7-4cf7-3968-c90fe199d66e\"\n      ]\n    },\n    \"carrierId\": {\n      \"equalTo\": \"18293a26-2da9-926e-67aa-5abb969ddede\",\n      \"notEqualTo\": \"be00c731-3ee7-4109-6df0-d0dd26f69d27\",\n      \"in\": [\n        \"24763cdf-7053-7c89-28dd-ea2105ebaa54\",\n        \"c38c68b1-01db-46b6-58a3-e4391c12f26e\"\n      ],\n      \"notIn\": [\n        \"df41cae0-94e0-ab26-dcbb-98d537999f4a\",\n        \"bd027e1c-a4ed-5394-a9e3-d5fbf799b7d1\"\n      ],\n      \"isNull\": true\n    },\n    \"paymentRecipientType\": {\n      \"equalTo\": \"DIRECT\",\n      \"notEqualTo\": \"DIRECT\",\n      \"in\": [\n        \"DIRECT\",\n        \"DIRECT\"\n      ],\n      \"notIn\": [\n        \"DIRECT\",\n        \"DIRECT\"\n      ]\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"ACH\",\n      \"notEqualTo\": \"ACH\",\n      \"in\": [\n        \"ACH\",\n        \"ACH\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"ACH\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"isPreferred\": {\n      \"equalTo\": false,\n      \"notEqualTo\": false,\n      \"isNull\": false\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"companyName\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"bankName\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"currency\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"carrierFactorId\": {\n      \"equalTo\": \"23ad0e01-9025-f4f8-7f6d-71f8277d6a96\",\n      \"notEqualTo\": \"4c243eba-6528-d72f-c024-ffbcd797e652\",\n      \"in\": [\n        \"740e6c36-ae51-3650-94c1-e1add5fbae9d\",\n        \"f18f0b0e-7d24-3d6e-50d6-46cc1f30df87\"\n      ],\n      \"notIn\": [\n        \"fe10c224-b8cb-37c4-e03c-435bd49a46ee\",\n        \"f59dccef-e055-3c7f-1910-856dbe1ae054\"\n      ],\n      \"isNull\": false\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"782a6dcb-755d-836f-0942-683753b9f284\",\n      \"notEqualTo\": \"9dabd6e6-7f08-d033-06ee-1b78974381a3\",\n      \"in\": [\n        \"5b3c496d-e7d1-4260-7233-89ba740fd6a3\",\n        \"6b4d456c-1a5e-d936-ebac-fad8653364a0\"\n      ],\n      \"notIn\": [\n        \"f4f6631b-61bf-5e7f-0086-3dc8f596b0c6\",\n        \"7966df3a-9853-2e13-53ac-ee279f2514c2\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1999-06-07T03:57:42.455Z\",\n      \"notEqualTo\": \"1947-10-26T11:31:00.820Z\",\n      \"lessThan\": \"1974-12-06T06:17:31.276Z\",\n      \"lessThanOrEqualTo\": \"2009-08-14T02:47:50.354Z\",\n      \"greaterThan\": \"1947-08-08T11:35:39.617Z\",\n      \"greaterThanOrEqualTo\": \"2019-08-12T06:17:19.087Z\",\n      \"isNull\": false\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"1949-05-02T04:00:44.090Z\",\n      \"notEqualTo\": \"1959-11-22T16:37:11.674Z\",\n      \"lessThan\": \"2014-03-18T10:31:45.079Z\",\n      \"lessThanOrEqualTo\": \"2026-01-30T15:59:39.117Z\",\n      \"greaterThan\": \"1975-03-30T03:19:47.162Z\",\n      \"greaterThanOrEqualTo\": \"1950-12-31T20:31:51.499Z\",\n      \"isNull\": false\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"1954-08-22T00:35:22.327Z\",\n      \"notEqualTo\": \"1979-03-05T10:01:17.003Z\",\n      \"lessThan\": \"1962-12-27T18:43:15.236Z\",\n      \"lessThanOrEqualTo\": \"2019-09-28T11:50:30.581Z\",\n      \"greaterThan\": \"1988-08-09T11:13:44.345Z\",\n      \"greaterThanOrEqualTo\": \"1997-03-04T16:11:04.688Z\",\n      \"isNull\": false\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"1960-08-20T05:14:14.200Z\"\n      },\n      \"paymentRecipientType\": \"DIRECT\",\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@carrier.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Carrier Payments LLC\",\n      \"username\": \"carrier_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Carrier Transport Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"carrierFactor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"companyName\": \"Capital Factoring Services Inc\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-FACTOR-001\",\n        \"email\": \"accounting@capitalfactoring.com\",\n        \"phoneNumber\": \"+1-555-234-5678\",\n        \"currency\": \"USD\"\n      },\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1965-10-20T21:10:07.631Z\"\n      },\n      \"deletedAt\": \"1993-05-26T19:02:56.263Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1954-06-09T10:31:23.863Z\"\n      }\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"2002-10-28T05:06:55.059Z\"\n      },\n      \"paymentRecipientType\": \"DIRECT\",\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@carrier.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Carrier Payments LLC\",\n      \"username\": \"carrier_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Carrier Transport Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"carrierFactor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"companyName\": \"Capital Factoring Services Inc\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-FACTOR-001\",\n        \"email\": \"accounting@capitalfactoring.com\",\n        \"phoneNumber\": \"+1-555-234-5678\",\n        \"currency\": \"USD\"\n      },\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"2005-01-05T04:17:11.953Z\"\n      },\n      \"deletedAt\": \"1994-05-25T12:44:06.849Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1950-08-27T05:54:29.758Z\"\n      }\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44a67c2c-0d1c-4db4-89d7-7ba66bd15a42",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"10872158-2add-c184-812c-2fa07bcff0ba\",\n      \"in\": [\n        \"9ac71915-4064-bb3d-e239-90789903ff41\",\n        \"dc8d8e54-c2f7-4cf7-3968-c90fe199d66e\"\n      ]\n    },\n    \"carrierId\": {\n      \"equalTo\": \"18293a26-2da9-926e-67aa-5abb969ddede\",\n      \"notEqualTo\": \"be00c731-3ee7-4109-6df0-d0dd26f69d27\",\n      \"in\": [\n        \"24763cdf-7053-7c89-28dd-ea2105ebaa54\",\n        \"c38c68b1-01db-46b6-58a3-e4391c12f26e\"\n      ],\n      \"notIn\": [\n        \"df41cae0-94e0-ab26-dcbb-98d537999f4a\",\n        \"bd027e1c-a4ed-5394-a9e3-d5fbf799b7d1\"\n      ],\n      \"isNull\": true\n    },\n    \"paymentRecipientType\": {\n      \"equalTo\": \"DIRECT\",\n      \"notEqualTo\": \"DIRECT\",\n      \"in\": [\n        \"DIRECT\",\n        \"DIRECT\"\n      ],\n      \"notIn\": [\n        \"DIRECT\",\n        \"DIRECT\"\n      ]\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"ACH\",\n      \"notEqualTo\": \"ACH\",\n      \"in\": [\n        \"ACH\",\n        \"ACH\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"ACH\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"isPreferred\": {\n      \"equalTo\": false,\n      \"notEqualTo\": false,\n      \"isNull\": false\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"companyName\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"bankName\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"currency\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"carrierFactorId\": {\n      \"equalTo\": \"23ad0e01-9025-f4f8-7f6d-71f8277d6a96\",\n      \"notEqualTo\": \"4c243eba-6528-d72f-c024-ffbcd797e652\",\n      \"in\": [\n        \"740e6c36-ae51-3650-94c1-e1add5fbae9d\",\n        \"f18f0b0e-7d24-3d6e-50d6-46cc1f30df87\"\n      ],\n      \"notIn\": [\n        \"fe10c224-b8cb-37c4-e03c-435bd49a46ee\",\n        \"f59dccef-e055-3c7f-1910-856dbe1ae054\"\n      ],\n      \"isNull\": false\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"782a6dcb-755d-836f-0942-683753b9f284\",\n      \"notEqualTo\": \"9dabd6e6-7f08-d033-06ee-1b78974381a3\",\n      \"in\": [\n        \"5b3c496d-e7d1-4260-7233-89ba740fd6a3\",\n        \"6b4d456c-1a5e-d936-ebac-fad8653364a0\"\n      ],\n      \"notIn\": [\n        \"f4f6631b-61bf-5e7f-0086-3dc8f596b0c6\",\n        \"7966df3a-9853-2e13-53ac-ee279f2514c2\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1999-06-07T03:57:42.455Z\",\n      \"notEqualTo\": \"1947-10-26T11:31:00.820Z\",\n      \"lessThan\": \"1974-12-06T06:17:31.276Z\",\n      \"lessThanOrEqualTo\": \"2009-08-14T02:47:50.354Z\",\n      \"greaterThan\": \"1947-08-08T11:35:39.617Z\",\n      \"greaterThanOrEqualTo\": \"2019-08-12T06:17:19.087Z\",\n      \"isNull\": false\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"1949-05-02T04:00:44.090Z\",\n      \"notEqualTo\": \"1959-11-22T16:37:11.674Z\",\n      \"lessThan\": \"2014-03-18T10:31:45.079Z\",\n      \"lessThanOrEqualTo\": \"2026-01-30T15:59:39.117Z\",\n      \"greaterThan\": \"1975-03-30T03:19:47.162Z\",\n      \"greaterThanOrEqualTo\": \"1950-12-31T20:31:51.499Z\",\n      \"isNull\": false\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"1954-08-22T00:35:22.327Z\",\n      \"notEqualTo\": \"1979-03-05T10:01:17.003Z\",\n      \"lessThan\": \"1962-12-27T18:43:15.236Z\",\n      \"lessThanOrEqualTo\": \"2019-09-28T11:50:30.581Z\",\n      \"greaterThan\": \"1988-08-09T11:13:44.345Z\",\n      \"greaterThanOrEqualTo\": \"1997-03-04T16:11:04.688Z\",\n      \"isNull\": false\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c6c44d7-6f05-43b5-8536-c61285e1d496",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"10872158-2add-c184-812c-2fa07bcff0ba\",\n      \"in\": [\n        \"9ac71915-4064-bb3d-e239-90789903ff41\",\n        \"dc8d8e54-c2f7-4cf7-3968-c90fe199d66e\"\n      ]\n    },\n    \"carrierId\": {\n      \"equalTo\": \"18293a26-2da9-926e-67aa-5abb969ddede\",\n      \"notEqualTo\": \"be00c731-3ee7-4109-6df0-d0dd26f69d27\",\n      \"in\": [\n        \"24763cdf-7053-7c89-28dd-ea2105ebaa54\",\n        \"c38c68b1-01db-46b6-58a3-e4391c12f26e\"\n      ],\n      \"notIn\": [\n        \"df41cae0-94e0-ab26-dcbb-98d537999f4a\",\n        \"bd027e1c-a4ed-5394-a9e3-d5fbf799b7d1\"\n      ],\n      \"isNull\": true\n    },\n    \"paymentRecipientType\": {\n      \"equalTo\": \"DIRECT\",\n      \"notEqualTo\": \"DIRECT\",\n      \"in\": [\n        \"DIRECT\",\n        \"DIRECT\"\n      ],\n      \"notIn\": [\n        \"DIRECT\",\n        \"DIRECT\"\n      ]\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"ACH\",\n      \"notEqualTo\": \"ACH\",\n      \"in\": [\n        \"ACH\",\n        \"ACH\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"ACH\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"isPreferred\": {\n      \"equalTo\": false,\n      \"notEqualTo\": false,\n      \"isNull\": false\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"companyName\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"bankName\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"currency\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"carrierFactorId\": {\n      \"equalTo\": \"23ad0e01-9025-f4f8-7f6d-71f8277d6a96\",\n      \"notEqualTo\": \"4c243eba-6528-d72f-c024-ffbcd797e652\",\n      \"in\": [\n        \"740e6c36-ae51-3650-94c1-e1add5fbae9d\",\n        \"f18f0b0e-7d24-3d6e-50d6-46cc1f30df87\"\n      ],\n      \"notIn\": [\n        \"fe10c224-b8cb-37c4-e03c-435bd49a46ee\",\n        \"f59dccef-e055-3c7f-1910-856dbe1ae054\"\n      ],\n      \"isNull\": false\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"782a6dcb-755d-836f-0942-683753b9f284\",\n      \"notEqualTo\": \"9dabd6e6-7f08-d033-06ee-1b78974381a3\",\n      \"in\": [\n        \"5b3c496d-e7d1-4260-7233-89ba740fd6a3\",\n        \"6b4d456c-1a5e-d936-ebac-fad8653364a0\"\n      ],\n      \"notIn\": [\n        \"f4f6631b-61bf-5e7f-0086-3dc8f596b0c6\",\n        \"7966df3a-9853-2e13-53ac-ee279f2514c2\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1999-06-07T03:57:42.455Z\",\n      \"notEqualTo\": \"1947-10-26T11:31:00.820Z\",\n      \"lessThan\": \"1974-12-06T06:17:31.276Z\",\n      \"lessThanOrEqualTo\": \"2009-08-14T02:47:50.354Z\",\n      \"greaterThan\": \"1947-08-08T11:35:39.617Z\",\n      \"greaterThanOrEqualTo\": \"2019-08-12T06:17:19.087Z\",\n      \"isNull\": false\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"1949-05-02T04:00:44.090Z\",\n      \"notEqualTo\": \"1959-11-22T16:37:11.674Z\",\n      \"lessThan\": \"2014-03-18T10:31:45.079Z\",\n      \"lessThanOrEqualTo\": \"2026-01-30T15:59:39.117Z\",\n      \"greaterThan\": \"1975-03-30T03:19:47.162Z\",\n      \"greaterThanOrEqualTo\": \"1950-12-31T20:31:51.499Z\",\n      \"isNull\": false\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"1954-08-22T00:35:22.327Z\",\n      \"notEqualTo\": \"1979-03-05T10:01:17.003Z\",\n      \"lessThan\": \"1962-12-27T18:43:15.236Z\",\n      \"lessThanOrEqualTo\": \"2019-09-28T11:50:30.581Z\",\n      \"greaterThan\": \"1988-08-09T11:13:44.345Z\",\n      \"greaterThanOrEqualTo\": \"1997-03-04T16:11:04.688Z\",\n      \"isNull\": false\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3251d545-e109-41d7-8def-c07778721e39",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CarrierPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"10872158-2add-c184-812c-2fa07bcff0ba\",\n      \"in\": [\n        \"9ac71915-4064-bb3d-e239-90789903ff41\",\n        \"dc8d8e54-c2f7-4cf7-3968-c90fe199d66e\"\n      ]\n    },\n    \"carrierId\": {\n      \"equalTo\": \"18293a26-2da9-926e-67aa-5abb969ddede\",\n      \"notEqualTo\": \"be00c731-3ee7-4109-6df0-d0dd26f69d27\",\n      \"in\": [\n        \"24763cdf-7053-7c89-28dd-ea2105ebaa54\",\n        \"c38c68b1-01db-46b6-58a3-e4391c12f26e\"\n      ],\n      \"notIn\": [\n        \"df41cae0-94e0-ab26-dcbb-98d537999f4a\",\n        \"bd027e1c-a4ed-5394-a9e3-d5fbf799b7d1\"\n      ],\n      \"isNull\": true\n    },\n    \"paymentRecipientType\": {\n      \"equalTo\": \"DIRECT\",\n      \"notEqualTo\": \"DIRECT\",\n      \"in\": [\n        \"DIRECT\",\n        \"DIRECT\"\n      ],\n      \"notIn\": [\n        \"DIRECT\",\n        \"DIRECT\"\n      ]\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"ACH\",\n      \"notEqualTo\": \"ACH\",\n      \"in\": [\n        \"ACH\",\n        \"ACH\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"ACH\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"isPreferred\": {\n      \"equalTo\": false,\n      \"notEqualTo\": false,\n      \"isNull\": false\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"companyName\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"bankName\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"currency\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"carrierFactorId\": {\n      \"equalTo\": \"23ad0e01-9025-f4f8-7f6d-71f8277d6a96\",\n      \"notEqualTo\": \"4c243eba-6528-d72f-c024-ffbcd797e652\",\n      \"in\": [\n        \"740e6c36-ae51-3650-94c1-e1add5fbae9d\",\n        \"f18f0b0e-7d24-3d6e-50d6-46cc1f30df87\"\n      ],\n      \"notIn\": [\n        \"fe10c224-b8cb-37c4-e03c-435bd49a46ee\",\n        \"f59dccef-e055-3c7f-1910-856dbe1ae054\"\n      ],\n      \"isNull\": false\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"782a6dcb-755d-836f-0942-683753b9f284\",\n      \"notEqualTo\": \"9dabd6e6-7f08-d033-06ee-1b78974381a3\",\n      \"in\": [\n        \"5b3c496d-e7d1-4260-7233-89ba740fd6a3\",\n        \"6b4d456c-1a5e-d936-ebac-fad8653364a0\"\n      ],\n      \"notIn\": [\n        \"f4f6631b-61bf-5e7f-0086-3dc8f596b0c6\",\n        \"7966df3a-9853-2e13-53ac-ee279f2514c2\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1999-06-07T03:57:42.455Z\",\n      \"notEqualTo\": \"1947-10-26T11:31:00.820Z\",\n      \"lessThan\": \"1974-12-06T06:17:31.276Z\",\n      \"lessThanOrEqualTo\": \"2009-08-14T02:47:50.354Z\",\n      \"greaterThan\": \"1947-08-08T11:35:39.617Z\",\n      \"greaterThanOrEqualTo\": \"2019-08-12T06:17:19.087Z\",\n      \"isNull\": false\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"1949-05-02T04:00:44.090Z\",\n      \"notEqualTo\": \"1959-11-22T16:37:11.674Z\",\n      \"lessThan\": \"2014-03-18T10:31:45.079Z\",\n      \"lessThanOrEqualTo\": \"2026-01-30T15:59:39.117Z\",\n      \"greaterThan\": \"1975-03-30T03:19:47.162Z\",\n      \"greaterThanOrEqualTo\": \"1950-12-31T20:31:51.499Z\",\n      \"isNull\": false\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"1954-08-22T00:35:22.327Z\",\n      \"notEqualTo\": \"1979-03-05T10:01:17.003Z\",\n      \"lessThan\": \"1962-12-27T18:43:15.236Z\",\n      \"lessThanOrEqualTo\": \"2019-09-28T11:50:30.581Z\",\n      \"greaterThan\": \"1988-08-09T11:13:44.345Z\",\n      \"greaterThanOrEqualTo\": \"1997-03-04T16:11:04.688Z\",\n      \"isNull\": false\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62c961c4-fb53-45a9-bb5f-99b4a3d977d0",
+          "name": "Create carrier payment method",
+          "request": {
+            "name": "Create carrier payment method",
+            "description": {
+              "content": "Create a new carrier payment method.\n\n**Payment Recipient Type Constraints:**\n- **DIRECT**: Payment goes to carrier directly. `carrierFactorId` must be null or omitted.\n- **FACTOR**: Payment goes to factoring company. `carrierFactorId` is required.\n\n**Important**: The `carrierId` cannot be changed after creation.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "carrier-payment-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrierId\": \"<uuid>\",\n  \"paymentRecipientType\": \"<string>\",\n  \"paymentMethodType\": \"<string>\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"carrierFactorId\": \"<uuid>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f25f158-7267-46cb-af0f-966996d0fcf3",
+              "name": "Carrier payment method created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"1980-05-20T00:06:41.826Z\"\n  },\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"status\": \"ACTIVE\",\n  \"isPreferred\": true,\n  \"email\": \"payments@carrier.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"companyName\": \"Carrier Payments LLC\",\n  \"username\": \"carrier_payments\",\n  \"bankName\": \"Chase Bank\",\n  \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"****1234\",\n  \"abaAch\": \"021000021\",\n  \"wire\": \"string\",\n  \"swiftCode\": \"CHASUS33\",\n  \"eftInstitution\": \"001\",\n  \"eftTransit\": \"00010\",\n  \"clabe\": \"string\",\n  \"currency\": \"USD\",\n  \"carrierFactor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"companyName\": \"Capital Factoring Services Inc\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-FACTOR-001\",\n    \"email\": \"accounting@capitalfactoring.com\",\n    \"phoneNumber\": \"+1-555-234-5678\",\n    \"currency\": \"USD\"\n  },\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1952-11-25T12:50:13.102Z\"\n  },\n  \"deletedAt\": \"1988-04-30T21:50:41.020Z\",\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1951-09-16T10:10:43.256Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8539261-f550-43de-bf03-097042711777",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9512340f-4fa8-4738-8b04-c9624391245e",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a631b11-e5e5-4ff2-b191-ba274631b08b",
+              "name": "Conflict - resource already exists or constraint violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a984747-c22b-4446-b876-d459bec0bc23",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58c9fc98-7f31-4500-97c9-82f870d3de68",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43593f08-6d2b-4f5e-bec1-bf9e533e0cc3",
+          "name": "Get carrier payment method",
+          "request": {
+            "name": "Get carrier payment method",
+            "description": {
+              "content": "Retrieve a single carrier payment method by its unique identifier.\n\nReturns full details including banking information and associated carrier/factor references.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "carrier-payment-methods",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74cc3a89-d9dd-49c2-a878-ab3568d01665",
+              "name": "Carrier payment method found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"1980-05-20T00:06:41.826Z\"\n  },\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"status\": \"ACTIVE\",\n  \"isPreferred\": true,\n  \"email\": \"payments@carrier.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"companyName\": \"Carrier Payments LLC\",\n  \"username\": \"carrier_payments\",\n  \"bankName\": \"Chase Bank\",\n  \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"****1234\",\n  \"abaAch\": \"021000021\",\n  \"wire\": \"string\",\n  \"swiftCode\": \"CHASUS33\",\n  \"eftInstitution\": \"001\",\n  \"eftTransit\": \"00010\",\n  \"clabe\": \"string\",\n  \"currency\": \"USD\",\n  \"carrierFactor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"companyName\": \"Capital Factoring Services Inc\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-FACTOR-001\",\n    \"email\": \"accounting@capitalfactoring.com\",\n    \"phoneNumber\": \"+1-555-234-5678\",\n    \"currency\": \"USD\"\n  },\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1952-11-25T12:50:13.102Z\"\n  },\n  \"deletedAt\": \"1988-04-30T21:50:41.020Z\",\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1951-09-16T10:10:43.256Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b4d7bd6-ffa3-48ee-b440-6f397d186551",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac953de2-312a-4f40-812b-5122fdc6a08f",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0859f43d-b18d-4a90-87b0-3f0aff16ecaa",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e4eb1c8-6f4f-4dbc-980f-ee840059bcbf",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee5f547d-b40b-43e8-af82-7253d6781f8a",
+          "name": "Update carrier payment method",
+          "request": {
+            "name": "Update carrier payment method",
+            "description": {
+              "content": "Partially update a carrier payment method. Only provided fields will be updated.\n\n**IMPORTANT**: The `carrierId` field cannot be changed after creation.\n\n**Payment Recipient Type Constraints:**\n- When changing to **DIRECT**: `carrierFactorId` must be set to null\n- When changing to **FACTOR**: `carrierFactorId` is required\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "carrier-payment-methods",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentRecipientType\": \"<string>\",\n  \"paymentMethodType\": \"<string>\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"carrierFactorId\": \"<string,null-uuid>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b3ef2a6-8586-4241-b234-11af66286b5f",
+              "name": "Carrier payment method updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"carrierId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"1980-05-20T00:06:41.826Z\"\n  },\n  \"paymentRecipientType\": \"DIRECT\",\n  \"paymentMethodType\": \"ACH\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"status\": \"ACTIVE\",\n  \"isPreferred\": true,\n  \"email\": \"payments@carrier.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"companyName\": \"Carrier Payments LLC\",\n  \"username\": \"carrier_payments\",\n  \"bankName\": \"Chase Bank\",\n  \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n  \"accountName\": \"Carrier Transport Inc\",\n  \"accountNumber\": \"****1234\",\n  \"abaAch\": \"021000021\",\n  \"wire\": \"string\",\n  \"swiftCode\": \"CHASUS33\",\n  \"eftInstitution\": \"001\",\n  \"eftTransit\": \"00010\",\n  \"clabe\": \"string\",\n  \"currency\": \"USD\",\n  \"carrierFactor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"companyName\": \"Capital Factoring Services Inc\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-FACTOR-001\",\n    \"email\": \"accounting@capitalfactoring.com\",\n    \"phoneNumber\": \"+1-555-234-5678\",\n    \"currency\": \"USD\"\n  },\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1952-11-25T12:50:13.102Z\"\n  },\n  \"deletedAt\": \"1988-04-30T21:50:41.020Z\",\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1951-09-16T10:10:43.256Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "456b3035-2c44-465a-9861-485f5c537751",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35002ae1-1e1e-47cd-b27c-0d4f7dfa946a",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd7b9597-ccf8-4693-a81a-19113e5d4ce2",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42a7dd7d-30db-4ccb-828f-2ffbd911609d",
+              "name": "Conflict - resource already exists or constraint violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "121692f0-dc2b-4077-89e4-c530a6bb31b4",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "050b0a02-0254-4797-99a3-6d072d355f7a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c196c1d-1f48-43b2-89e0-74a0a11e053f",
+          "name": "Delete carrier payment method",
+          "request": {
+            "name": "Delete carrier payment method",
+            "description": {
+              "content": "Soft delete a carrier payment method (sets deletedAt timestamp).\n\nThe payment method will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "carrier-payment-methods",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "248e6d4d-fc5e-46a4-92f8-3b32a44109e8",
+              "name": "Carrier payment method deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56b4646b-d3ac-4429-aea7-32814109d258",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64d34c99-e627-41f0-9da1-acb08e97a17a",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4856f292-b0dd-4c7a-a784-aa5fbb0935d0",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7320bf0-74e9-4c2d-9047-7793136025dd",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "carrier-payment-methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8910c238-2b4f-469f-af77-b3ade1b9e17e",
+    "name": "MVMNT Bill Payments Carrier Payment Methods API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

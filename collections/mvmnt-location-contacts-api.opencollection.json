@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Location Contacts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Location Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter location contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/location-contacts/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query location contacts using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted location contacts are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n"
+        },
+        {
+          "info": {
+            "name": "Create a new location contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/location-contacts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Link a customer contact to a location with specific contact types/roles.\n\nLocation contacts represent the relationship between a customer contact\nand a specific location, defining what role the contact has at that location.\n"
+        },
+        {
+          "info": {
+            "name": "Get a location contact by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/location-contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ]
+          },
+          "docs": "Retrieve a single location contact by its unique identifier.\n"
+        },
+        {
+          "info": {
+            "name": "Update a location contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/location-contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a location contact. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n"
+        },
+        {
+          "info": {
+            "name": "Delete a location contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/location-contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ]
+          },
+          "docs": "Soft delete a location contact (sets deletedAt timestamp).\n\nThe location contact will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1662 @@
+{
+  "item": [
+    {
+      "id": "827f5da6-531f-4a07-bc36-82faada33cce",
+      "name": "Payments",
+      "description": {
+        "content": "AR payment management operations.\nPayments represent received customer payments applied to invoices.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "81dede03-fa48-4963-8eff-fd56fa975863",
+          "name": "Filter payments",
+          "request": {
+            "name": "Filter payments",
+            "description": {
+              "content": "Search for AR payments using filter criteria.\n\n## Common Filters\n\n- By customer: `{ \"filter\": { \"customerId\": { \"equalTo\": \"uuid\" } } }`\n- By invoice: `{ \"filter\": { \"invoiceId\": { \"equalTo\": \"uuid\" } } }`\n- By date range: `{ \"filter\": { \"paymentDate\": { \"greaterThanOrEqualTo\": \"2025-01-01\" } } }`\n- By method: `{ \"filter\": { \"paymentMethodType\": { \"equalTo\": \"check\" } } }`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"invoiceId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"shipmentId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentDate\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"totalAmount\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"reference\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentFilter detected>\"\n      }\n    ]\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37732942-a5dd-4d90-9bbd-2500a0ae8d5e",
+              "name": "Payments matching filter criteria",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"customerId\": {\n      \"equalTo\": \"550e8400-e29b-41d4-a716-446655440000\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"paymentDate\": \"1968-10-13\",\n      \"totalAmount\": 7897.461492754071,\n      \"createdAt\": \"2010-05-05T03:16:29.047Z\",\n      \"key\": \"PMT-00001\",\n      \"customer\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Acme Manufacturing Corp\",\n        \"friendlyId\": \"A123456\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CUSTOMER-ACME\",\n        \"phoneNumber\": \"+1-555-123-4567\",\n        \"website\": \"https://acme-manufacturing.com\",\n        \"deletedAt\": \"1947-06-24T01:21:33.769Z\"\n      },\n      \"paymentMethodType\": \"ACH_WIRE\",\n      \"reference\": \"string\",\n      \"notes\": \"string\",\n      \"currency\": \"USD\",\n      \"applications\": [\n        {\n          \"id\": \"9cd1c042-eea6-3796-9df0-bbd5f3f92b7d\",\n          \"invoiceId\": \"b066de8b-5c9e-1854-ac02-abde5c9aa10a\",\n          \"amount\": 4311.9744529626205,\n          \"invoiceFriendlyId\": \"string\",\n          \"invoiceAmount\": 1947.9040157850425,\n          \"invoiceOpenBalance\": 5275.072369399189\n        },\n        {\n          \"id\": \"858eeac8-1c06-7f1d-ad58-12bcf3a13387\",\n          \"invoiceId\": \"4c8c3645-a305-8122-855b-a22bb21da61f\",\n          \"amount\": 2054.5975392309224,\n          \"invoiceFriendlyId\": \"string\",\n          \"invoiceAmount\": 2777.9398352743624,\n          \"invoiceOpenBalance\": 9700.938281979677\n        }\n      ],\n      \"creditApplications\": [\n        {\n          \"id\": \"c606482e-89ff-fd4d-fe3f-10c58683a036\",\n          \"creditMemoId\": \"3496544f-1f74-67a4-199c-bae0e3bd4f24\",\n          \"creditMemoReference\": \"string\",\n          \"amount\": 1678.169573178856\n        },\n        {\n          \"id\": \"49417ae8-6a71-709d-7d7f-cfa0ee41f587\",\n          \"creditMemoId\": \"ddd972a0-c9e9-6308-b076-6a12a5d76dfc\",\n          \"creditMemoReference\": \"string\",\n          \"amount\": 1433.8686427552095\n        }\n      ],\n      \"overpaymentAmount\": 2781.05387139584,\n      \"overpaymentCreditMemoId\": \"7bf84d93-61b3-1dd2-0235-ef5699376880\",\n      \"shipmentIds\": [\n        \"10ac3b8c-6044-4fdd-8ab2-b6d51785be03\",\n        \"729a6931-5c50-d4c1-4b8e-f8d7c7824022\"\n      ],\n      \"shipmentKeys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"qboId\": \"string\",\n      \"updatedAt\": \"2005-06-27T00:19:37.094Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"paymentDate\": \"1959-05-19\",\n      \"totalAmount\": 6180.594723400032,\n      \"createdAt\": \"2004-08-08T09:00:15.466Z\",\n      \"key\": \"PMT-00001\",\n      \"customer\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Acme Manufacturing Corp\",\n        \"friendlyId\": \"A123456\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CUSTOMER-ACME\",\n        \"phoneNumber\": \"+1-555-123-4567\",\n        \"website\": \"https://acme-manufacturing.com\",\n        \"deletedAt\": \"2003-01-24T03:07:01.427Z\"\n      },\n      \"paymentMethodType\": \"CREDIT_CARD\",\n      \"reference\": \"string\",\n      \"notes\": \"string\",\n      \"currency\": \"USD\",\n      \"applications\": [\n        {\n          \"id\": \"0f5a59ce-f17d-bc5c-7b80-51341ab82d85\",\n          \"invoiceId\": \"c7ca3ad6-778a-39a9-baad-ef1c3dc2c326\",\n          \"amount\": 5264.658576942518,\n          \"invoiceFriendlyId\": \"string\",\n          \"invoiceAmount\": 9131.745192138618,\n          \"invoiceOpenBalance\": 9339.863811651489\n        },\n        {\n          \"id\": \"54876e4e-d6a4-03a2-61ce-ddf62f3f9a55\",\n          \"invoiceId\": \"4f4fbd6f-69b2-c2e9-d2f7-e325664f2dff\",\n          \"amount\": 938.2946710423768,\n          \"invoiceFriendlyId\": \"string\",\n          \"invoiceAmount\": 1234.6938991005807,\n          \"invoiceOpenBalance\": 9832.566066350417\n        }\n      ],\n      \"creditApplications\": [\n        {\n          \"id\": \"dd638e64-8fb2-6fc4-c171-a2f31b56d91c\",\n          \"creditMemoId\": \"625652fd-13e7-52c4-b45d-a7fcb98774d4\",\n          \"creditMemoReference\": \"string\",\n          \"amount\": 3402.5448619844256\n        },\n        {\n          \"id\": \"5041f7c1-2f24-0596-8fc3-49abcd1c2d04\",\n          \"creditMemoId\": \"9b1734ed-7870-b5a8-10a7-28ce677aa97f\",\n          \"creditMemoReference\": \"string\",\n          \"amount\": 9947.121419336461\n        }\n      ],\n      \"overpaymentAmount\": 6285.0810836074825,\n      \"overpaymentCreditMemoId\": \"3a3ac25e-0d87-e449-1fc7-b4f3e76ae19c\",\n      \"shipmentIds\": [\n        \"f54c407f-e00e-a70a-6327-7de6aeda0a69\",\n        \"4630d805-238f-af4a-a77b-5c2ef608119c\"\n      ],\n      \"shipmentKeys\": [\n        \"string\",\n        \"string\"\n      ],\n      \"qboId\": \"string\",\n      \"updatedAt\": \"1981-10-28T01:07:59.146Z\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7ce5f68-c3b0-4a59-9d2f-a6f6ce51bf94",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"customerId\": {\n      \"equalTo\": \"550e8400-e29b-41d4-a716-446655440000\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "735202ba-03b6-4957-ac0e-e724f247930f",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"customerId\": {\n      \"equalTo\": \"550e8400-e29b-41d4-a716-446655440000\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49cf783a-f81a-407c-834f-b09881075ddd",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"customerId\": {\n      \"equalTo\": \"550e8400-e29b-41d4-a716-446655440000\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14d2ffb0-152d-4980-9795-3d2f763d8464",
+          "name": "Create a payment",
+          "request": {
+            "name": "Create a payment",
+            "description": {
+              "content": "Record a customer payment applied to invoices.\n\n## What happens\n\n- Payment record is created\n- Specified amounts are applied to invoices\n- Invoice/order status updated to `PAID` when fully paid\n- Overpayment creates a credit memo automatically\n\n## Validations\n\n- Payment date must be >= invoice date for all applied invoices\n- Application amounts must not exceed invoice open balances\n- Customer must match invoice customer\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"paymentDate\": \"<date>\",\n  \"applications\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"amount\": \"<number>\"\n    }\n  ],\n  \"paymentMethodType\": \"<string>\",\n  \"reference\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"creditApplications\": [\n    {\n      \"creditMemoId\": \"<uuid>\",\n      \"amount\": \"<number>\"\n    },\n    {\n      \"creditMemoId\": \"<uuid>\",\n      \"amount\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a86f3c2-4ebc-43e8-aa4c-c45c7fc81c5f",
+              "name": "Payment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"paymentDate\": \"2025-01-15\",\n  \"paymentMethodType\": \"check\",\n  \"reference\": \"CHK-12345\",\n  \"applications\": [\n    {\n      \"invoiceId\": \"660e8400-e29b-41d4-a716-446655440001\",\n      \"amount\": 2500\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"paymentDate\": \"1994-09-17\",\n  \"totalAmount\": 6715.862621377573,\n  \"createdAt\": \"1986-08-06T02:02:51.967Z\",\n  \"key\": \"PMT-00001\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"2015-09-30T22:51:25.324Z\"\n  },\n  \"paymentMethodType\": \"ZELLE\",\n  \"reference\": \"string\",\n  \"notes\": \"string\",\n  \"currency\": \"USD\",\n  \"applications\": [\n    {\n      \"id\": \"7588fccf-49ab-ff52-940d-91e9d6ced006\",\n      \"invoiceId\": \"1a462826-7d41-75a0-f5ad-3b30047061bb\",\n      \"amount\": 4506.423133905853,\n      \"invoiceFriendlyId\": \"string\",\n      \"invoiceAmount\": 783.6489366717369,\n      \"invoiceOpenBalance\": 2514.0795597564024\n    },\n    {\n      \"id\": \"d4d07486-390e-a266-7e57-caea1ab66eed\",\n      \"invoiceId\": \"43a131c5-7f76-03a8-8257-5d4c754c5482\",\n      \"amount\": 5821.521941040817,\n      \"invoiceFriendlyId\": \"string\",\n      \"invoiceAmount\": 9170.678372872393,\n      \"invoiceOpenBalance\": 6275.752065263329\n    }\n  ],\n  \"creditApplications\": [\n    {\n      \"id\": \"5685d1ea-6628-488c-cdf6-2b9a4fd3e855\",\n      \"creditMemoId\": \"6eda10cd-e908-7ebd-4335-8064af2d0be7\",\n      \"creditMemoReference\": \"string\",\n      \"amount\": 4944.51824711782\n    },\n    {\n      \"id\": \"5731d71a-e1f8-58bd-f1c3-71ea5fce300a\",\n      \"creditMemoId\": \"3855576d-fb61-ca68-9dd4-35b76033bc32\",\n      \"creditMemoReference\": \"string\",\n      \"amount\": 6856.48396223177\n    }\n  ],\n  \"overpaymentAmount\": 641.1835723696757,\n  \"overpaymentCreditMemoId\": \"589badfb-017c-67ed-d8ba-bbcf1e371f9e\",\n  \"shipmentIds\": [\n    \"64849441-78a4-a5ad-7501-5b58d60133a2\",\n    \"73d2708d-e95d-3887-e8be-511798e1ce22\"\n  ],\n  \"shipmentKeys\": [\n    \"string\",\n    \"string\"\n  ],\n  \"qboId\": \"string\",\n  \"updatedAt\": \"2014-07-22T14:24:44.179Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f28b0d3a-4a08-4375-8cb2-99cd7b57e14a",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"paymentDate\": \"2025-01-15\",\n  \"paymentMethodType\": \"check\",\n  \"reference\": \"CHK-12345\",\n  \"applications\": [\n    {\n      \"invoiceId\": \"660e8400-e29b-41d4-a716-446655440001\",\n      \"amount\": 2500\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "475b8604-0d5f-4dc8-b616-0226bc5c8caa",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"paymentDate\": \"2025-01-15\",\n  \"paymentMethodType\": \"check\",\n  \"reference\": \"CHK-12345\",\n  \"applications\": [\n    {\n      \"invoiceId\": \"660e8400-e29b-41d4-a716-446655440001\",\n      \"amount\": 2500\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b296c5b3-0e1f-46d1-b3b3-0a2a6b421304",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"paymentDate\": \"2025-01-15\",\n  \"paymentMethodType\": \"check\",\n  \"reference\": \"CHK-12345\",\n  \"applications\": [\n    {\n      \"invoiceId\": \"660e8400-e29b-41d4-a716-446655440001\",\n      \"amount\": 2500\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d355734f-c29e-41fb-adba-dbd1f0865eff",
+          "name": "Get a payment",
+          "request": {
+            "name": "Get a payment",
+            "description": {
+              "content": "Retrieve a payment by ID.\n\nThe response includes all invoice applications and credit applications.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b83cd35-8bfe-4685-a183-33b0031d3394",
+              "name": "Payment retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"paymentDate\": \"1994-09-17\",\n  \"totalAmount\": 6715.862621377573,\n  \"createdAt\": \"1986-08-06T02:02:51.967Z\",\n  \"key\": \"PMT-00001\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"2015-09-30T22:51:25.324Z\"\n  },\n  \"paymentMethodType\": \"ZELLE\",\n  \"reference\": \"string\",\n  \"notes\": \"string\",\n  \"currency\": \"USD\",\n  \"applications\": [\n    {\n      \"id\": \"7588fccf-49ab-ff52-940d-91e9d6ced006\",\n      \"invoiceId\": \"1a462826-7d41-75a0-f5ad-3b30047061bb\",\n      \"amount\": 4506.423133905853,\n      \"invoiceFriendlyId\": \"string\",\n      \"invoiceAmount\": 783.6489366717369,\n      \"invoiceOpenBalance\": 2514.0795597564024\n    },\n    {\n      \"id\": \"d4d07486-390e-a266-7e57-caea1ab66eed\",\n      \"invoiceId\": \"43a131c5-7f76-03a8-8257-5d4c754c5482\",\n      \"amount\": 5821.521941040817,\n      \"invoiceFriendlyId\": \"string\",\n      \"invoiceAmount\": 9170.678372872393,\n      \"invoiceOpenBalance\": 6275.752065263329\n    }\n  ],\n  \"creditApplications\": [\n    {\n      \"id\": \"5685d1ea-6628-488c-cdf6-2b9a4fd3e855\",\n      \"creditMemoId\": \"6eda10cd-e908-7ebd-4335-8064af2d0be7\",\n      \"creditMemoReference\": \"string\",\n      \"amount\": 4944.51824711782\n    },\n    {\n      \"id\": \"5731d71a-e1f8-58bd-f1c3-71ea5fce300a\",\n      \"creditMemoId\": \"3855576d-fb61-ca68-9dd4-35b76033bc32\",\n      \"creditMemoReference\": \"string\",\n      \"amount\": 6856.48396223177\n    }\n  ],\n  \"overpaymentAmount\": 641.1835723696757,\n  \"overpaymentCreditMemoId\": \"589badfb-017c-67ed-d8ba-bbcf1e371f9e\",\n  \"shipmentIds\": [\n    \"64849441-78a4-a5ad-7501-5b58d60133a2\",\n    \"73d2708d-e95d-3887-e8be-511798e1ce22\"\n  ],\n  \"shipmentKeys\": [\n    \"string\",\n    \"string\"\n  ],\n  \"qboId\": \"string\",\n  \"updatedAt\": \"2014-07-22T14:24:44.179Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d3b8986-329d-4294-b734-f4abdd60a723",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a9eaae0-e59d-4b7e-9801-0fc55f19e4ba",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93728b62-c647-4c93-93c4-51f6a365285a",
+          "name": "Update a payment",
+          "request": {
+            "name": "Update a payment",
+            "description": {
+              "content": "Update payment details or reassign invoice applications.\n\n## What happens\n\n- Payment fields are updated\n- Invoice applications are replaced if provided\n- Order statuses are recalculated\n\n## Note\n\nUpdating applications replaces all existing applications.\nInclude all desired applications in the request.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentDate\": \"<date>\",\n  \"paymentMethodType\": \"<string>\",\n  \"reference\": \"<string,null>\",\n  \"notes\": \"<string,null>\",\n  \"applications\": [\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"amount\": \"<number>\"\n    },\n    {\n      \"invoiceId\": \"<uuid>\",\n      \"amount\": \"<number>\"\n    }\n  ],\n  \"creditApplications\": [\n    {\n      \"creditMemoId\": \"<uuid>\",\n      \"amount\": \"<number>\"\n    },\n    {\n      \"creditMemoId\": \"<uuid>\",\n      \"amount\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce5ca807-c560-4768-8835-612e7535e478",
+              "name": "Payment updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference\": \"CHK-12345-REV\",\n  \"notes\": \"Corrected check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"paymentDate\": \"1994-09-17\",\n  \"totalAmount\": 6715.862621377573,\n  \"createdAt\": \"1986-08-06T02:02:51.967Z\",\n  \"key\": \"PMT-00001\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"2015-09-30T22:51:25.324Z\"\n  },\n  \"paymentMethodType\": \"ZELLE\",\n  \"reference\": \"string\",\n  \"notes\": \"string\",\n  \"currency\": \"USD\",\n  \"applications\": [\n    {\n      \"id\": \"7588fccf-49ab-ff52-940d-91e9d6ced006\",\n      \"invoiceId\": \"1a462826-7d41-75a0-f5ad-3b30047061bb\",\n      \"amount\": 4506.423133905853,\n      \"invoiceFriendlyId\": \"string\",\n      \"invoiceAmount\": 783.6489366717369,\n      \"invoiceOpenBalance\": 2514.0795597564024\n    },\n    {\n      \"id\": \"d4d07486-390e-a266-7e57-caea1ab66eed\",\n      \"invoiceId\": \"43a131c5-7f76-03a8-8257-5d4c754c5482\",\n      \"amount\": 5821.521941040817,\n      \"invoiceFriendlyId\": \"string\",\n      \"invoiceAmount\": 9170.678372872393,\n      \"invoiceOpenBalance\": 6275.752065263329\n    }\n  ],\n  \"creditApplications\": [\n    {\n      \"id\": \"5685d1ea-6628-488c-cdf6-2b9a4fd3e855\",\n      \"creditMemoId\": \"6eda10cd-e908-7ebd-4335-8064af2d0be7\",\n      \"creditMemoReference\": \"string\",\n      \"amount\": 4944.51824711782\n    },\n    {\n      \"id\": \"5731d71a-e1f8-58bd-f1c3-71ea5fce300a\",\n      \"creditMemoId\": \"3855576d-fb61-ca68-9dd4-35b76033bc32\",\n      \"creditMemoReference\": \"string\",\n      \"amount\": 6856.48396223177\n    }\n  ],\n  \"overpaymentAmount\": 641.1835723696757,\n  \"overpaymentCreditMemoId\": \"589badfb-017c-67ed-d8ba-bbcf1e371f9e\",\n  \"shipmentIds\": [\n    \"64849441-78a4-a5ad-7501-5b58d60133a2\",\n    \"73d2708d-e95d-3887-e8be-511798e1ce22\"\n  ],\n  \"shipmentKeys\": [\n    \"string\",\n    \"string\"\n  ],\n  \"qboId\": \"string\",\n  \"updatedAt\": \"2014-07-22T14:24:44.179Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "742eb598-fa46-41a4-8b8f-bd5776b760dd",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference\": \"CHK-12345-REV\",\n  \"notes\": \"Corrected check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ec092a4-f501-4161-8eb7-b6fae41b6b85",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference\": \"CHK-12345-REV\",\n  \"notes\": \"Corrected check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a750dc2-f89e-4e8c-b0df-e1899c005950",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference\": \"CHK-12345-REV\",\n  \"notes\": \"Corrected check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93aa8cb9-4df9-4467-accf-4c196832c3dc",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reference\": \"CHK-12345-REV\",\n  \"notes\": \"Corrected check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab083e79-e6c4-478a-afab-c2503b752b72",
+          "name": "Delete a payment",
+          "request": {
+            "name": "Delete a payment",
+            "description": {
+              "content": "Delete a payment and remove all invoice applications.\n\n## What happens\n\n- Payment record is deleted\n- Invoice applications are removed\n- Order statuses revert if needed (PAID → UNPAID)\n\n## Note\n\nThis action cannot be undone. Consider voiding instead\nif you need to maintain a record.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6db673a-ba43-474d-949a-cc2ea6d959c1",
+              "name": "Payment deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47c3bcbc-c18a-4d0c-930c-5c88cfaec20b",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4adf264-204a-4cca-b857-f867f68b2330",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91cec049-8208-4679-9791-2f21303d417f",
+              "name": "Cannot delete - payment is synced to QBO",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cef19628-d503-4968-a202-4ea2d8dadbd3",
+          "name": "Get payment applications",
+          "request": {
+            "name": "Get payment applications",
+            "description": {
+              "content": "List all invoice applications for a payment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":id",
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1604ae05-9ea5-4ccc-b68d-c6e0362c50eb",
+              "name": "Applications retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"4be18e8f-b938-04dd-8476-8edebb74007c\",\n      \"invoiceId\": \"fad7701c-a482-6428-d214-4aa1958e85a6\",\n      \"amount\": 2749.3198846942746,\n      \"invoiceFriendlyId\": \"string\",\n      \"invoiceAmount\": 8817.560137887018,\n      \"invoiceOpenBalance\": 9912.848965383979\n    },\n    {\n      \"id\": \"7085c9a7-b7a6-1090-f462-8ad8b6ca6218\",\n      \"invoiceId\": \"6a78a4a4-4a20-95bf-8132-3d527a853e3e\",\n      \"amount\": 3328.138193068878,\n      \"invoiceFriendlyId\": \"string\",\n      \"invoiceAmount\": 4949.547612649626,\n      \"invoiceOpenBalance\": 361.28313801055634\n    }\n  ],\n  \"totalApplied\": 2251.0925993821497\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e93e3e18-8e17-48cd-8366-a0a71396ef06",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea83e5a5-5bb6-4794-8c53-6a34d6e5bed5",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":id",
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e6853343-454a-4a29-9d6b-894595e6d96e",
+    "name": "MVMNT Bill Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

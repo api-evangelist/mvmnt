@@ -1,0 +1,2114 @@
+{
+  "item": [
+    {
+      "id": "66d98fe7-4905-4545-98a4-da1fa977645c",
+      "name": "Users",
+      "description": {
+        "content": "User management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a8cb12c-e11c-4005-86da-e1103bb4e890",
+          "name": "Filter users",
+          "request": {
+            "name": "Filter users",
+            "description": {
+              "content": "Filter users using comprehensive query criteria with AND/OR logic and multiple operators.\nSupports complex filtering similar to GraphQL capabilities.\nNote: Soft-deleted users are excluded by default (deletedAt defaults to { isNull: true }).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phone\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"roles\": {\n      \"contains\": \"<string>\",\n      \"containsAll\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"containsAny\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"datUsername\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"mcpUsername\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"avatarId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36688ae2-b397-493d-a418-294061b471f3",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"f885c05f-640a-78d2-52f0-a5c3c84598fa\",\n      \"in\": [\n        \"846ba606-8be1-ee7c-9bb3-38ea32f11a92\",\n        \"905193b5-a019-89b3-92b6-b2fb9072c3f4\"\n      ]\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"name\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"phone\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"status\": {\n      \"equalTo\": \"PENDING\",\n      \"notEqualTo\": \"ACTIVE\",\n      \"in\": [\n        \"INACTIVE\",\n        \"PENDING\"\n      ],\n      \"notIn\": [\n        \"INACTIVE\",\n        \"INACTIVE\"\n      ],\n      \"isNull\": false\n    },\n    \"roles\": {\n      \"contains\": \"CARRIER_REP\",\n      \"containsAll\": [\n        \"CARRIER_REP\",\n        \"ADMIN\"\n      ],\n      \"containsAny\": [\n        \"ADMIN\",\n        \"COMPLIANCE\"\n      ],\n      \"isNull\": false\n    },\n    \"key\": {\n      \"equalTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"isNull\": false\n    },\n    \"datUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"mcpUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"avatarId\": {\n      \"equalTo\": \"0f097f6f-0a9c-5f6c-be71-69044bd16a09\",\n      \"notEqualTo\": \"70b1201c-16c8-3b64-2369-7148574cdeb8\",\n      \"in\": [\n        \"89d3c940-4b92-3721-e207-0724c88f48d1\",\n        \"939635f0-375f-4638-9b1b-caa8dc88201c\"\n      ],\n      \"notIn\": [\n        \"13816131-1733-8c64-6ede-023b3bb5b08b\",\n        \"dc4ccb4a-4cc4-857a-383e-e29e59517a21\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1987-06-29T00:44:48.576Z\",\n      \"notEqualTo\": \"2021-05-01T16:32:41.287Z\",\n      \"lessThan\": \"2022-07-07T03:15:12.198Z\",\n      \"lessThanOrEqualTo\": \"1962-07-07T13:36:37.166Z\",\n      \"greaterThan\": \"1980-03-14T01:12:40.956Z\",\n      \"greaterThanOrEqualTo\": \"1963-12-08T16:07:42.486Z\",\n      \"isNull\": true\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"2012-03-04T07:41:51.459Z\",\n      \"notEqualTo\": \"1978-06-26T08:42:58.959Z\",\n      \"lessThan\": \"2003-04-03T01:37:14.696Z\",\n      \"lessThanOrEqualTo\": \"1962-02-05T23:41:19.015Z\",\n      \"greaterThan\": \"1973-11-14T06:56:41.581Z\",\n      \"greaterThanOrEqualTo\": \"2022-07-29T09:32:00.953Z\",\n      \"isNull\": true\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"2008-10-11T03:49:57.526Z\",\n      \"notEqualTo\": \"2000-12-11T10:06:22.575Z\",\n      \"lessThan\": \"2018-08-03T10:31:09.604Z\",\n      \"lessThanOrEqualTo\": \"2020-02-12T06:31:46.701Z\",\n      \"greaterThan\": \"1954-07-24T23:20:15.967Z\",\n      \"greaterThanOrEqualTo\": \"1954-07-29T12:54:13.177Z\",\n      \"isNull\": true\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"INACTIVE\",\n      \"roles\": [\n        \"CUSTOMER_REP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"USER\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"key\": \"ERP-USER-12345\",\n      \"datUsername\": \"johndoe_dat\",\n      \"mcpUsername\": \"johndoe_mcp\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"teams\": [\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"Sales Team - West Coast\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"TEAM\",\n          \"key\": \"ERP-TEAM-WEST\",\n          \"deletedAt\": \"1949-05-14T16:09:35.472Z\"\n        },\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"Sales Team - West Coast\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"TEAM\",\n          \"key\": \"ERP-TEAM-WEST\",\n          \"deletedAt\": \"1971-04-28T00:06:10.218Z\"\n        }\n      ],\n      \"deletedAt\": \"1959-12-14T15:17:21.241Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"roles\": [\n        \"CUSTOMER_REP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"USER\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"key\": \"ERP-USER-12345\",\n      \"datUsername\": \"johndoe_dat\",\n      \"mcpUsername\": \"johndoe_mcp\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"teams\": [\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"Sales Team - West Coast\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"TEAM\",\n          \"key\": \"ERP-TEAM-WEST\",\n          \"deletedAt\": \"2021-07-13T14:04:28.989Z\"\n        },\n        {\n          \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n          \"name\": \"Sales Team - West Coast\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"TEAM\",\n          \"key\": \"ERP-TEAM-WEST\",\n          \"deletedAt\": \"2021-02-17T09:31:04.753Z\"\n        }\n      ],\n      \"deletedAt\": \"1970-10-03T21:13:42.993Z\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "849882db-468f-4f83-9d42-152bf494c7cb",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"f885c05f-640a-78d2-52f0-a5c3c84598fa\",\n      \"in\": [\n        \"846ba606-8be1-ee7c-9bb3-38ea32f11a92\",\n        \"905193b5-a019-89b3-92b6-b2fb9072c3f4\"\n      ]\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"name\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"phone\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"status\": {\n      \"equalTo\": \"PENDING\",\n      \"notEqualTo\": \"ACTIVE\",\n      \"in\": [\n        \"INACTIVE\",\n        \"PENDING\"\n      ],\n      \"notIn\": [\n        \"INACTIVE\",\n        \"INACTIVE\"\n      ],\n      \"isNull\": false\n    },\n    \"roles\": {\n      \"contains\": \"CARRIER_REP\",\n      \"containsAll\": [\n        \"CARRIER_REP\",\n        \"ADMIN\"\n      ],\n      \"containsAny\": [\n        \"ADMIN\",\n        \"COMPLIANCE\"\n      ],\n      \"isNull\": false\n    },\n    \"key\": {\n      \"equalTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"isNull\": false\n    },\n    \"datUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"mcpUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"avatarId\": {\n      \"equalTo\": \"0f097f6f-0a9c-5f6c-be71-69044bd16a09\",\n      \"notEqualTo\": \"70b1201c-16c8-3b64-2369-7148574cdeb8\",\n      \"in\": [\n        \"89d3c940-4b92-3721-e207-0724c88f48d1\",\n        \"939635f0-375f-4638-9b1b-caa8dc88201c\"\n      ],\n      \"notIn\": [\n        \"13816131-1733-8c64-6ede-023b3bb5b08b\",\n        \"dc4ccb4a-4cc4-857a-383e-e29e59517a21\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1987-06-29T00:44:48.576Z\",\n      \"notEqualTo\": \"2021-05-01T16:32:41.287Z\",\n      \"lessThan\": \"2022-07-07T03:15:12.198Z\",\n      \"lessThanOrEqualTo\": \"1962-07-07T13:36:37.166Z\",\n      \"greaterThan\": \"1980-03-14T01:12:40.956Z\",\n      \"greaterThanOrEqualTo\": \"1963-12-08T16:07:42.486Z\",\n      \"isNull\": true\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"2012-03-04T07:41:51.459Z\",\n      \"notEqualTo\": \"1978-06-26T08:42:58.959Z\",\n      \"lessThan\": \"2003-04-03T01:37:14.696Z\",\n      \"lessThanOrEqualTo\": \"1962-02-05T23:41:19.015Z\",\n      \"greaterThan\": \"1973-11-14T06:56:41.581Z\",\n      \"greaterThanOrEqualTo\": \"2022-07-29T09:32:00.953Z\",\n      \"isNull\": true\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"2008-10-11T03:49:57.526Z\",\n      \"notEqualTo\": \"2000-12-11T10:06:22.575Z\",\n      \"lessThan\": \"2018-08-03T10:31:09.604Z\",\n      \"lessThanOrEqualTo\": \"2020-02-12T06:31:46.701Z\",\n      \"greaterThan\": \"1954-07-24T23:20:15.967Z\",\n      \"greaterThanOrEqualTo\": \"1954-07-29T12:54:13.177Z\",\n      \"isNull\": true\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f025a34-f922-4aa7-8f73-c712f6d64742",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"f885c05f-640a-78d2-52f0-a5c3c84598fa\",\n      \"in\": [\n        \"846ba606-8be1-ee7c-9bb3-38ea32f11a92\",\n        \"905193b5-a019-89b3-92b6-b2fb9072c3f4\"\n      ]\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"name\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"phone\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"status\": {\n      \"equalTo\": \"PENDING\",\n      \"notEqualTo\": \"ACTIVE\",\n      \"in\": [\n        \"INACTIVE\",\n        \"PENDING\"\n      ],\n      \"notIn\": [\n        \"INACTIVE\",\n        \"INACTIVE\"\n      ],\n      \"isNull\": false\n    },\n    \"roles\": {\n      \"contains\": \"CARRIER_REP\",\n      \"containsAll\": [\n        \"CARRIER_REP\",\n        \"ADMIN\"\n      ],\n      \"containsAny\": [\n        \"ADMIN\",\n        \"COMPLIANCE\"\n      ],\n      \"isNull\": false\n    },\n    \"key\": {\n      \"equalTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"isNull\": false\n    },\n    \"datUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"mcpUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"avatarId\": {\n      \"equalTo\": \"0f097f6f-0a9c-5f6c-be71-69044bd16a09\",\n      \"notEqualTo\": \"70b1201c-16c8-3b64-2369-7148574cdeb8\",\n      \"in\": [\n        \"89d3c940-4b92-3721-e207-0724c88f48d1\",\n        \"939635f0-375f-4638-9b1b-caa8dc88201c\"\n      ],\n      \"notIn\": [\n        \"13816131-1733-8c64-6ede-023b3bb5b08b\",\n        \"dc4ccb4a-4cc4-857a-383e-e29e59517a21\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1987-06-29T00:44:48.576Z\",\n      \"notEqualTo\": \"2021-05-01T16:32:41.287Z\",\n      \"lessThan\": \"2022-07-07T03:15:12.198Z\",\n      \"lessThanOrEqualTo\": \"1962-07-07T13:36:37.166Z\",\n      \"greaterThan\": \"1980-03-14T01:12:40.956Z\",\n      \"greaterThanOrEqualTo\": \"1963-12-08T16:07:42.486Z\",\n      \"isNull\": true\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"2012-03-04T07:41:51.459Z\",\n      \"notEqualTo\": \"1978-06-26T08:42:58.959Z\",\n      \"lessThan\": \"2003-04-03T01:37:14.696Z\",\n      \"lessThanOrEqualTo\": \"1962-02-05T23:41:19.015Z\",\n      \"greaterThan\": \"1973-11-14T06:56:41.581Z\",\n      \"greaterThanOrEqualTo\": \"2022-07-29T09:32:00.953Z\",\n      \"isNull\": true\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"2008-10-11T03:49:57.526Z\",\n      \"notEqualTo\": \"2000-12-11T10:06:22.575Z\",\n      \"lessThan\": \"2018-08-03T10:31:09.604Z\",\n      \"lessThanOrEqualTo\": \"2020-02-12T06:31:46.701Z\",\n      \"greaterThan\": \"1954-07-24T23:20:15.967Z\",\n      \"greaterThanOrEqualTo\": \"1954-07-29T12:54:13.177Z\",\n      \"isNull\": true\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b61161f4-c026-425a-9493-bcb4c5e26fa4",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"f885c05f-640a-78d2-52f0-a5c3c84598fa\",\n      \"in\": [\n        \"846ba606-8be1-ee7c-9bb3-38ea32f11a92\",\n        \"905193b5-a019-89b3-92b6-b2fb9072c3f4\"\n      ]\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"name\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"phone\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"status\": {\n      \"equalTo\": \"PENDING\",\n      \"notEqualTo\": \"ACTIVE\",\n      \"in\": [\n        \"INACTIVE\",\n        \"PENDING\"\n      ],\n      \"notIn\": [\n        \"INACTIVE\",\n        \"INACTIVE\"\n      ],\n      \"isNull\": false\n    },\n    \"roles\": {\n      \"contains\": \"CARRIER_REP\",\n      \"containsAll\": [\n        \"CARRIER_REP\",\n        \"ADMIN\"\n      ],\n      \"containsAny\": [\n        \"ADMIN\",\n        \"COMPLIANCE\"\n      ],\n      \"isNull\": false\n    },\n    \"key\": {\n      \"equalTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"isNull\": false\n    },\n    \"datUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"mcpUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"avatarId\": {\n      \"equalTo\": \"0f097f6f-0a9c-5f6c-be71-69044bd16a09\",\n      \"notEqualTo\": \"70b1201c-16c8-3b64-2369-7148574cdeb8\",\n      \"in\": [\n        \"89d3c940-4b92-3721-e207-0724c88f48d1\",\n        \"939635f0-375f-4638-9b1b-caa8dc88201c\"\n      ],\n      \"notIn\": [\n        \"13816131-1733-8c64-6ede-023b3bb5b08b\",\n        \"dc4ccb4a-4cc4-857a-383e-e29e59517a21\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1987-06-29T00:44:48.576Z\",\n      \"notEqualTo\": \"2021-05-01T16:32:41.287Z\",\n      \"lessThan\": \"2022-07-07T03:15:12.198Z\",\n      \"lessThanOrEqualTo\": \"1962-07-07T13:36:37.166Z\",\n      \"greaterThan\": \"1980-03-14T01:12:40.956Z\",\n      \"greaterThanOrEqualTo\": \"1963-12-08T16:07:42.486Z\",\n      \"isNull\": true\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"2012-03-04T07:41:51.459Z\",\n      \"notEqualTo\": \"1978-06-26T08:42:58.959Z\",\n      \"lessThan\": \"2003-04-03T01:37:14.696Z\",\n      \"lessThanOrEqualTo\": \"1962-02-05T23:41:19.015Z\",\n      \"greaterThan\": \"1973-11-14T06:56:41.581Z\",\n      \"greaterThanOrEqualTo\": \"2022-07-29T09:32:00.953Z\",\n      \"isNull\": true\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"2008-10-11T03:49:57.526Z\",\n      \"notEqualTo\": \"2000-12-11T10:06:22.575Z\",\n      \"lessThan\": \"2018-08-03T10:31:09.604Z\",\n      \"lessThanOrEqualTo\": \"2020-02-12T06:31:46.701Z\",\n      \"greaterThan\": \"1954-07-24T23:20:15.967Z\",\n      \"greaterThanOrEqualTo\": \"1954-07-29T12:54:13.177Z\",\n      \"isNull\": true\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f390ae61-8f72-4864-a016-98e156333727",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/UserFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"f885c05f-640a-78d2-52f0-a5c3c84598fa\",\n      \"in\": [\n        \"846ba606-8be1-ee7c-9bb3-38ea32f11a92\",\n        \"905193b5-a019-89b3-92b6-b2fb9072c3f4\"\n      ]\n    },\n    \"email\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"name\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"phone\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": false\n    },\n    \"status\": {\n      \"equalTo\": \"PENDING\",\n      \"notEqualTo\": \"ACTIVE\",\n      \"in\": [\n        \"INACTIVE\",\n        \"PENDING\"\n      ],\n      \"notIn\": [\n        \"INACTIVE\",\n        \"INACTIVE\"\n      ],\n      \"isNull\": false\n    },\n    \"roles\": {\n      \"contains\": \"CARRIER_REP\",\n      \"containsAll\": [\n        \"CARRIER_REP\",\n        \"ADMIN\"\n      ],\n      \"containsAny\": [\n        \"ADMIN\",\n        \"COMPLIANCE\"\n      ],\n      \"isNull\": false\n    },\n    \"key\": {\n      \"equalTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"isNull\": false\n    },\n    \"datUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"mcpUsername\": {\n      \"equalTo\": \"string\",\n      \"notEqualTo\": \"string\",\n      \"in\": [\n        \"string\",\n        \"string\"\n      ],\n      \"notIn\": [\n        \"string\",\n        \"string\"\n      ],\n      \"includes\": \"string\",\n      \"notIncludes\": \"string\",\n      \"startsWith\": \"string\",\n      \"notStartsWith\": \"string\",\n      \"endsWith\": \"string\",\n      \"notEndsWith\": \"string\",\n      \"isNull\": true\n    },\n    \"avatarId\": {\n      \"equalTo\": \"0f097f6f-0a9c-5f6c-be71-69044bd16a09\",\n      \"notEqualTo\": \"70b1201c-16c8-3b64-2369-7148574cdeb8\",\n      \"in\": [\n        \"89d3c940-4b92-3721-e207-0724c88f48d1\",\n        \"939635f0-375f-4638-9b1b-caa8dc88201c\"\n      ],\n      \"notIn\": [\n        \"13816131-1733-8c64-6ede-023b3bb5b08b\",\n        \"dc4ccb4a-4cc4-857a-383e-e29e59517a21\"\n      ],\n      \"isNull\": true\n    },\n    \"createdAt\": {\n      \"equalTo\": \"1987-06-29T00:44:48.576Z\",\n      \"notEqualTo\": \"2021-05-01T16:32:41.287Z\",\n      \"lessThan\": \"2022-07-07T03:15:12.198Z\",\n      \"lessThanOrEqualTo\": \"1962-07-07T13:36:37.166Z\",\n      \"greaterThan\": \"1980-03-14T01:12:40.956Z\",\n      \"greaterThanOrEqualTo\": \"1963-12-08T16:07:42.486Z\",\n      \"isNull\": true\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"2012-03-04T07:41:51.459Z\",\n      \"notEqualTo\": \"1978-06-26T08:42:58.959Z\",\n      \"lessThan\": \"2003-04-03T01:37:14.696Z\",\n      \"lessThanOrEqualTo\": \"1962-02-05T23:41:19.015Z\",\n      \"greaterThan\": \"1973-11-14T06:56:41.581Z\",\n      \"greaterThanOrEqualTo\": \"2022-07-29T09:32:00.953Z\",\n      \"isNull\": true\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"2008-10-11T03:49:57.526Z\",\n      \"notEqualTo\": \"2000-12-11T10:06:22.575Z\",\n      \"lessThan\": \"2018-08-03T10:31:09.604Z\",\n      \"lessThanOrEqualTo\": \"2020-02-12T06:31:46.701Z\",\n      \"greaterThan\": \"1954-07-24T23:20:15.967Z\",\n      \"greaterThanOrEqualTo\": \"1954-07-29T12:54:13.177Z\",\n      \"isNull\": true\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "9902"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21ffd65f-8277-4a6a-9297-3507bade392a",
+          "name": "Create user",
+          "request": {
+            "name": "Create user",
+            "description": {
+              "content": "Create a new user in your organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"status\": \"<string>\",\n  \"roles\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"phoneExt\": \"<string>\",\n  \"key\": \"<string>\",\n  \"datUsername\": \"<string>\",\n  \"mcpUsername\": \"<string>\",\n  \"avatarId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "061ea4a5-b839-4063-a200-979dcdf9b79d",
+              "name": "User created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\"\n  ],\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"email\": \"john.doe@example.com\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"USER\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"Sales Team - West Coast\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"TEAM\",\n      \"key\": \"ERP-TEAM-WEST\",\n      \"deletedAt\": \"1987-03-04T19:20:58.732Z\"\n    },\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"Sales Team - West Coast\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"TEAM\",\n      \"key\": \"ERP-TEAM-WEST\",\n      \"deletedAt\": \"2006-06-26T01:32:10.396Z\"\n    }\n  ],\n  \"deletedAt\": \"1990-11-12T09:45:53.824Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "980b353a-62b8-44a7-b011-81120d1f7b42",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\"\n  ],\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3eb5802-e17d-4043-88ef-51073af0ce37",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\"\n  ],\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1de68dc-9ac9-4775-9a56-d62a387f4a93",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\"\n  ],\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e016e40-cca9-4e0c-9e99-913085a0419d",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\"\n  ],\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "9902"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36208192-c91c-4d69-b326-fca23d2972c8",
+          "name": "Get user",
+          "request": {
+            "name": "Get user",
+            "description": {
+              "content": "Retrieve a user by ID or client key",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b871c8f2-c44c-4f6b-bf99-4e780799fa8b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"email\": \"john.doe@example.com\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"USER\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"Sales Team - West Coast\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"TEAM\",\n      \"key\": \"ERP-TEAM-WEST\",\n      \"deletedAt\": \"1987-03-04T19:20:58.732Z\"\n    },\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"Sales Team - West Coast\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"TEAM\",\n      \"key\": \"ERP-TEAM-WEST\",\n      \"deletedAt\": \"2006-06-26T01:32:10.396Z\"\n    }\n  ],\n  \"deletedAt\": \"1990-11-12T09:45:53.824Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcd022e8-3889-4ff6-8a77-ff0805261a55",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7164c47e-fd70-489f-95dc-6ea31c413a87",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cabd7335-bbb5-49c7-96a5-bcfb098790e2",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "9902"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c7bfdaa-d5a9-424e-a4ad-cf892913538d",
+          "name": "Update user",
+          "request": {
+            "name": "Update user",
+            "description": {
+              "content": "Partially update a user. Only provided fields will be updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"name\": \"<string,null>\",\n  \"phone\": \"<string,null>\",\n  \"phoneExt\": \"<string,null>\",\n  \"status\": \"<string>\",\n  \"roles\": [\n    \"<string>\"\n  ],\n  \"key\": \"<string,null>\",\n  \"datUsername\": \"<string,null>\",\n  \"mcpUsername\": \"<string,null>\",\n  \"avatarId\": \"<string,null-uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96fb5e60-9778-4199-806a-9b127642c5b2",
+              "name": "User updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"email\": \"john.doe@example.com\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"USER\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"Sales Team - West Coast\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"TEAM\",\n      \"key\": \"ERP-TEAM-WEST\",\n      \"deletedAt\": \"1987-03-04T19:20:58.732Z\"\n    },\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"Sales Team - West Coast\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"TEAM\",\n      \"key\": \"ERP-TEAM-WEST\",\n      \"deletedAt\": \"2006-06-26T01:32:10.396Z\"\n    }\n  ],\n  \"deletedAt\": \"1990-11-12T09:45:53.824Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee9b5b37-9f74-42b2-9fd2-514058102c57",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3b28e13-9749-4412-96c6-163a6f083070",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5e2bb5b-210c-4b0d-a1b0-a83b56bc4df0",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b1ac63-cb59-4643-b968-3f22bd7b50cc",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3524b4b3-1b96-48a5-8a01-4b8a5a4c28d6",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"name\": \"John Doe\",\n  \"phone\": \"+1-555-123-4567\",\n  \"phoneExt\": \"123\",\n  \"status\": \"PENDING\",\n  \"roles\": [\n    \"CUSTOMER_REP\",\n    \"ADMIN\"\n  ],\n  \"key\": \"ERP-USER-12345\",\n  \"datUsername\": \"johndoe_dat\",\n  \"mcpUsername\": \"johndoe_mcp\",\n  \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n  \"teams\": [\n    {},\n    {\n      \"key\": \"TEAM-WEST-COAST\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "9902"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fe27f02-ebb4-45ce-94d4-eefdc894a285",
+          "name": "Delete user",
+          "request": {
+            "name": "Delete user",
+            "description": {
+              "content": "Soft delete a user (sets deletedAt timestamp)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cade218a-e7c6-40bc-b465-8eae1da95892",
+              "name": "User deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a7ae7e8-8b58-4e58-8a44-92660101fa25",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9297a62d-39e3-474f-8af9-b57b84bec5d5",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fe9c96c-4d13-4a7f-bdc5-323c5aeb80c3",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "9902"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6afd6a15-c3aa-4f59-a216-cd70871f9df9",
+          "name": "Search users",
+          "request": {
+            "name": "Search users",
+            "description": {
+              "content": "Search users using OpenSearch-powered full-text and field-specific search.\n\nThis endpoint provides fast, indexed search across user data with support for:\n- Full-text search across multiple fields\n- Field-specific filtering with various operators\n- Sorting and pagination\n- Saved search preferences\n\n**Note:** Only active (non-deleted) users are searchable. Soft-deleted records are automatically excluded from all search results.\n\n**Response Formats:**\n- `flat` (default): Returns indexed fields only for faster performance\n- `full`: Returns complete user objects with all relationships\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"email\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"emailVerified\": {\n      \"operator\": \"<string>\"\n    },\n    \"phone\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"roles\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"visibility\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"teamIds\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"teamNames\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"customersCount\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"min\": \"<integer>\",\n      \"max\": \"<integer>\"\n    },\n    \"quotesCount\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"min\": \"<integer>\",\n      \"max\": \"<integer>\"\n    },\n    \"quotesWon\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"min\": \"<integer>\",\n      \"max\": \"<integer>\"\n    },\n    \"quoteWinRate\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<float>\",\n      \"min\": \"<float>\",\n      \"max\": \"<float>\"\n    },\n    \"ordersCount\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"min\": \"<integer>\",\n      \"max\": \"<integer>\"\n    },\n    \"ordersTotalRevenue\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<float>\",\n      \"min\": \"<float>\",\n      \"max\": \"<float>\"\n    },\n    \"ordersTotalTransportationCost\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<float>\",\n      \"min\": \"<float>\",\n      \"max\": \"<float>\"\n    },\n    \"ordersTotalGrossProfit\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<float>\",\n      \"min\": \"<float>\",\n      \"max\": \"<float>\"\n    },\n    \"averageGrossProfitPerOrder\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<float>\",\n      \"min\": \"<float>\",\n      \"max\": \"<float>\"\n    },\n    \"carriersCount\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"min\": \"<integer>\",\n      \"max\": \"<integer>\"\n    },\n    \"createdAt\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<dateTime>\",\n      \"min\": \"<dateTime>\",\n      \"max\": \"<dateTime>\",\n      \"valueRelative\": \"<integer>\",\n      \"valueRelativeUnit\": \"<string>\",\n      \"minRelative\": \"<integer>\",\n      \"minRelativeUnit\": \"<string>\",\n      \"maxRelative\": \"<integer>\",\n      \"maxRelativeUnit\": \"<string>\"\n    },\n    \"lastInvitedAt\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<dateTime>\",\n      \"min\": \"<dateTime>\",\n      \"max\": \"<dateTime>\",\n      \"valueRelative\": \"<integer>\",\n      \"valueRelativeUnit\": \"<string>\",\n      \"minRelative\": \"<integer>\",\n      \"minRelativeUnit\": \"<string>\",\n      \"maxRelative\": \"<integer>\",\n      \"maxRelativeUnit\": \"<string>\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"savedSearch\": {\n    \"id\": \"<uuid>\",\n    \"key\": \"<string>\"\n  },\n  \"format\": \"flat\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62a88a73-0826-4c70-8e72-0857b3d28c62",
+              "name": "Successful search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"email\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"emailVerified\": {\n      \"operator\": \"TRUE\"\n    },\n    \"phone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"roles\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"visibility\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"teamIds\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"teamNames\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesWon\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quoteWinRate\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"ordersTotalRevenue\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalTransportationCost\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalGrossProfit\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"averageGrossProfitPerOrder\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"carriersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    },\n    \"lastInvitedAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"object\": \"USER_SEARCH_ROW\",\n      \"id\": \"8218fcbe-33ab-2c65-f027-3e3f97cbbb90\",\n      \"name\": \"string\",\n      \"email\": \"k2Q@auWUnvvpgkAqTbWyHFyzfKZFmIu.lhp\",\n      \"emailVerified\": true,\n      \"status\": \"active\",\n      \"customersCount\": 5385,\n      \"ordersCount\": 5557,\n      \"ordersTotalRevenue\": 6246.081096794292,\n      \"ordersTotalTransportationCost\": 8103.258196466047,\n      \"ordersTotalGrossProfit\": 8859.20330609449,\n      \"carriersCount\": 4104,\n      \"createdAt\": \"1995-01-08T12:10:14.727Z\",\n      \"phone\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"visibility\": \"LIMITED\",\n      \"teamIds\": [\n        \"0accd5cf-3c27-c25b-c6e4-d26e59106818\",\n        \"8da4f103-12ae-570f-000a-e75dfd9f7da6\"\n      ],\n      \"teamNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"quotesCount\": 9861,\n      \"quotesWon\": 9749,\n      \"quoteWinRate\": 6738.825868692885,\n      \"averageGrossProfitPerOrder\": 6869.79681563673,\n      \"lastInvitedAt\": \"1983-07-04T11:31:33.300Z\"\n    },\n    {\n      \"object\": \"USER_SEARCH_ROW\",\n      \"id\": \"7c7f198f-1587-cdbe-28a4-9e77a24b4c81\",\n      \"name\": \"string\",\n      \"email\": \"Wt0DcsyxaLgZKTg@RylHueRWEjzUuymesFcdHAbIcGBa.mnw\",\n      \"emailVerified\": true,\n      \"status\": \"active\",\n      \"customersCount\": 4239,\n      \"ordersCount\": 8319,\n      \"ordersTotalRevenue\": 2802.7033235421927,\n      \"ordersTotalTransportationCost\": 7711.325306411246,\n      \"ordersTotalGrossProfit\": 7509.725906997174,\n      \"carriersCount\": 617,\n      \"createdAt\": \"2015-02-26T13:47:34.476Z\",\n      \"phone\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"visibility\": \"ALL\",\n      \"teamIds\": [\n        \"636b926b-3d29-a132-26c2-e3f68baefe11\",\n        \"ac853f20-684e-f034-ca76-af8bc62b82da\"\n      ],\n      \"teamNames\": [\n        \"string\",\n        \"string\"\n      ],\n      \"quotesCount\": 8944,\n      \"quotesWon\": 5909,\n      \"quoteWinRate\": 4779.099153793497,\n      \"averageGrossProfitPerOrder\": 6610.08978358042,\n      \"lastInvitedAt\": \"2009-11-13T15:48:30.014Z\"\n    }\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50,\n    \"totalPages\": 25\n  },\n  \"totalResults\": 6270\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe714a1e-5b86-496f-ae70-30782a49735b",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"email\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"emailVerified\": {\n      \"operator\": \"TRUE\"\n    },\n    \"phone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"roles\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"visibility\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"teamIds\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"teamNames\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesWon\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quoteWinRate\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"ordersTotalRevenue\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalTransportationCost\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalGrossProfit\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"averageGrossProfitPerOrder\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"carriersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    },\n    \"lastInvitedAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a870891-a73b-4b27-8876-bf15c9bbfd2e",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"email\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"emailVerified\": {\n      \"operator\": \"TRUE\"\n    },\n    \"phone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"roles\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"visibility\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"teamIds\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"teamNames\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesWon\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quoteWinRate\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"ordersTotalRevenue\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalTransportationCost\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalGrossProfit\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"averageGrossProfitPerOrder\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"carriersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    },\n    \"lastInvitedAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ce5306f-0d9d-4a9f-a5bd-b03139e7e0b9",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"email\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"emailVerified\": {\n      \"operator\": \"TRUE\"\n    },\n    \"phone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"roles\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"visibility\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"teamIds\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"teamNames\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesWon\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quoteWinRate\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"ordersTotalRevenue\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalTransportationCost\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalGrossProfit\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"averageGrossProfitPerOrder\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"carriersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    },\n    \"lastInvitedAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b84eea6-d9e9-4b9b-bccd-a3d719b4ed77",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"email\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"emailVerified\": {\n      \"operator\": \"TRUE\"\n    },\n    \"phone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"roles\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"visibility\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"teamIds\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"teamNames\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quotesWon\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"quoteWinRate\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"ordersTotalRevenue\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalTransportationCost\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"ordersTotalGrossProfit\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"averageGrossProfitPerOrder\": {\n      \"operator\": \"GREATER_THAN\",\n      \"value\": 1000.5\n    },\n    \"carriersCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    },\n    \"lastInvitedAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "9902"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "9902"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9b48dd74-d9be-482b-9b9c-591995495679",
+    "name": "MVMNT Bill Payments Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

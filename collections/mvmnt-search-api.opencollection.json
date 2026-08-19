@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Search API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search globally",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/global-search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search across multiple entity types simultaneously (shipments, customers, carriers, users, vendors).\n\n**Use Cases:**\n- Unified search bar for finding any type of record\n- Quick lookup by name, ID, or reference number\n- Cross-entity discovery\n\n**Search Behavior:**\n- Searches across default searchable fields for each entity type\n- Results are sorted by object type priority: SHIPMENT → CUSTOMER → CARRIER → USER → VENDOR\n- Within each object type, results are sorted by most recently updated\n\n**Prefi"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

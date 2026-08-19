@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Vendor Payment Methods API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vendor Payment Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter vendor payment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/vendor-payment-methods/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query vendor payment methods using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted payment methods are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n\nVendor payment methods define how and where payments are sent for a specific vendor.\n"
+        },
+        {
+          "info": {
+            "name": "Create vendor payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/vendor-payment-methods",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new vendor payment method.\n\n**Important**: The `vendorId` cannot be changed after creation.\n"
+        },
+        {
+          "info": {
+            "name": "Get vendor payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/vendor-payment-methods/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ]
+          },
+          "docs": "Retrieve a single vendor payment method by its unique identifier.\n\nReturns full details including banking information and associated vendor references.\n"
+        },
+        {
+          "info": {
+            "name": "Update vendor payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/vendor-payment-methods/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a vendor payment method. Only provided fields will be updated.\n\n**IMPORTANT**: The `vendorId` field cannot be changed after creation.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n"
+        },
+        {
+          "info": {
+            "name": "Delete vendor payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/vendor-payment-methods/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ]
+          },
+          "docs": "Soft delete a vendor payment method (sets deletedAt timestamp).\n\nThe payment method will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

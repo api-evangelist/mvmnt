@@ -1,0 +1,1774 @@
+{
+  "item": [
+    {
+      "id": "807fc745-831c-4b41-8afa-a8d85b961eb5",
+      "name": "Quotes",
+      "description": {
+        "content": "Quote management operations.\nQuotes are pricing requests/responses that can be converted to shipments.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "468cfdb8-2ee3-440b-96b5-ab7f5efce858",
+          "name": "Filter quotes",
+          "request": {
+            "name": "Filter quotes",
+            "description": {
+              "content": "Search for quotes using filter criteria.\n\n## Common Filters\n\n- Active quotes: `{ \"filter\": { \"status\": { \"in\": [\"DRAFT\", \"REQUESTED\", \"QUOTED\"] } } }`\n- Won quotes: `{ \"filter\": { \"status\": { \"equalTo\": \"WON\" } } }`\n- By customer: `{ \"filter\": { \"customerId\": { \"equalTo\": \"uuid\" } } }`\n- Expiring soon: `{ \"filter\": { \"expiresAt\": { \"lessThanOrEqualTo\": \"2025-01-20T00:00:00Z\" } } }`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"side\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"carrierId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"assigneeId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"amount\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"expiresAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/QuoteFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/QuoteFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/QuoteFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/QuoteFilter detected>\"\n      }\n    ]\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f8b19452-17c0-4a35-bdc6-11a719035858",
+              "name": "Quotes matching filter criteria",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"DRAFT\",\n        \"REQUESTED\",\n        \"QUOTED\"\n      ]\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"key\": \"Q003602\",\n      \"side\": \"BUY\",\n      \"status\": \"RECEIVED_COUNTER\",\n      \"createdAt\": \"1998-08-03T06:23:25.460Z\",\n      \"amount\": 2500,\n      \"target\": 2200,\n      \"margin\": 12,\n      \"expiresAt\": \"2021-07-31T23:51:36.125Z\",\n      \"customer\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Acme Manufacturing Corp\",\n        \"friendlyId\": \"A123456\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CUSTOMER-ACME\",\n        \"phoneNumber\": \"+1-555-123-4567\",\n        \"website\": \"https://acme-manufacturing.com\",\n        \"deletedAt\": \"2012-05-07T22:28:27.878Z\"\n      },\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"1991-02-09T06:25:35.103Z\"\n      },\n      \"order\": {\n        \"id\": \"07539709-25d4-4cfc-3a49-e9312f3fef02\",\n        \"key\": \"string\",\n        \"mode\": \"LTL\",\n        \"origin\": {\n          \"city\": \"string\",\n          \"stateProvince\": \"string\",\n          \"postalCode\": \"string\"\n        },\n        \"destination\": {\n          \"city\": \"string\",\n          \"stateProvince\": \"string\",\n          \"postalCode\": \"string\"\n        },\n        \"pickUpDate\": \"1953-04-21\",\n        \"deliveryDate\": \"1973-08-23\",\n        \"equipment\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weight\": 4184.964014079262,\n        \"mileage\": 9221.933348084447\n      },\n      \"lostReason\": \"TRUCK_NOT_AVAILABLE\",\n      \"lostReasonText\": \"string\",\n      \"closedTime\": \"1965-08-14T04:39:20.617Z\",\n      \"assignee\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1963-01-03T13:57:52.238Z\"\n      },\n      \"shipmentId\": \"7ba1ca68-ac0f-1c3d-0a92-eace267c4d3f\",\n      \"shipmentKey\": \"string\",\n      \"updatedAt\": \"2026-01-17T09:21:21.774Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"key\": \"Q003602\",\n      \"side\": \"SELL\",\n      \"status\": \"DRAFT\",\n      \"createdAt\": \"1968-07-16T04:43:32.725Z\",\n      \"amount\": 2500,\n      \"target\": 2200,\n      \"margin\": 12,\n      \"expiresAt\": \"1981-11-18T07:14:58.358Z\",\n      \"customer\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Acme Manufacturing Corp\",\n        \"friendlyId\": \"A123456\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CUSTOMER-ACME\",\n        \"phoneNumber\": \"+1-555-123-4567\",\n        \"website\": \"https://acme-manufacturing.com\",\n        \"deletedAt\": \"2025-04-03T21:05:00.607Z\"\n      },\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"1973-04-16T13:39:28.334Z\"\n      },\n      \"order\": {\n        \"id\": \"d200c4ee-1999-0dcf-718b-0cbede0a563d\",\n        \"key\": \"string\",\n        \"mode\": \"AIR\",\n        \"origin\": {\n          \"city\": \"string\",\n          \"stateProvince\": \"string\",\n          \"postalCode\": \"string\"\n        },\n        \"destination\": {\n          \"city\": \"string\",\n          \"stateProvince\": \"string\",\n          \"postalCode\": \"string\"\n        },\n        \"pickUpDate\": \"1978-02-16\",\n        \"deliveryDate\": \"1960-02-04\",\n        \"equipment\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weight\": 7082.477912911694,\n        \"mileage\": 2852.647942325993\n      },\n      \"lostReason\": \"EXPIRED\",\n      \"lostReasonText\": \"string\",\n      \"closedTime\": \"1997-12-30T02:45:54.467Z\",\n      \"assignee\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2025-01-20T11:55:35.219Z\"\n      },\n      \"shipmentId\": \"fe37bfac-8025-77c9-31be-7325d0d75a0f\",\n      \"shipmentKey\": \"string\",\n      \"updatedAt\": \"1948-04-11T17:13:32.428Z\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac38ebed-6dc2-47e3-8f0e-a897a6e29bab",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"DRAFT\",\n        \"REQUESTED\",\n        \"QUOTED\"\n      ]\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45d37461-288e-4cc4-8650-88693be00c05",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"DRAFT\",\n        \"REQUESTED\",\n        \"QUOTED\"\n      ]\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac8b0597-80d7-46fc-a715-1441dd371c1c",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"DRAFT\",\n        \"REQUESTED\",\n        \"QUOTED\"\n      ]\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94609895-6dcc-46e6-a602-867a91d70255",
+          "name": "Create a quote",
+          "request": {
+            "name": "Create a quote",
+            "description": {
+              "content": "Create a new quote with order details.\n\n## How it works\n\nCreating a quote also creates an associated Order containing the route and freight details.\nThe Order is embedded in the Quote and cannot be managed separately.\n\n## Required fields\n\n- `customer`: Reference to the customer (shipper profile)\n- `order`: Order details including stops and mode\n\n## Example workflow\n\n1. Create quote with customer and order details\n2. Add pricing (amount) via PATCH\n3. Send to customer (status changes to QUOTED)\n4. Convert to shipment when accepted (POST /quotes/{id}/convert-to-shipment)\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer\": {},\n  \"order\": {\n    \"stops\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {},\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"market\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"isAirportOrAirbase\": false,\n          \"isConstructionOrUtilitySite\": false,\n          \"isSmartyValidated\": false,\n          \"obeysDst\": true,\n          \"cityId\": \"<uuid>\"\n        },\n        \"requestedStartDate\": \"<date>\",\n        \"requestedEndDate\": \"<date>\",\n        \"requestedStartTime\": \"<string>\",\n        \"requestedEndTime\": \"<string>\",\n        \"appointmentRequired\": false,\n        \"notes\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {},\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"market\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"isAirportOrAirbase\": false,\n          \"isConstructionOrUtilitySite\": false,\n          \"isSmartyValidated\": false,\n          \"obeysDst\": true,\n          \"cityId\": \"<uuid>\"\n        },\n        \"requestedStartDate\": \"<date>\",\n        \"requestedEndDate\": \"<date>\",\n        \"requestedStartTime\": \"<string>\",\n        \"requestedEndTime\": \"<string>\",\n        \"appointmentRequired\": false,\n        \"notes\": \"<string>\"\n      }\n    ],\n    \"mode\": \"<string>\",\n    \"freight\": {\n      \"handlingUnitQuantity\": \"<integer>\",\n      \"handlingUnitType\": \"<string>\",\n      \"weight\": \"<number>\",\n      \"volume\": \"<number>\",\n      \"length\": \"<number>\",\n      \"width\": \"<number>\",\n      \"height\": \"<number>\",\n      \"commodityDescription\": \"<string>\",\n      \"hazmat\": false,\n      \"stackable\": true\n    },\n    \"references\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"carrier\": {},\n  \"amount\": \"<number>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"assignee\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "83839f23-880d-4f7e-b883-09c2c0bb3da1",
+              "name": "Quote created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\"\n  },\n  \"order\": {\n    \"mode\": \"TL\",\n    \"stops\": [\n      {\n        \"type\": \"PICKUP\",\n        \"address\": {\n          \"street1\": \"123 Warehouse Ave\",\n          \"city\": \"Los Angeles\",\n          \"stateProvince\": \"CA\",\n          \"postalCode\": \"90210\",\n          \"country\": \"US\"\n        },\n        \"requestedStartDate\": \"2025-01-20\"\n      },\n      {\n        \"type\": \"DELIVERY\",\n        \"address\": {\n          \"street1\": \"456 Distribution Center\",\n          \"city\": \"New York\",\n          \"stateProvince\": \"NY\",\n          \"postalCode\": \"10001\",\n          \"country\": \"US\"\n        },\n        \"requestedStartDate\": \"2025-01-25\"\n      }\n    ],\n    \"freight\": {\n      \"handlingUnitQuantity\": 10,\n      \"handlingUnitType\": \"PALLET\",\n      \"weight\": 15000\n    }\n  },\n  \"amount\": 2500,\n  \"expiresAt\": \"2025-01-18T23:59:59Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"key\": \"Q003602\",\n  \"side\": \"SELL\",\n  \"status\": \"DRAFT\",\n  \"createdAt\": \"1972-01-05T03:39:36.301Z\",\n  \"amount\": 2500,\n  \"target\": 2200,\n  \"margin\": 12,\n  \"expiresAt\": \"2015-09-27T11:43:17.170Z\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"1969-03-10T13:05:14.483Z\"\n  },\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"2014-06-23T15:43:54.203Z\"\n  },\n  \"order\": {\n    \"id\": \"e3fbe558-6872-4194-a6bc-059ff615b3e0\",\n    \"key\": \"string\",\n    \"mode\": \"LTL\",\n    \"origin\": {\n      \"city\": \"string\",\n      \"stateProvince\": \"string\",\n      \"postalCode\": \"string\"\n    },\n    \"destination\": {\n      \"city\": \"string\",\n      \"stateProvince\": \"string\",\n      \"postalCode\": \"string\"\n    },\n    \"pickUpDate\": \"1980-01-18\",\n    \"deliveryDate\": \"2012-05-10\",\n    \"equipment\": [\n      \"string\",\n      \"string\"\n    ],\n    \"weight\": 1904.1540557286419,\n    \"mileage\": 4071.350184937619\n  },\n  \"lostReason\": \"NO_REASON\",\n  \"lostReasonText\": \"string\",\n  \"closedTime\": \"2026-05-31T07:42:58.324Z\",\n  \"assignee\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"2006-07-31T04:38:09.263Z\"\n  },\n  \"shipmentId\": \"b370cafe-e3ca-0774-4d6f-795b370c0f85\",\n  \"shipmentKey\": \"string\",\n  \"updatedAt\": \"2019-11-16T20:17:28.457Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51bad373-084c-4dde-a07a-681e32cb8e67",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\"\n  },\n  \"order\": {\n    \"mode\": \"TL\",\n    \"stops\": [\n      {\n        \"type\": \"PICKUP\",\n        \"address\": {\n          \"street1\": \"123 Warehouse Ave\",\n          \"city\": \"Los Angeles\",\n          \"stateProvince\": \"CA\",\n          \"postalCode\": \"90210\",\n          \"country\": \"US\"\n        },\n        \"requestedStartDate\": \"2025-01-20\"\n      },\n      {\n        \"type\": \"DELIVERY\",\n        \"address\": {\n          \"street1\": \"456 Distribution Center\",\n          \"city\": \"New York\",\n          \"stateProvince\": \"NY\",\n          \"postalCode\": \"10001\",\n          \"country\": \"US\"\n        },\n        \"requestedStartDate\": \"2025-01-25\"\n      }\n    ],\n    \"freight\": {\n      \"handlingUnitQuantity\": 10,\n      \"handlingUnitType\": \"PALLET\",\n      \"weight\": 15000\n    }\n  },\n  \"amount\": 2500,\n  \"expiresAt\": \"2025-01-18T23:59:59Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "983b1587-239e-4f7c-a980-7bd4f086c89a",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\"\n  },\n  \"order\": {\n    \"mode\": \"TL\",\n    \"stops\": [\n      {\n        \"type\": \"PICKUP\",\n        \"address\": {\n          \"street1\": \"123 Warehouse Ave\",\n          \"city\": \"Los Angeles\",\n          \"stateProvince\": \"CA\",\n          \"postalCode\": \"90210\",\n          \"country\": \"US\"\n        },\n        \"requestedStartDate\": \"2025-01-20\"\n      },\n      {\n        \"type\": \"DELIVERY\",\n        \"address\": {\n          \"street1\": \"456 Distribution Center\",\n          \"city\": \"New York\",\n          \"stateProvince\": \"NY\",\n          \"postalCode\": \"10001\",\n          \"country\": \"US\"\n        },\n        \"requestedStartDate\": \"2025-01-25\"\n      }\n    ],\n    \"freight\": {\n      \"handlingUnitQuantity\": 10,\n      \"handlingUnitType\": \"PALLET\",\n      \"weight\": 15000\n    }\n  },\n  \"amount\": 2500,\n  \"expiresAt\": \"2025-01-18T23:59:59Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05a5ec60-6940-435a-ad2e-b7739b1cd1f4",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\"\n  },\n  \"order\": {\n    \"mode\": \"TL\",\n    \"stops\": [\n      {\n        \"type\": \"PICKUP\",\n        \"address\": {\n          \"street1\": \"123 Warehouse Ave\",\n          \"city\": \"Los Angeles\",\n          \"stateProvince\": \"CA\",\n          \"postalCode\": \"90210\",\n          \"country\": \"US\"\n        },\n        \"requestedStartDate\": \"2025-01-20\"\n      },\n      {\n        \"type\": \"DELIVERY\",\n        \"address\": {\n          \"street1\": \"456 Distribution Center\",\n          \"city\": \"New York\",\n          \"stateProvince\": \"NY\",\n          \"postalCode\": \"10001\",\n          \"country\": \"US\"\n        },\n        \"requestedStartDate\": \"2025-01-25\"\n      }\n    ],\n    \"freight\": {\n      \"handlingUnitQuantity\": 10,\n      \"handlingUnitType\": \"PALLET\",\n      \"weight\": 15000\n    }\n  },\n  \"amount\": 2500,\n  \"expiresAt\": \"2025-01-18T23:59:59Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6429713-382b-4f0a-b4a0-5b8aecadf310",
+          "name": "Get a quote",
+          "request": {
+            "name": "Get a quote",
+            "description": {
+              "content": "Retrieve a quote by ID or key.\n\nThe response includes embedded order details (route, freight, equipment).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ce6ae99-994a-4ad7-9639-2b46abedb53f",
+              "name": "Quote retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"key\": \"Q003602\",\n  \"side\": \"SELL\",\n  \"status\": \"DRAFT\",\n  \"createdAt\": \"1972-01-05T03:39:36.301Z\",\n  \"amount\": 2500,\n  \"target\": 2200,\n  \"margin\": 12,\n  \"expiresAt\": \"2015-09-27T11:43:17.170Z\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"1969-03-10T13:05:14.483Z\"\n  },\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"2014-06-23T15:43:54.203Z\"\n  },\n  \"order\": {\n    \"id\": \"e3fbe558-6872-4194-a6bc-059ff615b3e0\",\n    \"key\": \"string\",\n    \"mode\": \"LTL\",\n    \"origin\": {\n      \"city\": \"string\",\n      \"stateProvince\": \"string\",\n      \"postalCode\": \"string\"\n    },\n    \"destination\": {\n      \"city\": \"string\",\n      \"stateProvince\": \"string\",\n      \"postalCode\": \"string\"\n    },\n    \"pickUpDate\": \"1980-01-18\",\n    \"deliveryDate\": \"2012-05-10\",\n    \"equipment\": [\n      \"string\",\n      \"string\"\n    ],\n    \"weight\": 1904.1540557286419,\n    \"mileage\": 4071.350184937619\n  },\n  \"lostReason\": \"NO_REASON\",\n  \"lostReasonText\": \"string\",\n  \"closedTime\": \"2026-05-31T07:42:58.324Z\",\n  \"assignee\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"2006-07-31T04:38:09.263Z\"\n  },\n  \"shipmentId\": \"b370cafe-e3ca-0774-4d6f-795b370c0f85\",\n  \"shipmentKey\": \"string\",\n  \"updatedAt\": \"2019-11-16T20:17:28.457Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40efffcb-52a6-4ce3-a3b8-c262f4ff0c7f",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d5e477d-2962-45e5-853c-b63f050b6f07",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "721abe85-246f-4feb-a2f6-8be72a844981",
+          "name": "Update a quote",
+          "request": {
+            "name": "Update a quote",
+            "description": {
+              "content": "Update quote fields including status changes.\n\n## Status changes\n\nStatus changes use this endpoint (not separate action endpoints):\n- Set to QUOTED: `{ \"status\": \"QUOTED\", \"amount\": 2500 }`\n- Set to WON: `{ \"status\": \"WON\" }`\n- Set to LOST: `{ \"status\": \"LOST\", \"lostReason\": \"TOO_HIGH\" }`\n\n## Validation rules\n\n- When setting `status` to `LOST`, `lostReason` is required\n- When `lostReason` is `OTHER`, `lostReasonText` is required\n\n## Note\n\nTo convert a won quote to a shipment, use POST /quotes/{id}/convert-to-shipment\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"amount\": \"<number,null>\",\n  \"target\": \"<number,null>\",\n  \"expiresAt\": \"<string,null-date-time>\",\n  \"lostReason\": \"<string>\",\n  \"lostReasonText\": \"<string>\",\n  \"assignee\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7522ab10-c19f-4037-9b34-862e406192d3",
+              "name": "Quote updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"QUOTED\",\n  \"amount\": 2500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"key\": \"Q003602\",\n  \"side\": \"SELL\",\n  \"status\": \"DRAFT\",\n  \"createdAt\": \"1972-01-05T03:39:36.301Z\",\n  \"amount\": 2500,\n  \"target\": 2200,\n  \"margin\": 12,\n  \"expiresAt\": \"2015-09-27T11:43:17.170Z\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"1969-03-10T13:05:14.483Z\"\n  },\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"2014-06-23T15:43:54.203Z\"\n  },\n  \"order\": {\n    \"id\": \"e3fbe558-6872-4194-a6bc-059ff615b3e0\",\n    \"key\": \"string\",\n    \"mode\": \"LTL\",\n    \"origin\": {\n      \"city\": \"string\",\n      \"stateProvince\": \"string\",\n      \"postalCode\": \"string\"\n    },\n    \"destination\": {\n      \"city\": \"string\",\n      \"stateProvince\": \"string\",\n      \"postalCode\": \"string\"\n    },\n    \"pickUpDate\": \"1980-01-18\",\n    \"deliveryDate\": \"2012-05-10\",\n    \"equipment\": [\n      \"string\",\n      \"string\"\n    ],\n    \"weight\": 1904.1540557286419,\n    \"mileage\": 4071.350184937619\n  },\n  \"lostReason\": \"NO_REASON\",\n  \"lostReasonText\": \"string\",\n  \"closedTime\": \"2026-05-31T07:42:58.324Z\",\n  \"assignee\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"2006-07-31T04:38:09.263Z\"\n  },\n  \"shipmentId\": \"b370cafe-e3ca-0774-4d6f-795b370c0f85\",\n  \"shipmentKey\": \"string\",\n  \"updatedAt\": \"2019-11-16T20:17:28.457Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "116c6944-c44d-45ad-8850-7caaaa3cba5d",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"QUOTED\",\n  \"amount\": 2500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6361f41-e954-4101-b2af-f8cf32ba8716",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"QUOTED\",\n  \"amount\": 2500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "819aced0-3bdb-43e0-bcdc-2fc6b9724bac",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"QUOTED\",\n  \"amount\": 2500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30ffc29b-926b-422f-92c9-6f6b3e14ebc3",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"QUOTED\",\n  \"amount\": 2500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a87e5c23-af81-497a-8045-a1b0d8ddad94",
+          "name": "Delete a quote",
+          "request": {
+            "name": "Delete a quote",
+            "description": {
+              "content": "Soft delete a quote.\n\nThe quote record is marked as deleted but not permanently removed.\nAssociated orders are also soft deleted.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d61c2f12-f7e3-4054-a335-5ce45b36eb2b",
+              "name": "Quote deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1cc61001-5500-44d0-a47f-87b53e667d39",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "607cc2a4-eaf9-4f50-8433-f84c7d02af7e",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b7ff260-498b-4101-83b9-fc68c1a4532b",
+          "name": "Convert quote to shipment",
+          "request": {
+            "name": "Convert quote to shipment",
+            "description": {
+              "content": "Convert an accepted quote into a shipment.\n\n## What happens\n\n1. Quote status is set to WON (if not already)\n2. A new Shipment is created\n3. The Order from the quote is linked to the shipment\n4. Optionally, additional orders can be added\n\n## Prerequisites\n\n- Quote must be in QUOTED or WON status\n- Quote cannot already have a shipment\n\n## Response\n\nReturns the IDs of both the quote and the newly created shipment.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quotes",
+                ":id",
+                "convert-to-shipment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"additionalOrders\": [\n    {\n      \"stops\": [\n        {\n          \"type\": \"<string>\",\n          \"location\": {},\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"market\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"latitude\": \"<string>\",\n            \"longitude\": \"<string>\",\n            \"isAirportOrAirbase\": false,\n            \"isConstructionOrUtilitySite\": false,\n            \"isSmartyValidated\": false,\n            \"obeysDst\": true,\n            \"cityId\": \"<uuid>\"\n          },\n          \"requestedStartDate\": \"<date>\",\n          \"requestedEndDate\": \"<date>\",\n          \"requestedStartTime\": \"<string>\",\n          \"requestedEndTime\": \"<string>\",\n          \"appointmentRequired\": false,\n          \"notes\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"location\": {},\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"market\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"latitude\": \"<string>\",\n            \"longitude\": \"<string>\",\n            \"isAirportOrAirbase\": false,\n            \"isConstructionOrUtilitySite\": false,\n            \"isSmartyValidated\": false,\n            \"obeysDst\": true,\n            \"cityId\": \"<uuid>\"\n          },\n          \"requestedStartDate\": \"<date>\",\n          \"requestedEndDate\": \"<date>\",\n          \"requestedStartTime\": \"<string>\",\n          \"requestedEndTime\": \"<string>\",\n          \"appointmentRequired\": false,\n          \"notes\": \"<string>\"\n        }\n      ],\n      \"mode\": \"<string>\",\n      \"freight\": {\n        \"handlingUnitQuantity\": \"<integer>\",\n        \"handlingUnitType\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"volume\": \"<number>\",\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"commodityDescription\": \"<string>\",\n        \"hazmat\": false,\n        \"stackable\": true\n      },\n      \"references\": [\n        {\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"stops\": [\n        {\n          \"type\": \"<string>\",\n          \"location\": {},\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"market\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"latitude\": \"<string>\",\n            \"longitude\": \"<string>\",\n            \"isAirportOrAirbase\": false,\n            \"isConstructionOrUtilitySite\": false,\n            \"isSmartyValidated\": false,\n            \"obeysDst\": true,\n            \"cityId\": \"<uuid>\"\n          },\n          \"requestedStartDate\": \"<date>\",\n          \"requestedEndDate\": \"<date>\",\n          \"requestedStartTime\": \"<string>\",\n          \"requestedEndTime\": \"<string>\",\n          \"appointmentRequired\": false,\n          \"notes\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"location\": {},\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"market\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"latitude\": \"<string>\",\n            \"longitude\": \"<string>\",\n            \"isAirportOrAirbase\": false,\n            \"isConstructionOrUtilitySite\": false,\n            \"isSmartyValidated\": false,\n            \"obeysDst\": true,\n            \"cityId\": \"<uuid>\"\n          },\n          \"requestedStartDate\": \"<date>\",\n          \"requestedEndDate\": \"<date>\",\n          \"requestedStartTime\": \"<string>\",\n          \"requestedEndTime\": \"<string>\",\n          \"appointmentRequired\": false,\n          \"notes\": \"<string>\"\n        }\n      ],\n      \"mode\": \"<string>\",\n      \"freight\": {\n        \"handlingUnitQuantity\": \"<integer>\",\n        \"handlingUnitType\": \"<string>\",\n        \"weight\": \"<number>\",\n        \"volume\": \"<number>\",\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"commodityDescription\": \"<string>\",\n        \"hazmat\": false,\n        \"stackable\": true\n      },\n      \"references\": [\n        {\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8d24ae42-c314-4d39-aa60-cfcddc8ae029",
+              "name": "Quote converted to shipment successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "convert-to-shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quoteId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"quoteStatus\": \"WON\",\n  \"shipmentId\": \"660e8400-e29b-41d4-a716-446655440001\",\n  \"shipmentKey\": \"SHP-12345\",\n  \"orderId\": \"770e8400-e29b-41d4-a716-446655440002\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42f4e376-4b91-4141-bd61-4670bec4ed24",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "convert-to-shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54b55206-47c5-43fb-a237-5ac856d36a9d",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "convert-to-shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "918c5fcc-b3f0-4366-89a1-871bcba3dcde",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "convert-to-shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e35ed303-b10c-430c-8e32-c9f85681e338",
+              "name": "Quote already converted or in invalid status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quotes",
+                    ":id",
+                    "convert-to-shipment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://api.mvmnt.io/problems/conflict\",\n  \"title\": \"Conflict\",\n  \"status\": 409,\n  \"detail\": \"Quote has already been converted to shipment SHP-12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e9a6d5e8-9c74-4f9c-a28d-16209a7df1df",
+    "name": "MVMNT Bill Payments Quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

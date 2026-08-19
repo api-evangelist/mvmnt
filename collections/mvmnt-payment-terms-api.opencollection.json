@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Payment Terms API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Terms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter payment terms",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/payment-terms/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Filter payment terms using comprehensive query criteria with AND/OR logic and multiple operators.\nSupports complex filtering similar to GraphQL capabilities.\nNote: Soft-deleted payment terms are excluded by default (deletedAt defaults to { isNull: true }).\n"
+        },
+        {
+          "info": {
+            "name": "Create payment term",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/payment-terms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new payment term configuration in your organization"
+        },
+        {
+          "info": {
+            "name": "Get payment term",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/payment-terms/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a payment term by ID or client key"
+        },
+        {
+          "info": {
+            "name": "Update payment term",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/payment-terms/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a payment term. Only provided fields will be updated."
+        },
+        {
+          "info": {
+            "name": "Delete payment term",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/payment-terms/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Soft delete a payment term (sets deletedAt timestamp)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

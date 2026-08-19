@@ -1,0 +1,1622 @@
+{
+  "item": [
+    {
+      "id": "7cb3e15f-59ea-4b28-89a8-ac3afe06fbe5",
+      "name": "Location Contacts",
+      "description": {
+        "content": "Location contact management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8723754-a3ce-4ed6-9e14-7da026cdb5f9",
+          "name": "Filter location contacts",
+          "request": {
+            "name": "Filter location contacts",
+            "description": {
+              "content": "Query location contacts using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted location contacts are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location-contacts",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LocationContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LocationContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LocationContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LocationContactFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"locationId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"customerContactId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPrimary\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"contactTypes\": {\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31f6b890-6c01-4de0-af96-109b7c45491b",
+              "name": "Filtered location contacts with pagination",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"locationId\": {\n          \"equalTo\": \"770e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"isPrimary\": {\n          \"equalTo\": true\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n      \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n      \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n      \"isPrimary\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION_CONTACT\",\n      \"location\": {\n        \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n        \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"ABC Warehouse - Dallas\",\n        \"isAppointmentRequired\": true,\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"LOCATION\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"status\": \"ACTIVE\",\n          \"friendlyId\": \"A123456\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"CUSTOMER\",\n          \"serviceTier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"website\": \"https://acme-manufacturing.com\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"industry\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"annualRevenue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"annualSpend\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"spendType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"naics\": \"336411\",\n          \"ein\": \"12-3456789\",\n          \"duns\": \"123456789\",\n          \"leadSource\": \"Referral\",\n          \"dbaName\": \"Acme Corp DBA\",\n          \"numberOfEmployees\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"externalId\": \"EXT-12345\",\n          \"currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"creditLimit\": 50000,\n          \"creditUsageWarning\": 40000,\n          \"freeCreditReq\": 5000,\n          \"defaultMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"defaultMargin\": 0.15,\n          \"minMargin\": 0.1,\n          \"maxMargin\": 0.25,\n          \"defaultInternalNotes\": \"Contact via email only\",\n          \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n          \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n          \"defaultShowNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"autoAcceptTender\": false,\n          \"group\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"paymentTerm\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"notes\": \"Prefers email communication\",\n          \"deactivationReason\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deactivationNotes\": \"string\",\n          \"deactivationDate\": \"1984-04-05T01:55:45.401Z\",\n          \"closedAt\": \"1969-03-19T00:22:47.582Z\",\n          \"closedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"closedNotes\": \"string\",\n          \"corporateAddress\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"billingAddress\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qboCustomerId\": \"string\",\n          \"key\": \"ERP-CUSTOMER-12345\",\n          \"contacts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"deletedAt\": \"1951-08-11T18:33:30.279Z\",\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key\": \"ERP-LOC-DALLAS-01\",\n        \"type\": \"SHIPPER\",\n        \"notes\": \"Call 24 hours ahead for appointment\",\n        \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n        \"contacts\": [\n          {\n            \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n            \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n            \"isPrimary\": true,\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"updatedAt\": \"2025-01-15T14:30:00Z\",\n            \"object\": \"LOCATION_CONTACT\",\n            \"customerContact\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactTypes\": [\n              \"LOCATION_MANAGER\",\n              \"SHIPPING\"\n            ],\n            \"key\": \"ERP-LOC-CONTACT-001\",\n            \"deletedAt\": \"1979-09-13T10:35:15.264Z\"\n          },\n          {\n            \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n            \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n            \"isPrimary\": true,\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"updatedAt\": \"2025-01-15T14:30:00Z\",\n            \"object\": \"LOCATION_CONTACT\",\n            \"customerContact\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactTypes\": [\n              \"LOCATION_MANAGER\",\n              \"SHIPPING\"\n            ],\n            \"key\": \"ERP-LOC-CONTACT-001\",\n            \"deletedAt\": \"1998-11-06T00:02:25.311Z\"\n          }\n        ],\n        \"deletedAt\": \"1952-11-29T23:25:26.942Z\"\n      },\n      \"customerContact\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"friendlyId\": \"A123456\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-CUSTOMER-ACME\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"website\": \"https://acme-manufacturing.com\",\n          \"deletedAt\": \"2005-12-18T07:35:44.252Z\"\n        },\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1979-12-27T16:48:32.814Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1980-06-22T09:58:39.126Z\"\n        },\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"deletedAt\": \"2020-07-25T09:57:21.914Z\"\n      },\n      \"contactTypes\": [\n        \"LOCATION_MANAGER\",\n        \"SHIPPING\"\n      ],\n      \"key\": \"ERP-LOC-CONTACT-001\",\n      \"deletedAt\": \"1992-07-14T06:57:27.138Z\"\n    },\n    {\n      \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n      \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n      \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n      \"isPrimary\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION_CONTACT\",\n      \"location\": {\n        \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n        \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"ABC Warehouse - Dallas\",\n        \"isAppointmentRequired\": true,\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"LOCATION\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"status\": \"NURTURING\",\n          \"friendlyId\": \"A123456\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"CUSTOMER\",\n          \"serviceTier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"website\": \"https://acme-manufacturing.com\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"industry\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"annualRevenue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"annualSpend\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"spendType\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"naics\": \"336411\",\n          \"ein\": \"12-3456789\",\n          \"duns\": \"123456789\",\n          \"leadSource\": \"Referral\",\n          \"dbaName\": \"Acme Corp DBA\",\n          \"numberOfEmployees\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"externalId\": \"EXT-12345\",\n          \"currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"creditLimit\": 50000,\n          \"creditUsageWarning\": 40000,\n          \"freeCreditReq\": 5000,\n          \"defaultMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"defaultMargin\": 0.15,\n          \"minMargin\": 0.1,\n          \"maxMargin\": 0.25,\n          \"defaultInternalNotes\": \"Contact via email only\",\n          \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n          \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n          \"defaultShowNotes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"autoAcceptTender\": false,\n          \"group\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"paymentTerm\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"notes\": \"Prefers email communication\",\n          \"deactivationReason\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deactivationNotes\": \"string\",\n          \"deactivationDate\": \"2006-10-06T11:32:12.891Z\",\n          \"closedAt\": \"1990-06-30T15:16:10.450Z\",\n          \"closedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"closedNotes\": \"string\",\n          \"corporateAddress\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"billingAddress\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qboCustomerId\": \"string\",\n          \"key\": \"ERP-CUSTOMER-12345\",\n          \"contacts\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"deletedAt\": \"1984-11-21T20:14:35.627Z\",\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"key\": \"ERP-LOC-DALLAS-01\",\n        \"type\": \"SHIPPER\",\n        \"notes\": \"Call 24 hours ahead for appointment\",\n        \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n        \"contacts\": [\n          {\n            \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n            \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n            \"isPrimary\": true,\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"updatedAt\": \"2025-01-15T14:30:00Z\",\n            \"object\": \"LOCATION_CONTACT\",\n            \"customerContact\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactTypes\": [\n              \"LOCATION_MANAGER\",\n              \"SHIPPING\"\n            ],\n            \"key\": \"ERP-LOC-CONTACT-001\",\n            \"deletedAt\": \"1950-10-26T04:39:17.193Z\"\n          },\n          {\n            \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n            \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n            \"isPrimary\": true,\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"updatedAt\": \"2025-01-15T14:30:00Z\",\n            \"object\": \"LOCATION_CONTACT\",\n            \"customerContact\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"contactTypes\": [\n              \"LOCATION_MANAGER\",\n              \"SHIPPING\"\n            ],\n            \"key\": \"ERP-LOC-CONTACT-001\",\n            \"deletedAt\": \"1954-11-20T18:49:48.468Z\"\n          }\n        ],\n        \"deletedAt\": \"1954-07-11T12:25:19.019Z\"\n      },\n      \"customerContact\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"friendlyId\": \"A123456\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-CUSTOMER-ACME\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"website\": \"https://acme-manufacturing.com\",\n          \"deletedAt\": \"2024-10-03T16:03:38.999Z\"\n        },\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1950-04-10T04:40:00.928Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1999-01-27T09:28:09.134Z\"\n        },\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"deletedAt\": \"1983-09-13T01:11:05.394Z\"\n      },\n      \"contactTypes\": [\n        \"LOCATION_MANAGER\",\n        \"SHIPPING\"\n      ],\n      \"key\": \"ERP-LOC-CONTACT-001\",\n      \"deletedAt\": \"2021-12-18T15:03:06.553Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f2ffc77-7dfb-44f3-9edb-9dfd5ead9516",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"locationId\": {\n          \"equalTo\": \"770e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"isPrimary\": {\n          \"equalTo\": true\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61ee568c-b788-4b76-98a6-28434747a94f",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"locationId\": {\n          \"equalTo\": \"770e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"isPrimary\": {\n          \"equalTo\": true\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc730fa9-a6e9-4753-8718-7a4af4bfd7e2",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"locationId\": {\n          \"equalTo\": \"770e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"isPrimary\": {\n          \"equalTo\": true\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e57b008b-c9e1-462a-814f-51e478ddb2c7",
+          "name": "Create a new location contact",
+          "request": {
+            "name": "Create a new location contact",
+            "description": {
+              "content": "Link a customer contact to a location with specific contact types/roles.\n\nLocation contacts represent the relationship between a customer contact\nand a specific location, defining what role the contact has at that location.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location-contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<uuid>\",\n  \"customerContactId\": \"<uuid>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b33bc008-e4ad-4426-8b36-aadc56166158",
+              "name": "Location contact created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\"\n  ],\n  \"key\": \"ERP-LOC-CONTACT-001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n  \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n  \"isPrimary\": true,\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"LOCATION_CONTACT\",\n  \"location\": {\n    \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n    \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"ABC Warehouse - Dallas\",\n    \"isAppointmentRequired\": true,\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"object\": \"LOCATION\",\n    \"customer\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Acme Manufacturing Corp\",\n      \"status\": \"NURTURING\",\n      \"friendlyId\": \"A123456\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"CUSTOMER\",\n      \"serviceTier\": \"TIER_2\",\n      \"website\": \"https://acme-manufacturing.com\",\n      \"phoneNumber\": \"+1-555-123-4567\",\n      \"industry\": \"EDUCATIONAL_SERVICES\",\n      \"annualRevenue\": \"_25M_TO_50M\",\n      \"annualSpend\": \"_25M_TO_75M\",\n      \"spendType\": \"SPOT\",\n      \"naics\": \"336411\",\n      \"ein\": \"12-3456789\",\n      \"duns\": \"123456789\",\n      \"leadSource\": \"Referral\",\n      \"dbaName\": \"Acme Corp DBA\",\n      \"numberOfEmployees\": \"_10_TO_24\",\n      \"externalId\": \"EXT-12345\",\n      \"currency\": \"KRW\",\n      \"creditLimit\": 50000,\n      \"creditUsageWarning\": 40000,\n      \"freeCreditReq\": 5000,\n      \"defaultMode\": \"AIR\",\n      \"defaultMargin\": 0.15,\n      \"minMargin\": 0.1,\n      \"maxMargin\": 0.25,\n      \"defaultInternalNotes\": \"Contact via email only\",\n      \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n      \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n      \"defaultShowNotes\": \"ALL\",\n      \"autoAcceptTender\": false,\n      \"group\": {\n        \"id\": \"a5dfde6f-8771-fbd8-0f92-61fc8d22492e\",\n        \"key\": \"string\"\n      },\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1954-12-02T11:14:31.560Z\"\n      },\n      \"notes\": \"Prefers email communication\",\n      \"deactivationReason\": \"ACQUIRED\",\n      \"deactivationNotes\": \"string\",\n      \"deactivationDate\": \"1989-11-07T13:06:24.260Z\",\n      \"closedAt\": \"2001-05-04T02:32:47.660Z\",\n      \"closedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1986-10-18T06:26:29.999Z\"\n      },\n      \"closedNotes\": \"string\",\n      \"corporateAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"989532af-5409-da0f-3eae-891163073db4\"\n      },\n      \"billingAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"34895b31-44de-6a35-35ad-cdacfd461916\"\n      },\n      \"qboCustomerId\": \"string\",\n      \"key\": \"ERP-CUSTOMER-12345\",\n      \"contacts\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title)\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": \"1995-01-11T03:17:55.549Z\"\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title)\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": \"2020-08-11T05:53:11.588Z\"\n        }\n      ],\n      \"deletedAt\": \"1989-03-24T08:49:31.757Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2010-05-19T09:12:56.608Z\"\n      }\n    },\n    \"key\": \"ERP-LOC-DALLAS-01\",\n    \"type\": \"SHIPPER\",\n    \"notes\": \"Call 24 hours ahead for appointment\",\n    \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n    \"contacts\": [\n      {\n        \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n        \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n        \"isPrimary\": true,\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"LOCATION_CONTACT\",\n        \"customerContact\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"customer\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"friendlyId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title) - nested from parent Contact record\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"deletedAt\": \"1966-02-08T19:26:29.756Z\"\n        },\n        \"contactTypes\": [\n          \"LOCATION_MANAGER\",\n          \"SHIPPING\"\n        ],\n        \"key\": \"ERP-LOC-CONTACT-001\",\n        \"deletedAt\": \"1965-08-08T10:17:43.920Z\"\n      },\n      {\n        \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n        \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n        \"isPrimary\": true,\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"LOCATION_CONTACT\",\n        \"customerContact\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"customer\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"friendlyId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title) - nested from parent Contact record\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"deletedAt\": \"1979-10-12T17:42:29.646Z\"\n        },\n        \"contactTypes\": [\n          \"LOCATION_MANAGER\",\n          \"SHIPPING\"\n        ],\n        \"key\": \"ERP-LOC-CONTACT-001\",\n        \"deletedAt\": \"2021-09-08T22:40:02.279Z\"\n      }\n    ],\n    \"deletedAt\": \"1980-07-22T11:49:02.747Z\"\n  },\n  \"customerContact\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"customer\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Acme Manufacturing Corp\",\n      \"friendlyId\": \"A123456\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-CUSTOMER-ACME\",\n      \"phoneNumber\": \"+1-555-123-4567\",\n      \"website\": \"https://acme-manufacturing.com\",\n      \"deletedAt\": \"1968-02-22T22:37:12.855Z\"\n    },\n    \"name\": \"John Smith\",\n    \"isPrimary\": true,\n    \"contactInfo\": {\n      \"name\": \"John Smith\",\n      \"email\": \"john.smith@example.com\",\n      \"phoneNumber\": \"+1-555-0100\",\n      \"title\": \"Operations Manager\"\n    },\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"object\": \"CUSTOMER_CONTACT\",\n    \"phoneExtension\": \"1234\",\n    \"contactTypes\": [\n      \"BILLING\",\n      \"ACCOUNT_MANAGER\"\n    ],\n    \"notifications\": [\n      \"SHIPMENT_PICKED_UP\",\n      \"SHIPMENT_DELIVERED\"\n    ],\n    \"invitedUser\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1952-12-10T01:11:04.359Z\"\n    },\n    \"deletedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1976-10-02T03:12:36.029Z\"\n    },\n    \"key\": \"ERP-CONTACT-JOHN-001\",\n    \"deletedAt\": \"2011-09-20T17:03:15.460Z\"\n  },\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\"\n  ],\n  \"key\": \"ERP-LOC-CONTACT-001\",\n  \"deletedAt\": \"1953-06-28T22:50:46.282Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7018abc-1da6-43f4-9b45-357022ed3671",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\"\n  ],\n  \"key\": \"ERP-LOC-CONTACT-001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ced40a26-8c34-4573-976a-47af3ebb7825",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\"\n  ],\n  \"key\": \"ERP-LOC-CONTACT-001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af056b80-bb58-4af4-a7ba-629b70e5730d",
+              "name": "Conflict - resource already exists or constraint violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\"\n  ],\n  \"key\": \"ERP-LOC-CONTACT-001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93cc9773-3511-4936-9093-4fd427409500",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\"\n  ],\n  \"key\": \"ERP-LOC-CONTACT-001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd759105-9efd-4e25-a696-eb134ef4fb9c",
+          "name": "Get a location contact by ID",
+          "request": {
+            "name": "Get a location contact by ID",
+            "description": {
+              "content": "Retrieve a single location contact by its unique identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location-contacts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d22e388-0f9c-4014-a4b4-414baf417503",
+              "name": "Location contact found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n  \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n  \"isPrimary\": true,\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"LOCATION_CONTACT\",\n  \"location\": {\n    \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n    \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"ABC Warehouse - Dallas\",\n    \"isAppointmentRequired\": true,\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"object\": \"LOCATION\",\n    \"customer\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Acme Manufacturing Corp\",\n      \"status\": \"NURTURING\",\n      \"friendlyId\": \"A123456\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"CUSTOMER\",\n      \"serviceTier\": \"TIER_2\",\n      \"website\": \"https://acme-manufacturing.com\",\n      \"phoneNumber\": \"+1-555-123-4567\",\n      \"industry\": \"EDUCATIONAL_SERVICES\",\n      \"annualRevenue\": \"_25M_TO_50M\",\n      \"annualSpend\": \"_25M_TO_75M\",\n      \"spendType\": \"SPOT\",\n      \"naics\": \"336411\",\n      \"ein\": \"12-3456789\",\n      \"duns\": \"123456789\",\n      \"leadSource\": \"Referral\",\n      \"dbaName\": \"Acme Corp DBA\",\n      \"numberOfEmployees\": \"_10_TO_24\",\n      \"externalId\": \"EXT-12345\",\n      \"currency\": \"KRW\",\n      \"creditLimit\": 50000,\n      \"creditUsageWarning\": 40000,\n      \"freeCreditReq\": 5000,\n      \"defaultMode\": \"AIR\",\n      \"defaultMargin\": 0.15,\n      \"minMargin\": 0.1,\n      \"maxMargin\": 0.25,\n      \"defaultInternalNotes\": \"Contact via email only\",\n      \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n      \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n      \"defaultShowNotes\": \"ALL\",\n      \"autoAcceptTender\": false,\n      \"group\": {\n        \"id\": \"a5dfde6f-8771-fbd8-0f92-61fc8d22492e\",\n        \"key\": \"string\"\n      },\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1954-12-02T11:14:31.560Z\"\n      },\n      \"notes\": \"Prefers email communication\",\n      \"deactivationReason\": \"ACQUIRED\",\n      \"deactivationNotes\": \"string\",\n      \"deactivationDate\": \"1989-11-07T13:06:24.260Z\",\n      \"closedAt\": \"2001-05-04T02:32:47.660Z\",\n      \"closedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1986-10-18T06:26:29.999Z\"\n      },\n      \"closedNotes\": \"string\",\n      \"corporateAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"989532af-5409-da0f-3eae-891163073db4\"\n      },\n      \"billingAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"34895b31-44de-6a35-35ad-cdacfd461916\"\n      },\n      \"qboCustomerId\": \"string\",\n      \"key\": \"ERP-CUSTOMER-12345\",\n      \"contacts\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title)\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": \"1995-01-11T03:17:55.549Z\"\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title)\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": \"2020-08-11T05:53:11.588Z\"\n        }\n      ],\n      \"deletedAt\": \"1989-03-24T08:49:31.757Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2010-05-19T09:12:56.608Z\"\n      }\n    },\n    \"key\": \"ERP-LOC-DALLAS-01\",\n    \"type\": \"SHIPPER\",\n    \"notes\": \"Call 24 hours ahead for appointment\",\n    \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n    \"contacts\": [\n      {\n        \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n        \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n        \"isPrimary\": true,\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"LOCATION_CONTACT\",\n        \"customerContact\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"customer\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"friendlyId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title) - nested from parent Contact record\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"deletedAt\": \"1966-02-08T19:26:29.756Z\"\n        },\n        \"contactTypes\": [\n          \"LOCATION_MANAGER\",\n          \"SHIPPING\"\n        ],\n        \"key\": \"ERP-LOC-CONTACT-001\",\n        \"deletedAt\": \"1965-08-08T10:17:43.920Z\"\n      },\n      {\n        \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n        \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n        \"isPrimary\": true,\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"LOCATION_CONTACT\",\n        \"customerContact\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"customer\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"friendlyId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title) - nested from parent Contact record\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"deletedAt\": \"1979-10-12T17:42:29.646Z\"\n        },\n        \"contactTypes\": [\n          \"LOCATION_MANAGER\",\n          \"SHIPPING\"\n        ],\n        \"key\": \"ERP-LOC-CONTACT-001\",\n        \"deletedAt\": \"2021-09-08T22:40:02.279Z\"\n      }\n    ],\n    \"deletedAt\": \"1980-07-22T11:49:02.747Z\"\n  },\n  \"customerContact\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"customer\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Acme Manufacturing Corp\",\n      \"friendlyId\": \"A123456\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-CUSTOMER-ACME\",\n      \"phoneNumber\": \"+1-555-123-4567\",\n      \"website\": \"https://acme-manufacturing.com\",\n      \"deletedAt\": \"1968-02-22T22:37:12.855Z\"\n    },\n    \"name\": \"John Smith\",\n    \"isPrimary\": true,\n    \"contactInfo\": {\n      \"name\": \"John Smith\",\n      \"email\": \"john.smith@example.com\",\n      \"phoneNumber\": \"+1-555-0100\",\n      \"title\": \"Operations Manager\"\n    },\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"object\": \"CUSTOMER_CONTACT\",\n    \"phoneExtension\": \"1234\",\n    \"contactTypes\": [\n      \"BILLING\",\n      \"ACCOUNT_MANAGER\"\n    ],\n    \"notifications\": [\n      \"SHIPMENT_PICKED_UP\",\n      \"SHIPMENT_DELIVERED\"\n    ],\n    \"invitedUser\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1952-12-10T01:11:04.359Z\"\n    },\n    \"deletedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1976-10-02T03:12:36.029Z\"\n    },\n    \"key\": \"ERP-CONTACT-JOHN-001\",\n    \"deletedAt\": \"2011-09-20T17:03:15.460Z\"\n  },\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\"\n  ],\n  \"key\": \"ERP-LOC-CONTACT-001\",\n  \"deletedAt\": \"1953-06-28T22:50:46.282Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3254aba-5f3b-4007-a572-f50a30493e6b",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46b3cf77-4285-4a57-8bb2-166fffcde9ae",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d11fd023-3afd-4c65-88e2-3d3df751215b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db525e8e-16eb-410e-8e41-587131a97256",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38764b37-f63c-405a-b5b1-a2b2acd8ce36",
+          "name": "Update a location contact",
+          "request": {
+            "name": "Update a location contact",
+            "description": {
+              "content": "Partially update a location contact. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location-contacts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"locationId\": \"<uuid>\",\n  \"customerContactId\": \"<uuid>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f45eb0ae-f160-4a43-8351-3c27769fc4c2",
+              "name": "Location contact updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\",\n    \"RECEIVING\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n  \"locationId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n  \"isPrimary\": true,\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"LOCATION_CONTACT\",\n  \"location\": {\n    \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n    \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"ABC Warehouse - Dallas\",\n    \"isAppointmentRequired\": true,\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"object\": \"LOCATION\",\n    \"customer\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Acme Manufacturing Corp\",\n      \"status\": \"NURTURING\",\n      \"friendlyId\": \"A123456\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"CUSTOMER\",\n      \"serviceTier\": \"TIER_2\",\n      \"website\": \"https://acme-manufacturing.com\",\n      \"phoneNumber\": \"+1-555-123-4567\",\n      \"industry\": \"EDUCATIONAL_SERVICES\",\n      \"annualRevenue\": \"_25M_TO_50M\",\n      \"annualSpend\": \"_25M_TO_75M\",\n      \"spendType\": \"SPOT\",\n      \"naics\": \"336411\",\n      \"ein\": \"12-3456789\",\n      \"duns\": \"123456789\",\n      \"leadSource\": \"Referral\",\n      \"dbaName\": \"Acme Corp DBA\",\n      \"numberOfEmployees\": \"_10_TO_24\",\n      \"externalId\": \"EXT-12345\",\n      \"currency\": \"KRW\",\n      \"creditLimit\": 50000,\n      \"creditUsageWarning\": 40000,\n      \"freeCreditReq\": 5000,\n      \"defaultMode\": \"AIR\",\n      \"defaultMargin\": 0.15,\n      \"minMargin\": 0.1,\n      \"maxMargin\": 0.25,\n      \"defaultInternalNotes\": \"Contact via email only\",\n      \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n      \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n      \"defaultShowNotes\": \"ALL\",\n      \"autoAcceptTender\": false,\n      \"group\": {\n        \"id\": \"a5dfde6f-8771-fbd8-0f92-61fc8d22492e\",\n        \"key\": \"string\"\n      },\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1954-12-02T11:14:31.560Z\"\n      },\n      \"notes\": \"Prefers email communication\",\n      \"deactivationReason\": \"ACQUIRED\",\n      \"deactivationNotes\": \"string\",\n      \"deactivationDate\": \"1989-11-07T13:06:24.260Z\",\n      \"closedAt\": \"2001-05-04T02:32:47.660Z\",\n      \"closedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1986-10-18T06:26:29.999Z\"\n      },\n      \"closedNotes\": \"string\",\n      \"corporateAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"989532af-5409-da0f-3eae-891163073db4\"\n      },\n      \"billingAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"34895b31-44de-6a35-35ad-cdacfd461916\"\n      },\n      \"qboCustomerId\": \"string\",\n      \"key\": \"ERP-CUSTOMER-12345\",\n      \"contacts\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title)\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": \"1995-01-11T03:17:55.549Z\"\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title)\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedAt\": \"2020-08-11T05:53:11.588Z\"\n        }\n      ],\n      \"deletedAt\": \"1989-03-24T08:49:31.757Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2010-05-19T09:12:56.608Z\"\n      }\n    },\n    \"key\": \"ERP-LOC-DALLAS-01\",\n    \"type\": \"SHIPPER\",\n    \"notes\": \"Call 24 hours ahead for appointment\",\n    \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n    \"contacts\": [\n      {\n        \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n        \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n        \"isPrimary\": true,\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"LOCATION_CONTACT\",\n        \"customerContact\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"customer\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"friendlyId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title) - nested from parent Contact record\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"deletedAt\": \"1966-02-08T19:26:29.756Z\"\n        },\n        \"contactTypes\": [\n          \"LOCATION_MANAGER\",\n          \"SHIPPING\"\n        ],\n        \"key\": \"ERP-LOC-CONTACT-001\",\n        \"deletedAt\": \"1965-08-08T10:17:43.920Z\"\n      },\n      {\n        \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n        \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n        \"isPrimary\": true,\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"LOCATION_CONTACT\",\n        \"customerContact\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"customer\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"friendlyId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneNumber\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"website\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"John Smith\",\n          \"isPrimary\": true,\n          \"contactInfo\": {\n            \"description\": \"Contact information details (email, phone, title) - nested from parent Contact record\",\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"CUSTOMER_CONTACT\",\n          \"phoneExtension\": \"1234\",\n          \"contactTypes\": [\n            \"BILLING\",\n            \"ACCOUNT_MANAGER\"\n          ],\n          \"notifications\": [\n            \"SHIPMENT_PICKED_UP\",\n            \"SHIPMENT_DELIVERED\"\n          ],\n          \"invitedUser\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deletedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key\": \"ERP-CONTACT-JOHN-001\",\n          \"deletedAt\": \"1979-10-12T17:42:29.646Z\"\n        },\n        \"contactTypes\": [\n          \"LOCATION_MANAGER\",\n          \"SHIPPING\"\n        ],\n        \"key\": \"ERP-LOC-CONTACT-001\",\n        \"deletedAt\": \"2021-09-08T22:40:02.279Z\"\n      }\n    ],\n    \"deletedAt\": \"1980-07-22T11:49:02.747Z\"\n  },\n  \"customerContact\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"customer\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Acme Manufacturing Corp\",\n      \"friendlyId\": \"A123456\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-CUSTOMER-ACME\",\n      \"phoneNumber\": \"+1-555-123-4567\",\n      \"website\": \"https://acme-manufacturing.com\",\n      \"deletedAt\": \"1968-02-22T22:37:12.855Z\"\n    },\n    \"name\": \"John Smith\",\n    \"isPrimary\": true,\n    \"contactInfo\": {\n      \"name\": \"John Smith\",\n      \"email\": \"john.smith@example.com\",\n      \"phoneNumber\": \"+1-555-0100\",\n      \"title\": \"Operations Manager\"\n    },\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"object\": \"CUSTOMER_CONTACT\",\n    \"phoneExtension\": \"1234\",\n    \"contactTypes\": [\n      \"BILLING\",\n      \"ACCOUNT_MANAGER\"\n    ],\n    \"notifications\": [\n      \"SHIPMENT_PICKED_UP\",\n      \"SHIPMENT_DELIVERED\"\n    ],\n    \"invitedUser\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1952-12-10T01:11:04.359Z\"\n    },\n    \"deletedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1976-10-02T03:12:36.029Z\"\n    },\n    \"key\": \"ERP-CONTACT-JOHN-001\",\n    \"deletedAt\": \"2011-09-20T17:03:15.460Z\"\n  },\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\"\n  ],\n  \"key\": \"ERP-LOC-CONTACT-001\",\n  \"deletedAt\": \"1953-06-28T22:50:46.282Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eff47f97-f4ca-414f-bda6-5e174135034a",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\",\n    \"RECEIVING\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f080b90-69f1-41fd-a3fa-f504b137cfb3",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\",\n    \"RECEIVING\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fef8004f-ab75-41a6-b97d-3cd9364b5e2d",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\",\n    \"RECEIVING\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1138d605-caa2-4db2-b4ad-dc52ed04037e",
+              "name": "Conflict - resource already exists or constraint violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\",\n    \"RECEIVING\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c90a1d84-b76a-4381-a629-8cedf94442d6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactTypes\": [\n    \"LOCATION_MANAGER\",\n    \"SHIPPING\",\n    \"RECEIVING\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0afa8858-de3e-4870-b0af-cf24fa417f25",
+          "name": "Delete a location contact",
+          "request": {
+            "name": "Delete a location contact",
+            "description": {
+              "content": "Soft delete a location contact (sets deletedAt timestamp).\n\nThe location contact will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location-contacts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b12bc8ef-753d-427a-b891-3992bf5f3a91",
+              "name": "Location contact deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e603ea87-489d-480a-87b4-1a26eb9ef5b6",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9298d0b-2b11-4e24-b77e-72c75950b201",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79275ee8-d9b9-42bd-842a-8b6307ff72eb",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12a0d9ee-f719-47ba-8da1-ae52360edc68",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location-contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "05ed11a1-480c-40cc-b5b7-c872ea43f210",
+    "name": "MVMNT Bill Payments Location Contacts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

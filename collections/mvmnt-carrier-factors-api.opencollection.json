@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Carrier Factors API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Carrier Factors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter carrier factors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/carrier-factors/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query carrier factors (factoring companies) using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted carrier factors are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n\nCarrier factors represent factoring companies that provide payment services for carriers.\n"
+        },
+        {
+          "info": {
+            "name": "Create carrier factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/carrier-factors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new carrier factor (factoring company).\n\nFactoring companies provide payment services for carriers, allowing them to receive\nimmediate payment for invoices.\n"
+        },
+        {
+          "info": {
+            "name": "Get carrier factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/carrier-factors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ]
+          },
+          "docs": "Retrieve a single carrier factor by its unique identifier.\n\nCarrier factors represent factoring companies that provide payment services.\n"
+        },
+        {
+          "info": {
+            "name": "Update carrier factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/carrier-factors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a carrier factor. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n"
+        },
+        {
+          "info": {
+            "name": "Delete carrier factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/carrier-factors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ]
+          },
+          "docs": "Soft delete a carrier factor (sets deletedAt timestamp).\n\nThe carrier factor will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n"
+        },
+        {
+          "info": {
+            "name": "Get bills payable to a carrier factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/carrier-factors/:id/bills-for-payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List bills that should be paid to this carrier factor.\n\nReturns bills from carriers that use this factor with status `APPROVED_TO_PAY`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

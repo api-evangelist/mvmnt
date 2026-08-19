@@ -1,0 +1,1955 @@
+{
+  "item": [
+    {
+      "id": "a9396f4f-d23e-48f1-b3bb-49b7186c5da9",
+      "name": "Locations",
+      "description": {
+        "content": "Location management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "63e43261-2ea9-465d-8a7b-18faa2121379",
+          "name": "Filter locations",
+          "request": {
+            "name": "Filter locations",
+            "description": {
+              "content": "Query locations using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted locations are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LocationFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LocationFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LocationFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LocationFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"type\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isAppointmentRequired\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"notes\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"internalNotes\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c2fbd19-bac8-4eca-8629-4893aa4e9c70",
+              "name": "Filtered locations with pagination",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"customerId\": {\n          \"equalTo\": \"550e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"type\": {\n          \"equalTo\": \"SHIPPER\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n      \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"ABC Warehouse - Dallas\",\n      \"isAppointmentRequired\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION\",\n      \"customer\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Acme Manufacturing Corp\",\n        \"status\": \"PENDING\",\n        \"friendlyId\": \"A123456\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"CUSTOMER\",\n        \"serviceTier\": \"TIER_3\",\n        \"website\": \"https://acme-manufacturing.com\",\n        \"phoneNumber\": \"+1-555-123-4567\",\n        \"industry\": \"UTILITIES\",\n        \"annualRevenue\": \"_500M_PLUS\",\n        \"annualSpend\": \"_25_TO_150K\",\n        \"spendType\": \"SPOT\",\n        \"naics\": \"336411\",\n        \"ein\": \"12-3456789\",\n        \"duns\": \"123456789\",\n        \"leadSource\": \"Referral\",\n        \"dbaName\": \"Acme Corp DBA\",\n        \"numberOfEmployees\": \"_2_TO_5\",\n        \"externalId\": \"EXT-12345\",\n        \"currency\": \"JPY\",\n        \"creditLimit\": 50000,\n        \"creditUsageWarning\": 40000,\n        \"freeCreditReq\": 5000,\n        \"defaultMode\": \"AIR\",\n        \"defaultMargin\": 0.15,\n        \"minMargin\": 0.1,\n        \"maxMargin\": 0.25,\n        \"defaultInternalNotes\": \"Contact via email only\",\n        \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n        \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n        \"defaultShowNotes\": \"SPLIT\",\n        \"autoAcceptTender\": false,\n        \"group\": {\n          \"id\": \"5c3788fc-eca1-0aa5-7e03-546a97568e96\",\n          \"key\": \"string\"\n        },\n        \"paymentTerm\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Net 30\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-PAYTERM-NET30\",\n          \"description\": \"Payment due 30 days from invoice date\",\n          \"days\": 30,\n          \"quickPayFee\": 0.05,\n          \"apOnly\": false,\n          \"doNotUse\": false,\n          \"deletedAt\": \"1984-06-24T18:12:14.681Z\"\n        },\n        \"notes\": \"Prefers email communication\",\n        \"deactivationReason\": \"DUPLICATE\",\n        \"deactivationNotes\": \"string\",\n        \"deactivationDate\": \"1968-02-17T13:31:37.325Z\",\n        \"closedAt\": \"1974-05-02T23:16:09.129Z\",\n        \"closedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1967-11-16T17:29:36.723Z\"\n        },\n        \"closedNotes\": \"string\",\n        \"corporateAddress\": {\n          \"line1\": \"123 Main St\",\n          \"city\": \"Chicago\",\n          \"country\": \"USA\",\n          \"market\": \"CHI\",\n          \"isAirportOrAirbase\": false,\n          \"isConstructionOrUtilitySite\": false,\n          \"isSmartyValidated\": true,\n          \"obeysDst\": true,\n          \"line2\": \"Suite 400\",\n          \"latitude\": \"41.8781\",\n          \"longitude\": \"-87.6298\",\n          \"cityId\": \"7a1b493a-1d29-3ef2-6153-697be1bb163b\"\n        },\n        \"billingAddress\": {\n          \"line1\": \"123 Main St\",\n          \"city\": \"Chicago\",\n          \"country\": \"USA\",\n          \"market\": \"CHI\",\n          \"isAirportOrAirbase\": false,\n          \"isConstructionOrUtilitySite\": false,\n          \"isSmartyValidated\": true,\n          \"obeysDst\": true,\n          \"line2\": \"Suite 400\",\n          \"latitude\": \"41.8781\",\n          \"longitude\": \"-87.6298\",\n          \"cityId\": \"813620c6-53d3-664f-4e57-39026f44ffff\"\n        },\n        \"qboCustomerId\": \"string\",\n        \"key\": \"ERP-CUSTOMER-12345\",\n        \"contacts\": [\n          {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"name\": \"John Smith\",\n            \"isPrimary\": true,\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"object\": \"CUSTOMER_CONTACT\",\n            \"key\": \"ERP-CONTACT-JOHN-001\",\n            \"phoneExtension\": \"1234\",\n            \"contactTypes\": [\n              \"BILLING\",\n              \"ACCOUNT_MANAGER\"\n            ],\n            \"notifications\": [\n              \"SHIPMENT_PICKED_UP\",\n              \"SHIPMENT_DELIVERED\"\n            ],\n            \"invitedUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": \"1995-03-08T13:57:38.594Z\"\n          },\n          {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"name\": \"John Smith\",\n            \"isPrimary\": true,\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"object\": \"CUSTOMER_CONTACT\",\n            \"key\": \"ERP-CONTACT-JOHN-001\",\n            \"phoneExtension\": \"1234\",\n            \"contactTypes\": [\n              \"BILLING\",\n              \"ACCOUNT_MANAGER\"\n            ],\n            \"notifications\": [\n              \"SHIPMENT_PICKED_UP\",\n              \"SHIPMENT_DELIVERED\"\n            ],\n            \"invitedUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": \"1952-05-13T11:58:49.259Z\"\n          }\n        ],\n        \"deletedAt\": \"2004-04-07T05:25:43.990Z\",\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1983-06-14T11:55:56.572Z\"\n        }\n      },\n      \"key\": \"ERP-LOC-DALLAS-01\",\n      \"type\": \"SHIPPER\",\n      \"notes\": \"Call 24 hours ahead for appointment\",\n      \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n      \"contacts\": [\n        {\n          \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n          \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n          \"isPrimary\": true,\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"LOCATION_CONTACT\",\n          \"customerContact\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"customer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"John Smith\",\n            \"isPrimary\": true,\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"object\": \"CUSTOMER_CONTACT\",\n            \"phoneExtension\": \"1234\",\n            \"contactTypes\": [\n              \"BILLING\",\n              \"ACCOUNT_MANAGER\"\n            ],\n            \"notifications\": [\n              \"SHIPMENT_PICKED_UP\",\n              \"SHIPMENT_DELIVERED\"\n            ],\n            \"invitedUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": \"ERP-CONTACT-JOHN-001\",\n            \"deletedAt\": \"1978-06-10T15:27:30.111Z\"\n          },\n          \"contactTypes\": [\n            \"LOCATION_MANAGER\",\n            \"SHIPPING\"\n          ],\n          \"key\": \"ERP-LOC-CONTACT-001\",\n          \"deletedAt\": \"1959-02-20T10:55:50.815Z\"\n        },\n        {\n          \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n          \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n          \"isPrimary\": true,\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"LOCATION_CONTACT\",\n          \"customerContact\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"customer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"John Smith\",\n            \"isPrimary\": true,\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"object\": \"CUSTOMER_CONTACT\",\n            \"phoneExtension\": \"1234\",\n            \"contactTypes\": [\n              \"BILLING\",\n              \"ACCOUNT_MANAGER\"\n            ],\n            \"notifications\": [\n              \"SHIPMENT_PICKED_UP\",\n              \"SHIPMENT_DELIVERED\"\n            ],\n            \"invitedUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": \"ERP-CONTACT-JOHN-001\",\n            \"deletedAt\": \"1957-02-14T10:43:39.887Z\"\n          },\n          \"contactTypes\": [\n            \"LOCATION_MANAGER\",\n            \"SHIPPING\"\n          ],\n          \"key\": \"ERP-LOC-CONTACT-001\",\n          \"deletedAt\": \"1950-05-06T17:37:38.895Z\"\n        }\n      ],\n      \"deletedAt\": \"2016-10-12T14:04:17.766Z\"\n    },\n    {\n      \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n      \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"ABC Warehouse - Dallas\",\n      \"isAppointmentRequired\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION\",\n      \"customer\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Acme Manufacturing Corp\",\n        \"status\": \"CLOSED\",\n        \"friendlyId\": \"A123456\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"object\": \"CUSTOMER\",\n        \"serviceTier\": \"TIER_2\",\n        \"website\": \"https://acme-manufacturing.com\",\n        \"phoneNumber\": \"+1-555-123-4567\",\n        \"industry\": \"ENTERTAINMENT\",\n        \"annualRevenue\": \"_500K_TO_3M\",\n        \"annualSpend\": \"_75M_PLUS\",\n        \"spendType\": \"CONTRACT\",\n        \"naics\": \"336411\",\n        \"ein\": \"12-3456789\",\n        \"duns\": \"123456789\",\n        \"leadSource\": \"Referral\",\n        \"dbaName\": \"Acme Corp DBA\",\n        \"numberOfEmployees\": \"_100_TO_249\",\n        \"externalId\": \"EXT-12345\",\n        \"currency\": \"ZAR\",\n        \"creditLimit\": 50000,\n        \"creditUsageWarning\": 40000,\n        \"freeCreditReq\": 5000,\n        \"defaultMode\": \"PTL\",\n        \"defaultMargin\": 0.15,\n        \"minMargin\": 0.1,\n        \"maxMargin\": 0.25,\n        \"defaultInternalNotes\": \"Contact via email only\",\n        \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n        \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n        \"defaultShowNotes\": \"ALL\",\n        \"autoAcceptTender\": false,\n        \"group\": {\n          \"id\": \"7bf60e4e-ac31-e194-7970-0f83bf869fcc\",\n          \"key\": \"string\"\n        },\n        \"paymentTerm\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Net 30\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-PAYTERM-NET30\",\n          \"description\": \"Payment due 30 days from invoice date\",\n          \"days\": 30,\n          \"quickPayFee\": 0.05,\n          \"apOnly\": false,\n          \"doNotUse\": false,\n          \"deletedAt\": \"1974-06-03T18:52:15.350Z\"\n        },\n        \"notes\": \"Prefers email communication\",\n        \"deactivationReason\": \"DUPLICATE\",\n        \"deactivationNotes\": \"string\",\n        \"deactivationDate\": \"2019-07-20T02:24:29.346Z\",\n        \"closedAt\": \"1984-02-03T03:05:49.574Z\",\n        \"closedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1977-01-24T07:31:31.124Z\"\n        },\n        \"closedNotes\": \"string\",\n        \"corporateAddress\": {\n          \"line1\": \"123 Main St\",\n          \"city\": \"Chicago\",\n          \"country\": \"USA\",\n          \"market\": \"CHI\",\n          \"isAirportOrAirbase\": false,\n          \"isConstructionOrUtilitySite\": false,\n          \"isSmartyValidated\": true,\n          \"obeysDst\": true,\n          \"line2\": \"Suite 400\",\n          \"latitude\": \"41.8781\",\n          \"longitude\": \"-87.6298\",\n          \"cityId\": \"6d07aa17-77a8-324c-3f55-5d1fa63cf760\"\n        },\n        \"billingAddress\": {\n          \"line1\": \"123 Main St\",\n          \"city\": \"Chicago\",\n          \"country\": \"USA\",\n          \"market\": \"CHI\",\n          \"isAirportOrAirbase\": false,\n          \"isConstructionOrUtilitySite\": false,\n          \"isSmartyValidated\": true,\n          \"obeysDst\": true,\n          \"line2\": \"Suite 400\",\n          \"latitude\": \"41.8781\",\n          \"longitude\": \"-87.6298\",\n          \"cityId\": \"91bccbb3-8221-5ed0-afd0-2588a8c21eff\"\n        },\n        \"qboCustomerId\": \"string\",\n        \"key\": \"ERP-CUSTOMER-12345\",\n        \"contacts\": [\n          {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"name\": \"John Smith\",\n            \"isPrimary\": true,\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"object\": \"CUSTOMER_CONTACT\",\n            \"key\": \"ERP-CONTACT-JOHN-001\",\n            \"phoneExtension\": \"1234\",\n            \"contactTypes\": [\n              \"BILLING\",\n              \"ACCOUNT_MANAGER\"\n            ],\n            \"notifications\": [\n              \"SHIPMENT_PICKED_UP\",\n              \"SHIPMENT_DELIVERED\"\n            ],\n            \"invitedUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": \"2017-11-02T22:06:22.121Z\"\n          },\n          {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"name\": \"John Smith\",\n            \"isPrimary\": true,\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"object\": \"CUSTOMER_CONTACT\",\n            \"key\": \"ERP-CONTACT-JOHN-001\",\n            \"phoneExtension\": \"1234\",\n            \"contactTypes\": [\n              \"BILLING\",\n              \"ACCOUNT_MANAGER\"\n            ],\n            \"notifications\": [\n              \"SHIPMENT_PICKED_UP\",\n              \"SHIPMENT_DELIVERED\"\n            ],\n            \"invitedUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": \"2014-01-11T11:02:04.290Z\"\n          }\n        ],\n        \"deletedAt\": \"1951-03-05T12:00:06.319Z\",\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2012-07-18T16:23:35.731Z\"\n        }\n      },\n      \"key\": \"ERP-LOC-DALLAS-01\",\n      \"type\": \"SHIPPER\",\n      \"notes\": \"Call 24 hours ahead for appointment\",\n      \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n      \"contacts\": [\n        {\n          \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n          \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n          \"isPrimary\": true,\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"LOCATION_CONTACT\",\n          \"customerContact\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"customer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"John Smith\",\n            \"isPrimary\": true,\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"object\": \"CUSTOMER_CONTACT\",\n            \"phoneExtension\": \"1234\",\n            \"contactTypes\": [\n              \"BILLING\",\n              \"ACCOUNT_MANAGER\"\n            ],\n            \"notifications\": [\n              \"SHIPMENT_PICKED_UP\",\n              \"SHIPMENT_DELIVERED\"\n            ],\n            \"invitedUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": \"ERP-CONTACT-JOHN-001\",\n            \"deletedAt\": \"1995-12-04T01:13:57.200Z\"\n          },\n          \"contactTypes\": [\n            \"LOCATION_MANAGER\",\n            \"SHIPPING\"\n          ],\n          \"key\": \"ERP-LOC-CONTACT-001\",\n          \"deletedAt\": \"1966-03-10T01:09:47.003Z\"\n        },\n        {\n          \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n          \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n          \"isPrimary\": true,\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"LOCATION_CONTACT\",\n          \"customerContact\": {\n            \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n            \"customer\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"John Smith\",\n            \"isPrimary\": true,\n            \"contactInfo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": \"2025-01-15T10:00:00Z\",\n            \"object\": \"CUSTOMER_CONTACT\",\n            \"phoneExtension\": \"1234\",\n            \"contactTypes\": [\n              \"BILLING\",\n              \"ACCOUNT_MANAGER\"\n            ],\n            \"notifications\": [\n              \"SHIPMENT_PICKED_UP\",\n              \"SHIPMENT_DELIVERED\"\n            ],\n            \"invitedUser\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": \"ERP-CONTACT-JOHN-001\",\n            \"deletedAt\": \"2018-09-07T10:58:06.151Z\"\n          },\n          \"contactTypes\": [\n            \"LOCATION_MANAGER\",\n            \"SHIPPING\"\n          ],\n          \"key\": \"ERP-LOC-CONTACT-001\",\n          \"deletedAt\": \"1970-04-05T18:16:34.333Z\"\n        }\n      ],\n      \"deletedAt\": \"1980-10-18T01:21:52.424Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc1ce05d-697d-4a74-b415-e8683ea7ab5f",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"customerId\": {\n          \"equalTo\": \"550e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"type\": {\n          \"equalTo\": \"SHIPPER\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d84076a2-cb7e-4bdb-9815-76874c562f61",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"customerId\": {\n          \"equalTo\": \"550e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"type\": {\n          \"equalTo\": \"SHIPPER\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84403ee5-97b0-4c3e-8068-9baa885026d4",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"customerId\": {\n          \"equalTo\": \"550e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"type\": {\n          \"equalTo\": \"SHIPPER\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02db6e7c-97af-4166-81c3-c1d96fe75dea",
+          "name": "Create a new location",
+          "request": {
+            "name": "Create a new location",
+            "description": {
+              "content": "Create a new location for a customer.\n\nLocations represent pickup or delivery points (warehouses, distribution centers, etc.).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"isAppointmentRequired\": \"<boolean>\",\n  \"key\": \"<string>\",\n  \"type\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"internalNotes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d415f5b4-79fb-41e5-b870-e5e7b2822eee",
+              "name": "Location created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"ABC Warehouse - Dallas\",\n  \"key\": \"ERP-LOC-DALLAS-01\",\n  \"type\": \"SHIPPER\",\n  \"isAppointmentRequired\": true,\n  \"notes\": \"Call 24 hours ahead for appointment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"ABC Warehouse - Dallas\",\n  \"isAppointmentRequired\": true,\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"LOCATION\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"status\": \"INACTIVE\",\n    \"friendlyId\": \"A123456\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"object\": \"CUSTOMER\",\n    \"serviceTier\": \"TIER_2\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"industry\": \"CONSUMER_GOODS\",\n    \"annualRevenue\": \"_25M_TO_50M\",\n    \"annualSpend\": \"_150K_TO_300K\",\n    \"spendType\": \"SPOT\",\n    \"naics\": \"336411\",\n    \"ein\": \"12-3456789\",\n    \"duns\": \"123456789\",\n    \"leadSource\": \"Referral\",\n    \"dbaName\": \"Acme Corp DBA\",\n    \"numberOfEmployees\": \"_10_TO_24\",\n    \"externalId\": \"EXT-12345\",\n    \"currency\": \"USD\",\n    \"creditLimit\": 50000,\n    \"creditUsageWarning\": 40000,\n    \"freeCreditReq\": 5000,\n    \"defaultMode\": \"LTL\",\n    \"defaultMargin\": 0.15,\n    \"minMargin\": 0.1,\n    \"maxMargin\": 0.25,\n    \"defaultInternalNotes\": \"Contact via email only\",\n    \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n    \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n    \"defaultShowNotes\": \"SPLIT\",\n    \"autoAcceptTender\": false,\n    \"group\": {\n      \"id\": \"0c39fdee-c2ef-385d-41ef-f9d5c1096a0f\",\n      \"key\": \"string\"\n    },\n    \"paymentTerm\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Net 30\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-PAYTERM-NET30\",\n      \"description\": \"Payment due 30 days from invoice date\",\n      \"days\": 30,\n      \"quickPayFee\": 0.05,\n      \"apOnly\": false,\n      \"doNotUse\": false,\n      \"deletedAt\": \"2003-05-27T09:45:16.684Z\"\n    },\n    \"notes\": \"Prefers email communication\",\n    \"deactivationReason\": \"ACQUIRED\",\n    \"deactivationNotes\": \"string\",\n    \"deactivationDate\": \"1981-06-03T21:03:55.478Z\",\n    \"closedAt\": \"1984-08-31T06:23:35.505Z\",\n    \"closedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1990-12-19T20:57:35.014Z\"\n    },\n    \"closedNotes\": \"string\",\n    \"corporateAddress\": {\n      \"line1\": \"123 Main St\",\n      \"city\": \"Chicago\",\n      \"country\": \"USA\",\n      \"market\": \"CHI\",\n      \"isAirportOrAirbase\": false,\n      \"isConstructionOrUtilitySite\": false,\n      \"isSmartyValidated\": true,\n      \"obeysDst\": true,\n      \"line2\": \"Suite 400\",\n      \"latitude\": \"41.8781\",\n      \"longitude\": \"-87.6298\",\n      \"cityId\": \"e384af73-1016-8cb1-1bad-8e45d699c9a8\"\n    },\n    \"billingAddress\": {\n      \"line1\": \"123 Main St\",\n      \"city\": \"Chicago\",\n      \"country\": \"USA\",\n      \"market\": \"CHI\",\n      \"isAirportOrAirbase\": false,\n      \"isConstructionOrUtilitySite\": false,\n      \"isSmartyValidated\": true,\n      \"obeysDst\": true,\n      \"line2\": \"Suite 400\",\n      \"latitude\": \"41.8781\",\n      \"longitude\": \"-87.6298\",\n      \"cityId\": \"a5282c4d-53fc-3d70-fc2b-fa95154c8aee\"\n    },\n    \"qboCustomerId\": \"string\",\n    \"key\": \"ERP-CUSTOMER-12345\",\n    \"contacts\": [\n      {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1998-05-09T07:30:34.846Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1974-06-25T20:21:42.291Z\"\n        },\n        \"deletedAt\": \"1953-03-30T06:48:05.224Z\"\n      },\n      {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2002-11-03T01:00:52.602Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1971-09-26T09:18:08.210Z\"\n        },\n        \"deletedAt\": \"1969-05-26T20:14:16.068Z\"\n      }\n    ],\n    \"deletedAt\": \"1967-02-01T19:52:10.808Z\",\n    \"deletedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1958-04-29T16:47:32.058Z\"\n    }\n  },\n  \"key\": \"ERP-LOC-DALLAS-01\",\n  \"type\": \"SHIPPER\",\n  \"notes\": \"Call 24 hours ahead for appointment\",\n  \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n  \"contacts\": [\n    {\n      \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n      \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n      \"isPrimary\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION_CONTACT\",\n      \"customerContact\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"friendlyId\": \"A123456\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-CUSTOMER-ACME\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"website\": \"https://acme-manufacturing.com\",\n          \"deletedAt\": \"1993-09-17T04:09:48.273Z\"\n        },\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2008-04-05T21:20:32.054Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1946-09-11T03:11:22.125Z\"\n        },\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"deletedAt\": \"1981-03-03T07:14:23.808Z\"\n      },\n      \"contactTypes\": [\n        \"LOCATION_MANAGER\",\n        \"SHIPPING\"\n      ],\n      \"key\": \"ERP-LOC-CONTACT-001\",\n      \"deletedAt\": \"1987-04-22T18:15:30.703Z\"\n    },\n    {\n      \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n      \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n      \"isPrimary\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION_CONTACT\",\n      \"customerContact\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"friendlyId\": \"A123456\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-CUSTOMER-ACME\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"website\": \"https://acme-manufacturing.com\",\n          \"deletedAt\": \"1974-12-03T13:18:08.801Z\"\n        },\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1979-05-22T01:06:33.179Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1978-05-18T19:58:34.896Z\"\n        },\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"deletedAt\": \"2017-02-13T10:41:02.144Z\"\n      },\n      \"contactTypes\": [\n        \"LOCATION_MANAGER\",\n        \"SHIPPING\"\n      ],\n      \"key\": \"ERP-LOC-CONTACT-001\",\n      \"deletedAt\": \"1955-06-01T07:54:09.813Z\"\n    }\n  ],\n  \"deletedAt\": \"1980-01-26T11:57:16.123Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d5b6108-80a2-4b27-b23d-ec370257e64b",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"ABC Warehouse - Dallas\",\n  \"key\": \"ERP-LOC-DALLAS-01\",\n  \"type\": \"SHIPPER\",\n  \"isAppointmentRequired\": true,\n  \"notes\": \"Call 24 hours ahead for appointment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6c9d82d-1828-41a9-bdd0-1d5676dbbcde",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"ABC Warehouse - Dallas\",\n  \"key\": \"ERP-LOC-DALLAS-01\",\n  \"type\": \"SHIPPER\",\n  \"isAppointmentRequired\": true,\n  \"notes\": \"Call 24 hours ahead for appointment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca637969-5948-4972-a235-7617e12ee0ea",
+              "name": "Conflict - resource already exists or constraint violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"ABC Warehouse - Dallas\",\n  \"key\": \"ERP-LOC-DALLAS-01\",\n  \"type\": \"SHIPPER\",\n  \"isAppointmentRequired\": true,\n  \"notes\": \"Call 24 hours ahead for appointment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcbad348-2b7b-4830-bc55-d8024be7e2ee",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"ABC Warehouse - Dallas\",\n  \"key\": \"ERP-LOC-DALLAS-01\",\n  \"type\": \"SHIPPER\",\n  \"isAppointmentRequired\": true,\n  \"notes\": \"Call 24 hours ahead for appointment\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bac8766d-60b2-460d-b5be-488d7bf7c2ed",
+          "name": "Get a location by ID",
+          "request": {
+            "name": "Get a location by ID",
+            "description": {
+              "content": "Retrieve a single location by its unique identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65223447-9fd2-479b-bec9-b2376a5c54aa",
+              "name": "Location found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"ABC Warehouse - Dallas\",\n  \"isAppointmentRequired\": true,\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"LOCATION\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"status\": \"INACTIVE\",\n    \"friendlyId\": \"A123456\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"object\": \"CUSTOMER\",\n    \"serviceTier\": \"TIER_2\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"industry\": \"CONSUMER_GOODS\",\n    \"annualRevenue\": \"_25M_TO_50M\",\n    \"annualSpend\": \"_150K_TO_300K\",\n    \"spendType\": \"SPOT\",\n    \"naics\": \"336411\",\n    \"ein\": \"12-3456789\",\n    \"duns\": \"123456789\",\n    \"leadSource\": \"Referral\",\n    \"dbaName\": \"Acme Corp DBA\",\n    \"numberOfEmployees\": \"_10_TO_24\",\n    \"externalId\": \"EXT-12345\",\n    \"currency\": \"USD\",\n    \"creditLimit\": 50000,\n    \"creditUsageWarning\": 40000,\n    \"freeCreditReq\": 5000,\n    \"defaultMode\": \"LTL\",\n    \"defaultMargin\": 0.15,\n    \"minMargin\": 0.1,\n    \"maxMargin\": 0.25,\n    \"defaultInternalNotes\": \"Contact via email only\",\n    \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n    \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n    \"defaultShowNotes\": \"SPLIT\",\n    \"autoAcceptTender\": false,\n    \"group\": {\n      \"id\": \"0c39fdee-c2ef-385d-41ef-f9d5c1096a0f\",\n      \"key\": \"string\"\n    },\n    \"paymentTerm\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Net 30\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-PAYTERM-NET30\",\n      \"description\": \"Payment due 30 days from invoice date\",\n      \"days\": 30,\n      \"quickPayFee\": 0.05,\n      \"apOnly\": false,\n      \"doNotUse\": false,\n      \"deletedAt\": \"2003-05-27T09:45:16.684Z\"\n    },\n    \"notes\": \"Prefers email communication\",\n    \"deactivationReason\": \"ACQUIRED\",\n    \"deactivationNotes\": \"string\",\n    \"deactivationDate\": \"1981-06-03T21:03:55.478Z\",\n    \"closedAt\": \"1984-08-31T06:23:35.505Z\",\n    \"closedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1990-12-19T20:57:35.014Z\"\n    },\n    \"closedNotes\": \"string\",\n    \"corporateAddress\": {\n      \"line1\": \"123 Main St\",\n      \"city\": \"Chicago\",\n      \"country\": \"USA\",\n      \"market\": \"CHI\",\n      \"isAirportOrAirbase\": false,\n      \"isConstructionOrUtilitySite\": false,\n      \"isSmartyValidated\": true,\n      \"obeysDst\": true,\n      \"line2\": \"Suite 400\",\n      \"latitude\": \"41.8781\",\n      \"longitude\": \"-87.6298\",\n      \"cityId\": \"e384af73-1016-8cb1-1bad-8e45d699c9a8\"\n    },\n    \"billingAddress\": {\n      \"line1\": \"123 Main St\",\n      \"city\": \"Chicago\",\n      \"country\": \"USA\",\n      \"market\": \"CHI\",\n      \"isAirportOrAirbase\": false,\n      \"isConstructionOrUtilitySite\": false,\n      \"isSmartyValidated\": true,\n      \"obeysDst\": true,\n      \"line2\": \"Suite 400\",\n      \"latitude\": \"41.8781\",\n      \"longitude\": \"-87.6298\",\n      \"cityId\": \"a5282c4d-53fc-3d70-fc2b-fa95154c8aee\"\n    },\n    \"qboCustomerId\": \"string\",\n    \"key\": \"ERP-CUSTOMER-12345\",\n    \"contacts\": [\n      {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1998-05-09T07:30:34.846Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1974-06-25T20:21:42.291Z\"\n        },\n        \"deletedAt\": \"1953-03-30T06:48:05.224Z\"\n      },\n      {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2002-11-03T01:00:52.602Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1971-09-26T09:18:08.210Z\"\n        },\n        \"deletedAt\": \"1969-05-26T20:14:16.068Z\"\n      }\n    ],\n    \"deletedAt\": \"1967-02-01T19:52:10.808Z\",\n    \"deletedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1958-04-29T16:47:32.058Z\"\n    }\n  },\n  \"key\": \"ERP-LOC-DALLAS-01\",\n  \"type\": \"SHIPPER\",\n  \"notes\": \"Call 24 hours ahead for appointment\",\n  \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n  \"contacts\": [\n    {\n      \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n      \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n      \"isPrimary\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION_CONTACT\",\n      \"customerContact\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"friendlyId\": \"A123456\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-CUSTOMER-ACME\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"website\": \"https://acme-manufacturing.com\",\n          \"deletedAt\": \"1993-09-17T04:09:48.273Z\"\n        },\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2008-04-05T21:20:32.054Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1946-09-11T03:11:22.125Z\"\n        },\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"deletedAt\": \"1981-03-03T07:14:23.808Z\"\n      },\n      \"contactTypes\": [\n        \"LOCATION_MANAGER\",\n        \"SHIPPING\"\n      ],\n      \"key\": \"ERP-LOC-CONTACT-001\",\n      \"deletedAt\": \"1987-04-22T18:15:30.703Z\"\n    },\n    {\n      \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n      \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n      \"isPrimary\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION_CONTACT\",\n      \"customerContact\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"friendlyId\": \"A123456\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-CUSTOMER-ACME\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"website\": \"https://acme-manufacturing.com\",\n          \"deletedAt\": \"1974-12-03T13:18:08.801Z\"\n        },\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1979-05-22T01:06:33.179Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1978-05-18T19:58:34.896Z\"\n        },\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"deletedAt\": \"2017-02-13T10:41:02.144Z\"\n      },\n      \"contactTypes\": [\n        \"LOCATION_MANAGER\",\n        \"SHIPPING\"\n      ],\n      \"key\": \"ERP-LOC-CONTACT-001\",\n      \"deletedAt\": \"1955-06-01T07:54:09.813Z\"\n    }\n  ],\n  \"deletedAt\": \"1980-01-26T11:57:16.123Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d6e3e2c-bc7a-4e79-91e4-4efb5c037c99",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50fe29b1-a54e-408f-813b-6961d7182350",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5bc72b6-384c-41e5-93ed-4073ea59bec1",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82edd75d-a8c7-49bc-8a50-d75a12655d43",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79fa2197-6e7f-474f-8a84-04a33f24b7fb",
+          "name": "Update a location",
+          "request": {
+            "name": "Update a location",
+            "description": {
+              "content": "Partially update a location. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"isAppointmentRequired\": \"<boolean>\",\n  \"notes\": \"<string,null>\",\n  \"internalNotes\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "041f0c88-4900-4d3f-908b-52c223d9ac07",
+              "name": "Location updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"Updated appointment requirements\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"ABC Warehouse - Dallas\",\n  \"isAppointmentRequired\": true,\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"LOCATION\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"status\": \"INACTIVE\",\n    \"friendlyId\": \"A123456\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"object\": \"CUSTOMER\",\n    \"serviceTier\": \"TIER_2\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"industry\": \"CONSUMER_GOODS\",\n    \"annualRevenue\": \"_25M_TO_50M\",\n    \"annualSpend\": \"_150K_TO_300K\",\n    \"spendType\": \"SPOT\",\n    \"naics\": \"336411\",\n    \"ein\": \"12-3456789\",\n    \"duns\": \"123456789\",\n    \"leadSource\": \"Referral\",\n    \"dbaName\": \"Acme Corp DBA\",\n    \"numberOfEmployees\": \"_10_TO_24\",\n    \"externalId\": \"EXT-12345\",\n    \"currency\": \"USD\",\n    \"creditLimit\": 50000,\n    \"creditUsageWarning\": 40000,\n    \"freeCreditReq\": 5000,\n    \"defaultMode\": \"LTL\",\n    \"defaultMargin\": 0.15,\n    \"minMargin\": 0.1,\n    \"maxMargin\": 0.25,\n    \"defaultInternalNotes\": \"Contact via email only\",\n    \"defaultCarrierNotes\": \"Call pickup contact before arrival\",\n    \"defaultExternalNotes\": \"Please call 1 hour before delivery\",\n    \"defaultShowNotes\": \"SPLIT\",\n    \"autoAcceptTender\": false,\n    \"group\": {\n      \"id\": \"0c39fdee-c2ef-385d-41ef-f9d5c1096a0f\",\n      \"key\": \"string\"\n    },\n    \"paymentTerm\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Net 30\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-PAYTERM-NET30\",\n      \"description\": \"Payment due 30 days from invoice date\",\n      \"days\": 30,\n      \"quickPayFee\": 0.05,\n      \"apOnly\": false,\n      \"doNotUse\": false,\n      \"deletedAt\": \"2003-05-27T09:45:16.684Z\"\n    },\n    \"notes\": \"Prefers email communication\",\n    \"deactivationReason\": \"ACQUIRED\",\n    \"deactivationNotes\": \"string\",\n    \"deactivationDate\": \"1981-06-03T21:03:55.478Z\",\n    \"closedAt\": \"1984-08-31T06:23:35.505Z\",\n    \"closedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1990-12-19T20:57:35.014Z\"\n    },\n    \"closedNotes\": \"string\",\n    \"corporateAddress\": {\n      \"line1\": \"123 Main St\",\n      \"city\": \"Chicago\",\n      \"country\": \"USA\",\n      \"market\": \"CHI\",\n      \"isAirportOrAirbase\": false,\n      \"isConstructionOrUtilitySite\": false,\n      \"isSmartyValidated\": true,\n      \"obeysDst\": true,\n      \"line2\": \"Suite 400\",\n      \"latitude\": \"41.8781\",\n      \"longitude\": \"-87.6298\",\n      \"cityId\": \"e384af73-1016-8cb1-1bad-8e45d699c9a8\"\n    },\n    \"billingAddress\": {\n      \"line1\": \"123 Main St\",\n      \"city\": \"Chicago\",\n      \"country\": \"USA\",\n      \"market\": \"CHI\",\n      \"isAirportOrAirbase\": false,\n      \"isConstructionOrUtilitySite\": false,\n      \"isSmartyValidated\": true,\n      \"obeysDst\": true,\n      \"line2\": \"Suite 400\",\n      \"latitude\": \"41.8781\",\n      \"longitude\": \"-87.6298\",\n      \"cityId\": \"a5282c4d-53fc-3d70-fc2b-fa95154c8aee\"\n    },\n    \"qboCustomerId\": \"string\",\n    \"key\": \"ERP-CUSTOMER-12345\",\n    \"contacts\": [\n      {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1998-05-09T07:30:34.846Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1974-06-25T20:21:42.291Z\"\n        },\n        \"deletedAt\": \"1953-03-30T06:48:05.224Z\"\n      },\n      {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2002-11-03T01:00:52.602Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1971-09-26T09:18:08.210Z\"\n        },\n        \"deletedAt\": \"1969-05-26T20:14:16.068Z\"\n      }\n    ],\n    \"deletedAt\": \"1967-02-01T19:52:10.808Z\",\n    \"deletedBy\": {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"ERP-USER-12345\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1958-04-29T16:47:32.058Z\"\n    }\n  },\n  \"key\": \"ERP-LOC-DALLAS-01\",\n  \"type\": \"SHIPPER\",\n  \"notes\": \"Call 24 hours ahead for appointment\",\n  \"internalNotes\": \"Use dock door 5 for expedited shipments\",\n  \"contacts\": [\n    {\n      \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n      \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n      \"isPrimary\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION_CONTACT\",\n      \"customerContact\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"friendlyId\": \"A123456\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-CUSTOMER-ACME\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"website\": \"https://acme-manufacturing.com\",\n          \"deletedAt\": \"1993-09-17T04:09:48.273Z\"\n        },\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2008-04-05T21:20:32.054Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1946-09-11T03:11:22.125Z\"\n        },\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"deletedAt\": \"1981-03-03T07:14:23.808Z\"\n      },\n      \"contactTypes\": [\n        \"LOCATION_MANAGER\",\n        \"SHIPPING\"\n      ],\n      \"key\": \"ERP-LOC-CONTACT-001\",\n      \"deletedAt\": \"1987-04-22T18:15:30.703Z\"\n    },\n    {\n      \"id\": \"880e8400-e29b-41d4-a716-446655440000\",\n      \"customerContactId\": \"660e8400-e29b-41d4-a716-446655440000\",\n      \"isPrimary\": true,\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"LOCATION_CONTACT\",\n      \"customerContact\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"customer\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"name\": \"Acme Manufacturing Corp\",\n          \"friendlyId\": \"A123456\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-CUSTOMER-ACME\",\n          \"phoneNumber\": \"+1-555-123-4567\",\n          \"website\": \"https://acme-manufacturing.com\",\n          \"deletedAt\": \"1974-12-03T13:18:08.801Z\"\n        },\n        \"name\": \"John Smith\",\n        \"isPrimary\": true,\n        \"contactInfo\": {\n          \"name\": \"John Smith\",\n          \"email\": \"john.smith@example.com\",\n          \"phoneNumber\": \"+1-555-0100\",\n          \"title\": \"Operations Manager\"\n        },\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"object\": \"CUSTOMER_CONTACT\",\n        \"phoneExtension\": \"1234\",\n        \"contactTypes\": [\n          \"BILLING\",\n          \"ACCOUNT_MANAGER\"\n        ],\n        \"notifications\": [\n          \"SHIPMENT_PICKED_UP\",\n          \"SHIPMENT_DELIVERED\"\n        ],\n        \"invitedUser\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1979-05-22T01:06:33.179Z\"\n        },\n        \"deletedBy\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"ERP-USER-12345\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1978-05-18T19:58:34.896Z\"\n        },\n        \"key\": \"ERP-CONTACT-JOHN-001\",\n        \"deletedAt\": \"2017-02-13T10:41:02.144Z\"\n      },\n      \"contactTypes\": [\n        \"LOCATION_MANAGER\",\n        \"SHIPPING\"\n      ],\n      \"key\": \"ERP-LOC-CONTACT-001\",\n      \"deletedAt\": \"1955-06-01T07:54:09.813Z\"\n    }\n  ],\n  \"deletedAt\": \"1980-01-26T11:57:16.123Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abb2b6fd-5916-44c9-94ca-66ba1ac70d2a",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"Updated appointment requirements\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64af8024-5473-4bf4-b514-f1091838c837",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"Updated appointment requirements\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddb563e4-4690-451f-95bb-2176220a4927",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"Updated appointment requirements\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08348d1d-0021-4cbc-8d02-2665a08a53eb",
+              "name": "Conflict - resource already exists or constraint violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"Updated appointment requirements\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cab26e35-814d-4bca-950b-7423e2f92a29",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"notes\": \"Updated appointment requirements\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f4db6eb-b117-4e97-953f-f2bc2ed32081",
+          "name": "Delete a location",
+          "request": {
+            "name": "Delete a location",
+            "description": {
+              "content": "Soft delete a location (sets deletedAt timestamp).\n\nThe location will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "362261f8-2ef7-4c8d-a19f-ec2bf57b3400",
+              "name": "Location deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "588d696f-6964-4a09-b47e-816f329b4e30",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c96d254b-d469-4a17-aafc-7ec92647a2dd",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c677a47b-7c37-40eb-ab72-ab75eb81fbd2",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd550a35-6a7f-4aa3-a2d8-f736c3aacb7f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "988743c0-54e8-4c58-817d-9336fa079466",
+          "name": "Search locations",
+          "request": {
+            "name": "Search locations",
+            "description": {
+              "content": "Search locations using OpenSearch-powered full-text and field-specific search.\n\nThis endpoint provides fast, indexed search across location data with support for:\n- Full-text search across multiple fields\n- Field-specific filtering with various operators\n- Geographic search capabilities\n- Sorting and pagination\n- Saved search preferences\n\n**Note:** Only active (non-deleted) locations are searchable. Soft-deleted records are automatically excluded from all search results.\n\n**Response Formats:**\n- `flat` (default): Returns indexed fields only for faster performance\n- `full`: Returns complete location objects with all relationships\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerId\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerName\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"customerFriendlyId\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"type\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"externalId\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"line1\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"line2\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"postalCode\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"market\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"zone\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"phoneNumber\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"appointmentRequired\": {\n      \"operator\": \"<string>\"\n    },\n    \"stopsCount\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"min\": \"<integer>\",\n      \"max\": \"<integer>\"\n    },\n    \"createdAt\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<dateTime>\",\n      \"min\": \"<dateTime>\",\n      \"max\": \"<dateTime>\",\n      \"valueRelative\": \"<integer>\",\n      \"valueRelativeUnit\": \"<string>\",\n      \"minRelative\": \"<integer>\",\n      \"minRelativeUnit\": \"<string>\",\n      \"maxRelative\": \"<integer>\",\n      \"maxRelativeUnit\": \"<string>\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"savedSearch\": {\n    \"id\": \"<uuid>\",\n    \"key\": \"<string>\"\n  },\n  \"format\": \"flat\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2bcacabc-6f7f-4aa9-ba84-b380a6674c4f",
+              "name": "Successful search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerId\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customerFriendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"type\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"externalId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"line1\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"line2\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"postalCode\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"market\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zone\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"phoneNumber\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"appointmentRequired\": {\n      \"operator\": \"TRUE\"\n    },\n    \"stopsCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"object\": \"LOCATION_SEARCH_ROW\",\n      \"id\": \"6599acc8-1166-3d12-06f4-8f5e940727ef\",\n      \"customerId\": \"02b02b89-66b8-7a14-28bb-acb04dbbff91\",\n      \"customerName\": \"string\",\n      \"name\": \"string\",\n      \"createdAt\": \"1953-08-08T13:05:17.385Z\",\n      \"customerFriendlyId\": \"string\",\n      \"type\": \"SHIPPER\",\n      \"externalId\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"string\",\n      \"market\": \"string\",\n      \"zone\": \"string\",\n      \"point\": {\n        \"lat\": 7988.648441808952,\n        \"lon\": 9512.271802837127\n      },\n      \"phoneNumber\": \"string\",\n      \"appointmentRequired\": true,\n      \"stopsCount\": 2064\n    },\n    {\n      \"object\": \"LOCATION_SEARCH_ROW\",\n      \"id\": \"df30d168-2c20-947b-051f-4ad6962b01d7\",\n      \"customerId\": \"3bf6f906-cf05-138d-5938-b9aa778fd26d\",\n      \"customerName\": \"string\",\n      \"name\": \"string\",\n      \"createdAt\": \"2017-04-06T05:32:41.490Z\",\n      \"customerFriendlyId\": \"string\",\n      \"type\": \"SHIPPER\",\n      \"externalId\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postalCode\": \"string\",\n      \"country\": \"string\",\n      \"market\": \"string\",\n      \"zone\": \"string\",\n      \"point\": {\n        \"lat\": 6662.605728500751,\n        \"lon\": 5889.901837960631\n      },\n      \"phoneNumber\": \"string\",\n      \"appointmentRequired\": false,\n      \"stopsCount\": 655\n    }\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50,\n    \"totalPages\": 25\n  },\n  \"totalResults\": 2217\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32f64b79-0352-43ae-b4e8-a47da6331737",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerId\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customerFriendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"type\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"externalId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"line1\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"line2\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"postalCode\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"market\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zone\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"phoneNumber\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"appointmentRequired\": {\n      \"operator\": \"TRUE\"\n    },\n    \"stopsCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f56f8216-03b0-4e79-8673-44230cc7e672",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerId\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customerFriendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"type\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"externalId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"line1\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"line2\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"postalCode\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"market\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zone\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"phoneNumber\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"appointmentRequired\": {\n      \"operator\": \"TRUE\"\n    },\n    \"stopsCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eea6b82a-f2e7-4c2e-bbd2-9a05f0333d90",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerId\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customerFriendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"type\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"externalId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"line1\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"line2\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"postalCode\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"market\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zone\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"phoneNumber\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"appointmentRequired\": {\n      \"operator\": \"TRUE\"\n    },\n    \"stopsCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f9e8a9a-02cc-4c6c-bc4f-6d4d273e8c66",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerId\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"customerName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"customerFriendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"type\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"externalId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"line1\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"line2\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"postalCode\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"market\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zone\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"phoneNumber\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"appointmentRequired\": {\n      \"operator\": \"TRUE\"\n    },\n    \"stopsCount\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "5959"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "5959"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "5959"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "5959"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dfd53555-a076-49d0-9eec-f414563f8681",
+    "name": "MVMNT Bill Payments Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

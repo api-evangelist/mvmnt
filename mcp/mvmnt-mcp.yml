@@ -537,3 +537,9 @@ tools:
 - name: globalSearch
   description: Search globally
   source_operation: openapi/mvmnt-openapi-original.yml#globalSearch
+deployment:
+  mode: none
+  verified: derived
+  tools: 176
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,1690 @@
+{
+  "item": [
+    {
+      "id": "a52f3fb1-b74a-43ec-8549-d708ddd4d4e7",
+      "name": "Saved Searches",
+      "description": {
+        "content": "Saved search management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17bfe60c-de21-4bfe-95fc-5d002fbd915b",
+          "name": "Filter saved searches",
+          "request": {
+            "name": "Filter saved searches",
+            "description": {
+              "content": "Filter saved searches using comprehensive query criteria with AND/OR logic and multiple operators.\nSupports complex filtering similar to GraphQL capabilities.\nReturns only saved searches accessible to the authenticated user (either owned by them or public).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "saved-searches",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SavedSearchFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SavedSearchFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SavedSearchFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/SavedSearchFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"preferenceType\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPublic\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec186949-c714-4be9-b5aa-cdc6acb5a3c1",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"preferenceType\": {\n      \"equalTo\": \"SHIPMENT\"\n    },\n    \"isPublic\": {\n      \"equalTo\": true\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Active Shipments - West Coast\",\n      \"preferenceType\": \"SHIPMENT\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"SAVED_SEARCH\",\n      \"jsonValue\": {\n        \"searchCriteria\": {\n          \"filters\": [\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"searchCriteria\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"searchCriteria\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"sorting\": [\n          {\n            \"id\": \"createdAt\",\n            \"desc\": true\n          },\n          {\n            \"id\": \"createdAt\",\n            \"desc\": true\n          }\n        ],\n        \"columnVisibility\": {\n          \"status\": true,\n          \"createdAt\": true,\n          \"updatedAt\": false\n        },\n        \"columnOrder\": [\n          \"id\",\n          \"name\",\n          \"status\",\n          \"createdAt\"\n        ]\n      },\n      \"isPublic\": true,\n      \"ownedByUser\": \"550e8400-e29b-41d4-a716-446655440001\",\n      \"groupId\": \"83e7d617-1427-8065-84f6-8718ca03c4ac\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Active Shipments - West Coast\",\n      \"preferenceType\": \"SHIPMENT\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"SAVED_SEARCH\",\n      \"jsonValue\": {\n        \"searchCriteria\": {\n          \"filters\": [\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"searchCriteria\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"field\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"searchCriteria\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"sorting\": [\n          {\n            \"id\": \"createdAt\",\n            \"desc\": true\n          },\n          {\n            \"id\": \"createdAt\",\n            \"desc\": true\n          }\n        ],\n        \"columnVisibility\": {\n          \"status\": true,\n          \"createdAt\": true,\n          \"updatedAt\": false\n        },\n        \"columnOrder\": [\n          \"id\",\n          \"name\",\n          \"status\",\n          \"createdAt\"\n        ]\n      },\n      \"isPublic\": true,\n      \"ownedByUser\": \"550e8400-e29b-41d4-a716-446655440001\",\n      \"groupId\": \"93c1def5-a325-1959-4f7e-a80e47a4b0db\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de8f31e0-321d-410f-9472-9ad10fc63e8c",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"preferenceType\": {\n      \"equalTo\": \"SHIPMENT\"\n    },\n    \"isPublic\": {\n      \"equalTo\": true\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02b4596f-9eec-42da-9115-d81f5c665821",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"preferenceType\": {\n      \"equalTo\": \"SHIPMENT\"\n    },\n    \"isPublic\": {\n      \"equalTo\": true\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bb4570b-ca74-4fc6-99d2-8a02e06398be",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"preferenceType\": {\n      \"equalTo\": \"SHIPMENT\"\n    },\n    \"isPublic\": {\n      \"equalTo\": true\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bb22f15-2a3d-4a15-b74d-863a85101aa1",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"preferenceType\": {\n      \"equalTo\": \"SHIPMENT\"\n    },\n    \"isPublic\": {\n      \"equalTo\": true\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "7770"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52f0fbc6-87fd-4c34-8a5c-b98da2dfd88c",
+          "name": "Create saved search",
+          "request": {
+            "name": "Create saved search",
+            "description": {
+              "content": "Create a new saved search configuration in your organization.\nThe saved search can be used to quickly apply predefined search criteria, sorting, and display preferences.\n\nThe saved search will be owned by the authenticated user unless otherwise specified.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "saved-searches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"preferenceType\": \"<string>\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"<string>\",\n          \"searchCriteria\": {\n            \"operator\": \"<string>\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"value\": \"<string>\",\n            \"min\": \"<string>\",\n            \"max\": \"<string>\",\n            \"minRelative\": \"<integer>\",\n            \"minRelativeUnit\": \"<string>\",\n            \"maxRelative\": \"<integer>\",\n            \"maxRelativeUnit\": \"<string>\",\n            \"valueRelative\": \"<integer>\",\n            \"valueRelativeUnit\": \"<string>\"\n          }\n        },\n        {\n          \"field\": \"<string>\",\n          \"searchCriteria\": {\n            \"operator\": \"<string>\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"value\": \"<string>\",\n            \"min\": \"<string>\",\n            \"max\": \"<string>\",\n            \"minRelative\": \"<integer>\",\n            \"minRelativeUnit\": \"<string>\",\n            \"maxRelative\": \"<integer>\",\n            \"maxRelativeUnit\": \"<string>\",\n            \"valueRelative\": \"<integer>\",\n            \"valueRelativeUnit\": \"<string>\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"<string>\",\n        \"desc\": \"<boolean>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"desc\": \"<boolean>\"\n      }\n    ],\n    \"columnVisibility\": {\n      \"key_0\": \"<boolean>\"\n    },\n    \"columnOrder\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"isPublic\": false,\n  \"groupId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a95ff78b-4980-4b21-9798-6ec3c589ccdf",
+              "name": "Saved search created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Active Shipments - West Coast\",\n  \"preferenceType\": \"SHIPMENT\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 2973,\n            \"minRelativeUnit\": \"DAY\",\n            \"maxRelative\": 5463,\n            \"maxRelativeUnit\": \"YEAR\",\n            \"valueRelative\": 495,\n            \"valueRelativeUnit\": \"DAY\"\n          }\n        },\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 3264,\n            \"minRelativeUnit\": \"MINUTE\",\n            \"maxRelative\": 6055,\n            \"maxRelativeUnit\": \"SECOND\",\n            \"valueRelative\": 3204,\n            \"valueRelativeUnit\": \"MONTH\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      },\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      }\n    ],\n    \"columnVisibility\": {\n      \"status\": true,\n      \"createdAt\": true,\n      \"updatedAt\": false\n    },\n    \"columnOrder\": [\n      \"id\",\n      \"name\",\n      \"status\",\n      \"createdAt\"\n    ]\n  },\n  \"isPublic\": true,\n  \"groupId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"Active Shipments - West Coast\",\n  \"preferenceType\": \"SHIPMENT\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"SAVED_SEARCH\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 4938,\n            \"minRelativeUnit\": \"YEAR\",\n            \"maxRelative\": 3410,\n            \"maxRelativeUnit\": \"WEEK\",\n            \"valueRelative\": 1597,\n            \"valueRelativeUnit\": \"HOUR\"\n          }\n        },\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 9704,\n            \"minRelativeUnit\": \"MONTH\",\n            \"maxRelative\": 3895,\n            \"maxRelativeUnit\": \"MONTH\",\n            \"valueRelative\": 5951,\n            \"valueRelativeUnit\": \"SECOND\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      },\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      }\n    ],\n    \"columnVisibility\": {\n      \"status\": true,\n      \"createdAt\": true,\n      \"updatedAt\": false\n    },\n    \"columnOrder\": [\n      \"id\",\n      \"name\",\n      \"status\",\n      \"createdAt\"\n    ]\n  },\n  \"isPublic\": true,\n  \"ownedByUser\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"groupId\": \"f41d8b73-719c-596a-c3e1-f49bad9b0504\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b11fb56-cc3a-4704-9420-dc280264f367",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Active Shipments - West Coast\",\n  \"preferenceType\": \"SHIPMENT\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 2973,\n            \"minRelativeUnit\": \"DAY\",\n            \"maxRelative\": 5463,\n            \"maxRelativeUnit\": \"YEAR\",\n            \"valueRelative\": 495,\n            \"valueRelativeUnit\": \"DAY\"\n          }\n        },\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 3264,\n            \"minRelativeUnit\": \"MINUTE\",\n            \"maxRelative\": 6055,\n            \"maxRelativeUnit\": \"SECOND\",\n            \"valueRelative\": 3204,\n            \"valueRelativeUnit\": \"MONTH\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      },\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      }\n    ],\n    \"columnVisibility\": {\n      \"status\": true,\n      \"createdAt\": true,\n      \"updatedAt\": false\n    },\n    \"columnOrder\": [\n      \"id\",\n      \"name\",\n      \"status\",\n      \"createdAt\"\n    ]\n  },\n  \"isPublic\": true,\n  \"groupId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3903cfe1-32a7-4cc3-9aaa-96bb59cf173b",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Active Shipments - West Coast\",\n  \"preferenceType\": \"SHIPMENT\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 2973,\n            \"minRelativeUnit\": \"DAY\",\n            \"maxRelative\": 5463,\n            \"maxRelativeUnit\": \"YEAR\",\n            \"valueRelative\": 495,\n            \"valueRelativeUnit\": \"DAY\"\n          }\n        },\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 3264,\n            \"minRelativeUnit\": \"MINUTE\",\n            \"maxRelative\": 6055,\n            \"maxRelativeUnit\": \"SECOND\",\n            \"valueRelative\": 3204,\n            \"valueRelativeUnit\": \"MONTH\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      },\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      }\n    ],\n    \"columnVisibility\": {\n      \"status\": true,\n      \"createdAt\": true,\n      \"updatedAt\": false\n    },\n    \"columnOrder\": [\n      \"id\",\n      \"name\",\n      \"status\",\n      \"createdAt\"\n    ]\n  },\n  \"isPublic\": true,\n  \"groupId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1df562a5-b52e-4f3d-8f5e-4a15eb94c2b9",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Active Shipments - West Coast\",\n  \"preferenceType\": \"SHIPMENT\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 2973,\n            \"minRelativeUnit\": \"DAY\",\n            \"maxRelative\": 5463,\n            \"maxRelativeUnit\": \"YEAR\",\n            \"valueRelative\": 495,\n            \"valueRelativeUnit\": \"DAY\"\n          }\n        },\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 3264,\n            \"minRelativeUnit\": \"MINUTE\",\n            \"maxRelative\": 6055,\n            \"maxRelativeUnit\": \"SECOND\",\n            \"valueRelative\": 3204,\n            \"valueRelativeUnit\": \"MONTH\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      },\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      }\n    ],\n    \"columnVisibility\": {\n      \"status\": true,\n      \"createdAt\": true,\n      \"updatedAt\": false\n    },\n    \"columnOrder\": [\n      \"id\",\n      \"name\",\n      \"status\",\n      \"createdAt\"\n    ]\n  },\n  \"isPublic\": true,\n  \"groupId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4bbd824-1765-4427-b2fb-f06cd0c973ea",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Active Shipments - West Coast\",\n  \"preferenceType\": \"SHIPMENT\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 2973,\n            \"minRelativeUnit\": \"DAY\",\n            \"maxRelative\": 5463,\n            \"maxRelativeUnit\": \"YEAR\",\n            \"valueRelative\": 495,\n            \"valueRelativeUnit\": \"DAY\"\n          }\n        },\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 3264,\n            \"minRelativeUnit\": \"MINUTE\",\n            \"maxRelative\": 6055,\n            \"maxRelativeUnit\": \"SECOND\",\n            \"valueRelative\": 3204,\n            \"valueRelativeUnit\": \"MONTH\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      },\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      }\n    ],\n    \"columnVisibility\": {\n      \"status\": true,\n      \"createdAt\": true,\n      \"updatedAt\": false\n    },\n    \"columnOrder\": [\n      \"id\",\n      \"name\",\n      \"status\",\n      \"createdAt\"\n    ]\n  },\n  \"isPublic\": true,\n  \"groupId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "7770"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "474be6a9-3191-4030-b80f-56039b805ecf",
+          "name": "Get saved search",
+          "request": {
+            "name": "Get saved search",
+            "description": {
+              "content": "Retrieve a saved search by ID.\nYou can only retrieve saved searches that you own or that are public in your organization.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "saved-searches",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Saved search UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2892d8fc-384f-459b-9d96-132cd18da356",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"Active Shipments - West Coast\",\n  \"preferenceType\": \"SHIPMENT\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"SAVED_SEARCH\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 4938,\n            \"minRelativeUnit\": \"YEAR\",\n            \"maxRelative\": 3410,\n            \"maxRelativeUnit\": \"WEEK\",\n            \"valueRelative\": 1597,\n            \"valueRelativeUnit\": \"HOUR\"\n          }\n        },\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 9704,\n            \"minRelativeUnit\": \"MONTH\",\n            \"maxRelative\": 3895,\n            \"maxRelativeUnit\": \"MONTH\",\n            \"valueRelative\": 5951,\n            \"valueRelativeUnit\": \"SECOND\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      },\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      }\n    ],\n    \"columnVisibility\": {\n      \"status\": true,\n      \"createdAt\": true,\n      \"updatedAt\": false\n    },\n    \"columnOrder\": [\n      \"id\",\n      \"name\",\n      \"status\",\n      \"createdAt\"\n    ]\n  },\n  \"isPublic\": true,\n  \"ownedByUser\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"groupId\": \"f41d8b73-719c-596a-c3e1-f49bad9b0504\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "415265b0-3a92-4c14-a58f-983783bb3a25",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88f9cb23-f798-484b-a34e-bc9817c94a2c",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba2f0de3-969c-4c36-934b-e853f63e3ae5",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "7770"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a77b1179-b6d1-4e6e-97b8-e235141a3591",
+          "name": "Update saved search",
+          "request": {
+            "name": "Update saved search",
+            "description": {
+              "content": "Partially update a saved search. Only provided fields will be updated.\nYou can only update saved searches that you own.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "saved-searches",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Saved search UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"<string>\",\n          \"searchCriteria\": {\n            \"operator\": \"<string>\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"value\": \"<string>\",\n            \"min\": \"<string>\",\n            \"max\": \"<string>\",\n            \"minRelative\": \"<integer>\",\n            \"minRelativeUnit\": \"<string>\",\n            \"maxRelative\": \"<integer>\",\n            \"maxRelativeUnit\": \"<string>\",\n            \"valueRelative\": \"<integer>\",\n            \"valueRelativeUnit\": \"<string>\"\n          }\n        },\n        {\n          \"field\": \"<string>\",\n          \"searchCriteria\": {\n            \"operator\": \"<string>\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"value\": \"<string>\",\n            \"min\": \"<string>\",\n            \"max\": \"<string>\",\n            \"minRelative\": \"<integer>\",\n            \"minRelativeUnit\": \"<string>\",\n            \"maxRelative\": \"<integer>\",\n            \"maxRelativeUnit\": \"<string>\",\n            \"valueRelative\": \"<integer>\",\n            \"valueRelativeUnit\": \"<string>\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"<string>\",\n        \"desc\": \"<boolean>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"desc\": \"<boolean>\"\n      }\n    ],\n    \"columnVisibility\": {\n      \"key_0\": \"<boolean>\"\n    },\n    \"columnOrder\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"isPublic\": \"<boolean,null>\",\n  \"groupId\": \"<string,null-uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8edb918f-227e-4bdb-948e-19d10e57ed1b",
+              "name": "Saved search updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Shipments View\",\n  \"isPublic\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"Active Shipments - West Coast\",\n  \"preferenceType\": \"SHIPMENT\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"SAVED_SEARCH\",\n  \"jsonValue\": {\n    \"searchCriteria\": {\n      \"filters\": [\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 4938,\n            \"minRelativeUnit\": \"YEAR\",\n            \"maxRelative\": 3410,\n            \"maxRelativeUnit\": \"WEEK\",\n            \"valueRelative\": 1597,\n            \"valueRelativeUnit\": \"HOUR\"\n          }\n        },\n        {\n          \"field\": \"status\",\n          \"searchCriteria\": {\n            \"operator\": \"ONE_OF\",\n            \"values\": [\n              \"ACTIVE\",\n              \"PENDING\"\n            ],\n            \"value\": \"string\",\n            \"min\": \"string\",\n            \"max\": \"string\",\n            \"minRelative\": 9704,\n            \"minRelativeUnit\": \"MONTH\",\n            \"maxRelative\": 3895,\n            \"maxRelativeUnit\": \"MONTH\",\n            \"valueRelative\": 5951,\n            \"valueRelativeUnit\": \"SECOND\"\n          }\n        }\n      ]\n    },\n    \"sorting\": [\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      },\n      {\n        \"id\": \"createdAt\",\n        \"desc\": true\n      }\n    ],\n    \"columnVisibility\": {\n      \"status\": true,\n      \"createdAt\": true,\n      \"updatedAt\": false\n    },\n    \"columnOrder\": [\n      \"id\",\n      \"name\",\n      \"status\",\n      \"createdAt\"\n    ]\n  },\n  \"isPublic\": true,\n  \"ownedByUser\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"groupId\": \"f41d8b73-719c-596a-c3e1-f49bad9b0504\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbb69304-10b0-4338-9263-a52c98e07122",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Shipments View\",\n  \"isPublic\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ce3d061-9aca-49f5-a9b0-ce1cb4300f38",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Shipments View\",\n  \"isPublic\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a04a8d16-ee38-4fbe-8f50-18380d4d3d78",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Shipments View\",\n  \"isPublic\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22fab54c-5522-48cb-8b04-0007e3bcd85c",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Shipments View\",\n  \"isPublic\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b36e2f4-b654-47ac-8219-fe9c23b48bb3",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Shipments View\",\n  \"isPublic\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "7770"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95fbccd0-7c9e-476e-974b-d394c16189e9",
+          "name": "Delete saved search",
+          "request": {
+            "name": "Delete saved search",
+            "description": {
+              "content": "Permanently delete a saved search.\nYou can only delete saved searches that you own.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "saved-searches",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Saved search UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fa4f766-b524-4ba8-82cf-fc6dd8ed78cc",
+              "name": "Saved search deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7146389a-a182-4187-a38e-347d92fc525f",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a101c111-7ce6-401c-bdd0-37165eee3a00",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61e518d0-2aed-4e89-b0d5-a6cbbc51ce61",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "saved-searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Saved search UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "7770"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "7770"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "98e730b9-b74c-49c0-b268-d5fe11d5642d",
+    "name": "MVMNT Bill Payments Saved Searches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

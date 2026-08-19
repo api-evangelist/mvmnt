@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Saved Searches API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Saved Searches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter saved searches",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/saved-searches/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Filter saved searches using comprehensive query criteria with AND/OR logic and multiple operators.\nSupports complex filtering similar to GraphQL capabilities.\nReturns only saved searches accessible to the authenticated user (either owned by them or public).\n"
+        },
+        {
+          "info": {
+            "name": "Create saved search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/saved-searches",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new saved search configuration in your organization.\nThe saved search can be used to quickly apply predefined search criteria, sorting, and display preferences.\n\nThe saved search will be owned by the authenticated user unless otherwise specified.\n"
+        },
+        {
+          "info": {
+            "name": "Get saved search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/saved-searches/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Saved search UUID"
+              }
+            ]
+          },
+          "docs": "Retrieve a saved search by ID.\nYou can only retrieve saved searches that you own or that are public in your organization.\n"
+        },
+        {
+          "info": {
+            "name": "Update saved search",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/saved-searches/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Saved search UUID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a saved search. Only provided fields will be updated.\nYou can only update saved searches that you own.\n"
+        },
+        {
+          "info": {
+            "name": "Delete saved search",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/saved-searches/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Saved search UUID"
+              }
+            ]
+          },
+          "docs": "Permanently delete a saved search.\nYou can only delete saved searches that you own.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

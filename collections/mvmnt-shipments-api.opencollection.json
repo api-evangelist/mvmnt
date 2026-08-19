@@ -1,0 +1,306 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Shipments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tracking link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments/track",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for shipments by reference field values (BOL #, PRO #, MAWB #, etc.)\nand return tracking information.\n\n## Usage\n\n1. Provide an array of search queries in the `searches` field\n2. Optionally filter which reference field types to search using `referenceFields`\n3. Results are returned in the same order as input searches\n4. If no match is found, the result contains only the original `query` (other fields are null)\n\n## Matching Behavior\n\n- Searches are case-insensitive\n- If multiple shipments m"
+        },
+        {
+          "info": {
+            "name": "Filter shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for shipments using filter criteria.\n\n## Common Filters\n\n- Active shipments: `{ \"filter\": { \"status\": { \"notIn\": [\"DELIVERED\", \"CANCELED\"] } } }`\n- Delivered today: `{ \"filter\": { \"deliveredAt\": { \"greaterThanOrEqualTo\": \"2025-01-15T00:00:00Z\" } } }`\n- By customer: `{ \"filter\": { \"customerId\": { \"equalTo\": \"uuid\" } } }`\n"
+        },
+        {
+          "info": {
+            "name": "Create a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new shipment with orders, loads, and services.\n\n## Required fields\n\n- `customer`: Reference to the customer\n- `orders`: At least one order with stops and mode\n\n## What gets created\n\n- Shipment record\n- Order(s) with stops, freight, and charges\n- Optionally: Load(s) and Service(s)\n\n## Relationship to Quotes\n\nIf you have a Quote, use `POST /quotes/{id}/convert-to-shipment` instead.\nDirect shipment creation is for cases without a quote.\n"
+        },
+        {
+          "info": {
+            "name": "Get a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/shipments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a shipment by ID or key.\n\nThe response includes embedded orders, loads, and services.\nThe internal ShipmentDetail layer is hidden - all data is flattened.\n"
+        },
+        {
+          "info": {
+            "name": "Update a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/shipments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update shipment fields.\n\n**Note:** To update orders, loads, or services, use their respective endpoints:\n- Orders: Updates happen via order-specific endpoints\n- Loads: PATCH /loads/{id}\n- Services: PATCH /services/{id}\n"
+        },
+        {
+          "info": {
+            "name": "Delete a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/shipments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Soft delete a shipment.\n\nThe shipment and all associated orders, loads, and services are marked as deleted.\n"
+        },
+        {
+          "info": {
+            "name": "Cancel a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a shipment.\n\n## What happens\n\n- Shipment status is set to CANCELED\n- All orders are canceled\n- All loads are canceled\n- All services are canceled\n\n## Prerequisites\n\n- Shipment must not already be delivered or canceled\n"
+        },
+        {
+          "info": {
+            "name": "Un-cancel a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments/:id/uncancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Reactivate a canceled shipment.\n\n## What happens\n\n- Shipment status is restored to previous state\n- Orders, loads, and services are reactivated\n\n## Prerequisites\n\n- Shipment must be in CANCELED status\n"
+        },
+        {
+          "info": {
+            "name": "Duplicate a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments/:id/duplicate",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a copy of an existing shipment.\n\n## What gets duplicated\n\n- Customer and customer rep\n- Order(s) with stops, freight, and references\n- Equipment and special requirements\n\n## What is NOT duplicated\n\n- Loads and carriers\n- Services\n- Documents\n- Status history\n\n## New shipment\n\nThe duplicate is created in DRAFT status with new dates if provided.\n"
+        },
+        {
+          "info": {
+            "name": "Mark shipment ready to invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments/:id/ready-to-invoice",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Mark a shipment as ready for invoicing.\n\n## What happens\n\n- Shipment billing status changes to READY_TO_INVOICE\n- Shipment is now visible in invoice generation workflows\n\n## Prerequisites\n\n- Shipment must have delivery documents attached\n- Shipment must be in DOCS_NEEDED or NOT_READY_TO_INVOICE status\n"
+        },
+        {
+          "info": {
+            "name": "Revert shipment to not ready",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments/:id/not-ready-to-invoice",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Revert a shipment from ready-to-invoice back to not ready.\n\n## What happens\n\n- Shipment billing status changes back to NOT_READY_TO_INVOICE\n\n## Prerequisites\n\n- Shipment must be in READY_TO_INVOICE status\n- Shipment must not already be invoiced\n"
+        },
+        {
+          "info": {
+            "name": "Generate invoice for shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/shipments/:id/invoice/generate",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Generate an invoice PDF for the shipment.\n\n## What happens\n\n- Invoice PDF is generated\n- Invoice document is attached to the shipment\n- Shipment billing status changes to INVOICED\n\n## Prerequisites\n\n- Shipment must be in READY_TO_INVOICE status\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

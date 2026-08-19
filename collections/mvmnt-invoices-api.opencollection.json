@@ -1,0 +1,287 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Invoices API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/invoices/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for AR invoices using filter criteria.\n\n## Common Filters\n\n- By customer: `{ \"filter\": { \"customerId\": { \"equalTo\": \"uuid\" } } }`\n- Unpaid: `{ \"filter\": { \"status\": { \"in\": [\"AWAITING_PAYMENT\", \"PARTIALLY_PAID\"] } } }`\n- Overdue: `{ \"filter\": { \"overdue\": true } }`\n- By shipment: `{ \"filter\": { \"shipmentId\": { \"equalTo\": \"uuid\" } } }`\n"
+        },
+        {
+          "info": {
+            "name": "Create an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/invoices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new invoice for an order.\n\n## What happens\n\n- Invoice record is created for the order\n- Order status updates to `DELIVERED_UNPAID`\n- Due date calculated from payment term if not provided\n\n## Note\n\nEach shipment can have only one AR invoice. Use `POST /shipments/{id}/invoice/generate`\nto generate the invoice PDF document.\n"
+        },
+        {
+          "info": {
+            "name": "Get an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/invoices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve an invoice by ID.\n\nThe response includes payments, credits, and document info.\n"
+        },
+        {
+          "info": {
+            "name": "Update an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/invoices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update invoice fields.\n\n**Note:** Amount cannot be changed directly. Update order charges instead.\n"
+        },
+        {
+          "info": {
+            "name": "Void an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/invoices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Void/cancel an invoice.\n\n## Prerequisites\n\n- Invoice must not have any payments applied\n- Invoice must not be factored\n"
+        },
+        {
+          "info": {
+            "name": "Mark invoice as awaiting payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/invoices/:id/mark-awaiting",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark invoice as awaiting payment.\n\n## What happens\n\n- Sets invoice date and due date\n- Updates order status to `DELIVERED_UNPAID`\n- Invoice is now ready for payment collection\n"
+        },
+        {
+          "info": {
+            "name": "Email invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/invoices/:id/send",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send invoice to customer via email.\n\n## What happens\n\n- Generates invoice PDF if not already generated\n- Sends email with PDF attachment\n- Logs email in activity feed\n"
+        },
+        {
+          "info": {
+            "name": "Get invoice payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/invoices/:id/payments",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List all payments applied to a specific invoice."
+        },
+        {
+          "info": {
+            "name": "Batch generate invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/invoices/batch-generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate invoices for multiple shipments in a single request.\n\n## What happens\n\n- Creates invoice records for each shipment\n- Generates PDF documents\n- Optionally sends emails grouped by customer\n\n## Note\n\nShipments that already have invoices or are missing requirements\nwill be skipped and returned in the `failed` array.\n"
+        },
+        {
+          "info": {
+            "name": "Get aging report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/invoices/aging-report",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific customer"
+              },
+              {
+                "name": "daysPerBucket",
+                "value": "",
+                "type": "query",
+                "description": "Days per aging bucket"
+              },
+              {
+                "name": "maxDays",
+                "value": "",
+                "type": "query",
+                "description": "Maximum days to track"
+              }
+            ]
+          },
+          "docs": "Generate accounts receivable aging report.\n\n## Report buckets\n\nBy default: Current, 1-30, 31-60, 61-90, 90+ days\n\n## Export formats\n\n- JSON (default)\n- CSV (set Accept header to text/csv)\n"
+        },
+        {
+          "info": {
+            "name": "Get available credits for invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/invoices/:id/available-credits",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List credit memos that can be applied to an invoice.\n\nReturns credits for the same customer with remaining balance\nand matching currency.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

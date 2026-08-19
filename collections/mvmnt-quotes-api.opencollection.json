@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Quotes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter quotes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/quotes/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for quotes using filter criteria.\n\n## Common Filters\n\n- Active quotes: `{ \"filter\": { \"status\": { \"in\": [\"DRAFT\", \"REQUESTED\", \"QUOTED\"] } } }`\n- Won quotes: `{ \"filter\": { \"status\": { \"equalTo\": \"WON\" } } }`\n- By customer: `{ \"filter\": { \"customerId\": { \"equalTo\": \"uuid\" } } }`\n- Expiring soon: `{ \"filter\": { \"expiresAt\": { \"lessThanOrEqualTo\": \"2025-01-20T00:00:00Z\" } } }`\n"
+        },
+        {
+          "info": {
+            "name": "Create a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new quote with order details.\n\n## How it works\n\nCreating a quote also creates an associated Order containing the route and freight details.\nThe Order is embedded in the Quote and cannot be managed separately.\n\n## Required fields\n\n- `customer`: Reference to the customer (shipper profile)\n- `order`: Order details including stops and mode\n\n## Example workflow\n\n1. Create quote with customer and order details\n2. Add pricing (amount) via PATCH\n3. Send to customer (status changes to QUOTED)\n4."
+        },
+        {
+          "info": {
+            "name": "Get a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a quote by ID or key.\n\nThe response includes embedded order details (route, freight, equipment).\n"
+        },
+        {
+          "info": {
+            "name": "Update a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update quote fields including status changes.\n\n## Status changes\n\nStatus changes use this endpoint (not separate action endpoints):\n- Set to QUOTED: `{ \"status\": \"QUOTED\", \"amount\": 2500 }`\n- Set to WON: `{ \"status\": \"WON\" }`\n- Set to LOST: `{ \"status\": \"LOST\", \"lostReason\": \"TOO_HIGH\" }`\n\n## Validation rules\n\n- When setting `status` to `LOST`, `lostReason` is required\n- When `lostReason` is `OTHER`, `lostReasonText` is required\n\n## Note\n\nTo convert a won quote to a shipment, use POST /quotes/{i"
+        },
+        {
+          "info": {
+            "name": "Delete a quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/quotes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Soft delete a quote.\n\nThe quote record is marked as deleted but not permanently removed.\nAssociated orders are also soft deleted.\n"
+        },
+        {
+          "info": {
+            "name": "Convert quote to shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/quotes/:id/convert-to-shipment",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert an accepted quote into a shipment.\n\n## What happens\n\n1. Quote status is set to WON (if not already)\n2. A new Shipment is created\n3. The Order from the quote is linked to the shipment\n4. Optionally, additional orders can be added\n\n## Prerequisites\n\n- Quote must be in QUOTED or WON status\n- Quote cannot already have a shipment\n\n## Response\n\nReturns the IDs of both the quote and the newly created shipment.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

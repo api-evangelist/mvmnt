@@ -1,0 +1,2407 @@
+{
+  "item": [
+    {
+      "id": "6b68356e-7274-44cb-862e-78488da2c569",
+      "name": "Vendors",
+      "description": {
+        "content": "Vendor management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "daea5dce-9d5c-4363-9a5b-e9d5dae8fd7c",
+          "name": "Filter vendors",
+          "request": {
+            "name": "Filter vendors",
+            "description": {
+              "content": "Query vendors using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted vendors are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors",
+                "filter"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"friendlyId\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phone\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"notes\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"taxId\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"currency\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"isMvmnt\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a62bda2b-2d2a-488b-aae0-4aa989b15c28",
+              "name": "Filtered vendors with pagination",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"status\": {\n          \"equalTo\": \"ACTIVE\"\n        }\n      },\n      {\n        \"currency\": {\n          \"equalTo\": \"USD\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"friendlyId\": \"V123456\",\n      \"name\": \"ABC Warehouse Services\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"VENDOR\",\n      \"key\": \"ERP-VENDOR-ABC-001\",\n      \"email\": \"billing@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"status\": \"ACTIVE\",\n      \"notes\": \"Preferred vendor for warehouse services\",\n      \"taxId\": \"12-3456789\",\n      \"currency\": \"MXN\",\n      \"corporateAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"95f7797c-4121-fd16-1ce3-33f14ea53914\"\n      },\n      \"billingAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"f6d066c2-cf8b-30ad-fdf5-a95a03969388\"\n      },\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1957-11-18T17:41:27.528Z\"\n      },\n      \"isMvmnt\": false,\n      \"requiredDocuments\": [\n        \"W9\",\n        \"INSURANCE_CERTIFICATE\"\n      ],\n      \"paymentMethods\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"paymentMethodType\": \"ACH\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"VENDOR-PM-001\",\n          \"status\": \"ACTIVE\",\n          \"isPreferred\": true,\n          \"email\": \"payments@vendor.com\",\n          \"phone\": \"+1-555-123-4567\",\n          \"companyName\": \"Vendor Payments LLC\",\n          \"username\": \"vendor_payments\",\n          \"bankName\": \"Chase Bank\",\n          \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n          \"accountName\": \"Vendor Services Inc\",\n          \"accountNumber\": \"****1234\",\n          \"abaAch\": \"021000021\",\n          \"wire\": \"string\",\n          \"swiftCode\": \"CHASUS33\",\n          \"eftInstitution\": \"001\",\n          \"eftTransit\": \"00010\",\n          \"clabe\": \"string\",\n          \"currency\": \"USD\",\n          \"paymentTerm\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"days\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quickPayFee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"apOnly\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doNotUse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"deletedAt\": \"1950-02-03T11:13:31.122Z\",\n          \"deletedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneExt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatarId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"paymentMethodType\": \"ACH\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"VENDOR-PM-001\",\n          \"status\": \"ACTIVE\",\n          \"isPreferred\": true,\n          \"email\": \"payments@vendor.com\",\n          \"phone\": \"+1-555-123-4567\",\n          \"companyName\": \"Vendor Payments LLC\",\n          \"username\": \"vendor_payments\",\n          \"bankName\": \"Chase Bank\",\n          \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n          \"accountName\": \"Vendor Services Inc\",\n          \"accountNumber\": \"****1234\",\n          \"abaAch\": \"021000021\",\n          \"wire\": \"string\",\n          \"swiftCode\": \"CHASUS33\",\n          \"eftInstitution\": \"001\",\n          \"eftTransit\": \"00010\",\n          \"clabe\": \"string\",\n          \"currency\": \"USD\",\n          \"paymentTerm\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"days\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quickPayFee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"apOnly\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doNotUse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"deletedAt\": \"1951-08-01T14:51:43.510Z\",\n          \"deletedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneExt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatarId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"contacts\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"VENDOR_CONTACT\",\n          \"key\": \"ERP-VENDOR-CONTACT-001\",\n          \"email\": \"john.smith@abcwarehouse.com\",\n          \"phone\": \"+1-555-123-4567\",\n          \"role\": \"Billing Manager\",\n          \"roles\": [\n            \"BILLING\",\n            \"AGENT\"\n          ],\n          \"deletedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneExt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatarId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"deletedAt\": \"1973-08-16T16:02:53.690Z\"\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"VENDOR_CONTACT\",\n          \"key\": \"ERP-VENDOR-CONTACT-001\",\n          \"email\": \"john.smith@abcwarehouse.com\",\n          \"phone\": \"+1-555-123-4567\",\n          \"role\": \"Billing Manager\",\n          \"roles\": [\n            \"BILLING\",\n            \"AGENT\"\n          ],\n          \"deletedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneExt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatarId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"deletedAt\": \"1972-06-07T01:06:24.501Z\"\n        }\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1969-10-13T05:37:17.144Z\"\n      },\n      \"deletedAt\": \"2005-02-04T14:06:55.045Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"friendlyId\": \"V123456\",\n      \"name\": \"ABC Warehouse Services\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"VENDOR\",\n      \"key\": \"ERP-VENDOR-ABC-001\",\n      \"email\": \"billing@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"status\": \"ACTIVE\",\n      \"notes\": \"Preferred vendor for warehouse services\",\n      \"taxId\": \"12-3456789\",\n      \"currency\": \"USD\",\n      \"corporateAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"c195bb03-f3b8-e3a7-7359-71a0ab36761c\"\n      },\n      \"billingAddress\": {\n        \"line1\": \"123 Main St\",\n        \"city\": \"Chicago\",\n        \"country\": \"USA\",\n        \"market\": \"CHI\",\n        \"isAirportOrAirbase\": false,\n        \"isConstructionOrUtilitySite\": false,\n        \"isSmartyValidated\": true,\n        \"obeysDst\": true,\n        \"line2\": \"Suite 400\",\n        \"latitude\": \"41.8781\",\n        \"longitude\": \"-87.6298\",\n        \"cityId\": \"bec9beb1-238b-ae26-b7b3-93d48d27e76c\"\n      },\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1986-07-08T10:18:57.074Z\"\n      },\n      \"isMvmnt\": false,\n      \"requiredDocuments\": [\n        \"W9\",\n        \"INSURANCE_CERTIFICATE\"\n      ],\n      \"paymentMethods\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"paymentMethodType\": \"ACH\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"VENDOR-PM-001\",\n          \"status\": \"ACTIVE\",\n          \"isPreferred\": true,\n          \"email\": \"payments@vendor.com\",\n          \"phone\": \"+1-555-123-4567\",\n          \"companyName\": \"Vendor Payments LLC\",\n          \"username\": \"vendor_payments\",\n          \"bankName\": \"Chase Bank\",\n          \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n          \"accountName\": \"Vendor Services Inc\",\n          \"accountNumber\": \"****1234\",\n          \"abaAch\": \"021000021\",\n          \"wire\": \"string\",\n          \"swiftCode\": \"CHASUS33\",\n          \"eftInstitution\": \"001\",\n          \"eftTransit\": \"00010\",\n          \"clabe\": \"string\",\n          \"currency\": \"USD\",\n          \"paymentTerm\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"days\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quickPayFee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"apOnly\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doNotUse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"deletedAt\": \"1999-12-25T17:03:08.000Z\",\n          \"deletedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneExt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatarId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"paymentMethodType\": \"ACH\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"key\": \"VENDOR-PM-001\",\n          \"status\": \"ACTIVE\",\n          \"isPreferred\": true,\n          \"email\": \"payments@vendor.com\",\n          \"phone\": \"+1-555-123-4567\",\n          \"companyName\": \"Vendor Payments LLC\",\n          \"username\": \"vendor_payments\",\n          \"bankName\": \"Chase Bank\",\n          \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n          \"accountName\": \"Vendor Services Inc\",\n          \"accountNumber\": \"****1234\",\n          \"abaAch\": \"021000021\",\n          \"wire\": \"string\",\n          \"swiftCode\": \"CHASUS33\",\n          \"eftInstitution\": \"001\",\n          \"eftTransit\": \"00010\",\n          \"clabe\": \"string\",\n          \"currency\": \"USD\",\n          \"paymentTerm\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"days\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quickPayFee\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"apOnly\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"doNotUse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"deletedAt\": \"1971-07-18T14:18:18.807Z\",\n          \"deletedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneExt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatarId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"contacts\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"VENDOR_CONTACT\",\n          \"key\": \"ERP-VENDOR-CONTACT-001\",\n          \"email\": \"john.smith@abcwarehouse.com\",\n          \"phone\": \"+1-555-123-4567\",\n          \"role\": \"Billing Manager\",\n          \"roles\": [\n            \"BILLING\",\n            \"AGENT\"\n          ],\n          \"deletedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneExt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatarId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"deletedAt\": \"1976-01-13T02:15:10.608Z\"\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"object\": \"VENDOR_CONTACT\",\n          \"key\": \"ERP-VENDOR-CONTACT-001\",\n          \"email\": \"john.smith@abcwarehouse.com\",\n          \"phone\": \"+1-555-123-4567\",\n          \"role\": \"Billing Manager\",\n          \"roles\": [\n            \"BILLING\",\n            \"AGENT\"\n          ],\n          \"deletedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"phoneExt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avatarId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deletedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"deletedAt\": \"1971-12-09T22:40:48.754Z\"\n        }\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2014-04-27T15:35:28.785Z\"\n      },\n      \"deletedAt\": \"1968-04-09T11:04:22.984Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e86520a6-46e1-4898-bf70-17f083d98ab4",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"status\": {\n          \"equalTo\": \"ACTIVE\"\n        }\n      },\n      {\n        \"currency\": {\n          \"equalTo\": \"USD\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "faee96ce-ce76-4970-82c7-c63a15f8645c",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"status\": {\n          \"equalTo\": \"ACTIVE\"\n        }\n      },\n      {\n        \"currency\": {\n          \"equalTo\": \"USD\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b71aa034-11d7-4d35-ab4a-88d52235fb5f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "filter"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"status\": {\n          \"equalTo\": \"ACTIVE\"\n        }\n      },\n      {\n        \"currency\": {\n          \"equalTo\": \"USD\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4ad28ba-ca5b-409e-8c91-80c26c250c61",
+          "name": "Create a new vendor",
+          "request": {
+            "name": "Create a new vendor",
+            "description": {
+              "content": "Create a new vendor within an organization.\n\nVendors represent service providers (warehousing, storage, etc.) that are not carriers.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"status\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"corporateAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"market\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": false,\n    \"obeysDst\": true,\n    \"cityId\": \"<uuid>\"\n  },\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"market\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": false,\n    \"obeysDst\": true,\n    \"cityId\": \"<uuid>\"\n  },\n  \"paymentTermId\": \"<uuid>\",\n  \"isMvmnt\": \"<boolean>\",\n  \"requiredDocuments\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4240c69e-1e64-424e-895a-377bb36a95fa",
+              "name": "Vendor created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"ABC Warehouse Services\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"taxId\": \"12-3456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"friendlyId\": \"V123456\",\n  \"name\": \"ABC Warehouse Services\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"VENDOR\",\n  \"key\": \"ERP-VENDOR-ABC-001\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"status\": \"ACTIVE\",\n  \"notes\": \"Preferred vendor for warehouse services\",\n  \"taxId\": \"12-3456789\",\n  \"currency\": \"USD\",\n  \"corporateAddress\": {\n    \"line1\": \"123 Main St\",\n    \"city\": \"Chicago\",\n    \"country\": \"USA\",\n    \"market\": \"CHI\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": true,\n    \"obeysDst\": true,\n    \"line2\": \"Suite 400\",\n    \"latitude\": \"41.8781\",\n    \"longitude\": \"-87.6298\",\n    \"cityId\": \"d6e0891e-548d-59cf-e455-c35a0d205356\"\n  },\n  \"billingAddress\": {\n    \"line1\": \"123 Main St\",\n    \"city\": \"Chicago\",\n    \"country\": \"USA\",\n    \"market\": \"CHI\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": true,\n    \"obeysDst\": true,\n    \"line2\": \"Suite 400\",\n    \"latitude\": \"41.8781\",\n    \"longitude\": \"-87.6298\",\n    \"cityId\": \"641f9483-219c-bfe9-5eae-31ce17c2b489\"\n  },\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1979-04-24T20:20:31.180Z\"\n  },\n  \"isMvmnt\": false,\n  \"requiredDocuments\": [\n    \"W9\",\n    \"INSURANCE_CERTIFICATE\"\n  ],\n  \"paymentMethods\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"VENDOR-PM-001\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@vendor.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Vendor Payments LLC\",\n      \"username\": \"vendor_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Vendor Services Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"2006-01-18T19:04:10.817Z\"\n      },\n      \"deletedAt\": \"2025-08-19T06:13:42.746Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1955-04-23T22:39:33.687Z\"\n      }\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"VENDOR-PM-001\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@vendor.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Vendor Payments LLC\",\n      \"username\": \"vendor_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Vendor Services Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1964-04-11T18:18:03.727Z\"\n      },\n      \"deletedAt\": \"1978-11-29T00:41:15.905Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2008-09-16T18:58:34.149Z\"\n      }\n    }\n  ],\n  \"contacts\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"key\": \"ERP-VENDOR-CONTACT-001\",\n      \"email\": \"john.smith@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"role\": \"Billing Manager\",\n      \"roles\": [\n        \"BILLING\",\n        \"AGENT\"\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1952-12-04T10:44:53.157Z\"\n      },\n      \"deletedAt\": \"2012-09-01T00:50:51.411Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"key\": \"ERP-VENDOR-CONTACT-001\",\n      \"email\": \"john.smith@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"role\": \"Billing Manager\",\n      \"roles\": [\n        \"BILLING\",\n        \"AGENT\"\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1974-05-23T04:37:17.531Z\"\n      },\n      \"deletedAt\": \"1966-03-28T08:23:07.669Z\"\n    }\n  ],\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1994-02-06T19:16:30.942Z\"\n  },\n  \"deletedAt\": \"2015-10-29T20:30:32.598Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d45e7c3-f2c0-4e89-a3a0-11a2bc1b1cc7",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"ABC Warehouse Services\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"taxId\": \"12-3456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87eded83-b55e-4573-802e-52349e8a0f0b",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"ABC Warehouse Services\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"taxId\": \"12-3456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f05ea21-aa92-4266-932e-03c43d7ed9f8",
+              "name": "Conflict - resource already exists or constraint violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"ABC Warehouse Services\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"taxId\": \"12-3456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "925b1c34-d9ed-4721-beba-dc6828f0a797",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"ABC Warehouse Services\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"status\": \"ACTIVE\",\n  \"currency\": \"USD\",\n  \"taxId\": \"12-3456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18a392c5-8000-4901-a7ce-11a9e3d48e2a",
+          "name": "Get a vendor by ID",
+          "request": {
+            "name": "Get a vendor by ID",
+            "description": {
+              "content": "Retrieve a single vendor by its unique identifier.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4798e90-25b3-49e5-8280-3dc3f692b6d4",
+              "name": "Vendor found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"friendlyId\": \"V123456\",\n  \"name\": \"ABC Warehouse Services\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"VENDOR\",\n  \"key\": \"ERP-VENDOR-ABC-001\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"status\": \"ACTIVE\",\n  \"notes\": \"Preferred vendor for warehouse services\",\n  \"taxId\": \"12-3456789\",\n  \"currency\": \"USD\",\n  \"corporateAddress\": {\n    \"line1\": \"123 Main St\",\n    \"city\": \"Chicago\",\n    \"country\": \"USA\",\n    \"market\": \"CHI\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": true,\n    \"obeysDst\": true,\n    \"line2\": \"Suite 400\",\n    \"latitude\": \"41.8781\",\n    \"longitude\": \"-87.6298\",\n    \"cityId\": \"d6e0891e-548d-59cf-e455-c35a0d205356\"\n  },\n  \"billingAddress\": {\n    \"line1\": \"123 Main St\",\n    \"city\": \"Chicago\",\n    \"country\": \"USA\",\n    \"market\": \"CHI\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": true,\n    \"obeysDst\": true,\n    \"line2\": \"Suite 400\",\n    \"latitude\": \"41.8781\",\n    \"longitude\": \"-87.6298\",\n    \"cityId\": \"641f9483-219c-bfe9-5eae-31ce17c2b489\"\n  },\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1979-04-24T20:20:31.180Z\"\n  },\n  \"isMvmnt\": false,\n  \"requiredDocuments\": [\n    \"W9\",\n    \"INSURANCE_CERTIFICATE\"\n  ],\n  \"paymentMethods\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"VENDOR-PM-001\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@vendor.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Vendor Payments LLC\",\n      \"username\": \"vendor_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Vendor Services Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"2006-01-18T19:04:10.817Z\"\n      },\n      \"deletedAt\": \"2025-08-19T06:13:42.746Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1955-04-23T22:39:33.687Z\"\n      }\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"VENDOR-PM-001\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@vendor.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Vendor Payments LLC\",\n      \"username\": \"vendor_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Vendor Services Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1964-04-11T18:18:03.727Z\"\n      },\n      \"deletedAt\": \"1978-11-29T00:41:15.905Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2008-09-16T18:58:34.149Z\"\n      }\n    }\n  ],\n  \"contacts\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"key\": \"ERP-VENDOR-CONTACT-001\",\n      \"email\": \"john.smith@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"role\": \"Billing Manager\",\n      \"roles\": [\n        \"BILLING\",\n        \"AGENT\"\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1952-12-04T10:44:53.157Z\"\n      },\n      \"deletedAt\": \"2012-09-01T00:50:51.411Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"key\": \"ERP-VENDOR-CONTACT-001\",\n      \"email\": \"john.smith@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"role\": \"Billing Manager\",\n      \"roles\": [\n        \"BILLING\",\n        \"AGENT\"\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1974-05-23T04:37:17.531Z\"\n      },\n      \"deletedAt\": \"1966-03-28T08:23:07.669Z\"\n    }\n  ],\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1994-02-06T19:16:30.942Z\"\n  },\n  \"deletedAt\": \"2015-10-29T20:30:32.598Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e24cbc39-6d12-41b9-b6bb-ee9690590d86",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c577d4d6-c55f-49d8-9821-0c37e677ade7",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7a6d3a3-b554-44ae-bf40-d209d1be7621",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3dd75ecb-5d2c-419a-be5c-8212418358fe",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad437474-1074-42b6-ad86-f08eb83b0b99",
+          "name": "Update a vendor",
+          "request": {
+            "name": "Update a vendor",
+            "description": {
+              "content": "Partially update a vendor. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"status\": \"<string,null>\",\n  \"notes\": \"<string,null>\",\n  \"taxId\": \"<string,null>\",\n  \"currency\": \"<string>\",\n  \"corporateAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"market\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": false,\n    \"obeysDst\": true,\n    \"cityId\": \"<uuid>\"\n  },\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"market\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": false,\n    \"obeysDst\": true,\n    \"cityId\": \"<uuid>\"\n  },\n  \"paymentTermId\": \"<string,null-uuid>\",\n  \"isMvmnt\": \"<boolean,null>\",\n  \"requiredDocuments\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e98a06a0-30ed-4dd9-b2ae-e14d7efbcf18",
+              "name": "Vendor updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\",\n  \"phone\": \"+1-555-999-8888\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"friendlyId\": \"V123456\",\n  \"name\": \"ABC Warehouse Services\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"VENDOR\",\n  \"key\": \"ERP-VENDOR-ABC-001\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"status\": \"ACTIVE\",\n  \"notes\": \"Preferred vendor for warehouse services\",\n  \"taxId\": \"12-3456789\",\n  \"currency\": \"USD\",\n  \"corporateAddress\": {\n    \"line1\": \"123 Main St\",\n    \"city\": \"Chicago\",\n    \"country\": \"USA\",\n    \"market\": \"CHI\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": true,\n    \"obeysDst\": true,\n    \"line2\": \"Suite 400\",\n    \"latitude\": \"41.8781\",\n    \"longitude\": \"-87.6298\",\n    \"cityId\": \"d6e0891e-548d-59cf-e455-c35a0d205356\"\n  },\n  \"billingAddress\": {\n    \"line1\": \"123 Main St\",\n    \"city\": \"Chicago\",\n    \"country\": \"USA\",\n    \"market\": \"CHI\",\n    \"isAirportOrAirbase\": false,\n    \"isConstructionOrUtilitySite\": false,\n    \"isSmartyValidated\": true,\n    \"obeysDst\": true,\n    \"line2\": \"Suite 400\",\n    \"latitude\": \"41.8781\",\n    \"longitude\": \"-87.6298\",\n    \"cityId\": \"641f9483-219c-bfe9-5eae-31ce17c2b489\"\n  },\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1979-04-24T20:20:31.180Z\"\n  },\n  \"isMvmnt\": false,\n  \"requiredDocuments\": [\n    \"W9\",\n    \"INSURANCE_CERTIFICATE\"\n  ],\n  \"paymentMethods\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"VENDOR-PM-001\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@vendor.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Vendor Payments LLC\",\n      \"username\": \"vendor_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Vendor Services Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"2006-01-18T19:04:10.817Z\"\n      },\n      \"deletedAt\": \"2025-08-19T06:13:42.746Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1955-04-23T22:39:33.687Z\"\n      }\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"key\": \"VENDOR-PM-001\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@vendor.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Vendor Payments LLC\",\n      \"username\": \"vendor_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Vendor Services Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1964-04-11T18:18:03.727Z\"\n      },\n      \"deletedAt\": \"1978-11-29T00:41:15.905Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2008-09-16T18:58:34.149Z\"\n      }\n    }\n  ],\n  \"contacts\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"key\": \"ERP-VENDOR-CONTACT-001\",\n      \"email\": \"john.smith@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"role\": \"Billing Manager\",\n      \"roles\": [\n        \"BILLING\",\n        \"AGENT\"\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1952-12-04T10:44:53.157Z\"\n      },\n      \"deletedAt\": \"2012-09-01T00:50:51.411Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"key\": \"ERP-VENDOR-CONTACT-001\",\n      \"email\": \"john.smith@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"role\": \"Billing Manager\",\n      \"roles\": [\n        \"BILLING\",\n        \"AGENT\"\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1974-05-23T04:37:17.531Z\"\n      },\n      \"deletedAt\": \"1966-03-28T08:23:07.669Z\"\n    }\n  ],\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1994-02-06T19:16:30.942Z\"\n  },\n  \"deletedAt\": \"2015-10-29T20:30:32.598Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6a123e5-1608-416b-a0ec-3a43314746b7",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\",\n  \"phone\": \"+1-555-999-8888\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b2a6996-88ca-4a83-9f16-5aeb88347b19",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\",\n  \"phone\": \"+1-555-999-8888\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff39bdf9-9e52-40db-b38c-fe71c239fcca",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\",\n  \"phone\": \"+1-555-999-8888\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff557259-89c1-4023-ae90-bc7a0e08d564",
+              "name": "Conflict - resource already exists or constraint violation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\",\n  \"phone\": \"+1-555-999-8888\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "191a72a7-d1b2-4211-a73b-793f717a9587",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\",\n  \"phone\": \"+1-555-999-8888\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68215ffa-f3b7-43d7-9023-8970aa048ac8",
+          "name": "Delete a vendor",
+          "request": {
+            "name": "Delete a vendor",
+            "description": {
+              "content": "Soft delete a vendor (sets deletedAt timestamp).\n\nThe vendor will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bc7d5e6-42fd-4169-99ad-652a031a7ae3",
+              "name": "Vendor deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56e2b6a3-b187-4102-9ac9-d2c6f12c6e81",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f40da3b1-097c-4aab-97da-1ba88d8c90e1",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bdd10fa-1424-48c8-8f79-0371ca002532",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e58edf51-fe75-4aea-a73c-1fb0da323298",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2415b22b-dcd5-41bd-9c4a-86bf78755a01",
+          "name": "Search vendors",
+          "request": {
+            "name": "Search vendors",
+            "description": {
+              "content": "Search vendors using OpenSearch-powered full-text and field-specific search.\n\nThis endpoint provides fast, indexed search across vendor data with support for:\n- Full-text search across multiple fields\n- Field-specific filtering with various operators\n- Sorting and pagination\n- Saved search preferences\n\n**Note:** Only active (non-deleted) vendors are searchable. Soft-deleted records are automatically excluded from all search results.\n\n**Response Formats:**\n- `flat` (default): Returns indexed fields only for faster performance\n- `full`: Returns complete vendor objects with all relationships\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"friendlyId\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"service\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"taxId\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"location\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"zip\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"primaryContactName\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"primaryContactEmail\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"primaryContactPhone\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"paymentTermName\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"quickbooksVendorId\": {\n      \"operator\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"numberOfTimesUsed\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"min\": \"<integer>\",\n      \"max\": \"<integer>\"\n    },\n    \"lastUsed\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<date>\",\n      \"min\": \"<date>\",\n      \"max\": \"<date>\",\n      \"valueRelative\": \"<integer>\",\n      \"valueRelativeUnit\": \"<string>\",\n      \"minRelative\": \"<integer>\",\n      \"minRelativeUnit\": \"<string>\",\n      \"maxRelative\": \"<integer>\",\n      \"maxRelativeUnit\": \"<string>\"\n    },\n    \"createdAt\": {\n      \"operator\": \"<string>\",\n      \"value\": \"<dateTime>\",\n      \"min\": \"<dateTime>\",\n      \"max\": \"<dateTime>\",\n      \"valueRelative\": \"<integer>\",\n      \"valueRelativeUnit\": \"<string>\",\n      \"minRelative\": \"<integer>\",\n      \"minRelativeUnit\": \"<string>\",\n      \"maxRelative\": \"<integer>\",\n      \"maxRelativeUnit\": \"<string>\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ],\n  \"savedSearch\": {\n    \"id\": \"<uuid>\",\n    \"key\": \"<string>\"\n  },\n  \"format\": \"flat\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e101efcf-8547-4c21-ae3e-1227da0563fa",
+              "name": "Successful search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"friendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"service\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"taxId\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"location\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zip\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"primaryContactName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactEmail\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactPhone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"paymentTermName\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"quickbooksVendorId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"numberOfTimesUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"lastUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": \"2025-01-01\",\n      \"max\": \"2025-01-31\"\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"object\": \"VENDOR_SEARCH_ROW\",\n      \"id\": \"f6f6e111-e811-e922-1e7b-205fdd795767\",\n      \"friendlyId\": \"string\",\n      \"name\": \"string\",\n      \"numberOfTimesUsed\": 1832,\n      \"createdAt\": \"1997-10-02T00:17:46.669Z\",\n      \"status\": \"active\",\n      \"taxId\": \"string\",\n      \"service\": [\n        \"string\",\n        \"string\"\n      ],\n      \"location\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\",\n      \"primaryContactName\": \"string\",\n      \"primaryContactEmail\": \"dQ5bf@uTZLhigmOHsdFFHspRqotsbsSSH.he\",\n      \"primaryContactPhone\": \"string\",\n      \"paymentTermName\": \"string\",\n      \"quickbooksVendorId\": \"string\",\n      \"lastUsed\": \"1981-07-15\"\n    },\n    {\n      \"object\": \"VENDOR_SEARCH_ROW\",\n      \"id\": \"84292377-fa3e-e7a0-07a2-b35d5bc06466\",\n      \"friendlyId\": \"string\",\n      \"name\": \"string\",\n      \"numberOfTimesUsed\": 2307,\n      \"createdAt\": \"2012-03-04T02:51:13.056Z\",\n      \"status\": \"active\",\n      \"taxId\": \"string\",\n      \"service\": [\n        \"string\",\n        \"string\"\n      ],\n      \"location\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\",\n      \"primaryContactName\": \"string\",\n      \"primaryContactEmail\": \"d8moTLpjKL1d@MfaMrevaPLJWnhwxZklLjw.sfc\",\n      \"primaryContactPhone\": \"string\",\n      \"paymentTermName\": \"string\",\n      \"quickbooksVendorId\": \"string\",\n      \"lastUsed\": \"1989-08-18\"\n    }\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50,\n    \"totalPages\": 25\n  },\n  \"totalResults\": 7566\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d3e700b-6934-46ed-a2f3-3a02b95c965b",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"friendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"service\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"taxId\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"location\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zip\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"primaryContactName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactEmail\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactPhone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"paymentTermName\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"quickbooksVendorId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"numberOfTimesUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"lastUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": \"2025-01-01\",\n      \"max\": \"2025-01-31\"\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9d47175-4af5-44d6-a404-35eda97a310f",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"friendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"service\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"taxId\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"location\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zip\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"primaryContactName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactEmail\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactPhone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"paymentTermName\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"quickbooksVendorId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"numberOfTimesUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"lastUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": \"2025-01-01\",\n      \"max\": \"2025-01-31\"\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d733eee-8e3d-40e0-a016-751e8fa81e97",
+              "name": "Validation error - invalid field values",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"friendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"service\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"taxId\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"location\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zip\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"primaryContactName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactEmail\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactPhone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"paymentTermName\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"quickbooksVendorId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"numberOfTimesUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"lastUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": \"2025-01-01\",\n      \"max\": \"2025-01-31\"\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d903250-cd9a-4eb2-a137-1d872c2c2d24",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"criteria\": {\n    \"id\": {\n      \"operator\": \"EQUALS\",\n      \"values\": [\n        \"550e8400-e29b-41d4-a716-446655440000\"\n      ]\n    },\n    \"friendlyId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"name\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"status\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"service\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"taxId\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"location\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"city\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"state\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"zip\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"country\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"primaryContactName\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactEmail\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"primaryContactPhone\": {\n      \"operator\": \"INCLUDES\",\n      \"values\": [\n        \"search term\"\n      ]\n    },\n    \"paymentTermName\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"quickbooksVendorId\": {\n      \"operator\": \"ONE_OF\",\n      \"values\": [\n        \"ACTIVE\",\n        \"PENDING\"\n      ]\n    },\n    \"numberOfTimesUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": 10,\n      \"max\": 100\n    },\n    \"lastUsed\": {\n      \"operator\": \"BETWEEN\",\n      \"min\": \"2025-01-01\",\n      \"max\": \"2025-01-31\"\n    },\n    \"createdAt\": {\n      \"operator\": \"AFTER\",\n      \"value\": \"2025-01-01T00:00:00Z\"\n    }\n  },\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  },\n  \"sort\": [\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    },\n    {\n      \"field\": \"createdAt\",\n      \"order\": \"desc\"\n    }\n  ],\n  \"savedSearch\": {},\n  \"format\": \"flat\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Request limit per minute",
+                  "key": "X-RateLimit-Limit",
+                  "value": "6041"
+                },
+                {
+                  "disabled": false,
+                  "description": "Remaining requests in current window",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "6041"
+                },
+                {
+                  "disabled": false,
+                  "description": "Unix timestamp when rate limit resets",
+                  "key": "X-RateLimit-Reset",
+                  "value": "6041"
+                },
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying",
+                  "key": "Retry-After",
+                  "value": "6041"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d434d604-ce12-4646-b73b-f291525ab324",
+          "name": "Get vendor outstanding bills",
+          "request": {
+            "name": "Get vendor outstanding bills",
+            "description": {
+              "content": "List outstanding (unpaid) bills for a vendor.\n\nReturns bills with status `APPROVED_TO_PAY`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors",
+                ":id",
+                "outstanding-bills"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "926a4763-d006-43df-a12b-43b2f82e8714",
+              "name": "Outstanding bills retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id",
+                    "outstanding-bills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bills\": [\n    {\n      \"id\": \"b3444858-8530-f229-3e10-a0b07f98288f\",\n      \"friendlyId\": \"string\",\n      \"entityType\": \"CARRIER\",\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"1948-04-11T15:02:58.335Z\"\n      },\n      \"vendor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"friendlyId\": \"V123456\",\n        \"name\": \"ABC Warehouse Services\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-VENDOR-ABC-001\",\n        \"email\": \"billing@abcwarehouse.com\",\n        \"phone\": \"+1-555-123-4567\",\n        \"status\": \"ACTIVE\",\n        \"currency\": \"USD\"\n      },\n      \"amount\": 4138.085278476069,\n      \"invoiceDate\": \"1953-03-15\",\n      \"dueDate\": \"1971-11-08\",\n      \"openBalance\": 7894.167308230091,\n      \"isOverdue\": false\n    },\n    {\n      \"id\": \"ba4af968-dcbd-367e-f1a4-8383442dc0cd\",\n      \"friendlyId\": \"string\",\n      \"entityType\": \"VENDOR\",\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"1959-01-06T15:00:04.624Z\"\n      },\n      \"vendor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"friendlyId\": \"V123456\",\n        \"name\": \"ABC Warehouse Services\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-VENDOR-ABC-001\",\n        \"email\": \"billing@abcwarehouse.com\",\n        \"phone\": \"+1-555-123-4567\",\n        \"status\": \"ACTIVE\",\n        \"currency\": \"USD\"\n      },\n      \"amount\": 3349.0994398031835,\n      \"invoiceDate\": \"2020-09-30\",\n      \"dueDate\": \"2022-04-05\",\n      \"openBalance\": 3097.180751697248,\n      \"isOverdue\": true\n    }\n  ],\n  \"totalOutstanding\": 5832.698616141939\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0cb167e-d55b-4b34-ae77-c46f0ca713a2",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id",
+                    "outstanding-bills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "694c0734-e9cb-4876-abaf-6861a6bd9f4f",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id",
+                    "outstanding-bills"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6143fbd3-a301-4f02-b293-adf73ab9ad6b",
+          "name": "Get vendor bills available for payment",
+          "request": {
+            "name": "Get vendor bills available for payment",
+            "description": {
+              "content": "List bills available for payment from a vendor.\n\nReturns bills with status `APPROVED_TO_PAY` and open balance.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "vendors",
+                ":id",
+                "bills-for-payment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "by",
+                  "value": "<string>",
+                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource ID (UUID) or client key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37e9abcd-6b31-4d1f-a3e5-aef696eb1ce4",
+              "name": "Bills for payment retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id",
+                    "bills-for-payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bills\": [\n    {\n      \"id\": \"82566b5f-2f96-9f1b-396f-00b71df7ad6d\",\n      \"friendlyId\": \"string\",\n      \"entityType\": \"VENDOR\",\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"1960-08-20T01:49:57.923Z\"\n      },\n      \"vendor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"friendlyId\": \"V123456\",\n        \"name\": \"ABC Warehouse Services\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-VENDOR-ABC-001\",\n        \"email\": \"billing@abcwarehouse.com\",\n        \"phone\": \"+1-555-123-4567\",\n        \"status\": \"ACTIVE\",\n        \"currency\": \"USD\"\n      },\n      \"invoiceDate\": \"1994-05-29\",\n      \"dueDate\": \"1988-07-18\",\n      \"amount\": 2374.1244594940827,\n      \"amountPaid\": 6118.865806877867,\n      \"openBalance\": 2493.73967804018,\n      \"isOverdue\": true,\n      \"shipmentId\": \"b090c655-4cfc-8e19-d49b-f440f763f4f3\",\n      \"shipmentFriendlyId\": \"string\"\n    },\n    {\n      \"id\": \"3e819bd1-541e-fd4d-65cc-e57f8ab2e9c9\",\n      \"friendlyId\": \"string\",\n      \"entityType\": \"VENDOR\",\n      \"carrier\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Swift Transportation\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CARRIER-SWIFT\",\n        \"phoneNumber\": \"+1-555-987-6543\",\n        \"email\": \"dispatch@swifttrans.com\",\n        \"deletedAt\": \"1985-12-09T12:10:08.106Z\"\n      },\n      \"vendor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"friendlyId\": \"V123456\",\n        \"name\": \"ABC Warehouse Services\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-VENDOR-ABC-001\",\n        \"email\": \"billing@abcwarehouse.com\",\n        \"phone\": \"+1-555-123-4567\",\n        \"status\": \"ACTIVE\",\n        \"currency\": \"USD\"\n      },\n      \"invoiceDate\": \"1973-12-06\",\n      \"dueDate\": \"2005-08-30\",\n      \"amount\": 4716.955026861459,\n      \"amountPaid\": 1093.070167208341,\n      \"openBalance\": 9859.030865955376,\n      \"isOverdue\": true,\n      \"shipmentId\": \"4c3a5473-1b77-b475-8a87-e1a8b70aa6e6\",\n      \"shipmentFriendlyId\": \"string\"\n    }\n  ],\n  \"totalOutstanding\": 7973.77871198372,\n  \"carrier\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Swift Transportation\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CARRIER-SWIFT\",\n    \"phoneNumber\": \"+1-555-987-6543\",\n    \"email\": \"dispatch@swifttrans.com\",\n    \"deletedAt\": \"2009-06-15T04:04:26.430Z\"\n  },\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"carrierFactor\": {\n    \"id\": \"fe73f05b-63ed-4005-7112-fa1be6dcc5e1\",\n    \"companyName\": \"string\",\n    \"bankName\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fa168ce-bcbf-40c7-8d6a-6fc7ce033d09",
+              "name": "Unauthorized - invalid or missing access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id",
+                    "bills-for-payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bead9a0-8849-44cc-a5b9-b5f1ae535ce2",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "vendors",
+                    ":id",
+                    "bills-for-payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mvmnt.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "62e5f4e1-9672-4cbe-aa2f-00c33f74c048",
+    "name": "MVMNT Bill Payments Vendors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+      "type": "text/plain"
+    }
+  }
+}

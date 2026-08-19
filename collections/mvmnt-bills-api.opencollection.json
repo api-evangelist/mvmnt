@@ -1,0 +1,295 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Bills API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bills",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter bills",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bills/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for AP bills using filter criteria.\n\n## Common Filters\n\n- By carrier: `{ \"filter\": { \"carrierId\": { \"equalTo\": \"uuid\" } } }`\n- By vendor: `{ \"filter\": { \"vendorId\": { \"equalTo\": \"uuid\" } } }`\n- Awaiting approval: `{ \"filter\": { \"status\": { \"equalTo\": \"IN_REVIEW\" } } }`\n- By shipment: `{ \"filter\": { \"shipmentId\": { \"equalTo\": \"uuid\" } } }`\n- Overdue: `{ \"filter\": { \"overdue\": true } }`\n"
+        },
+        {
+          "info": {
+            "name": "Record a bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bills",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record a carrier or vendor bill (invoice).\n\n## What happens\n\n- Bill record is created for the load carrier or vended service\n- Entity status updates to `IN_REVIEW`\n- Due date calculated from payment term if not provided\n\n## Prerequisites\n\n- LoadCarrier or VendedService must exist\n- Entity must be in `AWAITING_INVOICE` status\n"
+        },
+        {
+          "info": {
+            "name": "Get a bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/bills/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Retrieve a bill by ID.\n\nThe response includes payments applied and carrier/vendor details.\n"
+        },
+        {
+          "info": {
+            "name": "Update a bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/bills/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update bill fields.\n\n## Constraints\n\n- Cannot change amount if payments have been applied\n- Status changes use action endpoints\n"
+        },
+        {
+          "info": {
+            "name": "Delete a bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/bills/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Delete a bill.\n\n## Prerequisites\n\n- Bill must not have any payments applied\n\n## What happens\n\n- Bill record is deleted\n- Entity status reverts to `AWAITING_INVOICE`\n"
+        },
+        {
+          "info": {
+            "name": "Approve bill for payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bills/:id/approve",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Approve a bill for payment.\n\n## What happens\n\n- Bill status changes to `APPROVED_TO_PAY`\n- Bill is now ready for payment\n\n## Prerequisites\n\n- Bill must be in `IN_REVIEW` status\n"
+        },
+        {
+          "info": {
+            "name": "Batch approve bills",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bills/batch-approve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approve multiple bills for payment in a single request.\n\nBills that cannot be approved will be returned in the `failed` array.\n"
+        },
+        {
+          "info": {
+            "name": "Unapprove bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bills/:id/unapprove",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "Revert bill from approved back to in review.\n\n## What happens\n\n- Bill status changes to `IN_REVIEW`\n\n## Prerequisites\n\n- Bill must be in `APPROVED_TO_PAY` status\n- Bill must not have any payments\n"
+        },
+        {
+          "info": {
+            "name": "Revert bill to awaiting invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/bills/:id/revert",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revert bill completely back to awaiting invoice state.\n\n## What happens\n\n- Bill record is deleted\n- Any payments are deleted\n- Entity status reverts to `AWAITING_INVOICE`\n\n## Use case\n\nUse when a bill was recorded incorrectly and needs to start over.\n"
+        },
+        {
+          "info": {
+            "name": "Get bill payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/bills/:id/payments",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List all payments applied to a specific bill."
+        },
+        {
+          "info": {
+            "name": "Get AP aging report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/bills/aging-report",
+            "params": [
+              {
+                "name": "carrierId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific carrier"
+              },
+              {
+                "name": "vendorId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific vendor"
+              },
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by entity type"
+              },
+              {
+                "name": "daysPerBucket",
+                "value": "",
+                "type": "query",
+                "description": "Days per aging bucket"
+              },
+              {
+                "name": "maxDays",
+                "value": "",
+                "type": "query",
+                "description": "Maximum days to track"
+              }
+            ]
+          },
+          "docs": "Generate accounts payable aging report.\n\n## Report buckets\n\nBy default: Current, 1-30, 31-60, 61-90, 90+ days\n\n## Export formats\n\n- JSON (default)\n- CSV (set Accept header to text/csv)\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

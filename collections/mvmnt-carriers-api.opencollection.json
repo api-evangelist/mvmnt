@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MVMNT Bill Payments Carriers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Carriers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/carriers/filter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query carriers using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted carriers are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n\nReturns carriers of all types (TRUCKLOAD, AIR, CARTAGE, LINEHAUL, LTL, OCEAN, RAIL)\nwith type-specific fields included based on carrier type.\n"
+        },
+        {
+          "info": {
+            "name": "Create a new carrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/carriers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new carrier within an organization.\n\nThe carrier type must be specified and determines which fields are available:\n- **TRUCKLOAD**: Includes insurance, safety rating, and FMCSA inspection fields\n- **AIR, CARTAGE, LINEHAUL, LTL, OCEAN, RAIL**: Include only base carrier fields\n\nNote: In the backend, null carrier type is represented as TRUCKLOAD in the public API.\n"
+        },
+        {
+          "info": {
+            "name": "Get a carrier by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/carriers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ]
+          },
+          "docs": "Retrieve a single carrier by its unique identifier.\n\nThe response will include type-specific fields based on the carrier's type:\n- **TRUCKLOAD**: Includes insurance, safety rating, and FMCSA inspection fields\n- **AIR, CARTAGE, LINEHAUL, LTL, OCEAN, RAIL**: Include only base carrier fields\n"
+        },
+        {
+          "info": {
+            "name": "Update a carrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mvmnt.io/v1/carriers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a carrier. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n\nThe carrier type determines which fields can be updated:\n- **TRUCKLOAD**: Can update insurance, safety rating, and FMCSA fields\n- **AIR, CARTAGE, LINEHAUL, LTL, OCEAN, RAIL**: Can only update base carrier fields\n\nChanging the carrier type will affect which "
+        },
+        {
+          "info": {
+            "name": "Delete a carrier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mvmnt.io/v1/carriers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              }
+            ]
+          },
+          "docs": "Soft delete a carrier (sets deletedAt timestamp).\n\nThe carrier will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n"
+        },
+        {
+          "info": {
+            "name": "Search carriers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mvmnt.io/v1/carriers/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search carriers using OpenSearch-powered full-text and field-specific search.\n\nThis endpoint searches both:\n- **ONBOARDED carriers**: Carriers with profiles in your organization\n- **FMCSA carriers**: Public carrier records from FMCSA database\n\nFeatures:\n- Full-text search across multiple fields\n- Field-specific filtering with various operators\n- Sorting and pagination\n- Saved search preferences\n\n**Note:** Only active (non-deleted) carriers are searchable. Soft-deleted records are automatically e"
+        },
+        {
+          "info": {
+            "name": "Get carrier outstanding bills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/carriers/:id/outstanding-bills",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List outstanding (unpaid) bills for a carrier.\n\nReturns bills with status `APPROVED_TO_PAY`.\n"
+        },
+        {
+          "info": {
+            "name": "Get carrier bills available for payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mvmnt.io/v1/carriers/:id/bills-for-payment",
+            "params": [
+              {
+                "name": "id",
+                "value": "550e8400-e29b-41d4-a716-446655440000",
+                "type": "path",
+                "description": "Resource ID (UUID) or client key"
+              },
+              {
+                "name": "by",
+                "value": "key",
+                "type": "query",
+                "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
+              }
+            ]
+          },
+          "docs": "List bills available for payment from a carrier.\n\nReturns bills with status `APPROVED_TO_PAY` and open balance.\n\n## Carrier factor\n\nIf the carrier has a factor configured, factor details are included.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
