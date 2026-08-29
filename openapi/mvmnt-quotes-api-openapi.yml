@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: MVMNT Bill Payments Quotes API
+  title: MVMNT Quotes API
   version: 1.0.0
   description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
   contact:
@@ -567,453 +567,6 @@ paths:
                 detail: Quote has already been converted to shipment SHP-12345
 components:
   schemas:
-    FloatFilter:
-      type: object
-      description: Filter options for float/number fields
-      properties:
-        equalTo:
-          type: number
-          format: float
-          description: Exact match
-        notEqualTo:
-          type: number
-          format: float
-          description: Not equal to
-        lessThan:
-          type: number
-          format: float
-          description: Less than
-        lessThanOrEqualTo:
-          type: number
-          format: float
-          description: Less than or equal to
-        greaterThan:
-          type: number
-          format: float
-          description: Greater than
-        greaterThanOrEqualTo:
-          type: number
-          format: float
-          description: Greater than or equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    ConvertToShipmentResponse:
-      type: object
-      required:
-      - quoteId
-      - quoteStatus
-      - shipmentId
-      - shipmentKey
-      - orderId
-      properties:
-        quoteId:
-          type: string
-          format: uuid
-          description: Quote ID that was converted
-        quoteStatus:
-          type: string
-          enum:
-          - WON
-          description: Quote status after conversion (always WON)
-        shipmentId:
-          type: string
-          format: uuid
-          description: Created shipment ID
-        shipmentKey:
-          type: string
-          description: Created shipment friendly ID
-        orderId:
-          type: string
-          format: uuid
-          description: Order ID from the quote
-    QuoteStatus:
-      type: string
-      enum:
-      - DRAFT
-      - REQUESTED
-      - QUOTED
-      - RECEIVED_REPLY
-      - SENT_REPLY
-      - RECEIVED_COUNTER
-      - SENT_COUNTER
-      - WON
-      - LOST
-      - PASS
-      - CANCELED
-      description: 'Current status in the quote lifecycle.
-
-
-        Initial states:
-
-        - `DRAFT`: Quote being drafted
-
-        - `REQUESTED`: Customer requested a quote (needs pricing)
-
-
-        Active states:
-
-        - `QUOTED`: Price sent to customer
-
-        - `RECEIVED_REPLY`: Received reply from customer
-
-        - `SENT_REPLY`: Sent reply to customer
-
-        - `RECEIVED_COUNTER`: Received counter-offer
-
-        - `SENT_COUNTER`: Sent counter-offer
-
-
-        Final states:
-
-        - `WON`: Customer accepted the quote
-
-        - `LOST`: Quote not accepted
-
-        - `PASS`: Broker declined to quote
-
-        - `CANCELED`: Quote canceled
-
-        '
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    QuoteSide:
-      type: string
-      enum:
-      - SELL
-      - BUY
-      description: 'Quote direction.
-
-        - `SELL`: Selling to shipper (customer quote)
-
-        - `BUY`: Buying from carrier (carrier quote)
-
-        '
-    CarrierReference:
-      type: object
-      description: 'Enhanced reference to a carrier resource (returned in responses).
-
-        Includes full carrier details in addition to id/key.
-
-
-        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Carrier UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CARRIER-SWIFT
-        name:
-          type: string
-          description: Carrier company name
-          example: Swift Transportation
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-987-6543
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: dispatch@swifttrans.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the carrier was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the carrier was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the carrier was soft deleted (null if active)
-          example: null
-    TransportMode:
-      type: string
-      enum:
-      - TL
-      - LTL
-      - AIR
-      - OCEAN
-      - RAIL
-      - INTERMODAL
-      - DRAYAGE
-      description: 'Transportation mode.
-
-        - `TL`: Full Truckload
-
-        - `LTL`: Less than Truckload
-
-        - `AIR`: Air freight
-
-        - `OCEAN`: Ocean freight
-
-        - `RAIL`: Rail freight
-
-        - `INTERMODAL`: Intermodal (multiple modes)
-
-        - `DRAYAGE`: Drayage/cartage
-
-        '
-    QuoteLostReason:
-      type: string
-      enum:
-      - EXPIRED
-      - NO_REASON
-      - NO_RESPONSE
-      - TOO_HIGH
-      - TOO_SLOW
-      - TRUCK_NOT_AVAILABLE
-      - OTHER
-      description: 'Reason why the quote was lost.
-
-        - `EXPIRED`: Quote expired without response
-
-        - `NO_REASON`: No specific reason given
-
-        - `NO_RESPONSE`: Customer didn''t respond
-
-        - `TOO_HIGH`: Price was too high
-
-        - `TOO_SLOW`: Response was too slow
-
-        - `TRUCK_NOT_AVAILABLE`: Capacity not available
-
-        - `OTHER`: Other reason (see lostReasonText)
-
-        '
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    QuoteSideFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/QuoteSide'
-        notEqualTo:
-          $ref: '#/components/schemas/QuoteSide'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteSide'
-    QuoteFilter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDFilter'
-        status:
-          $ref: '#/components/schemas/QuoteStatusFilter'
-        side:
-          $ref: '#/components/schemas/QuoteSideFilter'
-        customerId:
-          $ref: '#/components/schemas/UUIDFilter'
-        carrierId:
-          $ref: '#/components/schemas/UUIDFilter'
-        assigneeId:
-          $ref: '#/components/schemas/UUIDFilter'
-        amount:
-          $ref: '#/components/schemas/FloatFilter'
-        expiresAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteFilter'
-        not:
-          $ref: '#/components/schemas/QuoteFilter'
-    QuoteFilterRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/QuoteFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
-          type: string
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    AddressInput:
-      type: object
-      description: Address data for creating a new location
-      required:
-      - line1
-      - city
-      - country
-      - market
-      properties:
-        line1:
-          type: string
-          description: Primary street address line
-          example: 123 Main St
-        line2:
-          type: string
-          description: Secondary address line (suite, floor, etc.)
-          example: Suite 400
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        country:
-          type: string
-          description: Country name or code
-          example: USA
-        market:
-          type: string
-          description: Market or region identifier
-          example: CHI
-        latitude:
-          type: string
-          description: Latitude coordinate
-          example: '41.8781'
-        longitude:
-          type: string
-          description: Longitude coordinate
-          example: '-87.6298'
-        isAirportOrAirbase:
-          type: boolean
-          default: false
-          description: Whether this location is an airport or airbase
-          example: false
-        isConstructionOrUtilitySite:
-          type: boolean
-          default: false
-          description: Whether this location is a construction or utility site
-          example: false
-        isSmartyValidated:
-          type: boolean
-          default: false
-          description: Whether address has been validated by SmartyStreets
-          example: true
-        obeysDst:
-          type: boolean
-          default: true
-          description: Whether this location observes daylight saving time
-          example: true
-        cityId:
-          type: string
-          format: uuid
-          description: Reference to standardized city record (internal use)
     Quote:
       type: object
       required:
@@ -1107,84 +660,145 @@ components:
           - string
           - 'null'
           format: date-time
-    CustomerReference:
+    QuoteSideFilter:
       type: object
-      description: 'Enhanced reference to a customer resource (returned in responses).
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/QuoteSide'
+        notEqualTo:
+          $ref: '#/components/schemas/QuoteSide'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteSide'
+    QuoteLostReason:
+      type: string
+      enum:
+      - EXPIRED
+      - NO_REASON
+      - NO_RESPONSE
+      - TOO_HIGH
+      - TOO_SLOW
+      - TRUCK_NOT_AVAILABLE
+      - OTHER
+      description: 'Reason why the quote was lost.
 
-        Includes full customer details in addition to id/key.
+        - `EXPIRED`: Quote expired without response
 
+        - `NO_REASON`: No specific reason given
 
-        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+        - `NO_RESPONSE`: Customer didn''t respond
 
-        Maximum nesting depth: 1 level.
+        - `TOO_HIGH`: Price was too high
+
+        - `TOO_SLOW`: Response was too slow
+
+        - `TRUCK_NOT_AVAILABLE`: Capacity not available
+
+        - `OTHER`: Other reason (see lostReasonText)
 
         '
+    OrderStopInput:
+      type: object
       required:
-      - id
-      - name
-      - friendlyId
-      - status
-      - createdAt
-      - updatedAt
+      - type
       properties:
-        id:
+        type:
+          type: string
+          enum:
+          - PICKUP
+          - DELIVERY
+          - CROSS_DOCK
+          description: Type of stop
+        location:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Reference to an existing location
+        address:
+          $ref: '#/components/schemas/AddressInput'
+          description: Address for ad-hoc stop (if no location reference)
+        requestedStartDate:
+          type: string
+          format: date
+          description: Requested start date for the stop
+        requestedEndDate:
+          type: string
+          format: date
+          description: Requested end date for the stop
+        requestedStartTime:
+          type: string
+          pattern: ^([01]\d|2[0-3]):([0-5]\d)$
+          description: Requested start time (HH:MM format)
+        requestedEndTime:
+          type: string
+          pattern: ^([01]\d|2[0-3]):([0-5]\d)$
+          description: Requested end time (HH:MM format)
+        appointmentRequired:
+          type: boolean
+          default: false
+          description: Whether an appointment is required
+        notes:
+          type: string
+          maxLength: 2000
+          description: Special instructions for the stop
+      description: Stop definition for an order
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
           type: string
           format: uuid
-          description: Customer UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CUSTOMER-ACME
-        name:
+          description: Exact match
+        notEqualTo:
           type: string
-          description: Customer company name
-          example: Acme Manufacturing Corp
-        friendlyId:
-          type: string
-          description: Human-readable customer identifier
-          example: A123456
-        status:
-          type: string
-          description: Customer status
-          enum:
-          - PROSPECT
-          - ACTIVE
-          - INACTIVE
-          - CHURNED
-          example: ACTIVE
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        website:
-          type:
-          - string
-          - 'null'
-          description: Customer website URL
-          example: https://acme-manufacturing.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the customer was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the customer was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the customer was soft deleted (null if active)
-          example: null
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     UserReference:
       type: object
       description: 'Enhanced reference to a user resource (returned in responses).
@@ -1271,6 +885,108 @@ components:
           format: date-time
           description: When the user was soft deleted (null if active)
           example: null
+    QuotePatch:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/QuoteStatus'
+        amount:
+          type:
+          - number
+          - 'null'
+          minimum: 0
+        target:
+          type:
+          - number
+          - 'null'
+          minimum: 0
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        lostReason:
+          $ref: '#/components/schemas/QuoteLostReason'
+          description: Required when status is LOST
+        lostReasonText:
+          type: string
+          description: Required when lostReason is OTHER
+        assignee:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+      description: 'Partial update fields for a quote.
+
+
+        **Validation rules:**
+
+        - When `status` is `LOST`, `lostReason` is required
+
+        - When `lostReason` is `OTHER`, `lostReasonText` is required
+
+        '
+    CarrierReference:
+      type: object
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
+          type: string
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the carrier was soft deleted (null if active)
+          example: null
     DatetimeFilter:
       type: object
       description: Filter options for datetime fields
@@ -1302,6 +1018,219 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
+    QuoteStatus:
+      type: string
+      enum:
+      - DRAFT
+      - REQUESTED
+      - QUOTED
+      - RECEIVED_REPLY
+      - SENT_REPLY
+      - RECEIVED_COUNTER
+      - SENT_COUNTER
+      - WON
+      - LOST
+      - PASS
+      - CANCELED
+      description: 'Current status in the quote lifecycle.
+
+
+        Initial states:
+
+        - `DRAFT`: Quote being drafted
+
+        - `REQUESTED`: Customer requested a quote (needs pricing)
+
+
+        Active states:
+
+        - `QUOTED`: Price sent to customer
+
+        - `RECEIVED_REPLY`: Received reply from customer
+
+        - `SENT_REPLY`: Sent reply to customer
+
+        - `RECEIVED_COUNTER`: Received counter-offer
+
+        - `SENT_COUNTER`: Sent counter-offer
+
+
+        Final states:
+
+        - `WON`: Customer accepted the quote
+
+        - `LOST`: Quote not accepted
+
+        - `PASS`: Broker declined to quote
+
+        - `CANCELED`: Quote canceled
+
+        '
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    TransportMode:
+      type: string
+      enum:
+      - TL
+      - LTL
+      - AIR
+      - OCEAN
+      - RAIL
+      - INTERMODAL
+      - DRAYAGE
+      description: 'Transportation mode.
+
+        - `TL`: Full Truckload
+
+        - `LTL`: Less than Truckload
+
+        - `AIR`: Air freight
+
+        - `OCEAN`: Ocean freight
+
+        - `RAIL`: Rail freight
+
+        - `INTERMODAL`: Intermodal (multiple modes)
+
+        - `DRAYAGE`: Drayage/cartage
+
+        '
+    OrderInput:
+      type: object
+      required:
+      - stops
+      - mode
+      properties:
+        mode:
+          $ref: '#/components/schemas/TransportMode'
+        stops:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderStopInput'
+          minItems: 2
+          description: At least origin and destination stops
+        freight:
+          $ref: '#/components/schemas/OrderFreightInput'
+        equipment:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Equipment types required
+        references:
+          type: array
+          items:
+            type: object
+            required:
+            - type
+            - value
+            properties:
+              type:
+                type: string
+                description: Reference type (e.g., BOL_NUMBER, PO_NUMBER)
+              value:
+                type: string
+                description: Reference value
+          description: Reference numbers for the order
+        specialRequirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Special requirements (e.g., liftgate, team drivers)
+      description: 'Order definition used when creating Quotes or Shipments.
+
+        Contains route (stops), freight details, and requirements.
+
+        '
+    QuoteFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/QuoteFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    QuoteStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/QuoteStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/QuoteStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteStatus'
     OrderFreightInput:
       type: object
       properties:
@@ -1356,44 +1285,6 @@ components:
           default: true
           description: Whether freight is stackable
       description: Freight details for an order
-    QuotePatch:
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/QuoteStatus'
-        amount:
-          type:
-          - number
-          - 'null'
-          minimum: 0
-        target:
-          type:
-          - number
-          - 'null'
-          minimum: 0
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        lostReason:
-          $ref: '#/components/schemas/QuoteLostReason'
-          description: Required when status is LOST
-        lostReasonText:
-          type: string
-          description: Required when lostReason is OTHER
-        assignee:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-      description: 'Partial update fields for a quote.
-
-
-        **Validation rules:**
-
-        - When `status` is `LOST`, `lostReason` is required
-
-        - When `lostReason` is `OTHER`, `lostReasonText` is required
-
-        '
     ConvertToShipmentRequest:
       type: object
       properties:
@@ -1403,109 +1294,6 @@ components:
             $ref: '#/components/schemas/OrderInput'
           description: Optional additional orders to add to the shipment
       description: Request body for converting a quote to a shipment
-    QuoteStatusFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/QuoteStatus'
-        notEqualTo:
-          $ref: '#/components/schemas/QuoteStatus'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteStatus'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteStatus'
-    OrderStopInput:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          enum:
-          - PICKUP
-          - DELIVERY
-          - CROSS_DOCK
-          description: Type of stop
-        location:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Reference to an existing location
-        address:
-          $ref: '#/components/schemas/AddressInput'
-          description: Address for ad-hoc stop (if no location reference)
-        requestedStartDate:
-          type: string
-          format: date
-          description: Requested start date for the stop
-        requestedEndDate:
-          type: string
-          format: date
-          description: Requested end date for the stop
-        requestedStartTime:
-          type: string
-          pattern: ^([01]\d|2[0-3]):([0-5]\d)$
-          description: Requested start time (HH:MM format)
-        requestedEndTime:
-          type: string
-          pattern: ^([01]\d|2[0-3]):([0-5]\d)$
-          description: Requested end time (HH:MM format)
-        appointmentRequired:
-          type: boolean
-          default: false
-          description: Whether an appointment is required
-        notes:
-          type: string
-          maxLength: 2000
-          description: Special instructions for the stop
-      description: Stop definition for an order
-    QuoteInput:
-      type: object
-      required:
-      - customer
-      - order
-      properties:
-        customer:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Customer reference (for SELL quotes)
-        carrier:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Carrier reference (for BUY quotes)
-        order:
-          $ref: '#/components/schemas/OrderInput'
-          description: Order details (route, freight)
-        amount:
-          type: number
-          minimum: 0
-          description: Quoted price
-        expiresAt:
-          type: string
-          format: date-time
-          description: Quote expiration
-        assignee:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Assigned user
-      description: Input for creating a new quote
-    ResourceReferenceInput:
-      type: object
-      description: Reference to another resource by either ID or client key (used in create/update requests)
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type: string
-          description: Client-defined reference ID
-      oneOf:
-      - required:
-        - id
-      - required:
-        - key
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
     OrderSummary:
       type: object
       properties:
@@ -1563,52 +1351,264 @@ components:
           - number
           - 'null'
       description: Summary of order details (embedded in Quote response)
-    OrderInput:
-      type: object
-      required:
-      - stops
-      - mode
-      properties:
-        mode:
-          $ref: '#/components/schemas/TransportMode'
-        stops:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderStopInput'
-          minItems: 2
-          description: At least origin and destination stops
-        freight:
-          $ref: '#/components/schemas/OrderFreightInput'
-        equipment:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Equipment types required
-        references:
-          type: array
-          items:
-            type: object
-            required:
-            - type
-            - value
-            properties:
-              type:
-                type: string
-                description: Reference type (e.g., BOL_NUMBER, PO_NUMBER)
-              value:
-                type: string
-                description: Reference value
-          description: Reference numbers for the order
-        specialRequirements:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Special requirements (e.g., liftgate, team drivers)
-      description: 'Order definition used when creating Quotes or Shipments.
+    QuoteSide:
+      type: string
+      enum:
+      - SELL
+      - BUY
+      description: 'Quote direction.
 
-        Contains route (stops), freight details, and requirements.
+        - `SELL`: Selling to shipper (customer quote)
+
+        - `BUY`: Buying from carrier (carrier quote)
 
         '
+    AddressInput:
+      type: object
+      description: Address data for creating a new location
+      required:
+      - line1
+      - city
+      - country
+      - market
+      properties:
+        line1:
+          type: string
+          description: Primary street address line
+          example: 123 Main St
+        line2:
+          type: string
+          description: Secondary address line (suite, floor, etc.)
+          example: Suite 400
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        country:
+          type: string
+          description: Country name or code
+          example: USA
+        market:
+          type: string
+          description: Market or region identifier
+          example: CHI
+        latitude:
+          type: string
+          description: Latitude coordinate
+          example: '41.8781'
+        longitude:
+          type: string
+          description: Longitude coordinate
+          example: '-87.6298'
+        isAirportOrAirbase:
+          type: boolean
+          default: false
+          description: Whether this location is an airport or airbase
+          example: false
+        isConstructionOrUtilitySite:
+          type: boolean
+          default: false
+          description: Whether this location is a construction or utility site
+          example: false
+        isSmartyValidated:
+          type: boolean
+          default: false
+          description: Whether address has been validated by SmartyStreets
+          example: true
+        obeysDst:
+          type: boolean
+          default: true
+          description: Whether this location observes daylight saving time
+          example: true
+        cityId:
+          type: string
+          format: uuid
+          description: Reference to standardized city record (internal use)
+    ConvertToShipmentResponse:
+      type: object
+      required:
+      - quoteId
+      - quoteStatus
+      - shipmentId
+      - shipmentKey
+      - orderId
+      properties:
+        quoteId:
+          type: string
+          format: uuid
+          description: Quote ID that was converted
+        quoteStatus:
+          type: string
+          enum:
+          - WON
+          description: Quote status after conversion (always WON)
+        shipmentId:
+          type: string
+          format: uuid
+          description: Created shipment ID
+        shipmentKey:
+          type: string
+          description: Created shipment friendly ID
+        orderId:
+          type: string
+          format: uuid
+          description: Order ID from the quote
+    QuoteFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        status:
+          $ref: '#/components/schemas/QuoteStatusFilter'
+        side:
+          $ref: '#/components/schemas/QuoteSideFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        carrierId:
+          $ref: '#/components/schemas/UUIDFilter'
+        assigneeId:
+          $ref: '#/components/schemas/UUIDFilter'
+        amount:
+          $ref: '#/components/schemas/FloatFilter'
+        expiresAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteFilter'
+        not:
+          $ref: '#/components/schemas/QuoteFilter'
+    CustomerReference:
+      type: object
+      description: 'Enhanced reference to a customer resource (returned in responses).
+
+        Includes full customer details in addition to id/key.
+
+
+        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - friendlyId
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CUSTOMER-ACME
+        name:
+          type: string
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          description: Human-readable customer identifier
+          example: A123456
+        status:
+          type: string
+          description: Customer status
+          enum:
+          - PROSPECT
+          - ACTIVE
+          - INACTIVE
+          - CHURNED
+          example: ACTIVE
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        website:
+          type:
+          - string
+          - 'null'
+          description: Customer website URL
+          example: https://acme-manufacturing.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the customer was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the customer was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer was soft deleted (null if active)
+          example: null
+    ResourceReferenceInput:
+      type: object
+      description: Reference to another resource by either ID or client key (used in create/update requests)
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type: string
+          description: Client-defined reference ID
+      oneOf:
+      - required:
+        - id
+      - required:
+        - key
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+    QuoteInput:
+      type: object
+      required:
+      - customer
+      - order
+      properties:
+        customer:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Customer reference (for SELL quotes)
+        carrier:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Carrier reference (for BUY quotes)
+        order:
+          $ref: '#/components/schemas/OrderInput'
+          description: Order details (route, freight)
+        amount:
+          type: number
+          minimum: 0
+          description: Quoted price
+        expiresAt:
+          type: string
+          format: date-time
+          description: Quote expiration
+        assignee:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Assigned user
+      description: Input for creating a new quote
   responses:
     NotFoundError:
       description: Resource not found
@@ -1633,15 +1633,6 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
     BadRequestError:
       description: Bad request - invalid input
       content:
@@ -1651,6 +1642,15 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   parameters:
     IdOrClientKey:
       name: id

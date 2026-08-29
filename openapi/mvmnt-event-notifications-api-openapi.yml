@@ -1,0 +1,1368 @@
+openapi: 3.2.0
+info:
+  title: MVMNT Event Notifications API
+  version: 1.0.0
+  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  contact:
+    name: MVMNT Support
+    email: support@mvmnt.io
+    url: https://docs.mvmnt.io
+  license:
+    name: Proprietary
+    url: https://mvmnt.io/legal/terms
+  x-parsed-md-description:
+    result:
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 0
+      - 2
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 0
+        - 2
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: The MVMNT API enables you to automate freight brokerage workflows by integrating
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes: {}
+          children: []
+          type: softbreak
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 2
+          inline: true
+          attributes:
+            content: directly with our Transportation Management System.
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 3
+      - 4
+      inline: false
+      attributes:
+        level: 2
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 3
+        - 4
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 3
+          - 4
+          inline: true
+          attributes:
+            content: Authentication
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: heading
+      annotations: []
+      slots: {}
+    - $$mdtype: Node
+      errors: []
+      lines:
+      - 5
+      - 6
+      inline: false
+      attributes: {}
+      children:
+      - $$mdtype: Node
+        errors: []
+        lines:
+        - 5
+        - 6
+        inline: false
+        attributes: {}
+        children:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: 'OAuth 2.0 client credentials flow. See '
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            href: /getting-started/authentication
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: true
+            attributes:
+              content: Authentication Guide
+            children: []
+            type: text
+            annotations: []
+            slots: {}
+          type: link
+          annotations: []
+          slots: {}
+          redocly:::linkOriginal:href: /getting-started/authentication
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 5
+          - 6
+          inline: true
+          attributes:
+            content: ' for details.'
+          children: []
+          type: text
+          annotations: []
+          slots: {}
+        type: inline
+        annotations: []
+        slots: {}
+      type: paragraph
+      annotations: []
+      slots: {}
+servers:
+- url: https://api.mvmnt.io/v1
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Event Notifications
+paths: {}
+webhooks:
+  your-endpoint:
+    post:
+      summary: Webhook Event
+      description: 'All webhook events are delivered to your configured endpoint URL.
+
+
+        The `event` field in the payload determines which type of webhook was triggered.
+
+        Your endpoint should handle all event types or gracefully ignore unknown events.
+
+
+        **Event Types:**
+
+        - Entity changes: `CUSTOMER_*`, `COMPANY_*`, `CARRIER_*`, `CUSTOMER_CONTACT_*`
+
+        - Shipment events: `SHIPMENT_DELIVERED`, `SHIPMENT_BOOKED`, `SHIPMENT_DISPATCHED`, etc.
+
+        - Financial events: `CARRIER_INVOICE_CREATED`, `CUSTOMER_PAYMENT_CREATED`, etc.
+
+
+        **Security:** All webhook requests include an `x-api-key` header containing your webhook token configured in the MVMNT UI.
+
+
+        **Best Practices:**
+
+        - Return 200 OK quickly and process asynchronously
+
+        - Implement idempotency using event ID and timestamp
+
+        - Handle unknown event types gracefully for forward compatibility
+
+        '
+      operationId: webhookCallback
+      tags:
+      - Event Notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookDelivery'
+            examples:
+              customer_created:
+                summary: Customer created
+                value:
+                  sentAt: '2025-01-15T14:30:05Z'
+                  events:
+                  - event: CUSTOMER_CREATED
+                    timestamp: '2025-01-15T14:30:00Z'
+                    data:
+                      id: 660e8400-e29b-41d4-a716-446655440000
+                      name: Acme Corporation
+                      friendlyId: A123456
+                      status: ACTIVE
+                      serviceTier: PLATINUM
+                      website: https://acme-manufacturing.com
+                      phoneNumber: +1-555-123-4567
+                      industry: MANUFACTURING
+                      annualRevenue: OVER_100M
+                      annualSpend: 10M_TO_50M
+                      spendType: CONTRACT
+                      naics: '336411'
+                      ein: 12-3456789
+                      duns: '123456789'
+                      leadSource: Referral
+                      dbaName: Acme Corp DBA
+                      numberOfEmployees: 1000_TO_5000
+                      externalId: EXT-12345
+                      currency: USD
+                      creditLimit: 50000
+                      creditUsageWarning: 40000
+                      freeCreditReq: 5000
+                      defaultMode: FTL
+                      defaultMargin: 0.15
+                      minMargin: 0.1
+                      maxMargin: 0.25
+                      defaultInternalNotes: Contact via email only
+                      defaultCarrierNotes: Call pickup contact before arrival
+                      defaultExternalNotes: Please call 1 hour before delivery
+                      defaultShowNotes: SPLIT
+                      autoAcceptTender: false
+                      group: null
+                      paymentTerm:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        name: Net 30
+                        key: null
+                      notes: Prefers email communication
+                      deactivationReason: null
+                      deactivationNotes: null
+                      deactivationDate: null
+                      closedAt: null
+                      closedBy: null
+                      closedNotes: null
+                      corporateAddress:
+                        addressLine1: 123 Corporate Blvd
+                        addressLine2: Suite 100
+                        city: Chicago
+                        state: IL
+                        postalCode: '60601'
+                        country: USA
+                        latitude: 41.8781
+                        longitude: -87.6298
+                      billingAddress:
+                        addressLine1: 456 Billing Ave
+                        addressLine2: null
+                        city: Chicago
+                        state: IL
+                        postalCode: '60602'
+                        country: USA
+                        latitude: 41.8827
+                        longitude: -87.6233
+                      qboCustomerId: null
+                      key: ERP-CUSTOMER-12345
+                      createdAt: '2025-01-15T14:30:00Z'
+                      updatedAt: '2025-01-15T14:30:00Z'
+                      deletedAt: null
+                    diff: null
+              customer_updated:
+                summary: Customer updated with diff
+                value:
+                  sentAt: '2025-01-15T15:45:05Z'
+                  events:
+                  - event: CUSTOMER_UPDATED
+                    timestamp: '2025-01-15T15:45:00Z'
+                    data:
+                      id: 660e8400-e29b-41d4-a716-446655440000
+                      name: Acme Corporation
+                      friendlyId: A123456
+                      status: INACTIVE
+                      serviceTier: GOLD
+                      website: https://acme-manufacturing.com
+                      phoneNumber: +1-555-999-8888
+                      industry: MANUFACTURING
+                      annualRevenue: OVER_100M
+                      annualSpend: 50M_TO_100M
+                      spendType: CONTRACT
+                      naics: '336411'
+                      ein: 12-3456789
+                      duns: '123456789'
+                      leadSource: Referral
+                      dbaName: Acme Corp DBA
+                      numberOfEmployees: 1000_TO_5000
+                      externalId: EXT-12345
+                      currency: USD
+                      creditLimit: 75000
+                      creditUsageWarning: 60000
+                      freeCreditReq: 5000
+                      defaultMode: FTL
+                      defaultMargin: 0.15
+                      minMargin: 0.1
+                      maxMargin: 0.25
+                      defaultInternalNotes: Contact via email only
+                      defaultCarrierNotes: Call pickup contact before arrival
+                      defaultExternalNotes: Please call 1 hour before delivery
+                      defaultShowNotes: SPLIT
+                      autoAcceptTender: false
+                      group: null
+                      paymentTerm:
+                        id: 123e4567-e89b-12d3-a456-426614174000
+                        name: Net 30
+                        key: null
+                      notes: Prefers email communication. Account under review.
+                      deactivationReason: PAYMENT_ISSUES
+                      deactivationNotes: Multiple late payments
+                      deactivationDate: '2025-01-15T15:45:00Z'
+                      closedAt: null
+                      closedBy: null
+                      closedNotes: null
+                      corporateAddress:
+                        addressLine1: 123 Corporate Blvd
+                        addressLine2: Suite 100
+                        city: Chicago
+                        state: IL
+                        postalCode: '60601'
+                        country: USA
+                        latitude: 41.8781
+                        longitude: -87.6298
+                      billingAddress:
+                        addressLine1: 456 Billing Ave
+                        addressLine2: null
+                        city: Chicago
+                        state: IL
+                        postalCode: '60602'
+                        country: USA
+                        latitude: 41.8827
+                        longitude: -87.6233
+                      qboCustomerId: null
+                      key: ERP-CUSTOMER-12345
+                      createdAt: '2025-01-15T14:30:00Z'
+                      updatedAt: '2025-01-15T15:45:00Z'
+                      deletedAt: null
+                    diff:
+                    - type: UPDATE
+                      key: status
+                      value: INACTIVE
+                      oldValue: ACTIVE
+                    - type: UPDATE
+                      key: serviceTier
+                      value: GOLD
+                      oldValue: PLATINUM
+                    - type: UPDATE
+                      key: phoneNumber
+                      value: +1-555-999-8888
+                      oldValue: +1-555-123-4567
+                    - type: UPDATE
+                      key: annualSpend
+                      value: 50M_TO_100M
+                      oldValue: 10M_TO_50M
+                    - type: UPDATE
+                      key: creditLimit
+                      value: 75000
+                      oldValue: 50000
+                    - type: UPDATE
+                      key: creditUsageWarning
+                      value: 60000
+                      oldValue: 40000
+                    - type: UPDATE
+                      key: notes
+                      value: Prefers email communication. Account under review.
+                      oldValue: Prefers email communication
+                    - type: ADD
+                      key: deactivationReason
+                      value: PAYMENT_ISSUES
+                    - type: ADD
+                      key: deactivationNotes
+                      value: Multiple late payments
+                    - type: ADD
+                      key: deactivationDate
+                      value: '2025-01-15T15:45:00Z'
+              customer_deleted:
+                summary: Customer deleted
+                value:
+                  sentAt: '2025-01-15T16:00:05Z'
+                  events:
+                  - event: CUSTOMER_DELETED
+                    timestamp: '2025-01-15T16:00:00Z'
+                    data:
+                      id: 660e8400-e29b-41d4-a716-446655440000
+                    diff: null
+              company_created:
+                summary: Company created
+                value:
+                  sentAt: '2025-01-15T09:00:05Z'
+                  events:
+                  - event: COMPANY_CREATED
+                    timestamp: '2025-01-15T09:00:00Z'
+                    data:
+                      id: 550e8400-e29b-41d4-a716-446655440000
+                      name: Acme Logistics Inc
+                      addressLine1: 123 Main St
+                      addressLine2: Suite 400
+                      city: Chicago
+                      country: USA
+                      fax: +1-555-0123
+                      invoiceOnly: false
+                      invoiceVerbiage: Please remit payment within 30 days
+                      primaryContactName: John Smith
+                      primaryContactEmail: john.smith@acmelogistics.com
+                      primaryContactPhone: +1-555-0100
+                      createdBy:
+                        id: 550e8400-e29b-41d4-a716-446655440009
+                        email: admin@example.com
+                        name: Admin User
+                      key: ERP-COMPANY-ACME-001
+                      createdAt: '2025-01-15T09:00:00Z'
+                      updatedAt: '2025-01-15T09:00:00Z'
+                      deletedAt: null
+                    diff: null
+              company_updated:
+                summary: Company updated with diff
+                value:
+                  sentAt: '2025-01-15T11:00:05Z'
+                  events:
+                  - event: COMPANY_UPDATED
+                    timestamp: '2025-01-15T11:00:00Z'
+                    data:
+                      id: 550e8400-e29b-41d4-a716-446655440000
+                      name: Acme Logistics Corporation
+                      addressLine1: 456 New Ave
+                      addressLine2: Suite 200
+                      city: New York
+                      country: USA
+                      fax: +1-555-0124
+                      invoiceOnly: true
+                      invoiceVerbiage: Payment due upon receipt
+                      primaryContactName: Jane Doe
+                      primaryContactEmail: jane.doe@acmelogistics.com
+                      primaryContactPhone: +1-555-0101
+                      createdBy:
+                        id: 550e8400-e29b-41d4-a716-446655440009
+                        email: admin@example.com
+                        name: Admin User
+                      key: ERP-COMPANY-ACME-001
+                      createdAt: '2025-01-15T09:00:00Z'
+                      updatedAt: '2025-01-15T11:00:00Z'
+                      deletedAt: null
+                    diff:
+                    - type: UPDATE
+                      key: name
+                      value: Acme Logistics Corporation
+                      oldValue: Acme Logistics Inc
+                    - type: UPDATE
+                      key: addressLine1
+                      value: 456 New Ave
+                      oldValue: 123 Main St
+                    - type: UPDATE
+                      key: addressLine2
+                      value: Suite 200
+                      oldValue: Suite 400
+                    - type: UPDATE
+                      key: city
+                      value: New York
+                      oldValue: Chicago
+                    - type: UPDATE
+                      key: fax
+                      value: +1-555-0124
+                      oldValue: +1-555-0123
+                    - type: UPDATE
+                      key: invoiceOnly
+                      value: true
+                      oldValue: false
+                    - type: UPDATE
+                      key: invoiceVerbiage
+                      value: Payment due upon receipt
+                      oldValue: Please remit payment within 30 days
+                    - type: UPDATE
+                      key: primaryContactName
+                      value: Jane Doe
+                      oldValue: John Smith
+                    - type: UPDATE
+                      key: primaryContactEmail
+                      value: jane.doe@acmelogistics.com
+                      oldValue: john.smith@acmelogistics.com
+                    - type: UPDATE
+                      key: primaryContactPhone
+                      value: +1-555-0101
+                      oldValue: +1-555-0100
+              company_deleted:
+                summary: Company deleted
+                value:
+                  sentAt: '2025-01-15T12:00:05Z'
+                  events:
+                  - event: COMPANY_DELETED
+                    timestamp: '2025-01-15T12:00:00Z'
+                    data:
+                      id: 550e8400-e29b-41d4-a716-446655440000
+                    diff: null
+              customer_contact_created:
+                summary: Customer contact created
+                value:
+                  sentAt: '2025-01-15T13:00:05Z'
+                  events:
+                  - event: CUSTOMER_CONTACT_CREATED
+                    timestamp: '2025-01-15T13:00:00Z'
+                    data:
+                      id: 990e8400-e29b-41d4-a716-446655440002
+                      customer:
+                        id: 660e8400-e29b-41d4-a716-446655440000
+                        name: Acme Corporation
+                        friendlyId: A123456
+                      name: Sarah Johnson
+                      contactInfo:
+                        name: Sarah Johnson
+                        email: sarah.johnson@example.com
+                        phone: +1-555-0123
+                        title: Logistics Manager
+                      phoneExtension: '1234'
+                      isPrimary: true
+                      contactTypes:
+                      - BILLING
+                      - ACCOUNT_MANAGER
+                      notifications:
+                      - SHIPMENT_PICKED_UP
+                      - SHIPMENT_DELIVERED
+                      invitedUser: null
+                      deletedBy: null
+                      key: ERP-CONTACT-SARAH-001
+                      createdAt: '2025-01-15T13:00:00Z'
+                      deletedAt: null
+                    diff: null
+              customer_contact_updated:
+                summary: Customer contact updated with diff
+                value:
+                  sentAt: '2025-01-15T13:30:05Z'
+                  events:
+                  - event: CUSTOMER_CONTACT_UPDATED
+                    timestamp: '2025-01-15T13:30:00Z'
+                    data:
+                      id: 990e8400-e29b-41d4-a716-446655440002
+                      customer:
+                        id: 660e8400-e29b-41d4-a716-446655440000
+                        name: Acme Corporation
+                        friendlyId: A123456
+                      name: Sarah Johnson-Smith
+                      contactInfo:
+                        name: Sarah Johnson-Smith
+                        email: sarah.js@example.com
+                        phone: +1-555-9999
+                        title: Senior Logistics Manager
+                      phoneExtension: '5678'
+                      isPrimary: false
+                      contactTypes:
+                      - BILLING
+                      - PROCUREMENT
+                      - RATES_PRICING
+                      notifications:
+                      - SHIPMENT_IN_TRANSIT
+                      - SHIPMENT_DELIVERED
+                      - SHIPMENT_TENDER_REJECTED
+                      invitedUser:
+                        id: 880e8400-e29b-41d4-a716-446655440003
+                        email: sarah.js@example.com
+                        name: Sarah Johnson-Smith
+                      deletedBy: null
+                      key: ERP-CONTACT-SARAH-001
+                      createdAt: '2025-01-15T13:00:00Z'
+                      deletedAt: null
+                    diff:
+                    - type: UPDATE
+                      key: name
+                      value: Sarah Johnson-Smith
+                      oldValue: Sarah Johnson
+                    - type: UPDATE
+                      key: contactInfo
+                      changes:
+                      - type: UPDATE
+                        key: name
+                        value: Sarah Johnson-Smith
+                        oldValue: Sarah Johnson
+                      - type: UPDATE
+                        key: email
+                        value: sarah.js@example.com
+                        oldValue: sarah.johnson@example.com
+                      - type: UPDATE
+                        key: phone
+                        value: +1-555-9999
+                        oldValue: +1-555-0123
+                      - type: UPDATE
+                        key: title
+                        value: Senior Logistics Manager
+                        oldValue: Logistics Manager
+                    - type: UPDATE
+                      key: phoneExtension
+                      value: '5678'
+                      oldValue: '1234'
+                    - type: UPDATE
+                      key: isPrimary
+                      value: false
+                      oldValue: true
+                    - type: UPDATE
+                      key: contactTypes
+                      changes:
+                      - type: REMOVE
+                        key: '1'
+                        oldValue: ACCOUNT_MANAGER
+                      - type: ADD
+                        key: '1'
+                        value: PROCUREMENT
+                      - type: ADD
+                        key: '2'
+                        value: RATES_PRICING
+                    - type: UPDATE
+                      key: notifications
+                      changes:
+                      - type: UPDATE
+                        key: '0'
+                        value: SHIPMENT_IN_TRANSIT
+                        oldValue: SHIPMENT_PICKED_UP
+                      - type: ADD
+                        key: '2'
+                        value: SHIPMENT_TENDER_REJECTED
+                    - type: ADD
+                      key: invitedUser
+                      value:
+                        id: 880e8400-e29b-41d4-a716-446655440003
+                        email: sarah.js@example.com
+                        name: Sarah Johnson-Smith
+              customer_contact_deleted:
+                summary: Customer contact deleted
+                value:
+                  sentAt: '2025-01-15T14:00:05Z'
+                  events:
+                  - event: CUSTOMER_CONTACT_DELETED
+                    timestamp: '2025-01-15T14:00:00Z'
+                    data:
+                      id: 990e8400-e29b-41d4-a716-446655440002
+                    diff: null
+              carrier_created:
+                summary: Carrier created (truckload)
+                value:
+                  sentAt: '2025-01-15T08:00:05Z'
+                  events:
+                  - event: CARRIER_CREATED
+                    timestamp: '2025-01-15T08:00:00Z'
+                    data:
+                      id: 770e8400-e29b-41d4-a716-446655440000
+                      friendlyId: C123456
+                      type: TRUCKLOAD
+                      name: Fast Transport LLC
+                      dbaName: Fast Logistics
+                      key: ERP-CARRIER-FAST-001
+                      email: dispatch@fasttransport.com
+                      phone: +1-555-0200
+                      website: https://fasttransport.com
+                      status: ACTIVE
+                      statusReason: null
+                      notes: Preferred carrier for midwest routes
+                      corporateAddress:
+                        addressLine1: 789 Transport Way
+                        addressLine2: null
+                        city: Dallas
+                        state: TX
+                        postalCode: '75201'
+                        country: USA
+                        latitude: 32.7767
+                        longitude: -96.797
+                      billingAddress:
+                        addressLine1: PO Box 12345
+                        addressLine2: null
+                        city: Dallas
+                        state: TX
+                        postalCode: '75202'
+                        country: USA
+                        latitude: null
+                        longitude: null
+                      mcNumber: MC-123456
+                      dotNumber: '1234567'
+                      scac: FAST
+                      einNumber: 12-3456789
+                      ffNumber: null
+                      mxNumber: null
+                      rfcNumber: null
+                      iataCode: null
+                      equipments:
+                      - VAN
+                      - REEFER
+                      - FLATBED
+                      isHazmat: false
+                      tsaApproved: true
+                      trucks: 50
+                      trailers: 100
+                      drivers: 75
+                      powerUnits: 50
+                      currency: USD
+                      paymentTerm:
+                        id: 550e8400-e29b-41d4-a716-446655440002
+                        name: Net 30
+                        key: null
+                      isFactoringPreferred: false
+                      goldenCarrierId: null
+                      insuranceCompany: State Farm Insurance
+                      insuranceAgent: John Smith
+                      insuranceAgentPhone: +1-555-123-4567
+                      insuranceAuthorityDate: '2025-01-01T00:00:00Z'
+                      insuranceExpirationDate: '2025-12-31T23:59:59Z'
+                      insuranceAutoLiabilityLimit: 1000000
+                      insuranceCargoLiabilityLimit: 100000
+                      insuranceGeneralLiabilityLimit: 1000000
+                      rating: SATISFACTORY
+                      ratingDate: '2025-01-15'
+                      reviewType: COMPLIANCE_REVIEW
+                      reviewDate: '2025-01-15'
+                      operatingAbility: AUTHORIZED
+                      inFmcsa: true
+                      usDriverInspections: 100
+                      usDriverInspectionsOos: 5
+                      usDriverInspectionsOosPct: 5
+                      usVehicleInspections: 150
+                      usVehicleInspectionsOos: 8
+                      usVehicleInspectionsOosPct: 5.33
+                      createdAt: '2025-01-15T08:00:00Z'
+                      updatedAt: '2025-01-15T08:00:00Z'
+                      deletedAt: null
+                    diff: null
+              carrier_updated:
+                summary: Carrier updated with diff
+                value:
+                  sentAt: '2025-01-15T10:30:05Z'
+                  events:
+                  - event: CARRIER_UPDATED
+                    timestamp: '2025-01-15T10:30:00Z'
+                    data:
+                      id: 770e8400-e29b-41d4-a716-446655440000
+                      friendlyId: C123456
+                      type: TRUCKLOAD
+                      name: Fast Transport LLC
+                      dbaName: Fast Logistics Express
+                      key: ERP-CARRIER-FAST-001
+                      email: newdispatch@fasttransport.com
+                      phone: +1-555-0201
+                      website: https://fasttransport.com
+                      status: INACTIVE
+                      statusReason: Contract expired
+                      notes: Contract renewal pending. Good safety record.
+                      corporateAddress:
+                        addressLine1: 789 Transport Way
+                        addressLine2: Building B
+                        city: Dallas
+                        state: TX
+                        postalCode: '75201'
+                        country: USA
+                        latitude: 32.7767
+                        longitude: -96.797
+                      billingAddress:
+                        addressLine1: PO Box 12345
+                        addressLine2: null
+                        city: Dallas
+                        state: TX
+                        postalCode: '75202'
+                        country: USA
+                        latitude: null
+                        longitude: null
+                      mcNumber: MC-123456
+                      dotNumber: '1234567'
+                      scac: FAST
+                      einNumber: 12-3456789
+                      ffNumber: null
+                      mxNumber: null
+                      rfcNumber: null
+                      iataCode: null
+                      equipments:
+                      - VAN
+                      - REEFER
+                      - FLATBED
+                      - POWER_ONLY
+                      isHazmat: true
+                      tsaApproved: true
+                      trucks: 60
+                      trailers: 120
+                      drivers: 85
+                      powerUnits: 60
+                      currency: USD
+                      paymentTerm:
+                        id: 550e8400-e29b-41d4-a716-446655440002
+                        name: Net 30
+                        key: null
+                      isFactoringPreferred: false
+                      goldenCarrierId: null
+                      insuranceCompany: State Farm Insurance
+                      insuranceAgent: Jane Doe
+                      insuranceAgentPhone: +1-555-123-4568
+                      insuranceAuthorityDate: '2025-01-01T00:00:00Z'
+                      insuranceExpirationDate: '2026-12-31T23:59:59Z'
+                      insuranceAutoLiabilityLimit: 2000000
+                      insuranceCargoLiabilityLimit: 250000
+                      insuranceGeneralLiabilityLimit: 2000000
+                      rating: SATISFACTORY
+                      ratingDate: '2025-01-15'
+                      reviewType: COMPLIANCE_REVIEW
+                      reviewDate: '2025-01-15'
+                      operatingAbility: AUTHORIZED
+                      inFmcsa: true
+                      usDriverInspections: 110
+                      usDriverInspectionsOos: 4
+                      usDriverInspectionsOosPct: 3.64
+                      usVehicleInspections: 165
+                      usVehicleInspectionsOos: 7
+                      usVehicleInspectionsOosPct: 4.24
+                      createdAt: '2025-01-15T08:00:00Z'
+                      updatedAt: '2025-01-15T10:30:00Z'
+                      deletedAt: null
+                    diff:
+                    - type: UPDATE
+                      key: dbaName
+                      value: Fast Logistics Express
+                      oldValue: Fast Logistics
+                    - type: UPDATE
+                      key: email
+                      value: newdispatch@fasttransport.com
+                      oldValue: dispatch@fasttransport.com
+                    - type: UPDATE
+                      key: phone
+                      value: +1-555-0201
+                      oldValue: +1-555-0200
+                    - type: UPDATE
+                      key: status
+                      value: INACTIVE
+                      oldValue: ACTIVE
+                    - type: ADD
+                      key: statusReason
+                      value: Contract expired
+                    - type: UPDATE
+                      key: notes
+                      value: Contract renewal pending. Good safety record.
+                      oldValue: Preferred carrier for midwest routes
+                    - type: UPDATE
+                      key: corporateAddress
+                      changes:
+                      - type: ADD
+                        key: addressLine2
+                        value: Building B
+                    - type: UPDATE
+                      key: equipments
+                      changes:
+                      - type: ADD
+                        key: '3'
+                        value: POWER_ONLY
+                    - type: UPDATE
+                      key: isHazmat
+                      value: true
+                      oldValue: false
+                    - type: UPDATE
+                      key: trucks
+                      value: 60
+                      oldValue: 50
+                    - type: UPDATE
+                      key: trailers
+                      value: 120
+                      oldValue: 100
+                    - type: UPDATE
+                      key: drivers
+                      value: 85
+                      oldValue: 75
+                    - type: UPDATE
+                      key: powerUnits
+                      value: 60
+                      oldValue: 50
+                    - type: UPDATE
+                      key: insuranceAgent
+                      value: Jane Doe
+                      oldValue: John Smith
+                    - type: UPDATE
+                      key: insuranceAgentPhone
+                      value: +1-555-123-4568
+                      oldValue: +1-555-123-4567
+                    - type: UPDATE
+                      key: insuranceExpirationDate
+                      value: '2026-12-31T23:59:59Z'
+                      oldValue: '2025-12-31T23:59:59Z'
+                    - type: UPDATE
+                      key: insuranceAutoLiabilityLimit
+                      value: 2000000
+                      oldValue: 1000000
+                    - type: UPDATE
+                      key: insuranceCargoLiabilityLimit
+                      value: 250000
+                      oldValue: 100000
+                    - type: UPDATE
+                      key: insuranceGeneralLiabilityLimit
+                      value: 2000000
+                      oldValue: 1000000
+                    - type: UPDATE
+                      key: usDriverInspections
+                      value: 110
+                      oldValue: 100
+                    - type: UPDATE
+                      key: usDriverInspectionsOos
+                      value: 4
+                      oldValue: 5
+                    - type: UPDATE
+                      key: usDriverInspectionsOosPct
+                      value: 3.64
+                      oldValue: 5
+                    - type: UPDATE
+                      key: usVehicleInspections
+                      value: 165
+                      oldValue: 150
+                    - type: UPDATE
+                      key: usVehicleInspectionsOos
+                      value: 7
+                      oldValue: 8
+                    - type: UPDATE
+                      key: usVehicleInspectionsOosPct
+                      value: 4.24
+                      oldValue: 5.33
+              carrier_deleted:
+                summary: Carrier deleted
+                value:
+                  sentAt: '2025-01-15T11:00:05Z'
+                  events:
+                  - event: CARRIER_DELETED
+                    timestamp: '2025-01-15T11:00:00Z'
+                    data:
+                      id: 770e8400-e29b-41d4-a716-446655440000
+                    diff: null
+              carrier_contact_created:
+                summary: Carrier contact created
+                value:
+                  sentAt: '2025-01-15T12:00:05Z'
+                  events:
+                  - event: CARRIER_CONTACT_CREATED
+                    timestamp: '2025-01-15T12:00:00Z'
+                    data:
+                      id: 880e8400-e29b-41d4-a716-446655440001
+                      carrier:
+                        id: 770e8400-e29b-41d4-a716-446655440000
+                        name: Fast Transport LLC
+                        friendlyId: C123456
+                      name: Mike Johnson
+                      contactInfo:
+                        name: Mike Johnson
+                        email: mike@fasttransport.com
+                        phone: +1-555-0300
+                        title: Dispatch Manager
+                      contactType: DISPATCH
+                      key: ERP-CARRIER-CONTACT-001
+                      createdAt: '2025-01-15T12:00:00Z'
+                      deletedAt: null
+                    diff: null
+              carrier_factor_created:
+                summary: Carrier factor created
+                value:
+                  sentAt: '2025-01-15T13:00:05Z'
+                  events:
+                  - event: CARRIER_FACTOR_CREATED
+                    timestamp: '2025-01-15T13:00:00Z'
+                    data:
+                      id: 550e8400-e29b-41d4-a716-446655440010
+                      companyName: Capital Factoring Services Inc
+                      key: ERP-FACTOR-001
+                      email: accounting@capitalfactoring.com
+                      phoneNumber: +1-555-234-5678
+                      addressLine1: 789 Finance Ave
+                      city: Dallas
+                      state: TX
+                      country: USA
+                      zipCode: '75201'
+                      bankName: Chase Bank
+                      accountName: Capital Factoring Services Inc
+                      currency: USD
+                      createdAt: '2025-01-15T13:00:00Z'
+                      updatedAt: '2025-01-15T13:00:00Z'
+                      deletedAt: null
+                    diff: null
+              carrier_payment_method_created:
+                summary: Carrier payment method created
+                value:
+                  sentAt: '2025-01-15T14:00:05Z'
+                  events:
+                  - event: CARRIER_PAYMENT_METHOD_CREATED
+                    timestamp: '2025-01-15T14:00:00Z'
+                    data:
+                      id: 990e8400-e29b-41d4-a716-446655440020
+                      carrierId: 770e8400-e29b-41d4-a716-446655440000
+                      carrier:
+                        id: 770e8400-e29b-41d4-a716-446655440000
+                        name: Fast Transport LLC
+                        friendlyId: C123456
+                      paymentRecipientType: DIRECT
+                      paymentMethodType: ACH
+                      isPreferred: true
+                      bankName: Chase Bank
+                      accountName: Fast Transport LLC
+                      accountNumber: '****1234'
+                      abaAch: '021000021'
+                      currency: USD
+                      carrierFactor: null
+                      createdAt: '2025-01-15T14:00:00Z'
+                      updatedAt: '2025-01-15T14:00:00Z'
+                      deletedAt: null
+                    diff: null
+              carrier_payment_method_updated:
+                summary: Carrier payment method updated
+                value:
+                  sentAt: '2025-01-15T15:00:05Z'
+                  events:
+                  - event: CARRIER_PAYMENT_METHOD_UPDATED
+                    timestamp: '2025-01-15T15:00:00Z'
+                    data:
+                      id: 990e8400-e29b-41d4-a716-446655440020
+                      carrierId: 770e8400-e29b-41d4-a716-446655440000
+                      carrier:
+                        id: 770e8400-e29b-41d4-a716-446655440000
+                        name: Fast Transport LLC
+                        friendlyId: C123456
+                      paymentRecipientType: FACTOR
+                      paymentMethodType: ACH_WIRE
+                      isPreferred: false
+                      bankName: null
+                      accountName: null
+                      accountNumber: null
+                      abaAch: null
+                      currency: USD
+                      carrierFactor:
+                        id: 550e8400-e29b-41d4-a716-446655440010
+                        key: ERP-FACTOR-001
+                        companyName: Capital Factoring Services Inc
+                        email: accounting@capitalfactoring.com
+                        phoneNumber: +1-555-234-5678
+                        currency: USD
+                        createdAt: '2025-01-15T13:00:00Z'
+                        updatedAt: '2025-01-15T13:00:00Z'
+                      createdAt: '2025-01-15T14:00:00Z'
+                      updatedAt: '2025-01-15T15:00:00Z'
+                      deletedAt: null
+                    diff:
+                    - type: UPDATE
+                      key: paymentRecipientType
+                      value: FACTOR
+                      oldValue: DIRECT
+                    - type: UPDATE
+                      key: paymentMethodType
+                      value: ACH_WIRE
+                      oldValue: ACH
+                    - type: UPDATE
+                      key: isPreferred
+                      value: false
+                      oldValue: true
+                    - type: ADD
+                      key: carrierFactor
+                      value:
+                        id: 550e8400-e29b-41d4-a716-446655440010
+                        companyName: Capital Factoring Services Inc
+                    - type: REMOVE
+                      key: bankName
+                      oldValue: Chase Bank
+                    - type: REMOVE
+                      key: accountName
+                      oldValue: Fast Transport LLC
+                    - type: REMOVE
+                      key: accountNumber
+                      oldValue: '****1234'
+                    - type: REMOVE
+                      key: abaAch
+                      oldValue: '021000021'
+              vendor_payment_method_created:
+                summary: Vendor payment method created
+                value:
+                  sentAt: '2025-01-15T16:00:05Z'
+                  events:
+                  - event: VENDOR_PAYMENT_METHOD_CREATED
+                    timestamp: '2025-01-15T16:00:00Z'
+                    data:
+                      id: 330e8400-e29b-41d4-a716-446655440030
+                      vendorId: 550e8400-e29b-41d4-a716-446655440000
+                      vendor:
+                        id: 550e8400-e29b-41d4-a716-446655440000
+                        name: ABC Warehouse Services
+                        friendlyId: V123456
+                      paymentMethodType: ACH
+                      isPreferred: true
+                      bankName: Bank of America
+                      accountName: ABC Warehouse Services
+                      accountNumber: '****5678'
+                      abaAch: 026009593
+                      currency: USD
+                      createdAt: '2025-01-15T16:00:00Z'
+                      updatedAt: '2025-01-15T16:00:00Z'
+                      deletedAt: null
+                    diff: null
+              shipment_delivered:
+                summary: Shipment delivered
+                value:
+                  sentAt: '2025-01-15T18:30:05Z'
+                  events:
+                  - event: SHIPMENT_DELIVERED
+                    timestamp: '2025-01-15T18:30:00Z'
+                    data:
+                      id: 660e8400-e29b-41d4-a716-446655440000
+                      friendlyId: SHP-12345
+                      key: ERP-SHIP-789
+                    diff: null
+      responses:
+        '200':
+          description: Webhook received and processed successfully
+        '401':
+          description: Invalid or missing x-api-key header
+components:
+  schemas:
+    WebhookEvent:
+      type: string
+      description: The type of webhook event
+      enum:
+      - CARRIER_ACTIVATED
+      - CARRIER_CONTACT_CREATED
+      - CARRIER_CONTACT_UPDATED
+      - CARRIER_CONTACT_DELETED
+      - CARRIER_CREATED
+      - CARRIER_DEACTIVATED
+      - CARRIER_DELETED
+      - CARRIER_FACTOR_CREATED
+      - CARRIER_FACTOR_UPDATED
+      - CARRIER_FACTOR_DELETED
+      - CARRIER_INVOICE_CREATED
+      - CARRIER_PAYMENT_CREATED
+      - CARRIER_PAYMENT_METHOD_CREATED
+      - CARRIER_PAYMENT_METHOD_UPDATED
+      - CARRIER_PAYMENT_METHOD_DELETED
+      - CARRIER_UPDATED
+      - COMMISSION_APPROVED
+      - COMMISSION_CREATED
+      - COMPANY_CREATED
+      - COMPANY_UPDATED
+      - COMPANY_DELETED
+      - CUSTOMER_CREATED
+      - CUSTOMER_UPDATED
+      - CUSTOMER_DELETED
+      - CUSTOMER_CONTACT_CREATED
+      - CUSTOMER_CONTACT_UPDATED
+      - CUSTOMER_CONTACT_DELETED
+      - CUSTOMER_INVOICE_CREATED
+      - CUSTOMER_PAYMENT_CREATED
+      - DOCUMENT_UPLOADED
+      - QUOTE_CREATED
+      - QUOTE_LOST
+      - QUOTE_QUOTED
+      - QUOTE_REQUESTED
+      - QUOTE_WON
+      - SHIPMENT_BOOKED
+      - SHIPMENT_CANCELED
+      - SHIPMENT_CHECK_CALL
+      - SHIPMENT_CREATED
+      - SHIPMENT_DELETED
+      - SHIPMENT_DELIVERED
+      - SHIPMENT_DISPATCHED
+      - SHIPMENT_DRAFT
+      - SHIPMENT_IN_TRANSIT
+      - SHIPMENT_LOADING
+      - SHIPMENT_NEXT_CHECK_CALL_DUE
+      - SHIPMENT_NEXT_CHECK_CALL_OVERDUE
+      - SHIPMENT_OPEN
+      - SHIPMENT_PICK_UP_NEAR_NOT_BOOKED
+      - SHIPMENT_PICK_UP_NEAR_NOT_DISPATCHED
+      - SHIPMENT_RATE_CON_EXPIRED
+      - SHIPMENT_RATE_CON_NOT_SIGNED
+      - SHIPMENT_RATE_CON_SIGNED
+      - SHIPMENT_TENDER_PENDING
+      - SHIPMENT_TENDER_REJECTED
+      - SHIPMENT_UNLOADING
+      - VENDOR_CREATED
+      - VENDOR_UPDATED
+      - VENDOR_DELETED
+      - VENDOR_CONTACT_CREATED
+      - VENDOR_CONTACT_UPDATED
+      - VENDOR_CONTACT_DELETED
+      - VENDOR_INVOICE_CREATED
+      - VENDOR_PAYMENT_CREATED
+      - VENDOR_PAYMENT_METHOD_CREATED
+      - VENDOR_PAYMENT_METHOD_UPDATED
+      - VENDOR_PAYMENT_METHOD_DELETED
+      - LOCATION_CREATED
+      - LOCATION_UPDATED
+      - LOCATION_DELETED
+      - LOCATION_CONTACT_CREATED
+      - LOCATION_CONTACT_UPDATED
+      - LOCATION_CONTACT_DELETED
+    DiffOperation:
+      type: string
+      description: The type of diff operation from json-diff-ts
+      enum:
+      - REMOVE
+      - ADD
+      - UPDATE
+    WebhookDelivery:
+      type: object
+      description: The top-level webhook delivery payload containing one or more events
+      required:
+      - sentAt
+      - events
+      properties:
+        sentAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the webhook was sent from MVMNT
+          example: '2025-01-15T14:30:00Z'
+        events:
+          type: array
+          description: Array of webhook events (typically contains a single event)
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/WebhookPayload'
+    DiffChange:
+      type: object
+      description: 'Represents a single change from json-diff-ts IChange interface.
+
+        For nested object changes, the changes array will contain child changes.
+
+        '
+      required:
+      - type
+      - key
+      properties:
+        type:
+          $ref: '#/components/schemas/DiffOperation'
+        key:
+          type: string
+          description: The property name that changed
+          example: status
+        embeddedKey:
+          type: string
+          description: Optional key used when comparing array elements by identifier
+          example: id
+        value:
+          description: 'The new value being set.
+
+            - For ADD: The value being added
+
+            - For UPDATE: The new value replacing the old one
+
+            - For REMOVE: Not present
+
+            '
+          example: INACTIVE
+        oldValue:
+          description: 'The previous value (only present for UPDATE operations).
+
+            '
+          example: ACTIVE
+        changes:
+          type: array
+          description: Nested changes for complex objects
+          items:
+            $ref: '#/components/schemas/DiffChange'
+    WebhookPayload:
+      type: object
+      required:
+      - event
+      - timestamp
+      - data
+      discriminator:
+        propertyName: event
+        mapping:
+          CUSTOMER_CREATED: '#/components/schemas/CustomerChangedPayload'
+          CUSTOMER_UPDATED: '#/components/schemas/CustomerChangedPayload'
+          CUSTOMER_DELETED: '#/components/schemas/CustomerChangedPayload'
+          COMPANY_CREATED: '#/components/schemas/CompanyChangedPayload'
+          COMPANY_UPDATED: '#/components/schemas/CompanyChangedPayload'
+          COMPANY_DELETED: '#/components/schemas/CompanyChangedPayload'
+          CUSTOMER_CONTACT_CREATED: '#/components/schemas/CustomerContactChangedPayload'
+          CUSTOMER_CONTACT_UPDATED: '#/components/schemas/CustomerContactChangedPayload'
+          CUSTOMER_CONTACT_DELETED: '#/components/schemas/CustomerContactChangedPayload'
+          CARRIER_CONTACT_CREATED: '#/components/schemas/CarrierContactChangedPayload'
+          CARRIER_CONTACT_UPDATED: '#/components/schemas/CarrierContactChangedPayload'
+          CARRIER_CONTACT_DELETED: '#/components/schemas/CarrierContactChangedPayload'
+          CARRIER_CREATED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_UPDATED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_DELETED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_ACTIVATED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_DEACTIVATED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_FACTOR_CREATED: '#/components/schemas/CarrierFactorChangedPayload'
+          CARRIER_FACTOR_UPDATED: '#/components/schemas/CarrierFactorChangedPayload'
+          CARRIER_FACTOR_DELETED: '#/components/schemas/CarrierFactorChangedPayload'
+          CARRIER_PAYMENT_METHOD_CREATED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
+          CARRIER_PAYMENT_METHOD_UPDATED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
+          CARRIER_PAYMENT_METHOD_DELETED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
+          VENDOR_CREATED: '#/components/schemas/VendorChangedPayload'
+          VENDOR_UPDATED: '#/components/schemas/VendorChangedPayload'
+          VENDOR_DELETED: '#/components/schemas/VendorChangedPayload'
+          VENDOR_CONTACT_CREATED: '#/components/schemas/VendorContactChangedPayload'
+          VENDOR_CONTACT_UPDATED: '#/components/schemas/VendorContactChangedPayload'
+          VENDOR_CONTACT_DELETED: '#/components/schemas/VendorContactChangedPayload'
+          VENDOR_PAYMENT_METHOD_CREATED: '#/components/schemas/VendorPaymentMethodChangedPayload'
+          VENDOR_PAYMENT_METHOD_UPDATED: '#/components/schemas/VendorPaymentMethodChangedPayload'
+          VENDOR_PAYMENT_METHOD_DELETED: '#/components/schemas/VendorPaymentMethodChangedPayload'
+          LOCATION_CREATED: '#/components/schemas/LocationChangedPayload'
+          LOCATION_UPDATED: '#/components/schemas/LocationChangedPayload'
+          LOCATION_DELETED: '#/components/schemas/LocationChangedPayload'
+          LOCATION_CONTACT_CREATED: '#/components/schemas/LocationContactChangedPayload'
+          LOCATION_CONTACT_UPDATED: '#/components/schemas/LocationContactChangedPayload'
+          LOCATION_CONTACT_DELETED: '#/components/schemas/LocationContactChangedPayload'
+          SHIPMENT_DELIVERED: '#/components/schemas/ShipmentDeliveredPayload'
+      properties:
+        event:
+          $ref: '#/components/schemas/WebhookEvent'
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the event occurred
+          example: '2025-01-15T14:30:00Z'
+        data:
+          type: object
+          description: Event-specific data. Structure varies by event type.
+          additionalProperties: true
+        diff:
+          type:
+          - array
+          - 'null'
+          description: 'Array of changes made during an UPDATE operation using json-diff-ts.
+
+            Only present for UPDATE events. Null for CREATE and DELETE events.
+
+            Each change follows the IChange interface from json-diff-ts library.
+
+            '
+          items:
+            $ref: '#/components/schemas/DiffChange'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via client credentials flow

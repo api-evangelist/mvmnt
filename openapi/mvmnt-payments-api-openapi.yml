@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: MVMNT Bill Payments API
+  title: MVMNT Payments API
   version: 1.0.0
   description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
   contact:
@@ -503,18 +503,84 @@ paths:
           $ref: '#/components/responses/NotFoundError'
 components:
   schemas:
-    PaymentFilterRequest:
+    PaymentPatch:
       type: object
       properties:
-        filter:
-          $ref: '#/components/schemas/PaymentFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
+        paymentDate:
           type: string
+          format: date
+        paymentMethodType:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        reference:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentApplicationInput'
+          description: Replace all invoice applications
+        creditApplications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCreditApplicationInput'
+          description: Replace all credit applications
+    payments_PaymentMethodTypeFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        notEqualTo:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/payments_PaymentMethodType'
+    PaymentApplicationInput:
+      type: object
+      required:
+      - invoiceId
+      - amount
+      properties:
+        invoiceId:
+          type: string
+          format: uuid
+          description: Invoice to apply payment to
+        amount:
+          type: number
+          minimum: 0.01
+          description: Amount to apply to this invoice
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     FloatFilter:
       type: object
       description: Filter options for float/number fields
@@ -546,6 +612,165 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
+    PaymentFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        invoiceId:
+          $ref: '#/components/schemas/UUIDFilter'
+        shipmentId:
+          $ref: '#/components/schemas/UUIDFilter'
+        paymentDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        paymentMethodType:
+          $ref: '#/components/schemas/payments_PaymentMethodTypeFilter'
+        totalAmount:
+          $ref: '#/components/schemas/FloatFilter'
+        reference:
+          $ref: '#/components/schemas/StringFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentFilter'
+        not:
+          $ref: '#/components/schemas/PaymentFilter'
+    PaymentApplication:
+      type: object
+      required:
+      - id
+      - invoiceId
+      - amount
+      properties:
+        id:
+          type: string
+          format: uuid
+        invoiceId:
+          type: string
+          format: uuid
+        invoiceFriendlyId:
+          type:
+          - string
+          - 'null'
+        invoiceAmount:
+          type:
+          - number
+          - 'null'
+          description: Total invoice amount
+        invoiceOpenBalance:
+          type:
+          - number
+          - 'null'
+          description: Invoice balance before this payment
+        amount:
+          type: number
+          description: Amount applied to this invoice
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    payments_PaymentMethodType:
+      type: string
+      enum:
+      - ACH_WIRE
+      - ZELLE
+      - VENMO
+      - CHECK
+      - EFT_DIRECT_DEPOSIT
+      - E_TRANSFER
+      - CREDIT_CARD
+      description: 'Payment method type.
+
+        - `ACH_WIRE`: ACH or wire transfer
+
+        - `ZELLE`: Zelle payment
+
+        - `VENMO`: Venmo payment
+
+        - `CHECK`: Paper check
+
+        - `EFT_DIRECT_DEPOSIT`: EFT direct deposit
+
+        - `E_TRANSFER`: Electronic transfer
+
+        - `CREDIT_CARD`: Credit card payment
+
+        '
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    PaymentFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/PaymentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    PaymentCreditApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        creditMemoId:
+          type: string
+          format: uuid
+        creditMemoReference:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          description: Credit amount applied in this payment
     ValidationError:
       type: object
       required:
@@ -575,18 +800,30 @@ components:
               message:
                 type: string
                 description: Validation error message
-    Error:
+    PaginationInfo:
       type: object
       required:
-      - error
-      - message
+      - pageSize
+      - hasNextPage
       properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
     PaymentInput:
       type: object
       required:
@@ -623,48 +860,6 @@ components:
           items:
             $ref: '#/components/schemas/PaymentCreditApplicationInput'
           description: Credits to apply in this payment
-    PaymentPatch:
-      type: object
-      properties:
-        paymentDate:
-          type: string
-          format: date
-        paymentMethodType:
-          $ref: '#/components/schemas/payments_PaymentMethodType'
-        reference:
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentApplicationInput'
-          description: Replace all invoice applications
-        creditApplications:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentCreditApplicationInput'
-          description: Replace all credit applications
-    PaymentCreditApplication:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        creditMemoId:
-          type: string
-          format: uuid
-        creditMemoReference:
-          type:
-          - string
-          - 'null'
-        amount:
-          type: number
-          description: Credit amount applied in this payment
     PaymentCreditApplicationInput:
       type: object
       required:
@@ -679,320 +874,6 @@ components:
           type: number
           minimum: 0.01
           description: Credit amount to apply
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    PaymentApplication:
-      type: object
-      required:
-      - id
-      - invoiceId
-      - amount
-      properties:
-        id:
-          type: string
-          format: uuid
-        invoiceId:
-          type: string
-          format: uuid
-        invoiceFriendlyId:
-          type:
-          - string
-          - 'null'
-        invoiceAmount:
-          type:
-          - number
-          - 'null'
-          description: Total invoice amount
-        invoiceOpenBalance:
-          type:
-          - number
-          - 'null'
-          description: Invoice balance before this payment
-        amount:
-          type: number
-          description: Amount applied to this invoice
-    CustomerReference:
-      type: object
-      description: 'Enhanced reference to a customer resource (returned in responses).
-
-        Includes full customer details in addition to id/key.
-
-
-        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - friendlyId
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Customer UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CUSTOMER-ACME
-        name:
-          type: string
-          description: Customer company name
-          example: Acme Manufacturing Corp
-        friendlyId:
-          type: string
-          description: Human-readable customer identifier
-          example: A123456
-        status:
-          type: string
-          description: Customer status
-          enum:
-          - PROSPECT
-          - ACTIVE
-          - INACTIVE
-          - CHURNED
-          example: ACTIVE
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        website:
-          type:
-          - string
-          - 'null'
-          description: Customer website URL
-          example: https://acme-manufacturing.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the customer was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the customer was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the customer was soft deleted (null if active)
-          example: null
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    payments_PaymentMethodTypeFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/payments_PaymentMethodType'
-        notEqualTo:
-          $ref: '#/components/schemas/payments_PaymentMethodType'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/payments_PaymentMethodType'
-    PaymentFilter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDFilter'
-        customerId:
-          $ref: '#/components/schemas/UUIDFilter'
-        invoiceId:
-          $ref: '#/components/schemas/UUIDFilter'
-        shipmentId:
-          $ref: '#/components/schemas/UUIDFilter'
-        paymentDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        paymentMethodType:
-          $ref: '#/components/schemas/payments_PaymentMethodTypeFilter'
-        totalAmount:
-          $ref: '#/components/schemas/FloatFilter'
-        reference:
-          $ref: '#/components/schemas/StringFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentFilter'
-        not:
-          $ref: '#/components/schemas/PaymentFilter'
-    payments_PaymentMethodType:
-      type: string
-      enum:
-      - ACH_WIRE
-      - ZELLE
-      - VENMO
-      - CHECK
-      - EFT_DIRECT_DEPOSIT
-      - E_TRANSFER
-      - CREDIT_CARD
-      description: 'Payment method type.
-
-        - `ACH_WIRE`: ACH or wire transfer
-
-        - `ZELLE`: Zelle payment
-
-        - `VENMO`: Venmo payment
-
-        - `CHECK`: Paper check
-
-        - `EFT_DIRECT_DEPOSIT`: EFT direct deposit
-
-        - `E_TRANSFER`: Electronic transfer
-
-        - `CREDIT_CARD`: Credit card payment
-
-        '
-    PaymentApplicationInput:
-      type: object
-      required:
-      - invoiceId
-      - amount
-      properties:
-        invoiceId:
-          type: string
-          format: uuid
-          description: Invoice to apply payment to
-        amount:
-          type: number
-          minimum: 0.01
-          description: Amount to apply to this invoice
     Payment:
       type: object
       required:
@@ -1083,6 +964,125 @@ components:
           - string
           - 'null'
           format: date-time
+    CustomerReference:
+      type: object
+      description: 'Enhanced reference to a customer resource (returned in responses).
+
+        Includes full customer details in addition to id/key.
+
+
+        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - friendlyId
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CUSTOMER-ACME
+        name:
+          type: string
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          description: Human-readable customer identifier
+          example: A123456
+        status:
+          type: string
+          description: Customer status
+          enum:
+          - PROSPECT
+          - ACTIVE
+          - INACTIVE
+          - CHURNED
+          example: ACTIVE
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        website:
+          type:
+          - string
+          - 'null'
+          description: Customer website URL
+          example: https://acme-manufacturing.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the customer was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the customer was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer was soft deleted (null if active)
+          example: null
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
   responses:
     NotFoundError:
       description: Resource not found
@@ -1107,15 +1107,6 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
     BadRequestError:
       description: Bad request - invalid input
       content:
@@ -1125,6 +1116,15 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   parameters:
     IdOrClientKey:
       name: id

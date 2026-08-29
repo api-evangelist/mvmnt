@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: MVMNT Bill Payments Loads API
+  title: MVMNT Loads API
   version: 1.0.0
   description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
   contact:
@@ -779,7 +779,343 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   schemas:
+    LoadCarrier:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        carrier:
+          $ref: '#/components/schemas/CarrierReference'
+        contact:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            phone:
+              type:
+              - string
+              - 'null'
+            email:
+              type:
+              - string
+              - 'null'
+        status:
+          $ref: '#/components/schemas/LoadCarrierStatus'
+        billingStatus:
+          $ref: '#/components/schemas/LoadBillingStatus'
+        bookedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dispatchedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadCarrierCharge'
+          description: Flattened charges array
+        totalCost:
+          type:
+          - number
+          - 'null'
+          description: Sum of all charges
+        driverName:
+          type:
+          - string
+          - 'null'
+        driverPhone:
+          type:
+          - string
+          - 'null'
+        truckNumber:
+          type:
+          - string
+          - 'null'
+        trailerNumber:
+          type:
+          - string
+          - 'null'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    LoadInput:
+      type: object
+      required:
+      - mode
+      properties:
+        mode:
+          $ref: '#/components/schemas/TransportMode'
+        orderStopIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Order stop IDs to include in this load
+        carrier:
+          $ref: '#/components/schemas/LoadCarrierInput'
+          description: Initial carrier assignment
+    LoadStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/LoadStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/LoadStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadStatus'
+    LoadStatus:
+      type: string
+      enum:
+      - SOURCING
+      - BOOKED
+      - DISPATCHED
+      - LOADING
+      - PICKED_UP
+      - IN_TRANSIT
+      - UNLOADING
+      - DELIVERED
+      - CANCELED
+      description: 'Current status of the load.
+
+
+        **Pre-transit:**
+
+        - `SOURCING`: Looking for carrier
+
+        - `BOOKED`: Carrier booked
+
+        - `DISPATCHED`: Dispatched to carrier
+
+
+        **In-transit:**
+
+        - `LOADING`: Loading at pickup
+
+        - `PICKED_UP`: Picked up
+
+        - `IN_TRANSIT`: In transit
+
+        - `UNLOADING`: Unloading at delivery
+
+
+        **Final:**
+
+        - `DELIVERED`: Delivered
+
+        - `CANCELED`: Canceled
+
+        '
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    CarrierReference:
+      type: object
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
+          type: string
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the carrier was soft deleted (null if active)
+          example: null
+    ReportTonuRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          maxLength: 1000
+          description: Reason for TONU
+        costs:
+          type: array
+          items:
+            type: object
+            required:
+            - chargeCode
+            - amount
+            properties:
+              chargeCode:
+                $ref: '#/components/schemas/ResourceReferenceInput'
+              description:
+                type: string
+              amount:
+                type: number
+          description: TONU costs to record
+        createReplacementLoad:
+          type: boolean
+          default: false
+          description: Whether to create a replacement load
+      description: Request body for reporting TONU
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     LoadCarrierInput:
       type: object
       required:
@@ -816,35 +1152,73 @@ components:
           type: string
         trailerNumber:
           type: string
-    ValidationError:
+    AddCarrierResponse:
       type: object
       required:
-      - error
-      - message
-      - details
+      - loadId
+      - loadCarrierId
       properties:
-        error:
+        loadId:
           type: string
-          description: Error code
-          example: validation_error
-        message:
+          format: uuid
+        loadCarrierId:
           type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
+          format: uuid
+          description: The new load carrier ID
+        loadCarrier:
+          $ref: '#/components/schemas/LoadCarrier'
+    LoadStop:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        orderStopId:
+          type: string
+          format: uuid
+          description: Reference to the order stop
+        sequence:
+          type: integer
+        type:
+          type: string
+          enum:
+          - PICKUP
+          - DELIVERY
+          - CROSS_DOCK
+        address:
+          $ref: '#/components/schemas/Address'
+        scheduledArrival:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        actualArrival:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        actualDeparture:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    LoadCarrierCharge:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        chargeCode:
+          $ref: '#/components/schemas/ResourceReference'
+        description:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
     RebookLoadResponse:
       type: object
       required:
@@ -861,6 +1235,128 @@ components:
           type:
           - string
           - 'null'
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    ResourceReference:
+      type: object
+      description: Reference to another resource (returned in responses)
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type:
+          - string
+          - 'null'
+          description: Client-defined reference ID if set
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+        key: ERP-USER-12345
+    LoadCarrierStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - TONU
+      - BOUNCED
+      description: 'Status of the carrier assignment.
+
+        - `ACTIVE`: Carrier is actively assigned
+
+        - `TONU`: Truck Ordered Not Used (carrier dispatched but cancelled)
+
+        - `BOUNCED`: Carrier bounced/rejected load
+
+        '
+    LoadFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        shipmentId:
+          $ref: '#/components/schemas/UUIDFilter'
+        status:
+          $ref: '#/components/schemas/LoadStatusFilter'
+        mode:
+          type: object
+          properties:
+            equalTo:
+              $ref: '#/components/schemas/TransportMode'
+            in:
+              type: array
+              items:
+                $ref: '#/components/schemas/TransportMode'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deliveredAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadFilter'
+        not:
+          $ref: '#/components/schemas/LoadFilter'
+    TransportMode:
+      type: string
+      enum:
+      - TL
+      - LTL
+      - AIR
+      - OCEAN
+      - RAIL
+      - INTERMODAL
+      - DRAYAGE
+      description: 'Transportation mode.
+
+        - `TL`: Full Truckload
+
+        - `LTL`: Less than Truckload
+
+        - `AIR`: Air freight
+
+        - `OCEAN`: Ocean freight
+
+        - `RAIL`: Rail freight
+
+        - `INTERMODAL`: Intermodal (multiple modes)
+
+        - `DRAYAGE`: Drayage/cartage
+
+        '
+    LoadBillingStatus:
+      type: string
+      enum:
+      - AWAITING_INVOICE
+      - INVOICE_IN_REVIEW
+      - APPROVED_TO_PAY
+      - PAID
+      description: 'Billing status for the load (AP side).
+
+        - `AWAITING_INVOICE`: Waiting for carrier invoice
+
+        - `INVOICE_IN_REVIEW`: Invoice received, under review
+
+        - `APPROVED_TO_PAY`: Approved for payment
+
+        - `PAID`: Paid to carrier
+
+        '
     Address:
       type: object
       description: 'Physical address/location details (nested, without id).
@@ -938,186 +1434,58 @@ components:
           format: uuid
           description: Reference to standardized city record (internal use)
           example: null
-    Error:
+    LoadCarrierRemovalReason:
+      type: string
+      enum:
+      - TONU
+      - BOUNCED
+      - RATE_DISPUTE
+      - EQUIPMENT_ISSUE
+      - DRIVER_ISSUE
+      - TIMING_ISSUE
+      - OTHER
+      description: Reason for removing a carrier from a load
+    LoadFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/LoadFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    ValidationError:
       type: object
       required:
       - error
       - message
+      - details
       properties:
         error:
           type: string
           description: Error code
+          example: validation_error
         message:
           type: string
           description: Human-readable error message
-    LoadBillingStatus:
-      type: string
-      enum:
-      - AWAITING_INVOICE
-      - INVOICE_IN_REVIEW
-      - APPROVED_TO_PAY
-      - PAID
-      description: 'Billing status for the load (AP side).
-
-        - `AWAITING_INVOICE`: Waiting for carrier invoice
-
-        - `INVOICE_IN_REVIEW`: Invoice received, under review
-
-        - `APPROVED_TO_PAY`: Approved for payment
-
-        - `PAID`: Paid to carrier
-
-        '
-    LoadCarrierCharge:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        chargeCode:
-          $ref: '#/components/schemas/ResourceReference'
-        description:
-          type:
-          - string
-          - 'null'
-        amount:
-          type: number
-        quantity:
-          type: number
-          default: 1
-    CarrierReference:
-      type: object
-      description: 'Enhanced reference to a carrier resource (returned in responses).
-
-        Includes full carrier details in addition to id/key.
-
-
-        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Carrier UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CARRIER-SWIFT
-        name:
-          type: string
-          description: Carrier company name
-          example: Swift Transportation
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-987-6543
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: dispatch@swifttrans.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the carrier was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the carrier was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the carrier was soft deleted (null if active)
-          example: null
-    BounceCarrierRequest:
-      type: object
-      properties:
-        reason:
-          $ref: '#/components/schemas/LoadCarrierRemovalReason'
-        reasonText:
-          type: string
-          maxLength: 1000
-          description: Additional reason details
-      description: Request body for bouncing a carrier
-    TransportMode:
-      type: string
-      enum:
-      - TL
-      - LTL
-      - AIR
-      - OCEAN
-      - RAIL
-      - INTERMODAL
-      - DRAYAGE
-      description: 'Transportation mode.
-
-        - `TL`: Full Truckload
-
-        - `LTL`: Less than Truckload
-
-        - `AIR`: Air freight
-
-        - `OCEAN`: Ocean freight
-
-        - `RAIL`: Rail freight
-
-        - `INTERMODAL`: Intermodal (multiple modes)
-
-        - `DRAYAGE`: Drayage/cartage
-
-        '
-    LoadFilter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDFilter'
-        shipmentId:
-          $ref: '#/components/schemas/UUIDFilter'
-        status:
-          $ref: '#/components/schemas/LoadStatusFilter'
-        mode:
-          type: object
-          properties:
-            equalTo:
-              $ref: '#/components/schemas/TransportMode'
-            in:
-              type: array
-              items:
-                $ref: '#/components/schemas/TransportMode'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deliveredAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
+        details:
           type: array
+          description: Validation error details
           items:
-            $ref: '#/components/schemas/LoadFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/LoadFilter'
-        not:
-          $ref: '#/components/schemas/LoadFilter'
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
     PaginationInfo:
       type: object
       required:
@@ -1142,123 +1510,11 @@ components:
           - 'null'
           description: Cursor for the next page (null if no next page)
           example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    LoadFilterRequest:
+    LoadCarrierPatch:
       type: object
       properties:
-        filter:
-          $ref: '#/components/schemas/LoadFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
-          type: string
-    LoadCarrierStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - TONU
-      - BOUNCED
-      description: 'Status of the carrier assignment.
-
-        - `ACTIVE`: Carrier is actively assigned
-
-        - `TONU`: Truck Ordered Not Used (carrier dispatched but cancelled)
-
-        - `BOUNCED`: Carrier bounced/rejected load
-
-        '
-    LoadStatusFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/LoadStatus'
-        notEqualTo:
-          $ref: '#/components/schemas/LoadStatus'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/LoadStatus'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/LoadStatus'
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    LoadCarrier:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        carrier:
-          $ref: '#/components/schemas/CarrierReference'
         contact:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-            name:
-              type: string
-            phone:
-              type:
-              - string
-              - 'null'
-            email:
-              type:
-              - string
-              - 'null'
-        status:
-          $ref: '#/components/schemas/LoadCarrierStatus'
-        billingStatus:
-          $ref: '#/components/schemas/LoadBillingStatus'
-        bookedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dispatchedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        charges:
-          type: array
-          items:
-            $ref: '#/components/schemas/LoadCarrierCharge'
-          description: Flattened charges array
-        totalCost:
-          type:
-          - number
-          - 'null'
-          description: Sum of all charges
+          $ref: '#/components/schemas/ResourceReferenceInput'
         driverName:
           type:
           - string
@@ -1275,181 +1531,6 @@ components:
           type:
           - string
           - 'null'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    LoadStatus:
-      type: string
-      enum:
-      - SOURCING
-      - BOOKED
-      - DISPATCHED
-      - LOADING
-      - PICKED_UP
-      - IN_TRANSIT
-      - UNLOADING
-      - DELIVERED
-      - CANCELED
-      description: 'Current status of the load.
-
-
-        **Pre-transit:**
-
-        - `SOURCING`: Looking for carrier
-
-        - `BOOKED`: Carrier booked
-
-        - `DISPATCHED`: Dispatched to carrier
-
-
-        **In-transit:**
-
-        - `LOADING`: Loading at pickup
-
-        - `PICKED_UP`: Picked up
-
-        - `IN_TRANSIT`: In transit
-
-        - `UNLOADING`: Unloading at delivery
-
-
-        **Final:**
-
-        - `DELIVERED`: Delivered
-
-        - `CANCELED`: Canceled
-
-        '
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    ResourceReference:
-      type: object
-      description: Reference to another resource (returned in responses)
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type:
-          - string
-          - 'null'
-          description: Client-defined reference ID if set
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
-        key: ERP-USER-12345
-    LoadPatch:
-      type: object
-      properties:
-        mode:
-          $ref: '#/components/schemas/TransportMode'
-    AddCarrierResponse:
-      type: object
-      required:
-      - loadId
-      - loadCarrierId
-      properties:
-        loadId:
-          type: string
-          format: uuid
-        loadCarrierId:
-          type: string
-          format: uuid
-          description: The new load carrier ID
-        loadCarrier:
-          $ref: '#/components/schemas/LoadCarrier'
-    LoadCarrierRemovalReason:
-      type: string
-      enum:
-      - TONU
-      - BOUNCED
-      - RATE_DISPUTE
-      - EQUIPMENT_ISSUE
-      - DRIVER_ISSUE
-      - TIMING_ISSUE
-      - OTHER
-      description: Reason for removing a carrier from a load
-    ResourceReferenceInput:
-      type: object
-      description: Reference to another resource by either ID or client key (used in create/update requests)
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type: string
-          description: Client-defined reference ID
-      oneOf:
-      - required:
-        - id
-      - required:
-        - key
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
-    ReportTonuRequest:
-      type: object
-      properties:
-        reason:
-          type: string
-          maxLength: 1000
-          description: Reason for TONU
-        costs:
-          type: array
-          items:
-            type: object
-            required:
-            - chargeCode
-            - amount
-            properties:
-              chargeCode:
-                $ref: '#/components/schemas/ResourceReferenceInput'
-              description:
-                type: string
-              amount:
-                type: number
-          description: TONU costs to record
-        createReplacementLoad:
-          type: boolean
-          default: false
-          description: Whether to create a replacement load
-      description: Request body for reporting TONU
     Load:
       type: object
       required:
@@ -1513,120 +1594,39 @@ components:
           - string
           - 'null'
           format: date-time
-    LoadStop:
+    ResourceReferenceInput:
       type: object
+      description: Reference to another resource by either ID or client key (used in create/update requests)
       properties:
         id:
           type: string
           format: uuid
-        orderStopId:
+          description: Resource UUID
+        key:
           type: string
-          format: uuid
-          description: Reference to the order stop
-        sequence:
-          type: integer
-        type:
-          type: string
-          enum:
-          - PICKUP
-          - DELIVERY
-          - CROSS_DOCK
-        address:
-          $ref: '#/components/schemas/Address'
-        scheduledArrival:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        actualArrival:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        actualDeparture:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    LoadCarrierPatch:
+          description: Client-defined reference ID
+      oneOf:
+      - required:
+        - id
+      - required:
+        - key
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+    LoadPatch:
       type: object
-      properties:
-        contact:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-        driverName:
-          type:
-          - string
-          - 'null'
-        driverPhone:
-          type:
-          - string
-          - 'null'
-        truckNumber:
-          type:
-          - string
-          - 'null'
-        trailerNumber:
-          type:
-          - string
-          - 'null'
-    LoadInput:
-      type: object
-      required:
-      - mode
       properties:
         mode:
           $ref: '#/components/schemas/TransportMode'
-        orderStopIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Order stop IDs to include in this load
-        carrier:
-          $ref: '#/components/schemas/LoadCarrierInput'
-          description: Initial carrier assignment
-  responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
+    BounceCarrierRequest:
+      type: object
+      properties:
+        reason:
+          $ref: '#/components/schemas/LoadCarrierRemovalReason'
+        reasonText:
+          type: string
+          maxLength: 1000
+          description: Additional reason details
+      description: Request body for bouncing a carrier
   parameters:
     IdOrClientKey:
       name: id

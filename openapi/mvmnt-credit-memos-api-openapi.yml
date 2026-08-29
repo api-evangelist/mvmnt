@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: MVMNT Bill Payments Credit Memos API
+  title: MVMNT Credit Memos API
   version: 1.0.0
   description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
   contact:
@@ -596,7 +596,152 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
 components:
+  responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   schemas:
+    CreditMemoFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CreditMemoFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    CreditMemoFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        status:
+          $ref: '#/components/schemas/CreditMemoStatusFilter'
+        memoDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        amount:
+          $ref: '#/components/schemas/FloatFilter'
+        remainingBalance:
+          $ref: '#/components/schemas/FloatFilter'
+        hasRemainingBalance:
+          type: boolean
+          description: Filter to credits with available balance
+        sourcePaymentGroupId:
+          $ref: '#/components/schemas/UUIDFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditMemoFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditMemoFilter'
+        not:
+          $ref: '#/components/schemas/CreditMemoFilter'
+    CreditMemoStatus:
+      type: string
+      enum:
+      - OPEN
+      - PARTIALLY_APPLIED
+      - APPLIED
+      - VOIDED
+      description: 'Current status of the credit memo (derived from remaining balance).
+
+        - `OPEN`: No applications, full balance available
+
+        - `PARTIALLY_APPLIED`: Some amount applied, balance remains
+
+        - `APPLIED`: Fully applied to invoices
+
+        - `VOIDED`: Credit memo cancelled
+
+        '
+    CreditMemoPatch:
+      type: object
+      properties:
+        reference:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        memoDate:
+          type: string
+          format: date
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     FloatFilter:
       type: object
       description: Filter options for float/number fields
@@ -628,6 +773,338 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
+    UserReference:
+      type: object
+      description: 'Enhanced reference to a user resource (returned in responses).
+
+        Includes full user details in addition to id/key.
+
+
+        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-USER-12345
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          type: string
+          description: User account status
+          enum:
+          - PENDING
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the user was soft deleted (null if active)
+          example: null
+    ApplyCreditRequest:
+      type: object
+      required:
+      - invoiceId
+      - amount
+      properties:
+        invoiceId:
+          type: string
+          format: uuid
+          description: Invoice to apply credit to
+        amount:
+          type: number
+          minimum: 0.01
+          description: Amount to apply
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    VoidCreditMemoRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          maxLength: 1000
+          description: Reason for voiding
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    CreditMemoStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/CreditMemoStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/CreditMemoStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditMemoStatus'
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    ApplyCreditResponse:
+      type: object
+      required:
+      - application
+      - creditMemo
+      properties:
+        application:
+          $ref: '#/components/schemas/CreditMemoApplication'
+        creditMemo:
+          $ref: '#/components/schemas/CreditMemo'
+    CreditMemoInput:
+      type: object
+      required:
+      - customerId
+      - amount
+      - memoDate
+      properties:
+        customerId:
+          type: string
+          format: uuid
+          description: Customer to credit
+        amount:
+          type: number
+          minimum: 0.01
+          description: Credit amount
+        currency:
+          type: string
+          description: Currency code (defaults to customer currency)
+        memoDate:
+          type: string
+          format: date
+          description: Credit memo date
+        reference:
+          type: string
+          maxLength: 500
+          description: Reference number
+        notes:
+          type: string
+          maxLength: 2000
+          description: Notes or description
+    CustomerReference:
+      type: object
+      description: 'Enhanced reference to a customer resource (returned in responses).
+
+        Includes full customer details in addition to id/key.
+
+
+        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - friendlyId
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CUSTOMER-ACME
+        name:
+          type: string
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          description: Human-readable customer identifier
+          example: A123456
+        status:
+          type: string
+          description: Customer status
+          enum:
+          - PROSPECT
+          - ACTIVE
+          - INACTIVE
+          - CHURNED
+          example: ACTIVE
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        website:
+          type:
+          - string
+          - 'null'
+          description: Customer website URL
+          example: https://acme-manufacturing.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the customer was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the customer was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer was soft deleted (null if active)
+          example: null
     CreditMemo:
       type: object
       required:
@@ -720,108 +1197,6 @@ components:
           - 'null'
         createdBy:
           $ref: '#/components/schemas/UserReference'
-    ApplyCreditRequest:
-      type: object
-      required:
-      - invoiceId
-      - amount
-      properties:
-        invoiceId:
-          type: string
-          format: uuid
-          description: Invoice to apply credit to
-        amount:
-          type: number
-          minimum: 0.01
-          description: Amount to apply
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    CreditMemoStatusFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/CreditMemoStatus'
-        notEqualTo:
-          $ref: '#/components/schemas/CreditMemoStatus'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditMemoStatus'
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    CreditMemoFilterRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CreditMemoFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
-          type: string
     CreditMemoApplication:
       type: object
       required:
@@ -853,381 +1228,6 @@ components:
         appliedAt:
           type: string
           format: date-time
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CreditMemoPatch:
-      type: object
-      properties:
-        reference:
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        memoDate:
-          type: string
-          format: date
-    VoidCreditMemoRequest:
-      type: object
-      properties:
-        reason:
-          type: string
-          maxLength: 1000
-          description: Reason for voiding
-    CustomerReference:
-      type: object
-      description: 'Enhanced reference to a customer resource (returned in responses).
-
-        Includes full customer details in addition to id/key.
-
-
-        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - friendlyId
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Customer UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CUSTOMER-ACME
-        name:
-          type: string
-          description: Customer company name
-          example: Acme Manufacturing Corp
-        friendlyId:
-          type: string
-          description: Human-readable customer identifier
-          example: A123456
-        status:
-          type: string
-          description: Customer status
-          enum:
-          - PROSPECT
-          - ACTIVE
-          - INACTIVE
-          - CHURNED
-          example: ACTIVE
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        website:
-          type:
-          - string
-          - 'null'
-          description: Customer website URL
-          example: https://acme-manufacturing.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the customer was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the customer was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the customer was soft deleted (null if active)
-          example: null
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    UserReference:
-      type: object
-      description: 'Enhanced reference to a user resource (returned in responses).
-
-        Includes full user details in addition to id/key.
-
-
-        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - email
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: User UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-USER-12345
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: User's full name
-          example: John Doe
-        phone:
-          type:
-          - string
-          - 'null'
-          description: User's phone number
-          example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
-        status:
-          type: string
-          description: User account status
-          enum:
-          - PENDING
-          - ACTIVE
-          - INACTIVE
-          example: ACTIVE
-        avatarId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        createdAt:
-          type: string
-          format: date-time
-          description: When the user was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the user was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the user was soft deleted (null if active)
-          example: null
-    CreditMemoInput:
-      type: object
-      required:
-      - customerId
-      - amount
-      - memoDate
-      properties:
-        customerId:
-          type: string
-          format: uuid
-          description: Customer to credit
-        amount:
-          type: number
-          minimum: 0.01
-          description: Credit amount
-        currency:
-          type: string
-          description: Currency code (defaults to customer currency)
-        memoDate:
-          type: string
-          format: date
-          description: Credit memo date
-        reference:
-          type: string
-          maxLength: 500
-          description: Reference number
-        notes:
-          type: string
-          maxLength: 2000
-          description: Notes or description
-    CreditMemoFilter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDFilter'
-        customerId:
-          $ref: '#/components/schemas/UUIDFilter'
-        status:
-          $ref: '#/components/schemas/CreditMemoStatusFilter'
-        memoDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        amount:
-          $ref: '#/components/schemas/FloatFilter'
-        remainingBalance:
-          $ref: '#/components/schemas/FloatFilter'
-        hasRemainingBalance:
-          type: boolean
-          description: Filter to credits with available balance
-        sourcePaymentGroupId:
-          $ref: '#/components/schemas/UUIDFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditMemoFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/CreditMemoFilter'
-        not:
-          $ref: '#/components/schemas/CreditMemoFilter'
-    CreditMemoStatus:
-      type: string
-      enum:
-      - OPEN
-      - PARTIALLY_APPLIED
-      - APPLIED
-      - VOIDED
-      description: 'Current status of the credit memo (derived from remaining balance).
-
-        - `OPEN`: No applications, full balance available
-
-        - `PARTIALLY_APPLIED`: Some amount applied, balance remains
-
-        - `APPLIED`: Fully applied to invoices
-
-        - `VOIDED`: Credit memo cancelled
-
-        '
-    ApplyCreditResponse:
-      type: object
-      required:
-      - application
-      - creditMemo
-      properties:
-        application:
-          $ref: '#/components/schemas/CreditMemoApplication'
-        creditMemo:
-          $ref: '#/components/schemas/CreditMemo'
-  responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
   parameters:
     IdOrClientKey:
       name: id

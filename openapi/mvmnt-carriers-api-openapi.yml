@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: MVMNT Bill Payments Carriers API
+  title: MVMNT Carriers API
   version: 1.0.0
   description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
   contact:
@@ -532,615 +532,15 @@ paths:
           $ref: '#/components/responses/NotFoundError'
 components:
   schemas:
-    RailCarrier:
-      allOf:
-      - $ref: '#/components/schemas/CarrierBase'
-      - type: object
-        description: Rail freight carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - RAIL
-            description: Carrier type discriminator
-            example: RAIL
-    AddressPatch:
+    PaymentTermReference:
       type: object
-      description: 'Partial address update. All fields are optional.
+      description: 'Enhanced reference to a payment term resource (returned in responses).
 
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
-      properties:
-        line1:
-          type: string
-          description: Primary street address line
-          example: 123 Main St
-        line2:
-          type:
-          - string
-          - 'null'
-          description: Secondary address line
-          example: Suite 400
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        country:
-          type: string
-          description: Country name or code
-          example: USA
-        market:
-          type: string
-          description: Market or region identifier
-          example: CHI
-        latitude:
-          type:
-          - string
-          - 'null'
-          description: Latitude coordinate
-          example: '41.8781'
-        longitude:
-          type:
-          - string
-          - 'null'
-          description: Longitude coordinate
-          example: '-87.6298'
-        isAirportOrAirbase:
-          type: boolean
-          description: Whether this location is an airport or airbase
-          example: false
-        isConstructionOrUtilitySite:
-          type: boolean
-          description: Whether this location is a construction or utility site
-          example: false
-        isSmartyValidated:
-          type: boolean
-          description: Whether address has been validated by SmartyStreets
-          example: true
-        obeysDst:
-          type: boolean
-          description: Whether this location observes daylight saving time
-          example: true
-        cityId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Reference to standardized city record
-          example: null
-    CarrierFilter:
-      type: object
-      description: Filter criteria for carriers with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/CarrierFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/CarrierFilter'
-        not:
-          $ref: '#/components/schemas/CarrierFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        friendlyId:
-          $ref: '#/components/schemas/StringFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        dbaName:
-          $ref: '#/components/schemas/StringFilter'
-        key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        email:
-          $ref: '#/components/schemas/StringFilter'
-        phone:
-          $ref: '#/components/schemas/StringFilter'
-        website:
-          $ref: '#/components/schemas/StringFilter'
-        status:
-          $ref: '#/components/schemas/StringFilter'
-        statusReason:
-          $ref: '#/components/schemas/StringFilter'
-        type:
-          $ref: '#/components/schemas/StringFilter'
-        mcNumber:
-          $ref: '#/components/schemas/StringFilter'
-        dotNumber:
-          $ref: '#/components/schemas/StringFilter'
-        scac:
-          $ref: '#/components/schemas/StringFilter'
-        einNumber:
-          $ref: '#/components/schemas/StringFilter'
-        ffNumber:
-          $ref: '#/components/schemas/StringFilter'
-        mxNumber:
-          $ref: '#/components/schemas/StringFilter'
-        rfcNumber:
-          $ref: '#/components/schemas/StringFilter'
-        iataCode:
-          $ref: '#/components/schemas/StringFilter'
-        isHazmat:
-          $ref: '#/components/schemas/BooleanFilter'
-        tsaApproved:
-          $ref: '#/components/schemas/BooleanFilter'
-        trucks:
-          $ref: '#/components/schemas/IntFilter'
-        trailers:
-          $ref: '#/components/schemas/IntFilter'
-        drivers:
-          $ref: '#/components/schemas/IntFilter'
-        powerUnits:
-          $ref: '#/components/schemas/IntFilter'
-        currency:
-          $ref: '#/components/schemas/StringFilter'
-        isFactoringPreferred:
-          $ref: '#/components/schemas/BooleanFilter'
-        goldenCarrierId:
-          $ref: '#/components/schemas/UUIDFilter'
-        paymentTermId:
-          $ref: '#/components/schemas/UUIDFilter'
-        rating:
-          $ref: '#/components/schemas/StringFilter'
-        ratingDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        operatingAbility:
-          $ref: '#/components/schemas/StringFilter'
-        inFmcsa:
-          $ref: '#/components/schemas/BooleanFilter'
-        insuranceCompany:
-          $ref: '#/components/schemas/StringFilter'
-        insuranceExpirationDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-    AirCarrier:
-      allOf:
-      - $ref: '#/components/schemas/CarrierBase'
-      - type: object
-        description: Air cargo carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - AIR
-            description: Carrier type discriminator
-            example: AIR
-    DatetimeSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: 'Search criteria for datetime fields.
-
-        Supports both absolute datetime values and relative time expressions.
-
-        '
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - BEFORE
-          - AFTER
-          - BETWEEN
-          - NOT_BETWEEN
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `BEFORE`: Before datetime
-
-            - `AFTER`: After datetime
-
-            - `BETWEEN`: Between min and max (inclusive)
-
-            - `NOT_BETWEEN`: Not between min and max
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        value:
-          type: string
-          format: date-time
-          description: Absolute datetime for EQUALS, NOT_EQUALS
-          example: '2025-01-15T10:00:00Z'
-        min:
-          type: string
-          format: date-time
-          description: Minimum datetime for BETWEEN or NOT_BETWEEN
-          example: '2025-01-01T00:00:00Z'
-        max:
-          type: string
-          format: date-time
-          description: Maximum datetime for BETWEEN or NOT_BETWEEN
-          example: '2025-12-31T23:59:59Z'
-        valueRelative:
-          type: integer
-          description: 'Relative time from now (negative for past, positive for future).
-
-            Example: -7 with WEEK unit means 7 weeks ago.
-
-            '
-        valueRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
-        minRelative:
-          type: integer
-          description: Relative time for min boundary
-        minRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
-        maxRelative:
-          type: integer
-          description: Relative time for max boundary
-        maxRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
-      example:
-        operator: AFTER
-        value: '2025-01-01T00:00:00Z'
-    KeywordSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for keyword fields (exact match, no partial matching)
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - ONE_OF
-          - NOT_ONE_OF
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `ONE_OF`: Matches any value in array
-
-            - `NOT_ONE_OF`: Does not match any value in array
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        values:
-          type: array
-          items:
-            type: string
-          description: Array of values for ONE_OF or NOT_ONE_OF operators
-          example:
-          - ACTIVE
-          - PENDING
-      example:
-        operator: ONE_OF
-        values:
-        - ACTIVE
-        - PENDING
-    OceanCarrierInput:
-      allOf:
-      - $ref: '#/components/schemas/CarrierInputBase'
-      - type: object
-        description: Input for creating an ocean carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - OCEAN
-            description: Carrier type discriminator (must be OCEAN)
-            example: OCEAN
-    AirCarrierInput:
-      allOf:
-      - $ref: '#/components/schemas/CarrierInputBase'
-      - type: object
-        description: Input for creating an air carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - AIR
-            description: Carrier type discriminator (must be AIR)
-            example: AIR
-    LtlCarrier:
-      allOf:
-      - $ref: '#/components/schemas/CarrierBase'
-      - type: object
-        description: Less-than-truckload (LTL) carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - LTL
-            description: Carrier type discriminator
-            example: LTL
-    AddressInput:
-      type: object
-      description: Address data for creating a new location
-      required:
-      - line1
-      - city
-      - country
-      - market
-      properties:
-        line1:
-          type: string
-          description: Primary street address line
-          example: 123 Main St
-        line2:
-          type: string
-          description: Secondary address line (suite, floor, etc.)
-          example: Suite 400
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        country:
-          type: string
-          description: Country name or code
-          example: USA
-        market:
-          type: string
-          description: Market or region identifier
-          example: CHI
-        latitude:
-          type: string
-          description: Latitude coordinate
-          example: '41.8781'
-        longitude:
-          type: string
-          description: Longitude coordinate
-          example: '-87.6298'
-        isAirportOrAirbase:
-          type: boolean
-          default: false
-          description: Whether this location is an airport or airbase
-          example: false
-        isConstructionOrUtilitySite:
-          type: boolean
-          default: false
-          description: Whether this location is a construction or utility site
-          example: false
-        isSmartyValidated:
-          type: boolean
-          default: false
-          description: Whether address has been validated by SmartyStreets
-          example: true
-        obeysDst:
-          type: boolean
-          default: true
-          description: Whether this location observes daylight saving time
-          example: true
-        cityId:
-          type: string
-          format: uuid
-          description: Reference to standardized city record (internal use)
-    UUIDSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for UUID fields
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - ONE_OF
-          - NOT_ONE_OF
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `ONE_OF`: Matches any UUID in array
-
-            - `NOT_ONE_OF`: Does not match any UUID in array
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        values:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Array of UUIDs for ONE_OF or NOT_ONE_OF operators
-          example:
-          - 550e8400-e29b-41d4-a716-446655440000
-          - 550e8400-e29b-41d4-a716-446655440001
-      example:
-        operator: EQUALS
-        values:
-        - 550e8400-e29b-41d4-a716-446655440000
-    SearchPaginationInfo:
-      type: object
-      required:
-      - pageNumber
-      - pageSize
-      - totalPages
-      description: Pagination information for search results
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number
-          example: 1
-        pageSize:
-          type: integer
-          description: Number of results returned on this page
-          example: 50
-        totalPages:
-          type: integer
-          description: Total number of pages available
-          example: 25
-      example:
-        pageNumber: 1
-        pageSize: 50
-        totalPages: 25
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    LinehaulCarrier:
-      allOf:
-      - $ref: '#/components/schemas/CarrierBase'
-      - type: object
-        description: Linehaul (long-distance) carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - LINEHAUL
-            description: Carrier type discriminator
-            example: LINEHAUL
-    BillEntityType:
-      type: string
-      enum:
-      - CARRIER
-      - VENDOR
-      description: 'Type of entity the bill is for.
-
-        - `CARRIER`: Bill for a carrier (LoadCarrier)
-
-        - `VENDOR`: Bill for a vendor service (VendedService)
-
-        '
-    CartageCarrierPatch:
-      allOf:
-      - $ref: '#/components/schemas/CarrierPatchBase'
-      - type: object
-        description: Partial update for cartage carrier
-        properties:
-          type:
-            type: string
-            enum:
-            - CARTAGE
-            description: Carrier type discriminator (optional - only needed if changing type)
-            example: CARTAGE
-    OutstandingBill:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        friendlyId:
-          type: string
-        entityType:
-          $ref: '#/components/schemas/BillEntityType'
-        carrier:
-          $ref: '#/components/schemas/CarrierReference'
-        vendor:
-          $ref: '#/components/schemas/VendorReference'
-        invoiceDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        amount:
-          type: number
-        amountPaid:
-          type: number
-        openBalance:
-          type: number
-        isOverdue:
-          type: boolean
-        shipmentId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        shipmentFriendlyId:
-          type:
-          - string
-          - 'null'
-    RailCarrierPatch:
-      allOf:
-      - $ref: '#/components/schemas/CarrierPatchBase'
-      - type: object
-        description: Partial update for rail carrier
-        properties:
-          type:
-            type: string
-            enum:
-            - RAIL
-            description: Carrier type discriminator (optional - only needed if changing type)
-            example: RAIL
-    VendorReference:
-      type: object
-      description: 'Enhanced reference to a vendor profile.
-
-        Includes full vendor details in addition to id/key.
+        Includes full payment term details in addition to id/key.
 
         '
       required:
       - id
-      - friendlyId
       - name
       - createdAt
       - updatedAt
@@ -1148,7 +548,7 @@ components:
         id:
           type: string
           format: uuid
-          description: Vendor UUID
+          description: Payment term UUID
           example: 550e8400-e29b-41d4-a716-446655440000
         key:
           type:
@@ -1156,321 +556,126 @@ components:
           - 'null'
           maxLength: 512
           description: Client-defined reference ID if set
-          example: ERP-VENDOR-ABC-001
-        friendlyId:
-          type: string
-          description: Human-readable vendor identifier
-          example: V123456
+          example: ERP-PAYTERM-NET30
         name:
           type: string
-          description: Vendor legal name
-          example: ABC Warehouse Services
-        email:
+          description: Payment term name
+          example: Net 30
+        description:
           type:
           - string
           - 'null'
-          format: email
-          description: Primary email address
-          example: billing@abcwarehouse.com
-        phone:
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
           type:
-          - string
+          - integer
           - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        status:
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
           type:
-          - string
+          - number
           - 'null'
-          description: Vendor status
-          example: ACTIVE
-        currency:
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
           type:
-          - string
+          - boolean
           - 'null'
-          description: Preferred currency code (ISO 4217)
-          example: USD
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term for new transactions
+          example: false
         createdAt:
           type: string
           format: date-time
-          description: When the vendor was created
+          description: When the payment term was created
           example: '2025-01-15T10:00:00Z'
         updatedAt:
           type: string
           format: date-time
-          description: When the vendor was last updated
+          description: When the payment term was last updated
           example: '2025-01-15T14:30:00Z'
-    OceanCarrierPatch:
-      allOf:
-      - $ref: '#/components/schemas/CarrierPatchBase'
-      - type: object
-        description: Partial update for ocean carrier
-        properties:
-          type:
-            type: string
-            enum:
-            - OCEAN
-            description: Carrier type discriminator (optional - only needed if changing type)
-            example: OCEAN
-    ContactInfo:
-      type: object
-      description: 'Contact information details (nested, without id).
-
-
-        This is an embedded object representing a Contact record. The id is managed
-
-        internally and not exposed in the API.
-
-        '
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Contact person's full name
-          example: John Smith
-        email:
+        deletedAt:
           type:
           - string
           - 'null'
-          format: email
-          description: Email address
-          example: john.smith@example.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Phone number
-          example: +1-555-0100
-        title:
-          type:
-          - string
-          - 'null'
-          description: Job title or position
-          example: Operations Manager
-    OutstandingBillsForPaymentResponse:
+          format: date-time
+          description: When the payment term was soft deleted (null if active)
+          example: null
+    CarrierFilterRequest:
       type: object
-      required:
-      - bills
-      - totalOutstanding
+      description: Request body for filtering carriers
       properties:
-        bills:
-          type: array
-          items:
-            $ref: '#/components/schemas/OutstandingBill'
-        totalOutstanding:
-          type: number
-          description: Total outstanding balance
-        carrier:
-          $ref: '#/components/schemas/CarrierReference'
-        vendor:
-          $ref: '#/components/schemas/VendorReference'
-        carrierFactor:
-          $ref: '#/components/schemas/bill-payments_CarrierFactorReference'
-    TruckloadCarrierPatch:
-      allOf:
-      - $ref: '#/components/schemas/CarrierPatchBase'
-      - type: object
-        description: Partial update for truckload carrier
-        properties:
-          type:
-            type: string
-            enum:
-            - TRUCKLOAD
-            description: Carrier type discriminator (optional - only needed if changing type)
-            example: TRUCKLOAD
-          insuranceCompany:
-            type:
-            - string
-            - 'null'
-            description: Insurance company name
-            example: State Farm Insurance
-          insuranceAgent:
-            type:
-            - string
-            - 'null'
-            description: Insurance agent name
-            example: John Smith
-          insuranceAgentPhone:
-            type:
-            - string
-            - 'null'
-            description: Insurance agent phone number
-            example: +1-555-123-4567
-          insuranceAuthorityDate:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            description: Date insurance authority was granted
-            example: '2025-01-01T00:00:00Z'
-          insuranceExpirationDate:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            description: Insurance policy expiration date
-            example: '2025-12-31T23:59:59Z'
-          insuranceAutoLiabilityLimit:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: Auto liability insurance limit (in dollars)
-            example: 1000000
-          insuranceCargoLiabilityLimit:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: Cargo liability insurance limit (in dollars)
-            example: 100000
-          insuranceGeneralLiabilityLimit:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: General liability insurance limit (in dollars)
-            example: 1000000
-          rating:
-            type:
-            - string
-            - 'null'
-            description: Carrier safety rating
-            example: SATISFACTORY
-          ratingDate:
-            type:
-            - string
-            - 'null'
-            format: date
-            description: Date of last safety rating
-            example: '2025-01-15'
-          reviewType:
-            type:
-            - string
-            - 'null'
-            description: Type of safety review conducted
-            example: COMPLIANCE_REVIEW
-          reviewDate:
-            type:
-            - string
-            - 'null'
-            format: date
-            description: Date of last safety review
-            example: '2025-01-15'
-          operatingAbility:
-            type:
-            - string
-            - 'null'
-            description: FMCSA operating authority status
-            example: AUTHORIZED
-          inFmcsa:
-            type:
-            - boolean
-            - 'null'
-            description: Whether carrier is registered in FMCSA database
-            example: true
-          usDriverInspections:
-            type:
-            - integer
-            - 'null'
-            description: Total number of US driver inspections
-            example: 100
-          usDriverInspectionsOos:
-            type:
-            - integer
-            - 'null'
-            description: Number of US driver inspections resulting in out-of-service
-            example: 5
-          usDriverInspectionsOosPct:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: Percentage of US driver inspections resulting in out-of-service
-            example: 5
-          usVehicleInspections:
-            type:
-            - integer
-            - 'null'
-            description: Total number of US vehicle inspections
-            example: 150
-          usVehicleInspectionsOos:
-            type:
-            - integer
-            - 'null'
-            description: Number of US vehicle inspections resulting in out-of-service
-            example: 8
-          usVehicleInspectionsOosPct:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: Percentage of US vehicle inspections resulting in out-of-service
-            example: 5.33
-    CartageCarrier:
-      allOf:
-      - $ref: '#/components/schemas/CarrierBase'
-      - type: object
-        description: Cartage (local pickup/delivery) carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - CARTAGE
-            description: Carrier type discriminator
-            example: CARTAGE
-    IntSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for integer fields
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - GREATER_THAN
-          - LESS_THAN
-          - BETWEEN
-          - NOT_BETWEEN
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
+        filter:
+          $ref: '#/components/schemas/CarrierFilter'
+          description: 'Filter criteria (optional - omit to return all carriers).
 
-            - `EQUALS`: Exact match
 
-            - `NOT_EQUALS`: Not equal to
-
-            - `GREATER_THAN`: Greater than value
-
-            - `LESS_THAN`: Less than value
-
-            - `BETWEEN`: Between min and max (inclusive)
-
-            - `NOT_BETWEEN`: Not between min and max
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
 
             '
-        value:
+        pageSize:
           type: integer
-          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
-        min:
-          type: integer
-          description: Minimum value for BETWEEN or NOT_BETWEEN
-        max:
-          type: integer
-          description: Maximum value for BETWEEN or NOT_BETWEEN
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
       example:
-        operator: BETWEEN
-        min: 10
-        max: 100
+        filter:
+          and:
+          - type:
+              equalTo: TRUCKLOAD
+          - status:
+              equalTo: ACTIVE
+          - inFmcsa:
+              equalTo: true
+        pageSize: 50
     TruckloadCarrierInput:
       allOf:
       - $ref: '#/components/schemas/CarrierInputBase'
@@ -1813,6 +1018,1735 @@ components:
           readOnly: true
           description: When the carrier was soft deleted (null if active)
           example: null
+    RailCarrier:
+      allOf:
+      - $ref: '#/components/schemas/CarrierBase'
+      - type: object
+        description: Rail freight carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - RAIL
+            description: Carrier type discriminator
+            example: RAIL
+    UUIDSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for UUID fields
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - ONE_OF
+          - NOT_ONE_OF
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `ONE_OF`: Matches any UUID in array
+
+            - `NOT_ONE_OF`: Does not match any UUID in array
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        values:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Array of UUIDs for ONE_OF or NOT_ONE_OF operators
+          example:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 550e8400-e29b-41d4-a716-446655440001
+      example:
+        operator: EQUALS
+        values:
+        - 550e8400-e29b-41d4-a716-446655440000
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    PaymentMethodType:
+      type: string
+      description: Payment method type
+      enum:
+      - ACH_WIRE
+      - ZELLE
+      - VENMO
+      - ACH
+      - CHECK
+      - WIRE
+      - CAD_EFT
+      - TRIUMPH_PAY
+      - COMCHECK
+      - EFS
+      - ECHECK
+      example: ACH
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    bill-payments_CarrierFactorReference:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        companyName:
+          type: string
+        bankName:
+          type:
+          - string
+          - 'null'
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    LtlCarrier:
+      allOf:
+      - $ref: '#/components/schemas/CarrierBase'
+      - type: object
+        description: Less-than-truckload (LTL) carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - LTL
+            description: Carrier type discriminator
+            example: LTL
+    AddressInput:
+      type: object
+      description: Address data for creating a new location
+      required:
+      - line1
+      - city
+      - country
+      - market
+      properties:
+        line1:
+          type: string
+          description: Primary street address line
+          example: 123 Main St
+        line2:
+          type: string
+          description: Secondary address line (suite, floor, etc.)
+          example: Suite 400
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        country:
+          type: string
+          description: Country name or code
+          example: USA
+        market:
+          type: string
+          description: Market or region identifier
+          example: CHI
+        latitude:
+          type: string
+          description: Latitude coordinate
+          example: '41.8781'
+        longitude:
+          type: string
+          description: Longitude coordinate
+          example: '-87.6298'
+        isAirportOrAirbase:
+          type: boolean
+          default: false
+          description: Whether this location is an airport or airbase
+          example: false
+        isConstructionOrUtilitySite:
+          type: boolean
+          default: false
+          description: Whether this location is a construction or utility site
+          example: false
+        isSmartyValidated:
+          type: boolean
+          default: false
+          description: Whether address has been validated by SmartyStreets
+          example: true
+        obeysDst:
+          type: boolean
+          default: true
+          description: Whether this location observes daylight saving time
+          example: true
+        cityId:
+          type: string
+          format: uuid
+          description: Reference to standardized city record (internal use)
+    SearchSortOption:
+      type: object
+      required:
+      - field
+      - order
+      description: Sort option for search results
+      properties:
+        field:
+          type: string
+          description: Field name to sort by (must be an indexed field)
+          example: createdAt
+        order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: Sort direction (ascending or descending)
+          example: desc
+      example:
+        field: createdAt
+        order: desc
+    CarrierFactorReference:
+      type: object
+      description: 'Enhanced reference to a carrier factor (factoring company).
+
+        Includes full carrier factor details in addition to id/key.
+
+        '
+      required:
+      - id
+      - companyName
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier factor UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-FACTOR-001
+        companyName:
+          type: string
+          description: Factoring company legal name
+          example: Capital Factoring Services Inc
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: accounting@capitalfactoring.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-234-5678
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier factor was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier factor was last updated
+          example: '2025-01-15T14:30:00Z'
+    CartageCarrier:
+      allOf:
+      - $ref: '#/components/schemas/CarrierBase'
+      - type: object
+        description: Cartage (local pickup/delivery) carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - CARTAGE
+            description: Carrier type discriminator
+            example: CARTAGE
+    KeywordSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for keyword fields (exact match, no partial matching)
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - ONE_OF
+          - NOT_ONE_OF
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `ONE_OF`: Matches any value in array
+
+            - `NOT_ONE_OF`: Does not match any value in array
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of values for ONE_OF or NOT_ONE_OF operators
+          example:
+          - ACTIVE
+          - PENDING
+      example:
+        operator: ONE_OF
+        values:
+        - ACTIVE
+        - PENDING
+    CarrierPatchBase:
+      type: object
+      description: 'Partial carrier update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Carrier legal name
+          example: Swift Transportation Co
+        type:
+          $ref: '#/components/schemas/CarrierType'
+          description: Carrier operation type
+        dbaName:
+          type:
+          - string
+          - 'null'
+          description: Doing Business As name
+          example: Swift Logistics
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CARRIER-SWIFT-001
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        website:
+          type:
+          - string
+          - 'null'
+          description: Company website URL
+          example: https://swifttrans.com
+        status:
+          type: string
+          description: Carrier status
+          example: ACTIVE
+        statusReason:
+          type:
+          - string
+          - 'null'
+          description: Reason for current status
+          example: Active and in good standing
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Internal notes about the carrier
+          example: Preferred carrier for midwest routes
+        corporateAddress:
+          $ref: '#/components/schemas/AddressPatch'
+          description: Corporate headquarters address
+        billingAddress:
+          $ref: '#/components/schemas/AddressPatch'
+          description: Billing address for invoices
+        mcNumber:
+          type:
+          - string
+          - 'null'
+          description: Motor Carrier (MC) number
+          example: MC-123456
+        dotNumber:
+          type:
+          - string
+          - 'null'
+          description: Department of Transportation (DOT) number
+          example: '1234567'
+        scac:
+          type:
+          - string
+          - 'null'
+          description: Standard Carrier Alpha Code
+          example: SWFT
+        einNumber:
+          type:
+          - string
+          - 'null'
+          description: Employer Identification Number
+          example: 12-3456789
+        ffNumber:
+          type:
+          - string
+          - 'null'
+          description: Freight Forwarder (FF) number
+          example: FF-123456
+        mxNumber:
+          type:
+          - string
+          - 'null'
+          description: Mexico carrier registration number
+          example: MX-123456
+        rfcNumber:
+          type:
+          - string
+          - 'null'
+          description: RFC (Mexico tax ID) number
+          example: ABCD123456XYZ
+        iataCode:
+          type:
+          - string
+          - 'null'
+          description: International Air Transport Association code
+          example: AA
+        equipments:
+          type: array
+          description: Equipment types this carrier operates
+          items:
+            $ref: '#/components/schemas/CarrierEquipment'
+          example:
+          - VAN
+          - REEFER
+        isHazmat:
+          type:
+          - boolean
+          - 'null'
+          description: Whether carrier is certified to transport hazardous materials
+          example: false
+        tsaApproved:
+          type:
+          - boolean
+          - 'null'
+          description: Whether carrier is TSA approved
+          example: true
+        trucks:
+          type:
+          - integer
+          - 'null'
+          description: Number of trucks in fleet
+          example: 50
+        trailers:
+          type:
+          - integer
+          - 'null'
+          description: Number of trailers in fleet
+          example: 100
+        drivers:
+          type:
+          - integer
+          - 'null'
+          description: Number of drivers employed
+          example: 75
+        powerUnits:
+          type:
+          - integer
+          - 'null'
+          description: Number of power units
+          example: 50
+        currency:
+          anyOf:
+          - $ref: '#/components/schemas/Currency'
+          - type: 'null'
+          description: Preferred currency for transactions
+        paymentTermId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Payment term ID
+          example: 550e8400-e29b-41d4-a716-446655440002
+        isFactoringPreferred:
+          type:
+          - boolean
+          - 'null'
+          description: Whether carrier prefers factoring for payment
+          example: false
+        goldenCarrierId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Reference to golden carrier record (for deduplication)
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    SavedSearchLookup:
+      type: object
+      description: 'Reference to a saved search by ID or client key.
+
+        Provide either id or key (not both).
+
+        '
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Saved search UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined key for the saved search
+          example: my-carrier-search
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+    CarrierInputBase:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Carrier legal name
+          example: Swift Transportation Co
+        type:
+          $ref: '#/components/schemas/CarrierType'
+          description: Carrier operation type (discriminator field)
+        dbaName:
+          type: string
+          description: Doing Business As name
+          example: Swift Logistics
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CARRIER-SWIFT-001
+        email:
+          type: string
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        phone:
+          type: string
+          description: Primary phone number
+          example: +1-555-987-6543
+        website:
+          type: string
+          description: Company website URL
+          example: https://swifttrans.com
+        status:
+          type: string
+          description: Carrier status
+          example: ACTIVE
+        statusReason:
+          type: string
+          description: Reason for current status
+          example: Active and in good standing
+        notes:
+          type: string
+          description: Internal notes about the carrier
+          example: Preferred carrier for midwest routes
+        corporateAddress:
+          $ref: '#/components/schemas/AddressInput'
+          description: Corporate headquarters address
+        billingAddress:
+          $ref: '#/components/schemas/AddressInput'
+          description: Billing address for invoices
+        mcNumber:
+          type: string
+          description: Motor Carrier (MC) number
+          example: MC-123456
+        dotNumber:
+          type: string
+          description: Department of Transportation (DOT) number
+          example: '1234567'
+        scac:
+          type: string
+          description: Standard Carrier Alpha Code
+          example: SWFT
+        einNumber:
+          type: string
+          description: Employer Identification Number
+          example: 12-3456789
+        ffNumber:
+          type: string
+          description: Freight Forwarder (FF) number
+          example: FF-123456
+        mxNumber:
+          type: string
+          description: Mexico carrier registration number
+          example: MX-123456
+        rfcNumber:
+          type: string
+          description: RFC (Mexico tax ID) number
+          example: ABCD123456XYZ
+        iataCode:
+          type: string
+          description: International Air Transport Association code
+          example: AA
+        equipments:
+          type: array
+          description: Equipment types this carrier operates
+          items:
+            $ref: '#/components/schemas/CarrierEquipment'
+          example:
+          - VAN
+          - REEFER
+        isHazmat:
+          type: boolean
+          description: Whether carrier is certified to transport hazardous materials
+          example: false
+        tsaApproved:
+          type: boolean
+          description: Whether carrier is TSA approved
+          example: true
+        trucks:
+          type: integer
+          description: Number of trucks in fleet
+          example: 50
+        trailers:
+          type: integer
+          description: Number of trailers in fleet
+          example: 100
+        drivers:
+          type: integer
+          description: Number of drivers employed
+          example: 75
+        powerUnits:
+          type: integer
+          description: Number of power units
+          example: 50
+        currency:
+          $ref: '#/components/schemas/Currency'
+          description: Preferred currency for transactions
+        paymentTermId:
+          type: string
+          format: uuid
+          description: Payment term ID
+          example: 550e8400-e29b-41d4-a716-446655440002
+        isFactoringPreferred:
+          type: boolean
+          description: Whether carrier prefers factoring for payment
+          example: false
+        goldenCarrierId:
+          type: string
+          format: uuid
+          description: Reference to golden carrier record (for deduplication)
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    CarrierSearchRequest:
+      type: object
+      description: Request body for searching carriers
+      properties:
+        criteria:
+          $ref: '#/components/schemas/CarrierSearchCriteria'
+          description: Search criteria to filter carriers
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInput'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchSortOption'
+          maxItems: 3
+          description: Sort options for the search results
+        savedSearch:
+          $ref: '#/components/schemas/SavedSearchLookup'
+          description: 'Optional saved search to load preferences from.
+
+            When provided, the saved search criteria will be loaded and merged with any explicit criteria.
+
+            '
+        format:
+          type: string
+          enum:
+          - flat
+          - full
+          default: flat
+          description: 'Response format:
+
+            - flat: Returns only indexed fields (default, faster)
+
+            - full: Returns complete carrier objects
+
+            '
+    AirCarrier:
+      allOf:
+      - $ref: '#/components/schemas/CarrierBase'
+      - type: object
+        description: Air cargo carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - AIR
+            description: Carrier type discriminator
+            example: AIR
+    VendorReference:
+      type: object
+      description: 'Enhanced reference to a vendor profile.
+
+        Includes full vendor details in addition to id/key.
+
+        '
+      required:
+      - id
+      - friendlyId
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vendor UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-VENDOR-ABC-001
+        friendlyId:
+          type: string
+          description: Human-readable vendor identifier
+          example: V123456
+        name:
+          type: string
+          description: Vendor legal name
+          example: ABC Warehouse Services
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: billing@abcwarehouse.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        status:
+          type:
+          - string
+          - 'null'
+          description: Vendor status
+          example: ACTIVE
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        createdAt:
+          type: string
+          format: date-time
+          description: When the vendor was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the vendor was last updated
+          example: '2025-01-15T14:30:00Z'
+    CarrierPatch:
+      oneOf:
+      - $ref: '#/components/schemas/TruckloadCarrierPatch'
+      - $ref: '#/components/schemas/AirCarrierPatch'
+      - $ref: '#/components/schemas/CartageCarrierPatch'
+      - $ref: '#/components/schemas/LinehaulCarrierPatch'
+      - $ref: '#/components/schemas/LtlCarrierPatch'
+      - $ref: '#/components/schemas/OceanCarrierPatch'
+      - $ref: '#/components/schemas/RailCarrierPatch'
+      discriminator:
+        propertyName: type
+        mapping:
+          TRUCKLOAD: '#/components/schemas/TruckloadCarrierPatch'
+          AIR: '#/components/schemas/AirCarrierPatch'
+          CARTAGE: '#/components/schemas/CartageCarrierPatch'
+          LINEHAUL: '#/components/schemas/LinehaulCarrierPatch'
+          LTL: '#/components/schemas/LtlCarrierPatch'
+          OCEAN: '#/components/schemas/OceanCarrierPatch'
+          RAIL: '#/components/schemas/RailCarrierPatch'
+    AddressPatch:
+      type: object
+      description: 'Partial address update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        line1:
+          type: string
+          description: Primary street address line
+          example: 123 Main St
+        line2:
+          type:
+          - string
+          - 'null'
+          description: Secondary address line
+          example: Suite 400
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        country:
+          type: string
+          description: Country name or code
+          example: USA
+        market:
+          type: string
+          description: Market or region identifier
+          example: CHI
+        latitude:
+          type:
+          - string
+          - 'null'
+          description: Latitude coordinate
+          example: '41.8781'
+        longitude:
+          type:
+          - string
+          - 'null'
+          description: Longitude coordinate
+          example: '-87.6298'
+        isAirportOrAirbase:
+          type: boolean
+          description: Whether this location is an airport or airbase
+          example: false
+        isConstructionOrUtilitySite:
+          type: boolean
+          description: Whether this location is a construction or utility site
+          example: false
+        isSmartyValidated:
+          type: boolean
+          description: Whether address has been validated by SmartyStreets
+          example: true
+        obeysDst:
+          type: boolean
+          description: Whether this location observes daylight saving time
+          example: true
+        cityId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Reference to standardized city record
+          example: null
+    TruckloadCarrierPatch:
+      allOf:
+      - $ref: '#/components/schemas/CarrierPatchBase'
+      - type: object
+        description: Partial update for truckload carrier
+        properties:
+          type:
+            type: string
+            enum:
+            - TRUCKLOAD
+            description: Carrier type discriminator (optional - only needed if changing type)
+            example: TRUCKLOAD
+          insuranceCompany:
+            type:
+            - string
+            - 'null'
+            description: Insurance company name
+            example: State Farm Insurance
+          insuranceAgent:
+            type:
+            - string
+            - 'null'
+            description: Insurance agent name
+            example: John Smith
+          insuranceAgentPhone:
+            type:
+            - string
+            - 'null'
+            description: Insurance agent phone number
+            example: +1-555-123-4567
+          insuranceAuthorityDate:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            description: Date insurance authority was granted
+            example: '2025-01-01T00:00:00Z'
+          insuranceExpirationDate:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            description: Insurance policy expiration date
+            example: '2025-12-31T23:59:59Z'
+          insuranceAutoLiabilityLimit:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: Auto liability insurance limit (in dollars)
+            example: 1000000
+          insuranceCargoLiabilityLimit:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: Cargo liability insurance limit (in dollars)
+            example: 100000
+          insuranceGeneralLiabilityLimit:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: General liability insurance limit (in dollars)
+            example: 1000000
+          rating:
+            type:
+            - string
+            - 'null'
+            description: Carrier safety rating
+            example: SATISFACTORY
+          ratingDate:
+            type:
+            - string
+            - 'null'
+            format: date
+            description: Date of last safety rating
+            example: '2025-01-15'
+          reviewType:
+            type:
+            - string
+            - 'null'
+            description: Type of safety review conducted
+            example: COMPLIANCE_REVIEW
+          reviewDate:
+            type:
+            - string
+            - 'null'
+            format: date
+            description: Date of last safety review
+            example: '2025-01-15'
+          operatingAbility:
+            type:
+            - string
+            - 'null'
+            description: FMCSA operating authority status
+            example: AUTHORIZED
+          inFmcsa:
+            type:
+            - boolean
+            - 'null'
+            description: Whether carrier is registered in FMCSA database
+            example: true
+          usDriverInspections:
+            type:
+            - integer
+            - 'null'
+            description: Total number of US driver inspections
+            example: 100
+          usDriverInspectionsOos:
+            type:
+            - integer
+            - 'null'
+            description: Number of US driver inspections resulting in out-of-service
+            example: 5
+          usDriverInspectionsOosPct:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: Percentage of US driver inspections resulting in out-of-service
+            example: 5
+          usVehicleInspections:
+            type:
+            - integer
+            - 'null'
+            description: Total number of US vehicle inspections
+            example: 150
+          usVehicleInspectionsOos:
+            type:
+            - integer
+            - 'null'
+            description: Number of US vehicle inspections resulting in out-of-service
+            example: 8
+          usVehicleInspectionsOosPct:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: Percentage of US vehicle inspections resulting in out-of-service
+            example: 5.33
+    AirCarrierPatch:
+      allOf:
+      - $ref: '#/components/schemas/CarrierPatchBase'
+      - type: object
+        description: Partial update for air carrier
+        properties:
+          type:
+            type: string
+            enum:
+            - AIR
+            description: Carrier type discriminator (optional - only needed if changing type)
+            example: AIR
+    CartageCarrierInput:
+      allOf:
+      - $ref: '#/components/schemas/CarrierInputBase'
+      - type: object
+        description: Input for creating a cartage carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - CARTAGE
+            description: Carrier type discriminator (must be CARTAGE)
+            example: CARTAGE
+    IntSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for integer fields
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - GREATER_THAN
+          - LESS_THAN
+          - BETWEEN
+          - NOT_BETWEEN
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `GREATER_THAN`: Greater than value
+
+            - `LESS_THAN`: Less than value
+
+            - `BETWEEN`: Between min and max (inclusive)
+
+            - `NOT_BETWEEN`: Not between min and max
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        value:
+          type: integer
+          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
+        min:
+          type: integer
+          description: Minimum value for BETWEEN or NOT_BETWEEN
+        max:
+          type: integer
+          description: Maximum value for BETWEEN or NOT_BETWEEN
+      example:
+        operator: BETWEEN
+        min: 10
+        max: 100
+    SearchPaginationInfo:
+      type: object
+      required:
+      - pageNumber
+      - pageSize
+      - totalPages
+      description: Pagination information for search results
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of results returned on this page
+          example: 50
+        totalPages:
+          type: integer
+          description: Total number of pages available
+          example: 25
+      example:
+        pageNumber: 1
+        pageSize: 50
+        totalPages: 25
+    RailCarrierPatch:
+      allOf:
+      - $ref: '#/components/schemas/CarrierPatchBase'
+      - type: object
+        description: Partial update for rail carrier
+        properties:
+          type:
+            type: string
+            enum:
+            - RAIL
+            description: Carrier type discriminator (optional - only needed if changing type)
+            example: RAIL
+    LtlCarrierPatch:
+      allOf:
+      - $ref: '#/components/schemas/CarrierPatchBase'
+      - type: object
+        description: Partial update for LTL carrier
+        properties:
+          type:
+            type: string
+            enum:
+            - LTL
+            description: Carrier type discriminator (optional - only needed if changing type)
+            example: LTL
+    CarrierContactType:
+      type: string
+      description: Type of carrier contact role
+      enum:
+      - ACCOUNTING
+      - AFTER_HOURS
+      - CENSUS
+      - CLAIMS
+      - DISPATCH
+      - DRIVER
+      - EMERGENCY
+      - MANAGER
+      - OWNER
+    Carrier:
+      oneOf:
+      - $ref: '#/components/schemas/TruckloadCarrier'
+      - $ref: '#/components/schemas/AirCarrier'
+      - $ref: '#/components/schemas/CartageCarrier'
+      - $ref: '#/components/schemas/LinehaulCarrier'
+      - $ref: '#/components/schemas/LtlCarrier'
+      - $ref: '#/components/schemas/OceanCarrier'
+      - $ref: '#/components/schemas/RailCarrier'
+      discriminator:
+        propertyName: type
+        mapping:
+          TRUCKLOAD: '#/components/schemas/TruckloadCarrier'
+          AIR: '#/components/schemas/AirCarrier'
+          CARTAGE: '#/components/schemas/CartageCarrier'
+          LINEHAUL: '#/components/schemas/LinehaulCarrier'
+          LTL: '#/components/schemas/LtlCarrier'
+          OCEAN: '#/components/schemas/OceanCarrier'
+          RAIL: '#/components/schemas/RailCarrier'
+    CarrierInput:
+      oneOf:
+      - $ref: '#/components/schemas/TruckloadCarrierInput'
+      - $ref: '#/components/schemas/AirCarrierInput'
+      - $ref: '#/components/schemas/CartageCarrierInput'
+      - $ref: '#/components/schemas/LinehaulCarrierInput'
+      - $ref: '#/components/schemas/LtlCarrierInput'
+      - $ref: '#/components/schemas/OceanCarrierInput'
+      - $ref: '#/components/schemas/RailCarrierInput'
+      discriminator:
+        propertyName: type
+        mapping:
+          TRUCKLOAD: '#/components/schemas/TruckloadCarrierInput'
+          AIR: '#/components/schemas/AirCarrierInput'
+          CARTAGE: '#/components/schemas/CartageCarrierInput'
+          LINEHAUL: '#/components/schemas/LinehaulCarrierInput'
+          LTL: '#/components/schemas/LtlCarrierInput'
+          OCEAN: '#/components/schemas/OceanCarrierInput'
+          RAIL: '#/components/schemas/RailCarrierInput'
+    BillEntityType:
+      type: string
+      enum:
+      - CARRIER
+      - VENDOR
+      description: 'Type of entity the bill is for.
+
+        - `CARRIER`: Bill for a carrier (LoadCarrier)
+
+        - `VENDOR`: Bill for a vendor service (VendedService)
+
+        '
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentRecipientType:
+      type: string
+      description: 'Who receives the payment.
+
+
+        - `DIRECT`: Payment goes directly to the carrier
+
+        - `FACTOR`: Payment goes to a factoring company (requires carrierFactorId)
+
+        '
+      enum:
+      - DIRECT
+      - FACTOR
+      example: DIRECT
+    TruckloadCarrier:
+      allOf:
+      - $ref: '#/components/schemas/CarrierBase'
+      - type: object
+        description: Truckload carrier with insurance, safety rating, and FMCSA data
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - TRUCKLOAD
+            description: Carrier type discriminator
+            example: TRUCKLOAD
+          insuranceCompany:
+            type:
+            - string
+            - 'null'
+            description: Insurance company name
+            example: State Farm Insurance
+          insuranceAgent:
+            type:
+            - string
+            - 'null'
+            description: Insurance agent name
+            example: John Smith
+          insuranceAgentPhone:
+            type:
+            - string
+            - 'null'
+            description: Insurance agent phone number
+            example: +1-555-123-4567
+          insuranceAuthorityDate:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            description: Date insurance authority was granted
+            example: '2025-01-01T00:00:00Z'
+          insuranceExpirationDate:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            description: Insurance policy expiration date
+            example: '2025-12-31T23:59:59Z'
+          insuranceAutoLiabilityLimit:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: Auto liability insurance limit (in dollars)
+            example: 1000000
+          insuranceCargoLiabilityLimit:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: Cargo liability insurance limit (in dollars)
+            example: 100000
+          insuranceGeneralLiabilityLimit:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: General liability insurance limit (in dollars)
+            example: 1000000
+          rating:
+            type:
+            - string
+            - 'null'
+            description: Carrier safety rating
+            example: SATISFACTORY
+          ratingDate:
+            type:
+            - string
+            - 'null'
+            format: date
+            description: Date of last safety rating
+            example: '2025-01-15'
+          reviewType:
+            type:
+            - string
+            - 'null'
+            description: Type of safety review conducted
+            example: COMPLIANCE_REVIEW
+          reviewDate:
+            type:
+            - string
+            - 'null'
+            format: date
+            description: Date of last safety review
+            example: '2025-01-15'
+          operatingAbility:
+            type:
+            - string
+            - 'null'
+            description: FMCSA operating authority status
+            example: AUTHORIZED
+          inFmcsa:
+            type:
+            - boolean
+            - 'null'
+            description: Whether carrier is registered in FMCSA database
+            example: true
+          usDriverInspections:
+            type:
+            - integer
+            - 'null'
+            description: Total number of US driver inspections
+            example: 100
+          usDriverInspectionsOos:
+            type:
+            - integer
+            - 'null'
+            description: Number of US driver inspections resulting in out-of-service
+            example: 5
+          usDriverInspectionsOosPct:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: Percentage of US driver inspections resulting in out-of-service
+            example: 5
+          usVehicleInspections:
+            type:
+            - integer
+            - 'null'
+            description: Total number of US vehicle inspections
+            example: 150
+          usVehicleInspectionsOos:
+            type:
+            - integer
+            - 'null'
+            description: Number of US vehicle inspections resulting in out-of-service
+            example: 8
+          usVehicleInspectionsOosPct:
+            type:
+            - number
+            - 'null'
+            format: float
+            description: Percentage of US vehicle inspections resulting in out-of-service
+            example: 5.33
+    ContactInfo:
+      type: object
+      description: 'Contact information details (nested, without id).
+
+
+        This is an embedded object representing a Contact record. The id is managed
+
+        internally and not exposed in the API.
+
+        '
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contact person's full name
+          example: John Smith
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address
+          example: john.smith@example.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Phone number
+          example: +1-555-0100
+        title:
+          type:
+          - string
+          - 'null'
+          description: Job title or position
+          example: Operations Manager
+    TextSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for text fields (supports wildcards and partial matching)
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - STARTS_WITH
+          - ENDS_WITH
+          - INCLUDES
+          - ONE_OF
+          - NOT_ONE_OF
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `STARTS_WITH`: Begins with prefix
+
+            - `ENDS_WITH`: Ends with suffix
+
+            - `INCLUDES`: Contains substring
+
+            - `ONE_OF`: Matches any value in array
+
+            - `NOT_ONE_OF`: Does not match any value in array
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of values for ONE_OF or NOT_ONE_OF operators
+          example:
+          - value1
+          - value2
+      example:
+        operator: INCLUDES
+        values:
+        - search term
+    AirCarrierInput:
+      allOf:
+      - $ref: '#/components/schemas/CarrierInputBase'
+      - type: object
+        description: Input for creating an air carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - AIR
+            description: Carrier type discriminator (must be AIR)
+            example: AIR
+    Address:
+      type: object
+      description: 'Physical address/location details (nested, without id).
+
+
+        This is an embedded object representing a Location record. The id is managed
+
+        internally and not exposed in the API.
+
+        '
+      required:
+      - line1
+      - city
+      - country
+      - market
+      - isAirportOrAirbase
+      - isConstructionOrUtilitySite
+      - isSmartyValidated
+      - obeysDst
+      properties:
+        line1:
+          type: string
+          description: Primary street address line
+          example: 123 Main St
+        line2:
+          type:
+          - string
+          - 'null'
+          description: Secondary address line (suite, floor, etc.)
+          example: Suite 400
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        country:
+          type: string
+          description: Country name or code
+          example: USA
+        market:
+          type: string
+          description: Market or region identifier
+          example: CHI
+        latitude:
+          type:
+          - string
+          - 'null'
+          description: Latitude coordinate
+          example: '41.8781'
+        longitude:
+          type:
+          - string
+          - 'null'
+          description: Longitude coordinate
+          example: '-87.6298'
+        isAirportOrAirbase:
+          type: boolean
+          description: Whether this location is an airport or airbase
+          example: false
+        isConstructionOrUtilitySite:
+          type: boolean
+          description: Whether this location is a construction or utility site
+          example: false
+        isSmartyValidated:
+          type: boolean
+          description: Whether address has been validated by SmartyStreets
+          example: true
+        obeysDst:
+          type: boolean
+          description: Whether this location observes daylight saving time
+          example: true
+        cityId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Reference to standardized city record (internal use)
+          example: null
+    DatetimeSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: 'Search criteria for datetime fields.
+
+        Supports both absolute datetime values and relative time expressions.
+
+        '
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - BEFORE
+          - AFTER
+          - BETWEEN
+          - NOT_BETWEEN
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `BEFORE`: Before datetime
+
+            - `AFTER`: After datetime
+
+            - `BETWEEN`: Between min and max (inclusive)
+
+            - `NOT_BETWEEN`: Not between min and max
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        value:
+          type: string
+          format: date-time
+          description: Absolute datetime for EQUALS, NOT_EQUALS
+          example: '2025-01-15T10:00:00Z'
+        min:
+          type: string
+          format: date-time
+          description: Minimum datetime for BETWEEN or NOT_BETWEEN
+          example: '2025-01-01T00:00:00Z'
+        max:
+          type: string
+          format: date-time
+          description: Maximum datetime for BETWEEN or NOT_BETWEEN
+          example: '2025-12-31T23:59:59Z'
+        valueRelative:
+          type: integer
+          description: 'Relative time from now (negative for past, positive for future).
+
+            Example: -7 with WEEK unit means 7 weeks ago.
+
+            '
+        valueRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+        minRelative:
+          type: integer
+          description: Relative time for min boundary
+        minRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+        maxRelative:
+          type: integer
+          description: Relative time for max boundary
+        maxRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+      example:
+        operator: AFTER
+        value: '2025-01-01T00:00:00Z'
+    OutstandingBillsForPaymentResponse:
+      type: object
+      required:
+      - bills
+      - totalOutstanding
+      properties:
+        bills:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutstandingBill'
+        totalOutstanding:
+          type: number
+          description: Total outstanding balance
+        carrier:
+          $ref: '#/components/schemas/CarrierReference'
+        vendor:
+          $ref: '#/components/schemas/VendorReference'
+        carrierFactor:
+          $ref: '#/components/schemas/bill-payments_CarrierFactorReference'
     LtlCarrierInput:
       allOf:
       - $ref: '#/components/schemas/CarrierInputBase'
@@ -1827,20 +2761,155 @@ components:
             - LTL
             description: Carrier type discriminator (must be LTL)
             example: LTL
-    LinehaulCarrierInput:
-      allOf:
-      - $ref: '#/components/schemas/CarrierInputBase'
-      - type: object
-        description: Input for creating a linehaul carrier
-        required:
-        - type
-        properties:
+    CarrierContactReference:
+      type: object
+      description: 'Carrier contact reference for embedding in Carrier responses.
+
+        Identical to CarrierContact but excludes the carrier and carrierId fields to avoid circular references.
+
+        '
+      required:
+      - id
+      - name
+      - contactInfo
+      - createdAt
+      properties:
+        object:
+          type: string
+          enum:
+          - CARRIER_CONTACT
+          readOnly: true
+          description: Object type identifier
+          example: CARRIER_CONTACT
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique contact identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
           type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CARRIER-CONTACT-001
+        name:
+          type: string
+          description: Contact person's name
+          example: Jane Dispatcher
+        contactInfo:
+          allOf:
+          - $ref: '#/components/schemas/ContactInfo'
+          description: Contact information details (email, phone, title)
+        contactTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CarrierContactType'
+          description: Types/roles this contact serves
+          example:
+          - DISPATCH
+          - AFTER_HOURS
+        invitedUser:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User account invited/created for this contact
+        deletedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User who deleted this contact
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the contact was created
+          example: '2025-01-15T10:00:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: When the contact was soft deleted
+          example: null
+    Currency:
+      type: string
+      description: Currency code (ISO 4217)
+      enum:
+      - ARS
+      - AUD
+      - BRL
+      - CAD
+      - CNY
+      - EUR
+      - GBP
+      - IDR
+      - INR
+      - JPY
+      - KRW
+      - MXN
+      - RUB
+      - SAR
+      - TRY
+      - USD
+      - ZAR
+      example: USD
+    ClientKeyFilter:
+      type: object
+      description: Filter options for client key fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        in:
+          type: array
+          description: Matches any value in the array
+          items:
             type: string
-            enum:
-            - LINEHAUL
-            description: Carrier type discriminator (must be LINEHAUL)
-            example: LINEHAUL
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    IntFilter:
+      type: object
+      description: Filter options for integer fields
+      properties:
+        equalTo:
+          type: integer
+          description: Exact match
+        notEqualTo:
+          type: integer
+          description: Not equal to
+        lessThan:
+          type: integer
+          description: Less than
+        lessThanOrEqualTo:
+          type: integer
+          description: Less than or equal to
+        greaterThan:
+          type: integer
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: integer
+          description: Greater than or equal to
+        in:
+          type: array
+          items:
+            type: integer
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: integer
+          description: Does not match any value in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     CarrierSearchRow:
       type: object
       description: 'Flattened carrier data from search index.
@@ -2088,575 +3157,47 @@ components:
       - id
       - goldenCarrierId
       - name
-    CarrierSearchRequest:
-      type: object
-      description: Request body for searching carriers
-      properties:
-        criteria:
-          $ref: '#/components/schemas/CarrierSearchCriteria'
-          description: Search criteria to filter carriers
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInput'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchSortOption'
-          maxItems: 3
-          description: Sort options for the search results
-        savedSearch:
-          $ref: '#/components/schemas/SavedSearchLookup'
-          description: 'Optional saved search to load preferences from.
-
-            When provided, the saved search criteria will be loaded and merged with any explicit criteria.
-
-            '
-        format:
-          type: string
-          enum:
-          - flat
-          - full
-          default: flat
-          description: 'Response format:
-
-            - flat: Returns only indexed fields (default, faster)
-
-            - full: Returns complete carrier objects
-
-            '
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    AirCarrierPatch:
-      allOf:
-      - $ref: '#/components/schemas/CarrierPatchBase'
-      - type: object
-        description: Partial update for air carrier
-        properties:
-          type:
-            type: string
-            enum:
-            - AIR
-            description: Carrier type discriminator (optional - only needed if changing type)
-            example: AIR
-    CarrierSearchResponse:
-      type: object
-      description: 'Response for carrier search requests.
-
-        Note: Only active (non-deleted) carriers are included in results.
-
-        '
-      required:
-      - data
-      - pagination
-      - totalResults
-      properties:
-        data:
-          type: array
-          description: Search results - either flat rows or full carrier objects based on format parameter
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/CarrierSearchRow'
-            - $ref: '#/components/schemas/Carrier'
-            discriminator:
-              propertyName: object
-              mapping:
-                CARRIER_SEARCH_ROW: '#/components/schemas/CarrierSearchRow'
-                CARRIER: '#/components/schemas/Carrier'
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInfo'
-        totalResults:
-          type: integer
-          description: Total number of matching results (excluding soft-deleted records)
-          minimum: 0
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    TextSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for text fields (supports wildcards and partial matching)
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - STARTS_WITH
-          - ENDS_WITH
-          - INCLUDES
-          - ONE_OF
-          - NOT_ONE_OF
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `STARTS_WITH`: Begins with prefix
-
-            - `ENDS_WITH`: Ends with suffix
-
-            - `INCLUDES`: Contains substring
-
-            - `ONE_OF`: Matches any value in array
-
-            - `NOT_ONE_OF`: Does not match any value in array
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        values:
-          type: array
-          items:
-            type: string
-          description: Array of values for ONE_OF or NOT_ONE_OF operators
-          example:
-          - value1
-          - value2
-      example:
-        operator: INCLUDES
-        values:
-        - search term
-    Address:
-      type: object
-      description: 'Physical address/location details (nested, without id).
-
-
-        This is an embedded object representing a Location record. The id is managed
-
-        internally and not exposed in the API.
-
-        '
-      required:
-      - line1
-      - city
-      - country
-      - market
-      - isAirportOrAirbase
-      - isConstructionOrUtilitySite
-      - isSmartyValidated
-      - obeysDst
-      properties:
-        line1:
-          type: string
-          description: Primary street address line
-          example: 123 Main St
-        line2:
-          type:
-          - string
-          - 'null'
-          description: Secondary address line (suite, floor, etc.)
-          example: Suite 400
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        country:
-          type: string
-          description: Country name or code
-          example: USA
-        market:
-          type: string
-          description: Market or region identifier
-          example: CHI
-        latitude:
-          type:
-          - string
-          - 'null'
-          description: Latitude coordinate
-          example: '41.8781'
-        longitude:
-          type:
-          - string
-          - 'null'
-          description: Longitude coordinate
-          example: '-87.6298'
-        isAirportOrAirbase:
-          type: boolean
-          description: Whether this location is an airport or airbase
-          example: false
-        isConstructionOrUtilitySite:
-          type: boolean
-          description: Whether this location is a construction or utility site
-          example: false
-        isSmartyValidated:
-          type: boolean
-          description: Whether address has been validated by SmartyStreets
-          example: true
-        obeysDst:
-          type: boolean
-          description: Whether this location observes daylight saving time
-          example: true
-        cityId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Reference to standardized city record (internal use)
-          example: null
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    CarrierFactorReference:
-      type: object
-      description: 'Enhanced reference to a carrier factor (factoring company).
-
-        Includes full carrier factor details in addition to id/key.
-
-        '
-      required:
-      - id
-      - companyName
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Carrier factor UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-FACTOR-001
-        companyName:
-          type: string
-          description: Factoring company legal name
-          example: Capital Factoring Services Inc
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: accounting@capitalfactoring.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-234-5678
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Preferred currency code (ISO 4217)
-          example: USD
-        createdAt:
-          type: string
-          format: date-time
-          description: When the carrier factor was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the carrier factor was last updated
-          example: '2025-01-15T14:30:00Z'
-    CarrierReference:
-      type: object
-      description: 'Enhanced reference to a carrier resource (returned in responses).
-
-        Includes full carrier details in addition to id/key.
-
-
-        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Carrier UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CARRIER-SWIFT
-        name:
-          type: string
-          description: Carrier company name
-          example: Swift Transportation
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-987-6543
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: dispatch@swifttrans.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the carrier was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the carrier was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the carrier was soft deleted (null if active)
-          example: null
-    CarrierInput:
-      oneOf:
-      - $ref: '#/components/schemas/TruckloadCarrierInput'
-      - $ref: '#/components/schemas/AirCarrierInput'
-      - $ref: '#/components/schemas/CartageCarrierInput'
-      - $ref: '#/components/schemas/LinehaulCarrierInput'
-      - $ref: '#/components/schemas/LtlCarrierInput'
-      - $ref: '#/components/schemas/OceanCarrierInput'
-      - $ref: '#/components/schemas/RailCarrierInput'
-      discriminator:
-        propertyName: type
-        mapping:
-          TRUCKLOAD: '#/components/schemas/TruckloadCarrierInput'
-          AIR: '#/components/schemas/AirCarrierInput'
-          CARTAGE: '#/components/schemas/CartageCarrierInput'
-          LINEHAUL: '#/components/schemas/LinehaulCarrierInput'
-          LTL: '#/components/schemas/LtlCarrierInput'
-          OCEAN: '#/components/schemas/OceanCarrierInput'
-          RAIL: '#/components/schemas/RailCarrierInput'
-    bill-payments_CarrierFactorReference:
+    OutstandingBill:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        companyName:
+        friendlyId:
           type: string
-        bankName:
+        entityType:
+          $ref: '#/components/schemas/BillEntityType'
+        carrier:
+          $ref: '#/components/schemas/CarrierReference'
+        vendor:
+          $ref: '#/components/schemas/VendorReference'
+        invoiceDate:
           type:
           - string
           - 'null'
-    PaymentMethodType:
-      type: string
-      description: Payment method type
-      enum:
-      - ACH_WIRE
-      - ZELLE
-      - VENMO
-      - ACH
-      - CHECK
-      - WIRE
-      - CAD_EFT
-      - TRIUMPH_PAY
-      - COMCHECK
-      - EFS
-      - ECHECK
-      example: ACH
-    PaymentTermReference:
-      type: object
-      description: 'Enhanced reference to a payment term resource (returned in responses).
-
-        Includes full payment term details in addition to id/key.
-
-        '
-      required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
+          format: date
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        amount:
+          type: number
+        amountPaid:
+          type: number
+        openBalance:
+          type: number
+        isOverdue:
+          type: boolean
+        shipmentId:
+          type:
+          - string
+          - 'null'
           format: uuid
-          description: Payment term UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
+        shipmentFriendlyId:
           type:
           - string
           - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-PAYTERM-NET30
-        name:
-          type: string
-          description: Payment term name
-          example: Net 30
-        description:
-          type:
-          - string
-          - 'null'
-          description: Payment term description or notes
-          example: Payment due 30 days from invoice date
-        days:
-          type:
-          - integer
-          - 'null'
-          description: Number of days until payment is due
-          example: 30
-        quickPayFee:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Quick pay fee percentage (e.g., 0.05 for 5%)
-          example: 0.05
-          x-parsed-md-description:
-            result:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 1
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 0
-                - 1
-                inline: false
-                attributes: {}
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 1
-                  inline: true
-                  attributes:
-                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: inline
-                annotations: []
-                slots: {}
-              type: paragraph
-              annotations: []
-              slots: {}
-        apOnly:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this payment term is for accounts payable only
-          example: false
-        doNotUse:
-          type:
-          - boolean
-          - 'null'
-          description: Flag to prevent using this payment term for new transactions
-          example: false
-        createdAt:
-          type: string
-          format: date-time
-          description: When the payment term was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the payment term was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the payment term was soft deleted (null if active)
-          example: null
     RelativeTimeUnit:
       type: string
       enum:
@@ -2684,81 +3225,6 @@ components:
         - `SECOND`: Seconds
 
         '
-    CartageCarrierInput:
-      allOf:
-      - $ref: '#/components/schemas/CarrierInputBase'
-      - type: object
-        description: Input for creating a cartage carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - CARTAGE
-            description: Carrier type discriminator (must be CARTAGE)
-            example: CARTAGE
-    PaymentRecipientType:
-      type: string
-      description: 'Who receives the payment.
-
-
-        - `DIRECT`: Payment goes directly to the carrier
-
-        - `FACTOR`: Payment goes to a factoring company (requires carrierFactorId)
-
-        '
-      enum:
-      - DIRECT
-      - FACTOR
-      example: DIRECT
-    RailCarrierInput:
-      allOf:
-      - $ref: '#/components/schemas/CarrierInputBase'
-      - type: object
-        description: Input for creating a rail carrier
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - RAIL
-            description: Carrier type discriminator (must be RAIL)
-            example: RAIL
-    SearchSortOption:
-      type: object
-      required:
-      - field
-      - order
-      description: Sort option for search results
-      properties:
-        field:
-          type: string
-          description: Field name to sort by (must be an indexed field)
-          example: createdAt
-        order:
-          type: string
-          enum:
-          - asc
-          - desc
-          description: Sort direction (ascending or descending)
-          example: desc
-      example:
-        field: createdAt
-        order: desc
-    CarrierEquipment:
-      type: string
-      description: Equipment types that a carrier can operate
-      enum:
-      - CONTAINER
-      - FLATBED
-      - POWER_ONLY
-      - REEFER
-      - SPECIALIZED
-      - TANKER
-      - VAN
-      example: VAN
     LinehaulCarrierPatch:
       allOf:
       - $ref: '#/components/schemas/CarrierPatchBase'
@@ -2771,96 +3237,23 @@ components:
             - LINEHAUL
             description: Carrier type discriminator (optional - only needed if changing type)
             example: LINEHAUL
-    CarrierContactType:
+    CarrierType:
       type: string
-      description: Type of carrier contact role
-      enum:
-      - ACCOUNTING
-      - AFTER_HOURS
-      - CENSUS
-      - CLAIMS
-      - DISPATCH
-      - DRIVER
-      - EMERGENCY
-      - MANAGER
-      - OWNER
-    CarrierContactReference:
-      type: object
-      description: 'Carrier contact reference for embedding in Carrier responses.
+      description: 'Type of carrier operation.
 
-        Identical to CarrierContact but excludes the carrier and carrierId fields to avoid circular references.
+
+        Note: In the backend, null carrier type is represented as TRUCKLOAD in the public API.
 
         '
-      required:
-      - id
-      - name
-      - contactInfo
-      - createdAt
-      properties:
-        object:
-          type: string
-          enum:
-          - CARRIER_CONTACT
-          readOnly: true
-          description: Object type identifier
-          example: CARRIER_CONTACT
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique contact identifier
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CARRIER-CONTACT-001
-        name:
-          type: string
-          description: Contact person's name
-          example: Jane Dispatcher
-        contactInfo:
-          allOf:
-          - $ref: '#/components/schemas/ContactInfo'
-          description: Contact information details (email, phone, title)
-        contactTypes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CarrierContactType'
-          description: Types/roles this contact serves
-          example:
-          - DISPATCH
-          - AFTER_HOURS
-        invitedUser:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User account invited/created for this contact
-        deletedBy:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User who deleted this contact
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the contact was created
-          example: '2025-01-15T10:00:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: When the contact was soft deleted
-          example: null
+      enum:
+      - TRUCKLOAD
+      - AIR
+      - CARTAGE
+      - LINEHAUL
+      - LTL
+      - OCEAN
+      - RAIL
+      example: TRUCKLOAD
     CarrierSearchCriteria:
       type: object
       description: 'Search criteria for filtering carriers.
@@ -2991,168 +3384,6 @@ components:
         createdAt:
           $ref: '#/components/schemas/DatetimeSearchCriteria'
           description: Onboarding date
-    CarrierInputBase:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          description: Carrier legal name
-          example: Swift Transportation Co
-        type:
-          $ref: '#/components/schemas/CarrierType'
-          description: Carrier operation type (discriminator field)
-        dbaName:
-          type: string
-          description: Doing Business As name
-          example: Swift Logistics
-        key:
-          type: string
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CARRIER-SWIFT-001
-        email:
-          type: string
-          format: email
-          description: Primary email address
-          example: dispatch@swifttrans.com
-        phone:
-          type: string
-          description: Primary phone number
-          example: +1-555-987-6543
-        website:
-          type: string
-          description: Company website URL
-          example: https://swifttrans.com
-        status:
-          type: string
-          description: Carrier status
-          example: ACTIVE
-        statusReason:
-          type: string
-          description: Reason for current status
-          example: Active and in good standing
-        notes:
-          type: string
-          description: Internal notes about the carrier
-          example: Preferred carrier for midwest routes
-        corporateAddress:
-          $ref: '#/components/schemas/AddressInput'
-          description: Corporate headquarters address
-        billingAddress:
-          $ref: '#/components/schemas/AddressInput'
-          description: Billing address for invoices
-        mcNumber:
-          type: string
-          description: Motor Carrier (MC) number
-          example: MC-123456
-        dotNumber:
-          type: string
-          description: Department of Transportation (DOT) number
-          example: '1234567'
-        scac:
-          type: string
-          description: Standard Carrier Alpha Code
-          example: SWFT
-        einNumber:
-          type: string
-          description: Employer Identification Number
-          example: 12-3456789
-        ffNumber:
-          type: string
-          description: Freight Forwarder (FF) number
-          example: FF-123456
-        mxNumber:
-          type: string
-          description: Mexico carrier registration number
-          example: MX-123456
-        rfcNumber:
-          type: string
-          description: RFC (Mexico tax ID) number
-          example: ABCD123456XYZ
-        iataCode:
-          type: string
-          description: International Air Transport Association code
-          example: AA
-        equipments:
-          type: array
-          description: Equipment types this carrier operates
-          items:
-            $ref: '#/components/schemas/CarrierEquipment'
-          example:
-          - VAN
-          - REEFER
-        isHazmat:
-          type: boolean
-          description: Whether carrier is certified to transport hazardous materials
-          example: false
-        tsaApproved:
-          type: boolean
-          description: Whether carrier is TSA approved
-          example: true
-        trucks:
-          type: integer
-          description: Number of trucks in fleet
-          example: 50
-        trailers:
-          type: integer
-          description: Number of trailers in fleet
-          example: 100
-        drivers:
-          type: integer
-          description: Number of drivers employed
-          example: 75
-        powerUnits:
-          type: integer
-          description: Number of power units
-          example: 50
-        currency:
-          $ref: '#/components/schemas/Currency'
-          description: Preferred currency for transactions
-        paymentTermId:
-          type: string
-          format: uuid
-          description: Payment term ID
-          example: 550e8400-e29b-41d4-a716-446655440002
-        isFactoringPreferred:
-          type: boolean
-          description: Whether carrier prefers factoring for payment
-          example: false
-        goldenCarrierId:
-          type: string
-          format: uuid
-          description: Reference to golden carrier record (for deduplication)
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-    BooleanFilter:
-      type: object
-      description: Filter options for boolean fields
-      properties:
-        equalTo:
-          type: boolean
-          description: Exact match
-        notEqualTo:
-          type: boolean
-          description: Not equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    ClientKeyFilter:
-      type: object
-      description: Filter options for client key fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        in:
-          type: array
-          description: Matches any value in the array
-          items:
-            type: string
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
     SearchPaginationInput:
       type: object
       description: Pagination options for search requests
@@ -3173,100 +3404,6 @@ components:
       example:
         pageNumber: 1
         pageSize: 50
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    FloatSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for float/decimal fields
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - GREATER_THAN
-          - LESS_THAN
-          - BETWEEN
-          - NOT_BETWEEN
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `GREATER_THAN`: Greater than value
-
-            - `LESS_THAN`: Less than value
-
-            - `BETWEEN`: Between min and max (inclusive)
-
-            - `NOT_BETWEEN`: Not between min and max
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        value:
-          type: number
-          format: float
-          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
-        min:
-          type: number
-          format: float
-          description: Minimum value for BETWEEN or NOT_BETWEEN
-        max:
-          type: number
-          format: float
-          description: Maximum value for BETWEEN or NOT_BETWEEN
-      example:
-        operator: GREATER_THAN
-        value: 1000.5
-    Carrier:
-      oneOf:
-      - $ref: '#/components/schemas/TruckloadCarrier'
-      - $ref: '#/components/schemas/AirCarrier'
-      - $ref: '#/components/schemas/CartageCarrier'
-      - $ref: '#/components/schemas/LinehaulCarrier'
-      - $ref: '#/components/schemas/LtlCarrier'
-      - $ref: '#/components/schemas/OceanCarrier'
-      - $ref: '#/components/schemas/RailCarrier'
-      discriminator:
-        propertyName: type
-        mapping:
-          TRUCKLOAD: '#/components/schemas/TruckloadCarrier'
-          AIR: '#/components/schemas/AirCarrier'
-          CARTAGE: '#/components/schemas/CartageCarrier'
-          LINEHAUL: '#/components/schemas/LinehaulCarrier'
-          LTL: '#/components/schemas/LtlCarrier'
-          OCEAN: '#/components/schemas/OceanCarrier'
-          RAIL: '#/components/schemas/RailCarrier'
     OceanCarrier:
       allOf:
       - $ref: '#/components/schemas/CarrierBase'
@@ -3281,18 +3418,6 @@ components:
             - OCEAN
             description: Carrier type discriminator
             example: OCEAN
-    LtlCarrierPatch:
-      allOf:
-      - $ref: '#/components/schemas/CarrierPatchBase'
-      - type: object
-        description: Partial update for LTL carrier
-        properties:
-          type:
-            type: string
-            enum:
-            - LTL
-            description: Carrier type discriminator (optional - only needed if changing type)
-            example: LTL
     CarrierPaymentMethodReference:
       type: object
       description: 'Carrier payment method reference for embedding in Carrier responses.
@@ -3465,152 +3590,6 @@ components:
           - type: 'null'
           readOnly: true
           description: User who deleted this payment method
-    OutstandingBillsResponse:
-      type: object
-      required:
-      - bills
-      - totalOutstanding
-      properties:
-        bills:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-              friendlyId:
-                type: string
-              entityType:
-                $ref: '#/components/schemas/BillEntityType'
-              carrier:
-                $ref: '#/components/schemas/CarrierReference'
-              vendor:
-                $ref: '#/components/schemas/VendorReference'
-              amount:
-                type: number
-              invoiceDate:
-                type:
-                - string
-                - 'null'
-                format: date
-              dueDate:
-                type:
-                - string
-                - 'null'
-                format: date
-              openBalance:
-                type: number
-              isOverdue:
-                type: boolean
-        totalOutstanding:
-          type: number
-          description: Total outstanding balance
-    CarrierType:
-      type: string
-      description: 'Type of carrier operation.
-
-
-        Note: In the backend, null carrier type is represented as TRUCKLOAD in the public API.
-
-        '
-      enum:
-      - TRUCKLOAD
-      - AIR
-      - CARTAGE
-      - LINEHAUL
-      - LTL
-      - OCEAN
-      - RAIL
-      example: TRUCKLOAD
-    CarrierFilterRequest:
-      type: object
-      description: Request body for filtering carriers
-      properties:
-        filter:
-          $ref: '#/components/schemas/CarrierFilter'
-          description: 'Filter criteria (optional - omit to return all carriers).
-
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - type:
-              equalTo: TRUCKLOAD
-          - status:
-              equalTo: ACTIVE
-          - inFmcsa:
-              equalTo: true
-        pageSize: 50
-    IntFilter:
-      type: object
-      description: Filter options for integer fields
-      properties:
-        equalTo:
-          type: integer
-          description: Exact match
-        notEqualTo:
-          type: integer
-          description: Not equal to
-        lessThan:
-          type: integer
-          description: Less than
-        lessThanOrEqualTo:
-          type: integer
-          description: Less than or equal to
-        greaterThan:
-          type: integer
-          description: Greater than
-        greaterThanOrEqualTo:
-          type: integer
-          description: Greater than or equal to
-        in:
-          type: array
-          items:
-            type: integer
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: integer
-          description: Does not match any value in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    Currency:
-      type: string
-      description: Currency code (ISO 4217)
-      enum:
-      - ARS
-      - AUD
-      - BRL
-      - CAD
-      - CNY
-      - EUR
-      - GBP
-      - IDR
-      - INR
-      - JPY
-      - KRW
-      - MXN
-      - RUB
-      - SAR
-      - TRY
-      - USD
-      - ZAR
-      example: USD
     UserReference:
       type: object
       description: 'Enhanced reference to a user resource (returned in responses).
@@ -3697,37 +3676,245 @@ components:
           format: date-time
           description: When the user was soft deleted (null if active)
           example: null
-    DatetimeFilter:
+    CarrierReference:
       type: object
-      description: Filter options for datetime fields
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
       properties:
-        equalTo:
+        id:
+          type: string
+          format: uuid
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
+          type: string
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
           type: string
           format: date-time
-          description: Exact match
-        notEqualTo:
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
           type: string
           format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
           format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
+          description: When the carrier was soft deleted (null if active)
+          example: null
+    OceanCarrierPatch:
+      allOf:
+      - $ref: '#/components/schemas/CarrierPatchBase'
+      - type: object
+        description: Partial update for ocean carrier
+        properties:
+          type:
+            type: string
+            enum:
+            - OCEAN
+            description: Carrier type discriminator (optional - only needed if changing type)
+            example: OCEAN
+    LinehaulCarrierInput:
+      allOf:
+      - $ref: '#/components/schemas/CarrierInputBase'
+      - type: object
+        description: Input for creating a linehaul carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - LINEHAUL
+            description: Carrier type discriminator (must be LINEHAUL)
+            example: LINEHAUL
+    LinehaulCarrier:
+      allOf:
+      - $ref: '#/components/schemas/CarrierBase'
+      - type: object
+        description: Linehaul (long-distance) carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - LINEHAUL
+            description: Carrier type discriminator
+            example: LINEHAUL
+    CarrierFilter:
+      type: object
+      description: Filter criteria for carriers with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/CarrierFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/CarrierFilter'
+        not:
+          $ref: '#/components/schemas/CarrierFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        friendlyId:
+          $ref: '#/components/schemas/StringFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        dbaName:
+          $ref: '#/components/schemas/StringFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        phone:
+          $ref: '#/components/schemas/StringFilter'
+        website:
+          $ref: '#/components/schemas/StringFilter'
+        status:
+          $ref: '#/components/schemas/StringFilter'
+        statusReason:
+          $ref: '#/components/schemas/StringFilter'
+        type:
+          $ref: '#/components/schemas/StringFilter'
+        mcNumber:
+          $ref: '#/components/schemas/StringFilter'
+        dotNumber:
+          $ref: '#/components/schemas/StringFilter'
+        scac:
+          $ref: '#/components/schemas/StringFilter'
+        einNumber:
+          $ref: '#/components/schemas/StringFilter'
+        ffNumber:
+          $ref: '#/components/schemas/StringFilter'
+        mxNumber:
+          $ref: '#/components/schemas/StringFilter'
+        rfcNumber:
+          $ref: '#/components/schemas/StringFilter'
+        iataCode:
+          $ref: '#/components/schemas/StringFilter'
+        isHazmat:
+          $ref: '#/components/schemas/BooleanFilter'
+        tsaApproved:
+          $ref: '#/components/schemas/BooleanFilter'
+        trucks:
+          $ref: '#/components/schemas/IntFilter'
+        trailers:
+          $ref: '#/components/schemas/IntFilter'
+        drivers:
+          $ref: '#/components/schemas/IntFilter'
+        powerUnits:
+          $ref: '#/components/schemas/IntFilter'
+        currency:
+          $ref: '#/components/schemas/StringFilter'
+        isFactoringPreferred:
+          $ref: '#/components/schemas/BooleanFilter'
+        goldenCarrierId:
+          $ref: '#/components/schemas/UUIDFilter'
+        paymentTermId:
+          $ref: '#/components/schemas/UUIDFilter'
+        rating:
+          $ref: '#/components/schemas/StringFilter'
+        ratingDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        operatingAbility:
+          $ref: '#/components/schemas/StringFilter'
+        inFmcsa:
+          $ref: '#/components/schemas/BooleanFilter'
+        insuranceCompany:
+          $ref: '#/components/schemas/StringFilter'
+        insuranceExpirationDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    CarrierSearchResponse:
+      type: object
+      description: 'Response for carrier search requests.
+
+        Note: Only active (non-deleted) carriers are included in results.
+
+        '
+      required:
+      - data
+      - pagination
+      - totalResults
+      properties:
+        data:
+          type: array
+          description: Search results - either flat rows or full carrier objects based on format parameter
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/CarrierSearchRow'
+            - $ref: '#/components/schemas/Carrier'
+            discriminator:
+              propertyName: object
+              mapping:
+                CARRIER_SEARCH_ROW: '#/components/schemas/CarrierSearchRow'
+                CARRIER: '#/components/schemas/Carrier'
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInfo'
+        totalResults:
+          type: integer
+          description: Total number of matching results (excluding soft-deleted records)
+          minimum: 0
+    CarrierEquipment:
+      type: string
+      description: Equipment types that a carrier can operate
+      enum:
+      - CONTAINER
+      - FLATBED
+      - POWER_ONLY
+      - REEFER
+      - SPECIALIZED
+      - TANKER
+      - VAN
+      example: VAN
     IDFilter:
       type: object
       description: Filter options for ID fields (limited operations - exact match only)
@@ -3742,407 +3929,193 @@ components:
           items:
             type: string
             format: uuid
-    CarrierPatch:
-      oneOf:
-      - $ref: '#/components/schemas/TruckloadCarrierPatch'
-      - $ref: '#/components/schemas/AirCarrierPatch'
-      - $ref: '#/components/schemas/CartageCarrierPatch'
-      - $ref: '#/components/schemas/LinehaulCarrierPatch'
-      - $ref: '#/components/schemas/LtlCarrierPatch'
-      - $ref: '#/components/schemas/OceanCarrierPatch'
-      - $ref: '#/components/schemas/RailCarrierPatch'
-      discriminator:
-        propertyName: type
-        mapping:
-          TRUCKLOAD: '#/components/schemas/TruckloadCarrierPatch'
-          AIR: '#/components/schemas/AirCarrierPatch'
-          CARTAGE: '#/components/schemas/CartageCarrierPatch'
-          LINEHAUL: '#/components/schemas/LinehaulCarrierPatch'
-          LTL: '#/components/schemas/LtlCarrierPatch'
-          OCEAN: '#/components/schemas/OceanCarrierPatch'
-          RAIL: '#/components/schemas/RailCarrierPatch'
-    CarrierPatchBase:
+    BooleanFilter:
       type: object
-      description: 'Partial carrier update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
+      description: Filter options for boolean fields
       properties:
-        name:
+        equalTo:
+          type: boolean
+          description: Exact match
+        notEqualTo:
+          type: boolean
+          description: Not equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
           type: string
-          description: Carrier legal name
-          example: Swift Transportation Co
-        type:
-          $ref: '#/components/schemas/CarrierType'
-          description: Carrier operation type
-        dbaName:
-          type:
-          - string
-          - 'null'
-          description: Doing Business As name
-          example: Swift Logistics
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CARRIER-SWIFT-001
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: dispatch@swifttrans.com
-        phone:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-987-6543
-        website:
-          type:
-          - string
-          - 'null'
-          description: Company website URL
-          example: https://swifttrans.com
-        status:
+          description: Exact match
+        notEqualTo:
           type: string
-          description: Carrier status
-          example: ACTIVE
-        statusReason:
-          type:
-          - string
-          - 'null'
-          description: Reason for current status
-          example: Active and in good standing
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Internal notes about the carrier
-          example: Preferred carrier for midwest routes
-        corporateAddress:
-          $ref: '#/components/schemas/AddressPatch'
-          description: Corporate headquarters address
-        billingAddress:
-          $ref: '#/components/schemas/AddressPatch'
-          description: Billing address for invoices
-        mcNumber:
-          type:
-          - string
-          - 'null'
-          description: Motor Carrier (MC) number
-          example: MC-123456
-        dotNumber:
-          type:
-          - string
-          - 'null'
-          description: Department of Transportation (DOT) number
-          example: '1234567'
-        scac:
-          type:
-          - string
-          - 'null'
-          description: Standard Carrier Alpha Code
-          example: SWFT
-        einNumber:
-          type:
-          - string
-          - 'null'
-          description: Employer Identification Number
-          example: 12-3456789
-        ffNumber:
-          type:
-          - string
-          - 'null'
-          description: Freight Forwarder (FF) number
-          example: FF-123456
-        mxNumber:
-          type:
-          - string
-          - 'null'
-          description: Mexico carrier registration number
-          example: MX-123456
-        rfcNumber:
-          type:
-          - string
-          - 'null'
-          description: RFC (Mexico tax ID) number
-          example: ABCD123456XYZ
-        iataCode:
-          type:
-          - string
-          - 'null'
-          description: International Air Transport Association code
-          example: AA
-        equipments:
+          description: Not equal to
+        in:
           type: array
-          description: Equipment types this carrier operates
           items:
-            $ref: '#/components/schemas/CarrierEquipment'
-          example:
-          - VAN
-          - REEFER
-        isHazmat:
-          type:
-          - boolean
-          - 'null'
-          description: Whether carrier is certified to transport hazardous materials
-          example: false
-        tsaApproved:
-          type:
-          - boolean
-          - 'null'
-          description: Whether carrier is TSA approved
-          example: true
-        trucks:
-          type:
-          - integer
-          - 'null'
-          description: Number of trucks in fleet
-          example: 50
-        trailers:
-          type:
-          - integer
-          - 'null'
-          description: Number of trailers in fleet
-          example: 100
-        drivers:
-          type:
-          - integer
-          - 'null'
-          description: Number of drivers employed
-          example: 75
-        powerUnits:
-          type:
-          - integer
-          - 'null'
-          description: Number of power units
-          example: 50
-        currency:
-          anyOf:
-          - $ref: '#/components/schemas/Currency'
-          - type: 'null'
-          description: Preferred currency for transactions
-        paymentTermId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Payment term ID
-          example: 550e8400-e29b-41d4-a716-446655440002
-        isFactoringPreferred:
-          type:
-          - boolean
-          - 'null'
-          description: Whether carrier prefers factoring for payment
-          example: false
-        goldenCarrierId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Reference to golden carrier record (for deduplication)
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-    SavedSearchLookup:
-      type: object
-      description: 'Reference to a saved search by ID or client key.
-
-        Provide either id or key (not both).
-
-        '
-      properties:
-        id:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
           type: string
-          format: uuid
-          description: Saved search UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
+          description: Contains substring (case-insensitive)
+        notIncludes:
           type: string
-          maxLength: 512
-          description: Client-defined key for the saved search
-          example: my-carrier-search
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
-    TruckloadCarrier:
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    RailCarrierInput:
       allOf:
-      - $ref: '#/components/schemas/CarrierBase'
+      - $ref: '#/components/schemas/CarrierInputBase'
       - type: object
-        description: Truckload carrier with insurance, safety rating, and FMCSA data
+        description: Input for creating a rail carrier
         required:
         - type
         properties:
           type:
             type: string
             enum:
-            - TRUCKLOAD
-            description: Carrier type discriminator
-            example: TRUCKLOAD
-          insuranceCompany:
-            type:
-            - string
-            - 'null'
-            description: Insurance company name
-            example: State Farm Insurance
-          insuranceAgent:
-            type:
-            - string
-            - 'null'
-            description: Insurance agent name
-            example: John Smith
-          insuranceAgentPhone:
-            type:
-            - string
-            - 'null'
-            description: Insurance agent phone number
-            example: +1-555-123-4567
-          insuranceAuthorityDate:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            description: Date insurance authority was granted
-            example: '2025-01-01T00:00:00Z'
-          insuranceExpirationDate:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            description: Insurance policy expiration date
-            example: '2025-12-31T23:59:59Z'
-          insuranceAutoLiabilityLimit:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: Auto liability insurance limit (in dollars)
-            example: 1000000
-          insuranceCargoLiabilityLimit:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: Cargo liability insurance limit (in dollars)
-            example: 100000
-          insuranceGeneralLiabilityLimit:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: General liability insurance limit (in dollars)
-            example: 1000000
-          rating:
-            type:
-            - string
-            - 'null'
-            description: Carrier safety rating
-            example: SATISFACTORY
-          ratingDate:
-            type:
-            - string
-            - 'null'
-            format: date
-            description: Date of last safety rating
-            example: '2025-01-15'
-          reviewType:
-            type:
-            - string
-            - 'null'
-            description: Type of safety review conducted
-            example: COMPLIANCE_REVIEW
-          reviewDate:
-            type:
-            - string
-            - 'null'
-            format: date
-            description: Date of last safety review
-            example: '2025-01-15'
-          operatingAbility:
-            type:
-            - string
-            - 'null'
-            description: FMCSA operating authority status
-            example: AUTHORIZED
-          inFmcsa:
-            type:
-            - boolean
-            - 'null'
-            description: Whether carrier is registered in FMCSA database
-            example: true
-          usDriverInspections:
-            type:
-            - integer
-            - 'null'
-            description: Total number of US driver inspections
-            example: 100
-          usDriverInspectionsOos:
-            type:
-            - integer
-            - 'null'
-            description: Number of US driver inspections resulting in out-of-service
-            example: 5
-          usDriverInspectionsOosPct:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: Percentage of US driver inspections resulting in out-of-service
-            example: 5
-          usVehicleInspections:
-            type:
-            - integer
-            - 'null'
-            description: Total number of US vehicle inspections
-            example: 150
-          usVehicleInspectionsOos:
-            type:
-            - integer
-            - 'null'
-            description: Number of US vehicle inspections resulting in out-of-service
-            example: 8
-          usVehicleInspectionsOosPct:
-            type:
-            - number
-            - 'null'
-            format: float
-            description: Percentage of US vehicle inspections resulting in out-of-service
-            example: 5.33
+            - RAIL
+            description: Carrier type discriminator (must be RAIL)
+            example: RAIL
+    OceanCarrierInput:
+      allOf:
+      - $ref: '#/components/schemas/CarrierInputBase'
+      - type: object
+        description: Input for creating an ocean carrier
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - OCEAN
+            description: Carrier type discriminator (must be OCEAN)
+            example: OCEAN
+    OutstandingBillsResponse:
+      type: object
+      required:
+      - bills
+      - totalOutstanding
+      properties:
+        bills:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              friendlyId:
+                type: string
+              entityType:
+                $ref: '#/components/schemas/BillEntityType'
+              carrier:
+                $ref: '#/components/schemas/CarrierReference'
+              vendor:
+                $ref: '#/components/schemas/VendorReference'
+              amount:
+                type: number
+              invoiceDate:
+                type:
+                - string
+                - 'null'
+                format: date
+              dueDate:
+                type:
+                - string
+                - 'null'
+                format: date
+              openBalance:
+                type: number
+              isOverdue:
+                type: boolean
+        totalOutstanding:
+          type: number
+          description: Total outstanding balance
+    FloatSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for float/decimal fields
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - GREATER_THAN
+          - LESS_THAN
+          - BETWEEN
+          - NOT_BETWEEN
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `GREATER_THAN`: Greater than value
+
+            - `LESS_THAN`: Less than value
+
+            - `BETWEEN`: Between min and max (inclusive)
+
+            - `NOT_BETWEEN`: Not between min and max
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        value:
+          type: number
+          format: float
+          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
+        min:
+          type: number
+          format: float
+          description: Minimum value for BETWEEN or NOT_BETWEEN
+        max:
+          type: number
+          format: float
+          description: Maximum value for BETWEEN or NOT_BETWEEN
+      example:
+        operator: GREATER_THAN
+        value: 1000.5
+    CartageCarrierPatch:
+      allOf:
+      - $ref: '#/components/schemas/CarrierPatchBase'
+      - type: object
+        description: Partial update for cartage carrier
+        properties:
+          type:
+            type: string
+            enum:
+            - CARTAGE
+            description: Carrier type discriminator (optional - only needed if changing type)
+            example: CARTAGE
   responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    ConflictError:
-      description: Conflict - resource already exists or constraint violation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: conflict
-            message: A resource with this identifier already exists
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
     ValidationError:
       description: Validation error - invalid field values
       content:
@@ -4157,6 +4130,24 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
     InternalServerError:
       description: Internal server error
       content:
@@ -4192,24 +4183,25 @@ components:
           description: Seconds to wait before retrying
           schema:
             type: integer
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
+    ConflictError:
+      description: Conflict - resource already exists or constraint violation
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
           example:
-            error: unauthorized
-            message: Invalid or expired access token
+            error: conflict
+            message: A resource with this identifier already exists
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
   parameters:
-    IdOrClientKey:
-      name: id
-      in: path
-      required: true
-      description: Resource ID (UUID) or client key
-      schema:
-        type: string
-      example: 550e8400-e29b-41d4-a716-446655440000
     LookupBy:
       name: by
       in: query
@@ -4332,6 +4324,14 @@ components:
           type: paragraph
           annotations: []
           slots: {}
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
   securitySchemes:
     BearerAuth:
       type: http

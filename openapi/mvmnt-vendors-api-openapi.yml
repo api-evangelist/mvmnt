@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: MVMNT Bill Payments Vendors API
+  title: MVMNT Vendors API
   version: 1.0.0
   description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
   contact:
@@ -485,808 +485,105 @@ paths:
         '404':
           $ref: '#/components/responses/NotFoundError'
 components:
-  schemas:
-    VendorSearchResponse:
-      type: object
-      description: 'Response for vendor search requests.
-
-        Note: Only active (non-deleted) vendors are included in results.
-
-        '
-      required:
-      - data
-      - pagination
-      - totalResults
-      properties:
-        data:
-          type: array
-          description: Search results - either flat rows or full vendor objects based on format parameter
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/VendorSearchRow'
-            - $ref: '#/components/schemas/Vendor'
-            discriminator:
-              propertyName: object
-              mapping:
-                VENDOR_SEARCH_ROW: '#/components/schemas/VendorSearchRow'
-                VENDOR: '#/components/schemas/Vendor'
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInfo'
-        totalResults:
-          type: integer
-          description: Total number of matching results (excluding soft-deleted records)
-          minimum: 0
-    OutstandingBillsForPaymentResponse:
-      type: object
-      required:
-      - bills
-      - totalOutstanding
-      properties:
-        bills:
-          type: array
-          items:
-            $ref: '#/components/schemas/OutstandingBill'
-        totalOutstanding:
-          type: number
-          description: Total outstanding balance
-        carrier:
-          $ref: '#/components/schemas/CarrierReference'
-        vendor:
-          $ref: '#/components/schemas/VendorReference'
-        carrierFactor:
-          $ref: '#/components/schemas/bill-payments_CarrierFactorReference'
-    VendorStatus:
-      type: string
-      description: Vendor status
-      enum:
-      - ACTIVE
-      - INACTIVE
+  responses:
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: internal_server_error
+            message: An unexpected error occurred
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
     ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    DatetimeSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: 'Search criteria for datetime fields.
-
-        Supports both absolute datetime values and relative time expressions.
-
-        '
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - BEFORE
-          - AFTER
-          - BETWEEN
-          - NOT_BETWEEN
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `BEFORE`: Before datetime
-
-            - `AFTER`: After datetime
-
-            - `BETWEEN`: Between min and max (inclusive)
-
-            - `NOT_BETWEEN`: Not between min and max
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        value:
-          type: string
-          format: date-time
-          description: Absolute datetime for EQUALS, NOT_EQUALS
-          example: '2025-01-15T10:00:00Z'
-        min:
-          type: string
-          format: date-time
-          description: Minimum datetime for BETWEEN or NOT_BETWEEN
-          example: '2025-01-01T00:00:00Z'
-        max:
-          type: string
-          format: date-time
-          description: Maximum datetime for BETWEEN or NOT_BETWEEN
-          example: '2025-12-31T23:59:59Z'
-        valueRelative:
-          type: integer
-          description: 'Relative time from now (negative for past, positive for future).
-
-            Example: -7 with WEEK unit means 7 weeks ago.
-
-            '
-        valueRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
-        minRelative:
-          type: integer
-          description: Relative time for min boundary
-        minRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
-        maxRelative:
-          type: integer
-          description: Relative time for max boundary
-        maxRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
-      example:
-        operator: AFTER
-        value: '2025-01-01T00:00:00Z'
-    TextSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for text fields (supports wildcards and partial matching)
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - STARTS_WITH
-          - ENDS_WITH
-          - INCLUDES
-          - ONE_OF
-          - NOT_ONE_OF
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `STARTS_WITH`: Begins with prefix
-
-            - `ENDS_WITH`: Ends with suffix
-
-            - `INCLUDES`: Contains substring
-
-            - `ONE_OF`: Matches any value in array
-
-            - `NOT_ONE_OF`: Does not match any value in array
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        values:
-          type: array
-          items:
-            type: string
-          description: Array of values for ONE_OF or NOT_ONE_OF operators
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
           example:
-          - value1
-          - value2
-      example:
-        operator: INCLUDES
-        values:
-        - search term
-    Address:
-      type: object
-      description: 'Physical address/location details (nested, without id).
-
-
-        This is an embedded object representing a Location record. The id is managed
-
-        internally and not exposed in the API.
-
-        '
-      required:
-      - line1
-      - city
-      - country
-      - market
-      - isAirportOrAirbase
-      - isConstructionOrUtilitySite
-      - isSmartyValidated
-      - obeysDst
-      properties:
-        line1:
-          type: string
-          description: Primary street address line
-          example: 123 Main St
-        line2:
-          type:
-          - string
-          - 'null'
-          description: Secondary address line (suite, floor, etc.)
-          example: Suite 400
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        country:
-          type: string
-          description: Country name or code
-          example: USA
-        market:
-          type: string
-          description: Market or region identifier
-          example: CHI
-        latitude:
-          type:
-          - string
-          - 'null'
-          description: Latitude coordinate
-          example: '41.8781'
-        longitude:
-          type:
-          - string
-          - 'null'
-          description: Longitude coordinate
-          example: '-87.6298'
-        isAirportOrAirbase:
-          type: boolean
-          description: Whether this location is an airport or airbase
-          example: false
-        isConstructionOrUtilitySite:
-          type: boolean
-          description: Whether this location is a construction or utility site
-          example: false
-        isSmartyValidated:
-          type: boolean
-          description: Whether address has been validated by SmartyStreets
-          example: true
-        obeysDst:
-          type: boolean
-          description: Whether this location observes daylight saving time
-          example: true
-        cityId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Reference to standardized city record (internal use)
-          example: null
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    ClientKeyFilter:
-      type: object
-      description: Filter options for client key fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        in:
-          type: array
-          description: Matches any value in the array
-          items:
-            type: string
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    KeywordSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for keyword fields (exact match, no partial matching)
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - ONE_OF
-          - NOT_ONE_OF
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `ONE_OF`: Matches any value in array
-
-            - `NOT_ONE_OF`: Does not match any value in array
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        values:
-          type: array
-          items:
-            type: string
-          description: Array of values for ONE_OF or NOT_ONE_OF operators
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    ConflictError:
+      description: Conflict - resource already exists or constraint violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
           example:
-          - ACTIVE
-          - PENDING
-      example:
-        operator: ONE_OF
-        values:
-        - ACTIVE
-        - PENDING
-    BooleanFilter:
-      type: object
-      description: Filter options for boolean fields
-      properties:
-        equalTo:
-          type: boolean
-          description: Exact match
-        notEqualTo:
-          type: boolean
-          description: Not equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    SearchPaginationInput:
-      type: object
-      description: Pagination options for search requests
-      properties:
-        pageNumber:
-          type: integer
-          minimum: 1
-          default: 1
-          description: Page number (1-based)
-          example: 1
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page (max 250)
-          example: 50
-      example:
-        pageNumber: 1
-        pageSize: 50
-    VendorPatch:
-      type: object
-      description: 'Partial vendor update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
-      properties:
-        name:
-          type: string
-          description: Vendor legal name
-          example: ABC Warehouse Services
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-VENDOR-ABC-001
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: billing@abcwarehouse.com
-        phone:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        status:
-          type:
-          - string
-          - 'null'
-          description: Vendor status
-          example: ACTIVE
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Internal notes about the vendor
-          example: Preferred vendor for warehouse services
-        taxId:
-          type:
-          - string
-          - 'null'
-          description: Tax identification number
-          example: 12-3456789
-        currency:
-          anyOf:
-          - $ref: '#/components/schemas/vendors_Currency'
-          - type: 'null'
-          description: Preferred currency for transactions
-        corporateAddress:
-          anyOf:
-          - $ref: '#/components/schemas/AddressInput'
-          - type: 'null'
-          description: Corporate headquarters address
-        billingAddress:
-          anyOf:
-          - $ref: '#/components/schemas/AddressInput'
-          - type: 'null'
-          description: Billing address for invoices
-        paymentTermId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Payment term ID
-          example: 550e8400-e29b-41d4-a716-446655440001
-        isMvmnt:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this vendor is MVMNT itself
-          example: false
-        requiredDocuments:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of required document types
+            error: conflict
+            message: A resource with this identifier already exists
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
           example:
-          - W9
-          - INSURANCE_CERTIFICATE
-    CarrierReference:
-      type: object
-      description: 'Enhanced reference to a carrier resource (returned in responses).
-
-        Includes full carrier details in addition to id/key.
-
-
-        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Carrier UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CARRIER-SWIFT
-        name:
-          type: string
-          description: Carrier company name
-          example: Swift Transportation
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-987-6543
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: dispatch@swifttrans.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the carrier was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the carrier was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the carrier was soft deleted (null if active)
-          example: null
-    IntSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for integer fields
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - GREATER_THAN
-          - LESS_THAN
-          - BETWEEN
-          - NOT_BETWEEN
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `GREATER_THAN`: Greater than value
-
-            - `LESS_THAN`: Less than value
-
-            - `BETWEEN`: Between min and max (inclusive)
-
-            - `NOT_BETWEEN`: Not between min and max
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        value:
-          type: integer
-          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
-        min:
-          type: integer
-          description: Minimum value for BETWEEN or NOT_BETWEEN
-        max:
-          type: integer
-          description: Maximum value for BETWEEN or NOT_BETWEEN
-      example:
-        operator: BETWEEN
-        min: 10
-        max: 100
-    VendorSearchRow:
-      type: object
-      description: 'Flattened vendor data from search index.
-
-        Note: This represents only active vendors. Soft-deleted records are never returned.
-
-        '
-      properties:
-        object:
-          type: string
-          enum:
-          - VENDOR_SEARCH_ROW
-          description: Object type identifier for discriminating between flat and full response formats
-        id:
-          type: string
-          format: uuid
-        friendlyId:
-          type: string
-          description: Vendor ID
-        name:
-          type: string
-        status:
-          type:
-          - string
-          - 'null'
-          enum:
-          - active
-          - inactive
-          - do_not_use
-        taxId:
-          type:
-          - string
-          - 'null'
-          description: EIN or other tax ID
-        service:
-          type: array
-          items:
-            type: string
-          description: Services provided
-        location:
-          type:
-          - string
-          - 'null'
-          description: Computed as "city, state"
-        city:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        zip:
-          type:
-          - string
-          - 'null'
-          description: Postal code
-        country:
-          type:
-          - string
-          - 'null'
-        primaryContactName:
-          type:
-          - string
-          - 'null'
-        primaryContactEmail:
-          type:
-          - string
-          - 'null'
-          format: email
-        primaryContactPhone:
-          type:
-          - string
-          - 'null'
-        paymentTermName:
-          type:
-          - string
-          - 'null'
-        quickbooksVendorId:
-          type:
-          - string
-          - 'null'
-          description: QuickBooks Online vendor ID
-        numberOfTimesUsed:
-          type: integer
-          description: Number of times used
-        lastUsed:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: Last date used
-        createdAt:
-          type: string
-          format: date-time
-      required:
-      - object
-      - id
-      - friendlyId
-      - name
-      - numberOfTimesUsed
-      - createdAt
-    bill-payments_CarrierFactorReference:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        companyName:
-          type: string
-        bankName:
-          type:
-          - string
-          - 'null'
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    PaymentMethodType:
+            error: rate_limit_exceeded
+            message: Too many requests. Please retry after 60 seconds.
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per minute
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Remaining requests in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Unix timestamp when rate limit resets
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema:
+            type: integer
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+  schemas:
+    BillEntityType:
       type: string
-      description: Payment method type
       enum:
-      - ACH_WIRE
-      - ZELLE
-      - VENMO
-      - ACH
-      - CHECK
-      - WIRE
-      - CAD_EFT
-      - TRIUMPH_PAY
-      - COMCHECK
-      - EFS
-      - ECHECK
-      example: ACH
-    VendorFilter:
-      type: object
-      description: Filter criteria for vendors with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/VendorFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/VendorFilter'
-        not:
-          $ref: '#/components/schemas/VendorFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        friendlyId:
-          $ref: '#/components/schemas/StringFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        email:
-          $ref: '#/components/schemas/StringFilter'
-        phone:
-          $ref: '#/components/schemas/StringFilter'
-        status:
-          $ref: '#/components/schemas/VendorStatusFilter'
-        notes:
-          $ref: '#/components/schemas/StringFilter'
-        taxId:
-          $ref: '#/components/schemas/StringFilter'
-        currency:
-          $ref: '#/components/schemas/CurrencyFilter'
-        paymentTermId:
-          $ref: '#/components/schemas/UUIDFilter'
-        isMvmnt:
-          $ref: '#/components/schemas/BooleanFilter'
-        deletedById:
-          $ref: '#/components/schemas/UUIDFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
+      - CARRIER
+      - VENDOR
+      description: 'Type of entity the bill is for.
+
+        - `CARRIER`: Bill for a carrier (LoadCarrier)
+
+        - `VENDOR`: Bill for a vendor service (VendedService)
+
+        '
     PaymentTermReference:
       type: object
       description: 'Enhanced reference to a payment term resource (returned in responses).
@@ -1400,6 +697,84 @@ components:
           format: date-time
           description: When the payment term was soft deleted (null if active)
           example: null
+    vendors_Currency:
+      type: string
+      description: Currency code
+      enum:
+      - USD
+      - CAD
+      - MXN
+      - EUR
+      - GBP
+    VendorContactRole:
+      type: string
+      description: Type of vendor contact role
+      enum:
+      - AGENT
+      - BILLING
+      - OPERATION
+      - OWNER
+    VendorInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Vendor legal name
+          example: ABC Warehouse Services
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-VENDOR-ABC-001
+        email:
+          type: string
+          format: email
+          description: Primary email address
+          example: billing@abcwarehouse.com
+        phone:
+          type: string
+          description: Primary phone number
+          example: +1-555-123-4567
+        status:
+          type: string
+          description: Vendor status
+          example: ACTIVE
+        notes:
+          type: string
+          description: Internal notes about the vendor
+          example: Preferred vendor for warehouse services
+        taxId:
+          type: string
+          description: Tax identification number
+          example: 12-3456789
+        currency:
+          $ref: '#/components/schemas/vendors_Currency'
+          description: Preferred currency for transactions
+        corporateAddress:
+          $ref: '#/components/schemas/AddressInput'
+          description: Corporate headquarters address
+        billingAddress:
+          $ref: '#/components/schemas/AddressInput'
+          description: Billing address for invoices
+        paymentTermId:
+          type: string
+          format: uuid
+          description: Payment term ID
+          example: 550e8400-e29b-41d4-a716-446655440001
+        isMvmnt:
+          type: boolean
+          description: Whether this vendor is MVMNT itself
+          example: false
+        requiredDocuments:
+          type: array
+          items:
+            type: string
+          description: List of required document types
+          example:
+          - W9
+          - INSURANCE_CERTIFICATE
     VendorPaymentMethodReference:
       type: object
       description: 'Vendor payment method reference for embedding in Vendor responses.
@@ -1563,60 +938,353 @@ components:
           - type: 'null'
           readOnly: true
           description: User who deleted this payment method
-    DateSearchCriteria:
+    SearchPaginationInput:
+      type: object
+      description: Pagination options for search requests
+      properties:
+        pageNumber:
+          type: integer
+          minimum: 1
+          default: 1
+          description: Page number (1-based)
+          example: 1
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page (max 250)
+          example: 50
+      example:
+        pageNumber: 1
+        pageSize: 50
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    KeywordSearchCriteria:
       type: object
       required:
       - operator
-      description: 'Search criteria for date fields (no time component).
-
-        Supports both absolute date values and relative time expressions.
-
-        '
+      description: Search criteria for keyword fields (exact match, no partial matching)
       properties:
         operator:
           type: string
           enum:
           - EQUALS
           - NOT_EQUALS
-          - BEFORE
-          - AFTER
-          - BETWEEN
-          - NOT_BETWEEN
+          - ONE_OF
+          - NOT_ONE_OF
           - EXISTS
           - DOES_NOT_EXIST
-          description: Search operator (same as DatetimeSearchCriteria)
-        value:
-          type: string
-          format: date
-          description: Absolute date for EQUALS, NOT_EQUALS
-          example: '2025-01-15'
-        min:
-          type: string
-          format: date
-          description: Minimum date for BETWEEN or NOT_BETWEEN
-          example: '2025-01-01'
-        max:
-          type: string
-          format: date
-          description: Maximum date for BETWEEN or NOT_BETWEEN
-          example: '2025-12-31'
-        valueRelative:
-          type: integer
-          description: Relative time from now
-        valueRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
-        minRelative:
-          type: integer
-        minRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
-        maxRelative:
-          type: integer
-        maxRelativeUnit:
-          $ref: '#/components/schemas/RelativeTimeUnit'
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `ONE_OF`: Matches any value in array
+
+            - `NOT_ONE_OF`: Does not match any value in array
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of values for ONE_OF or NOT_ONE_OF operators
+          example:
+          - ACTIVE
+          - PENDING
       example:
-        operator: BETWEEN
-        min: '2025-01-01'
-        max: '2025-01-31'
+        operator: ONE_OF
+        values:
+        - ACTIVE
+        - PENDING
+    UserReference:
+      type: object
+      description: 'Enhanced reference to a user resource (returned in responses).
+
+        Includes full user details in addition to id/key.
+
+
+        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-USER-12345
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          type: string
+          description: User account status
+          enum:
+          - PENDING
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the user was soft deleted (null if active)
+          example: null
+    CarrierReference:
+      type: object
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
+          type: string
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the carrier was soft deleted (null if active)
+          example: null
+    SavedSearchLookup:
+      type: object
+      description: 'Reference to a saved search by ID or client key.
+
+        Provide either id or key (not both).
+
+        '
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Saved search UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined key for the saved search
+          example: my-carrier-search
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+    VendorSearchCriteria:
+      type: object
+      description: 'Search criteria for filtering vendors.
+
+        Note: Only active (non-deleted) vendors are searchable. Soft-deleted records are automatically excluded.
+
+        '
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDSearchCriteria'
+        friendlyId:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+          description: Vendor ID
+        name:
+          $ref: '#/components/schemas/TextSearchCriteria'
+          description: Vendor name
+        status:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+          description: Status (active, inactive, do_not_use)
+        service:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+          description: Services provided by the vendor
+        taxId:
+          $ref: '#/components/schemas/TextSearchCriteria'
+          description: EIN or other tax ID
+        location:
+          $ref: '#/components/schemas/TextSearchCriteria'
+          description: Computed field "city, state"
+        city:
+          $ref: '#/components/schemas/TextSearchCriteria'
+        state:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+        zip:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+          description: Postal code
+        country:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+        primaryContactName:
+          $ref: '#/components/schemas/TextSearchCriteria'
+        primaryContactEmail:
+          $ref: '#/components/schemas/TextSearchCriteria'
+        primaryContactPhone:
+          $ref: '#/components/schemas/TextSearchCriteria'
+        paymentTermName:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+        quickbooksVendorId:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+          description: QuickBooks Online vendor ID (internal field qboVendorId)
+        numberOfTimesUsed:
+          $ref: '#/components/schemas/IntSearchCriteria'
+          description: Number of times vendor was used
+        lastUsed:
+          $ref: '#/components/schemas/DateSearchCriteria'
+          description: Last date vendor was used
+        createdAt:
+          $ref: '#/components/schemas/DatetimeSearchCriteria'
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     UUIDSearchCriteria:
       type: object
       required:
@@ -1660,221 +1328,6 @@ components:
         operator: EQUALS
         values:
         - 550e8400-e29b-41d4-a716-446655440000
-    AddressInput:
-      type: object
-      description: Address data for creating a new location
-      required:
-      - line1
-      - city
-      - country
-      - market
-      properties:
-        line1:
-          type: string
-          description: Primary street address line
-          example: 123 Main St
-        line2:
-          type: string
-          description: Secondary address line (suite, floor, etc.)
-          example: Suite 400
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        country:
-          type: string
-          description: Country name or code
-          example: USA
-        market:
-          type: string
-          description: Market or region identifier
-          example: CHI
-        latitude:
-          type: string
-          description: Latitude coordinate
-          example: '41.8781'
-        longitude:
-          type: string
-          description: Longitude coordinate
-          example: '-87.6298'
-        isAirportOrAirbase:
-          type: boolean
-          default: false
-          description: Whether this location is an airport or airbase
-          example: false
-        isConstructionOrUtilitySite:
-          type: boolean
-          default: false
-          description: Whether this location is a construction or utility site
-          example: false
-        isSmartyValidated:
-          type: boolean
-          default: false
-          description: Whether address has been validated by SmartyStreets
-          example: true
-        obeysDst:
-          type: boolean
-          default: true
-          description: Whether this location observes daylight saving time
-          example: true
-        cityId:
-          type: string
-          format: uuid
-          description: Reference to standardized city record (internal use)
-    VendorSearchRequest:
-      type: object
-      description: Request body for searching vendors
-      properties:
-        criteria:
-          $ref: '#/components/schemas/VendorSearchCriteria'
-          description: Search criteria to filter vendors
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInput'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchSortOption'
-          maxItems: 3
-          description: Sort options for the search results
-        savedSearch:
-          $ref: '#/components/schemas/SavedSearchLookup'
-          description: 'Optional saved search to load preferences from.
-
-            When provided, the saved search criteria will be loaded and merged with any explicit criteria.
-
-            '
-        format:
-          type: string
-          enum:
-          - flat
-          - full
-          default: flat
-          description: 'Response format:
-
-            - flat: Returns only indexed fields (default, faster)
-
-            - full: Returns complete vendor objects
-
-            '
-    RelativeTimeUnit:
-      type: string
-      enum:
-      - YEAR
-      - MONTH
-      - WEEK
-      - DAY
-      - HOUR
-      - MINUTE
-      - SECOND
-      description: 'Time unit for relative time calculations:
-
-        - `YEAR`: Years
-
-        - `MONTH`: Months
-
-        - `WEEK`: Weeks
-
-        - `DAY`: Days
-
-        - `HOUR`: Hours
-
-        - `MINUTE`: Minutes
-
-        - `SECOND`: Seconds
-
-        '
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    SearchPaginationInfo:
-      type: object
-      required:
-      - pageNumber
-      - pageSize
-      - totalPages
-      description: Pagination information for search results
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number
-          example: 1
-        pageSize:
-          type: integer
-          description: Number of results returned on this page
-          example: 50
-        totalPages:
-          type: integer
-          description: Total number of pages available
-          example: 25
-      example:
-        pageNumber: 1
-        pageSize: 50
-        totalPages: 25
-    OutstandingBillsResponse:
-      type: object
-      required:
-      - bills
-      - totalOutstanding
-      properties:
-        bills:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-              friendlyId:
-                type: string
-              entityType:
-                $ref: '#/components/schemas/BillEntityType'
-              carrier:
-                $ref: '#/components/schemas/CarrierReference'
-              vendor:
-                $ref: '#/components/schemas/VendorReference'
-              amount:
-                type: number
-              invoiceDate:
-                type:
-                - string
-                - 'null'
-                format: date
-              dueDate:
-                type:
-                - string
-                - 'null'
-                format: date
-              openBalance:
-                type: number
-              isOverdue:
-                type: boolean
-        totalOutstanding:
-          type: number
-          description: Total outstanding balance
     Vendor:
       type: object
       required:
@@ -2016,370 +1469,36 @@ components:
           readOnly: true
           description: When the vendor was soft deleted (null if active)
           example: null
-    VendorSearchCriteria:
+    VendorSearchResponse:
       type: object
-      description: 'Search criteria for filtering vendors.
+      description: 'Response for vendor search requests.
 
-        Note: Only active (non-deleted) vendors are searchable. Soft-deleted records are automatically excluded.
-
-        '
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDSearchCriteria'
-        friendlyId:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-          description: Vendor ID
-        name:
-          $ref: '#/components/schemas/TextSearchCriteria'
-          description: Vendor name
-        status:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-          description: Status (active, inactive, do_not_use)
-        service:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-          description: Services provided by the vendor
-        taxId:
-          $ref: '#/components/schemas/TextSearchCriteria'
-          description: EIN or other tax ID
-        location:
-          $ref: '#/components/schemas/TextSearchCriteria'
-          description: Computed field "city, state"
-        city:
-          $ref: '#/components/schemas/TextSearchCriteria'
-        state:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-        zip:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-          description: Postal code
-        country:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-        primaryContactName:
-          $ref: '#/components/schemas/TextSearchCriteria'
-        primaryContactEmail:
-          $ref: '#/components/schemas/TextSearchCriteria'
-        primaryContactPhone:
-          $ref: '#/components/schemas/TextSearchCriteria'
-        paymentTermName:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-        quickbooksVendorId:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-          description: QuickBooks Online vendor ID (internal field qboVendorId)
-        numberOfTimesUsed:
-          $ref: '#/components/schemas/IntSearchCriteria'
-          description: Number of times vendor was used
-        lastUsed:
-          $ref: '#/components/schemas/DateSearchCriteria'
-          description: Last date vendor was used
-        createdAt:
-          $ref: '#/components/schemas/DatetimeSearchCriteria'
-    BillEntityType:
-      type: string
-      enum:
-      - CARRIER
-      - VENDOR
-      description: 'Type of entity the bill is for.
-
-        - `CARRIER`: Bill for a carrier (LoadCarrier)
-
-        - `VENDOR`: Bill for a vendor service (VendedService)
-
-        '
-    VendorContactRole:
-      type: string
-      description: Type of vendor contact role
-      enum:
-      - AGENT
-      - BILLING
-      - OPERATION
-      - OWNER
-    UserReference:
-      type: object
-      description: 'Enhanced reference to a user resource (returned in responses).
-
-        Includes full user details in addition to id/key.
-
-
-        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
+        Note: Only active (non-deleted) vendors are included in results.
 
         '
       required:
-      - id
-      - email
-      - status
-      - createdAt
-      - updatedAt
+      - data
+      - pagination
+      - totalResults
       properties:
-        id:
-          type: string
-          format: uuid
-          description: User UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-USER-12345
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: User's full name
-          example: John Doe
-        phone:
-          type:
-          - string
-          - 'null'
-          description: User's phone number
-          example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
-        status:
-          type: string
-          description: User account status
-          enum:
-          - PENDING
-          - ACTIVE
-          - INACTIVE
-          example: ACTIVE
-        avatarId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        createdAt:
-          type: string
-          format: date-time
-          description: When the user was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the user was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the user was soft deleted (null if active)
-          example: null
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
+        data:
           type: array
-          description: Matches any UUID in the array
+          description: Search results - either flat rows or full vendor objects based on format parameter
           items:
-            type: string
-            format: uuid
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    SearchSortOption:
-      type: object
-      required:
-      - field
-      - order
-      description: Sort option for search results
-      properties:
-        field:
-          type: string
-          description: Field name to sort by (must be an indexed field)
-          example: createdAt
-        order:
-          type: string
-          enum:
-          - asc
-          - desc
-          description: Sort direction (ascending or descending)
-          example: desc
-      example:
-        field: createdAt
-        order: desc
-    SavedSearchLookup:
-      type: object
-      description: 'Reference to a saved search by ID or client key.
-
-        Provide either id or key (not both).
-
-        '
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Saved search UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type: string
-          maxLength: 512
-          description: Client-defined key for the saved search
-          example: my-carrier-search
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
-    VendorStatusFilter:
-      type: object
-      description: Filter for vendor status enum field
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/VendorStatus'
-          description: Exact match
-        notEqualTo:
-          $ref: '#/components/schemas/VendorStatus'
-          description: Not equal to
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/VendorStatus'
-          description: Matches any value in the list
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/VendorStatus'
-          description: Does not match any value in the list
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    VendorFilterRequest:
-      type: object
-      description: Request body for filtering vendors
-      properties:
-        filter:
-          $ref: '#/components/schemas/VendorFilter'
-          description: 'Filter criteria (optional - omit to return all vendors).
-
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-        pageSize:
+            oneOf:
+            - $ref: '#/components/schemas/VendorSearchRow'
+            - $ref: '#/components/schemas/Vendor'
+            discriminator:
+              propertyName: object
+              mapping:
+                VENDOR_SEARCH_ROW: '#/components/schemas/VendorSearchRow'
+                VENDOR: '#/components/schemas/Vendor'
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInfo'
+        totalResults:
           type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - status:
-              equalTo: ACTIVE
-          - currency:
-              equalTo: USD
-        pageSize: 50
-    CurrencyFilter:
-      type: object
-      description: Filter for currency enum field
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/vendors_Currency'
-          description: Exact match
-        notEqualTo:
-          $ref: '#/components/schemas/vendors_Currency'
-          description: Not equal to
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/vendors_Currency'
-          description: Matches any value in the list
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/vendors_Currency'
-          description: Does not match any value in the list
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
+          description: Total number of matching results (excluding soft-deleted records)
+          minimum: 0
     VendorContactReference:
       type: object
       description: 'Vendor contact reference for embedding in Vendor responses.
@@ -2460,56 +1579,41 @@ components:
           readOnly: true
           description: When the contact was soft deleted
           example: null
-    vendors_Currency:
-      type: string
-      description: Currency code
-      enum:
-      - USD
-      - CAD
-      - MXN
-      - EUR
-      - GBP
-    OutstandingBill:
+    VendorSearchRequest:
       type: object
+      description: Request body for searching vendors
       properties:
-        id:
+        criteria:
+          $ref: '#/components/schemas/VendorSearchCriteria'
+          description: Search criteria to filter vendors
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInput'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchSortOption'
+          maxItems: 3
+          description: Sort options for the search results
+        savedSearch:
+          $ref: '#/components/schemas/SavedSearchLookup'
+          description: 'Optional saved search to load preferences from.
+
+            When provided, the saved search criteria will be loaded and merged with any explicit criteria.
+
+            '
+        format:
           type: string
-          format: uuid
-        friendlyId:
-          type: string
-        entityType:
-          $ref: '#/components/schemas/BillEntityType'
-        carrier:
-          $ref: '#/components/schemas/CarrierReference'
-        vendor:
-          $ref: '#/components/schemas/VendorReference'
-        invoiceDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        amount:
-          type: number
-        amountPaid:
-          type: number
-        openBalance:
-          type: number
-        isOverdue:
-          type: boolean
-        shipmentId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        shipmentFriendlyId:
-          type:
-          - string
-          - 'null'
+          enum:
+          - flat
+          - full
+          default: flat
+          description: 'Response format:
+
+            - flat: Returns only indexed fields (default, faster)
+
+            - full: Returns complete vendor objects
+
+            '
     VendorReference:
       type: object
       description: 'Enhanced reference to a vendor profile.
@@ -2579,153 +1683,1049 @@ components:
           format: date-time
           description: When the vendor was last updated
           example: '2025-01-15T14:30:00Z'
-    VendorInput:
+    Error:
       type: object
       required:
-      - name
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    TextSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for text fields (supports wildcards and partial matching)
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - STARTS_WITH
+          - ENDS_WITH
+          - INCLUDES
+          - ONE_OF
+          - NOT_ONE_OF
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `STARTS_WITH`: Begins with prefix
+
+            - `ENDS_WITH`: Ends with suffix
+
+            - `INCLUDES`: Contains substring
+
+            - `ONE_OF`: Matches any value in array
+
+            - `NOT_ONE_OF`: Does not match any value in array
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of values for ONE_OF or NOT_ONE_OF operators
+          example:
+          - value1
+          - value2
+      example:
+        operator: INCLUDES
+        values:
+        - search term
+    VendorFilter:
+      type: object
+      description: Filter criteria for vendors with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/VendorFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/VendorFilter'
+        not:
+          $ref: '#/components/schemas/VendorFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        friendlyId:
+          $ref: '#/components/schemas/StringFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        phone:
+          $ref: '#/components/schemas/StringFilter'
+        status:
+          $ref: '#/components/schemas/VendorStatusFilter'
+        notes:
+          $ref: '#/components/schemas/StringFilter'
+        taxId:
+          $ref: '#/components/schemas/StringFilter'
+        currency:
+          $ref: '#/components/schemas/CurrencyFilter'
+        paymentTermId:
+          $ref: '#/components/schemas/UUIDFilter'
+        isMvmnt:
+          $ref: '#/components/schemas/BooleanFilter'
+        deletedById:
+          $ref: '#/components/schemas/UUIDFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    PaymentMethodType:
+      type: string
+      description: Payment method type
+      enum:
+      - ACH_WIRE
+      - ZELLE
+      - VENMO
+      - ACH
+      - CHECK
+      - WIRE
+      - CAD_EFT
+      - TRIUMPH_PAY
+      - COMCHECK
+      - EFS
+      - ECHECK
+      example: ACH
+    Address:
+      type: object
+      description: 'Physical address/location details (nested, without id).
+
+
+        This is an embedded object representing a Location record. The id is managed
+
+        internally and not exposed in the API.
+
+        '
+      required:
+      - line1
+      - city
+      - country
+      - market
+      - isAirportOrAirbase
+      - isConstructionOrUtilitySite
+      - isSmartyValidated
+      - obeysDst
+      properties:
+        line1:
+          type: string
+          description: Primary street address line
+          example: 123 Main St
+        line2:
+          type:
+          - string
+          - 'null'
+          description: Secondary address line (suite, floor, etc.)
+          example: Suite 400
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        country:
+          type: string
+          description: Country name or code
+          example: USA
+        market:
+          type: string
+          description: Market or region identifier
+          example: CHI
+        latitude:
+          type:
+          - string
+          - 'null'
+          description: Latitude coordinate
+          example: '41.8781'
+        longitude:
+          type:
+          - string
+          - 'null'
+          description: Longitude coordinate
+          example: '-87.6298'
+        isAirportOrAirbase:
+          type: boolean
+          description: Whether this location is an airport or airbase
+          example: false
+        isConstructionOrUtilitySite:
+          type: boolean
+          description: Whether this location is a construction or utility site
+          example: false
+        isSmartyValidated:
+          type: boolean
+          description: Whether address has been validated by SmartyStreets
+          example: true
+        obeysDst:
+          type: boolean
+          description: Whether this location observes daylight saving time
+          example: true
+        cityId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Reference to standardized city record (internal use)
+          example: null
+    VendorPatch:
+      type: object
+      description: 'Partial vendor update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
       properties:
         name:
           type: string
           description: Vendor legal name
           example: ABC Warehouse Services
         key:
-          type: string
+          type:
+          - string
+          - 'null'
           maxLength: 512
           description: Client-defined reference identifier
           example: ERP-VENDOR-ABC-001
         email:
-          type: string
+          type:
+          - string
+          - 'null'
           format: email
           description: Primary email address
           example: billing@abcwarehouse.com
         phone:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Primary phone number
           example: +1-555-123-4567
         status:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Vendor status
           example: ACTIVE
         notes:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Internal notes about the vendor
           example: Preferred vendor for warehouse services
         taxId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Tax identification number
           example: 12-3456789
         currency:
-          $ref: '#/components/schemas/vendors_Currency'
+          anyOf:
+          - $ref: '#/components/schemas/vendors_Currency'
+          - type: 'null'
           description: Preferred currency for transactions
         corporateAddress:
-          $ref: '#/components/schemas/AddressInput'
+          anyOf:
+          - $ref: '#/components/schemas/AddressInput'
+          - type: 'null'
           description: Corporate headquarters address
         billingAddress:
-          $ref: '#/components/schemas/AddressInput'
+          anyOf:
+          - $ref: '#/components/schemas/AddressInput'
+          - type: 'null'
           description: Billing address for invoices
         paymentTermId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
           description: Payment term ID
           example: 550e8400-e29b-41d4-a716-446655440001
         isMvmnt:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: Whether this vendor is MVMNT itself
           example: false
         requiredDocuments:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: List of required document types
           example:
           - W9
           - INSURANCE_CERTIFICATE
-  responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    ConflictError:
-      description: Conflict - resource already exists or constraint violation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: conflict
-            message: A resource with this identifier already exists
+    DatetimeSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: 'Search criteria for datetime fields.
+
+        Supports both absolute datetime values and relative time expressions.
+
+        '
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - BEFORE
+          - AFTER
+          - BETWEEN
+          - NOT_BETWEEN
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `BEFORE`: Before datetime
+
+            - `AFTER`: After datetime
+
+            - `BETWEEN`: Between min and max (inclusive)
+
+            - `NOT_BETWEEN`: Not between min and max
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        value:
+          type: string
+          format: date-time
+          description: Absolute datetime for EQUALS, NOT_EQUALS
+          example: '2025-01-15T10:00:00Z'
+        min:
+          type: string
+          format: date-time
+          description: Minimum datetime for BETWEEN or NOT_BETWEEN
+          example: '2025-01-01T00:00:00Z'
+        max:
+          type: string
+          format: date-time
+          description: Maximum datetime for BETWEEN or NOT_BETWEEN
+          example: '2025-12-31T23:59:59Z'
+        valueRelative:
+          type: integer
+          description: 'Relative time from now (negative for past, positive for future).
+
+            Example: -7 with WEEK unit means 7 weeks ago.
+
+            '
+        valueRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+        minRelative:
+          type: integer
+          description: Relative time for min boundary
+        minRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+        maxRelative:
+          type: integer
+          description: Relative time for max boundary
+        maxRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+      example:
+        operator: AFTER
+        value: '2025-01-01T00:00:00Z'
+    VendorStatusFilter:
+      type: object
+      description: Filter for vendor status enum field
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/VendorStatus'
+          description: Exact match
+        notEqualTo:
+          $ref: '#/components/schemas/VendorStatus'
+          description: Not equal to
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorStatus'
+          description: Matches any value in the list
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorStatus'
+          description: Does not match any value in the list
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    VendorStatus:
+      type: string
+      description: Vendor status
+      enum:
+      - ACTIVE
+      - INACTIVE
+    CurrencyFilter:
+      type: object
+      description: Filter for currency enum field
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/vendors_Currency'
+          description: Exact match
+        notEqualTo:
+          $ref: '#/components/schemas/vendors_Currency'
+          description: Not equal to
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/vendors_Currency'
+          description: Matches any value in the list
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/vendors_Currency'
+          description: Does not match any value in the list
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
+    OutstandingBillsForPaymentResponse:
+      type: object
+      required:
+      - bills
+      - totalOutstanding
+      properties:
+        bills:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutstandingBill'
+        totalOutstanding:
+          type: number
+          description: Total outstanding balance
+        carrier:
+          $ref: '#/components/schemas/CarrierReference'
+        vendor:
+          $ref: '#/components/schemas/VendorReference'
+        carrierFactor:
+          $ref: '#/components/schemas/bill-payments_CarrierFactorReference'
     ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: internal_server_error
-            message: An unexpected error occurred
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
-    RateLimitExceeded:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: rate_limit_exceeded
-            message: Too many requests. Please retry after 60 seconds.
-      headers:
-        X-RateLimit-Limit:
-          description: Request limit per minute
-          schema:
-            type: integer
-        X-RateLimit-Remaining:
-          description: Remaining requests in current window
-          schema:
-            type: integer
-        X-RateLimit-Reset:
-          description: Unix timestamp when rate limit resets
-          schema:
-            type: integer
-        Retry-After:
-          description: Seconds to wait before retrying
-          schema:
-            type: integer
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    bill-payments_CarrierFactorReference:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        companyName:
+          type: string
+        bankName:
+          type:
+          - string
+          - 'null'
+    VendorSearchRow:
+      type: object
+      description: 'Flattened vendor data from search index.
+
+        Note: This represents only active vendors. Soft-deleted records are never returned.
+
+        '
+      properties:
+        object:
+          type: string
+          enum:
+          - VENDOR_SEARCH_ROW
+          description: Object type identifier for discriminating between flat and full response formats
+        id:
+          type: string
+          format: uuid
+        friendlyId:
+          type: string
+          description: Vendor ID
+        name:
+          type: string
+        status:
+          type:
+          - string
+          - 'null'
+          enum:
+          - active
+          - inactive
+          - do_not_use
+        taxId:
+          type:
+          - string
+          - 'null'
+          description: EIN or other tax ID
+        service:
+          type: array
+          items:
+            type: string
+          description: Services provided
+        location:
+          type:
+          - string
+          - 'null'
+          description: Computed as "city, state"
+        city:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        zip:
+          type:
+          - string
+          - 'null'
+          description: Postal code
+        country:
+          type:
+          - string
+          - 'null'
+        primaryContactName:
+          type:
+          - string
+          - 'null'
+        primaryContactEmail:
+          type:
+          - string
+          - 'null'
+          format: email
+        primaryContactPhone:
+          type:
+          - string
+          - 'null'
+        paymentTermName:
+          type:
+          - string
+          - 'null'
+        quickbooksVendorId:
+          type:
+          - string
+          - 'null'
+          description: QuickBooks Online vendor ID
+        numberOfTimesUsed:
+          type: integer
+          description: Number of times used
+        lastUsed:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Last date used
+        createdAt:
+          type: string
+          format: date-time
+      required:
+      - object
+      - id
+      - friendlyId
+      - name
+      - numberOfTimesUsed
+      - createdAt
+    BooleanFilter:
+      type: object
+      description: Filter options for boolean fields
+      properties:
+        equalTo:
+          type: boolean
+          description: Exact match
+        notEqualTo:
+          type: boolean
+          description: Not equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    IntSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for integer fields
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - GREATER_THAN
+          - LESS_THAN
+          - BETWEEN
+          - NOT_BETWEEN
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `GREATER_THAN`: Greater than value
+
+            - `LESS_THAN`: Less than value
+
+            - `BETWEEN`: Between min and max (inclusive)
+
+            - `NOT_BETWEEN`: Not between min and max
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        value:
+          type: integer
+          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
+        min:
+          type: integer
+          description: Minimum value for BETWEEN or NOT_BETWEEN
+        max:
+          type: integer
+          description: Maximum value for BETWEEN or NOT_BETWEEN
+      example:
+        operator: BETWEEN
+        min: 10
+        max: 100
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    SearchPaginationInfo:
+      type: object
+      required:
+      - pageNumber
+      - pageSize
+      - totalPages
+      description: Pagination information for search results
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of results returned on this page
+          example: 50
+        totalPages:
+          type: integer
+          description: Total number of pages available
+          example: 25
+      example:
+        pageNumber: 1
+        pageSize: 50
+        totalPages: 25
+    ClientKeyFilter:
+      type: object
+      description: Filter options for client key fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        in:
+          type: array
+          description: Matches any value in the array
+          items:
+            type: string
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    DateSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: 'Search criteria for date fields (no time component).
+
+        Supports both absolute date values and relative time expressions.
+
+        '
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - BEFORE
+          - AFTER
+          - BETWEEN
+          - NOT_BETWEEN
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: Search operator (same as DatetimeSearchCriteria)
+        value:
+          type: string
+          format: date
+          description: Absolute date for EQUALS, NOT_EQUALS
+          example: '2025-01-15'
+        min:
+          type: string
+          format: date
+          description: Minimum date for BETWEEN or NOT_BETWEEN
+          example: '2025-01-01'
+        max:
+          type: string
+          format: date
+          description: Maximum date for BETWEEN or NOT_BETWEEN
+          example: '2025-12-31'
+        valueRelative:
+          type: integer
+          description: Relative time from now
+        valueRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+        minRelative:
+          type: integer
+        minRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+        maxRelative:
+          type: integer
+        maxRelativeUnit:
+          $ref: '#/components/schemas/RelativeTimeUnit'
+      example:
+        operator: BETWEEN
+        min: '2025-01-01'
+        max: '2025-01-31'
+    SearchSortOption:
+      type: object
+      required:
+      - field
+      - order
+      description: Sort option for search results
+      properties:
+        field:
+          type: string
+          description: Field name to sort by (must be an indexed field)
+          example: createdAt
+        order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: Sort direction (ascending or descending)
+          example: desc
+      example:
+        field: createdAt
+        order: desc
+    AddressInput:
+      type: object
+      description: Address data for creating a new location
+      required:
+      - line1
+      - city
+      - country
+      - market
+      properties:
+        line1:
+          type: string
+          description: Primary street address line
+          example: 123 Main St
+        line2:
+          type: string
+          description: Secondary address line (suite, floor, etc.)
+          example: Suite 400
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        country:
+          type: string
+          description: Country name or code
+          example: USA
+        market:
+          type: string
+          description: Market or region identifier
+          example: CHI
+        latitude:
+          type: string
+          description: Latitude coordinate
+          example: '41.8781'
+        longitude:
+          type: string
+          description: Longitude coordinate
+          example: '-87.6298'
+        isAirportOrAirbase:
+          type: boolean
+          default: false
+          description: Whether this location is an airport or airbase
+          example: false
+        isConstructionOrUtilitySite:
+          type: boolean
+          default: false
+          description: Whether this location is a construction or utility site
+          example: false
+        isSmartyValidated:
+          type: boolean
+          default: false
+          description: Whether address has been validated by SmartyStreets
+          example: true
+        obeysDst:
+          type: boolean
+          default: true
+          description: Whether this location observes daylight saving time
+          example: true
+        cityId:
+          type: string
+          format: uuid
+          description: Reference to standardized city record (internal use)
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    VendorFilterRequest:
+      type: object
+      description: Request body for filtering vendors
+      properties:
+        filter:
+          $ref: '#/components/schemas/VendorFilter'
+          description: 'Filter criteria (optional - omit to return all vendors).
+
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - status:
+              equalTo: ACTIVE
+          - currency:
+              equalTo: USD
+        pageSize: 50
+    OutstandingBillsResponse:
+      type: object
+      required:
+      - bills
+      - totalOutstanding
+      properties:
+        bills:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              friendlyId:
+                type: string
+              entityType:
+                $ref: '#/components/schemas/BillEntityType'
+              carrier:
+                $ref: '#/components/schemas/CarrierReference'
+              vendor:
+                $ref: '#/components/schemas/VendorReference'
+              amount:
+                type: number
+              invoiceDate:
+                type:
+                - string
+                - 'null'
+                format: date
+              dueDate:
+                type:
+                - string
+                - 'null'
+                format: date
+              openBalance:
+                type: number
+              isOverdue:
+                type: boolean
+        totalOutstanding:
+          type: number
+          description: Total outstanding balance
+    OutstandingBill:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        friendlyId:
+          type: string
+        entityType:
+          $ref: '#/components/schemas/BillEntityType'
+        carrier:
+          $ref: '#/components/schemas/CarrierReference'
+        vendor:
+          $ref: '#/components/schemas/VendorReference'
+        invoiceDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        amount:
+          type: number
+        amountPaid:
+          type: number
+        openBalance:
+          type: number
+        isOverdue:
+          type: boolean
+        shipmentId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        shipmentFriendlyId:
+          type:
+          - string
+          - 'null'
+    RelativeTimeUnit:
+      type: string
+      enum:
+      - YEAR
+      - MONTH
+      - WEEK
+      - DAY
+      - HOUR
+      - MINUTE
+      - SECOND
+      description: 'Time unit for relative time calculations:
+
+        - `YEAR`: Years
+
+        - `MONTH`: Months
+
+        - `WEEK`: Weeks
+
+        - `DAY`: Days
+
+        - `HOUR`: Hours
+
+        - `MINUTE`: Minutes
+
+        - `SECOND`: Seconds
+
+        '
   parameters:
     IdOrClientKey:
       name: id

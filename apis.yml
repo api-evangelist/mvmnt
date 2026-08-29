@@ -524,6 +524,16 @@ apis:
     url: https://docs.mvmnt.io/
   - type: GettingStarted
     url: https://docs.mvmnt.io/getting-started
+- aid: mvmnt:mvmnt-event-notifications-api
+  name: MVMNT Event Notifications API
+  description: The Event Notifications API from MVMNT — 0 operation(s) for event notifications.
+  humanURL: https://docs.mvmnt.io/
+  baseURL: https://api.mvmnt.io/v1
+  tags:
+  - Event Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/mvmnt-event-notifications-api-openapi.yml
 common:
 - type: DeveloperPortal
   url: https://docs.mvmnt.io/
