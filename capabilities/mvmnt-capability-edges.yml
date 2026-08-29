@@ -1,0 +1,122 @@
+slug: mvmnt
+provider: MVMNT
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: Bill Payments
+  spec_file: mvmnt-bill-payments-api-openapi.yml
+  capability_id: BC-2530.20
+  capability_id_l1: BC-2530
+  capability_name: Freight Audit and Payment Management
+  confidence: 0.8
+  evidence: POST /bill-payments createBillPayment Create a bill payment; GET /bill-payments/{id}/remittance-advice
+    Generate remittance advice; schemas CarrierReference, VendorReference
+  reason: Freight-brokerage TMS paying carrier/vendor bills with remittance advice — execution of carrier
+    payments by a broker/forwarder, i.e. freight audit and payment management rather than generic corporate
+    AP.
+- tag: Quotes
+  spec_file: mvmnt-quotes-api-openapi.yml
+  capability_id: BC-2450.10
+  capability_id_l1: BC-2450
+  capability_name: Shipper Quotation Management
+  confidence: 0.8
+  evidence: POST /quotes createQuote; POST /quotes/{id}/convert-to-shipment "Convert quote to shipment";
+    schemas Quote, QuoteLostReason, TransportMode, CarrierReference
+  reason: Freight-brokerage quoting to shippers across transport modes, convertible into a shipment —
+    shipper quotation management by a broker/forwarder. Alternative reading (generic sales quoting) is
+    less apt given TransportMode/CarrierReference.
+- tag: Bills
+  spec_file: mvmnt-bills-api-openapi.yml
+  capability_id: BC-2530.20
+  capability_id_l1: BC-2530
+  capability_name: Freight Audit and Payment Management
+  confidence: 0.75
+  evidence: POST /bills/{id}/approve approveBill Approve bill for payment; GET /bills/aging-report getApAgingReport
+    Get AP aging report; schema CarrierReference
+  reason: Recording, approving and aging of carrier/vendor bills inside a freight brokerage TMS maps to
+    audit and payment of carrier invoices. Some overlap with generic Accounts Payable Management, hence
+    not maximal confidence on the sub-capability.
+- tag: Invoices
+  spec_file: mvmnt-invoices-api-openapi.yml
+  capability_id: BC-2530.10
+  capability_id_l1: BC-2530
+  capability_name: Freight Invoicing Management
+  confidence: 0.75
+  evidence: POST /invoices/batch-generate  batchGenerateInvoices  Batch generate invoices; POST /invoices/{id}/send  sendInvoiceEmail  Email
+    invoice; GET /invoices/aging-report; schemas FactoringProvider, InvoicePayment
+  reason: Generation, distribution and aging of freight invoices to customers by a freight brokerage TMS,
+    which is freight invoicing rather than generic ledger accounting.
+- tag: Carrier Factors
+  spec_file: mvmnt-carrier-factors-api-openapi.yml
+  capability_id: BC-2530.20
+  capability_id_l1: BC-2530
+  capability_name: Freight Audit and Payment Management
+  confidence: 0.7
+  evidence: GET /carrier-factors/{id}/bills-for-payment  getCarrierFactorBillsForPayment  Get bills payable
+    to a carrier factor; schemas OutstandingBill, PaymentTermReference, VendorReference
+  reason: Freight factoring companies that receive payment of carrier bills on the carrier's behalf; the
+    operations expose outstanding bills and payment terms, which is carrier invoice payment execution
+    by the broker.
+- tag: Customer Contacts
+  spec_file: mvmnt-customer-contacts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: POST /customer-contacts  createCustomerContact  Create customer contact; schemas CustomerContact,
+    CustomerContactNotificationType, ContactInfo
+  reason: Maintenance of contact-person records and notification preferences against customer accounts,
+    i.e. customer master/contact data upkeep.
+- tag: Customers
+  spec_file: mvmnt-customers-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: POST /customers  createCustomer  Create customer; POST /customers/search  searchCustomers;
+    schemas CustomerStatus, CustomerServiceTier, CustomerAnnualSpend, CustomerDeactivationReason
+  reason: CRUD, search, and attribute management of the shipper-customer master record including status,
+    service tier and spend attributes. Receivables views (outstanding invoices, payments) are secondary
+    reads off the same record.
+- tag: Loads
+  spec_file: mvmnt-loads-api-openapi.yml
+  capability_id: BC-2420.10
+  capability_id_l1: BC-2420
+  capability_name: Dispatch Management
+  confidence: 0.7
+  evidence: POST /loads/{id}/add-carrier  addCarrierToLoad  Add carrier to load; POST /loads/{loadId}/carriers/{carrierId}/bounce  bounceCarrier;
+    schemas LoadStop, TransportMode, LoadCarrierStatus
+  reason: Creation of loads and assignment/reassignment of carriers to those loads (add carrier, bounce,
+    rebook TONU) is the dispatch and load-tender execution surface. Some overlap with carrier booking,
+    hence moderate confidence on the L2.
+- tag: Payments
+  spec_file: mvmnt-payments-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: GET /payments/{id}/applications "Get payment applications"; schemas PaymentApplication, PaymentCreditApplication,
+    CustomerReference
+  reason: Payments recorded against customers with payment applications and credit applications is cash
+    receipt and cash application — accounts receivable. Some chance it also covers vendor-side payments,
+    hence 0.7.
+- tag: Vendor Payment Methods
+  spec_file: mvmnt-vendor-payment-methods-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.7
+  evidence: POST /vendor-payment-methods createVendorPaymentMethod; schemas VendorPaymentMethod, PaymentMethodType,
+    PaymentTermReference, VendorReference
+  reason: Payment methods and terms for paying vendors (carriers) — vendor accounting setup supporting
+    the vendor's stated accounts-payable ('bills, payments') flows.
