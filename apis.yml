@@ -150,6 +150,8 @@ apis:
   humanURL: https://docs.mvmnt.io/
   baseURL: https://api.mvmnt.io/v1
   tags:
+  - Carrier
+  tags_raw:
   - Carriers
   properties:
   - type: OpenAPI
@@ -306,6 +308,8 @@ apis:
   humanURL: https://docs.mvmnt.io/
   baseURL: https://api.mvmnt.io/v1
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
