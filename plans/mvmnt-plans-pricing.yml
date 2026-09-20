@@ -1,0 +1,63 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://mvmnt.io/pricing
+sources:
+- https://mvmnt.io/pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+published: true
+note: Per-user subscription tiers for a freight TMS product with API/EDI integration; monthly/annual toggle
+  with 15% off annual.
+plan_count: 6
+currency: USD
+plans:
+- name: Free
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  unit: per user/month
+  included_quota: 15 shipments per month, 50 quote emails per month, Setup 20+ integrations, Invite unlimited
+    users
+- name: RateLens
+  price_text: $84
+  price: 84
+  currency: USD
+  period: month
+  unit: per user/month, billed annually
+  included_quota: Everything in Free, Unlimited quote emails, API or EDI integration, Advanced reporting
+    & analytics
+- name: TMS
+  price_text: $169
+  price: 169
+  currency: USD
+  period: month
+  unit: per user/month, billed annually
+  included_quota: Everything in RateLens, Unlimited shipments, Whitelabeled customer portal, Carrier Sourcing
+- name: Enterprise
+  price_text: Custom
+  period: month
+  unit: per user/month, billed annually
+  included_quota: Everything in TMS, Security and legal review
+- name: Native EDI (add-on)
+  price_text: $249
+  price: 249
+  currency: USD
+  period: month
+  unit: per trading partner/month
+  included_quota: No setup fee, Flat rate per ISA ID, Unlimited messages
+- name: Data Migration (add-on)
+  price_text: $799
+  price: 799
+  currency: USD
+  period: one-time
+  unit: per 10k records
+  included_quota: No long term commitment, No upfront cost, 5 business day turnaround
+rate_limit_statements:
+- 15 shipments per month
+- 50 quote emails per month
