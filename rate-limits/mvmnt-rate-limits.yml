@@ -1,0 +1,20 @@
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://docs.mvmnt.io/getting-started/rate-limits
+sources:
+- https://docs.mvmnt.io/getting-started/rate-limits
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: false
+note: Page describes rate-limit tiers (Standard, Enterprise), headers, and 429 handling but states no
+  numeric limit values.
+limit_count: 0
+limits: []
+headers:
+- X-RateLimit-Limit
+- X-RateLimit-Remaining
+- X-RateLimit-Reset
+exceeded_status: 429
