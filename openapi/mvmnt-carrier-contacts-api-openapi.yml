@@ -2,7 +2,9 @@ openapi: 3.2.0
 info:
   title: MVMNT Carrier Contacts API
   version: 1.0.0
-  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  description: 'The MVMNT API enables you to automate freight brokerage workflows by integrating
+
+    directly with our Transportation Management System.'
   contact:
     name: MVMNT Support
     email: support@mvmnt.io
@@ -194,9 +196,7 @@ paths:
 
         By default, only non-deleted carrier contacts are returned (deletedAt: { isNull: true }).
 
-        Override this by explicitly setting deletedAt filter criteria.
-
-        '
+        Override this by explicitly setting deletedAt filter criteria.'
       operationId: filterCarrierContacts
       requestBody:
         required: true
@@ -234,9 +234,7 @@ paths:
       summary: Create carrier contact
       description: 'Create a new carrier contact. The contactInfo will create a new Contact record,
 
-        and the CarrierContact will reference it via contactId (managed internally).
-
-        '
+        and the CarrierContact will reference it via contactId (managed internally).'
       operationId: createCarrierContact
       requestBody:
         required: true
@@ -297,9 +295,7 @@ paths:
         - **Null values**: Clear the field (set to null) where applicable
 
 
-        When updating contactInfo, the underlying Contact record is updated.
-
-        '
+        When updating contactInfo, the underlying Contact record is updated.'
       operationId: updateCarrierContact
       parameters:
       - $ref: '#/components/parameters/IdOrClientKey'
@@ -335,9 +331,7 @@ paths:
 
         The contact will no longer appear in default queries but can be retrieved
 
-        by explicitly filtering for deleted records.
-
-        '
+        by explicitly filtering for deleted records.'
       operationId: deleteCarrierContact
       parameters:
       - $ref: '#/components/parameters/IdOrClientKey'
@@ -353,62 +347,382 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: internal_server_error
-            message: An unexpected error occurred
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    ConflictError:
-      description: Conflict - resource already exists or constraint violation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: conflict
-            message: A resource with this identifier already exists
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
-  parameters:
-    IdOrClientKey:
-      name: id
-      in: path
-      required: true
-      description: Resource ID (UUID) or client key
-      schema:
-        type: string
-      example: 550e8400-e29b-41d4-a716-446655440000
   schemas:
+    ContactInfoPatch:
+      type: object
+      description: 'Partial contact information update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Contact person's full name
+          example: John Smith
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address
+          example: john.smith@example.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Phone number
+          example: +1-555-0100
+        title:
+          type:
+          - string
+          - 'null'
+          description: Job title or position
+          example: Operations Manager
+    CarrierContactFilterRequest:
+      type: object
+      description: Request body for filtering carrier contacts
+      properties:
+        filter:
+          $ref: '#/components/schemas/CarrierContactFilter'
+          description: 'Filter criteria (optional - omit to return all contacts).
+
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - contactTypes:
+              includes: DISPATCH
+          - email:
+              isNotNull: true
+        pageSize: 50
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ContactInfoInput:
+      type: object
+      description: Contact information for creating a new contact record
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contact person's full name
+          example: John Smith
+        email:
+          type: string
+          format: email
+          description: Email address
+          example: john.smith@example.com
+        phoneNumber:
+          type: string
+          description: Phone number
+          example: +1-555-0100
+        title:
+          type: string
+          description: Job title or position
+          example: Operations Manager
+    CarrierContactTypeFilter:
+      type: object
+      description: Filter for contact type enum array field
+      properties:
+        includes:
+          $ref: '#/components/schemas/CarrierContactType'
+          description: Array contains this contact type
+        notIncludes:
+          $ref: '#/components/schemas/CarrierContactType'
+          description: Array does not contain this contact type
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ContactInfo:
+      type: object
+      description: 'Contact information details (nested, without id).
+
+
+        This is an embedded object representing a Contact record. The id is managed
+
+        internally and not exposed in the API.
+
+        '
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contact person's full name
+          example: John Smith
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address
+          example: john.smith@example.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Phone number
+          example: +1-555-0100
+        title:
+          type:
+          - string
+          - 'null'
+          description: Job title or position
+          example: Operations Manager
+    CarrierContactPatch:
+      type: object
+      description: 'Partial carrier contact update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+
+        Note: carrierId cannot be updated after creation.
+
+        '
+      properties:
+        name:
+          type: string
+          description: Contact person's name (should match contactInfo.name if updating both)
+          example: Jane Dispatcher
+        contactInfo:
+          anyOf:
+          - $ref: '#/components/schemas/ContactInfoPatch'
+          - type: 'null'
+          description: 'Contact information update. Provide partial or full contact data to update the parent Contact record.
+
+            Cannot be set to null (contact info is required).
+
+            '
+        contactTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CarrierContactType'
+          description: Types/roles this contact serves (replaces entire array)
+          example:
+          - DISPATCH
+          - AFTER_HOURS
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CARRIER-CONTACT-001
+    CarrierContactInput:
+      type: object
+      required:
+      - carrierId
+      - name
+      - contactInfo
+      properties:
+        carrierId:
+          type: string
+          format: uuid
+          description: Carrier this contact belongs to
+          example: 550e8400-e29b-41d4-a716-446655440001
+        name:
+          type: string
+          description: Contact person's name (should match contactInfo.name)
+          example: Jane Dispatcher
+        contactInfo:
+          $ref: '#/components/schemas/ContactInfoInput'
+          description: Contact information details (will create new Contact record)
+        contactTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarrierContactType'
+          description: Types/roles this contact serves
+          example:
+          - DISPATCH
+          - AFTER_HOURS
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CARRIER-CONTACT-001
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    CarrierContactType:
+      type: string
+      description: Type of carrier contact role
+      enum:
+      - ACCOUNTING
+      - AFTER_HOURS
+      - CENSUS
+      - CLAIMS
+      - DISPATCH
+      - DRIVER
+      - EMERGENCY
+      - MANAGER
+      - OWNER
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    CarrierContactFilter:
+      type: object
+      description: Filter criteria for carrier contacts with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/CarrierContactFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/CarrierContactFilter'
+        not:
+          $ref: '#/components/schemas/CarrierContactFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        carrierId:
+          $ref: '#/components/schemas/UUIDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        phoneNumber:
+          $ref: '#/components/schemas/StringFilter'
+        contactTypes:
+          $ref: '#/components/schemas/CarrierContactTypeFilter'
+        invitedUserId:
+          $ref: '#/components/schemas/UUIDFilter'
+        deletedById:
+          $ref: '#/components/schemas/UUIDFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
     CarrierContact:
       type: object
       required:
@@ -662,231 +976,6 @@ components:
           format: date-time
           description: When the carrier was soft deleted (null if active)
           example: null
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CarrierContactFilter:
-      type: object
-      description: Filter criteria for carrier contacts with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/CarrierContactFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/CarrierContactFilter'
-        not:
-          $ref: '#/components/schemas/CarrierContactFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        carrierId:
-          $ref: '#/components/schemas/UUIDFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        email:
-          $ref: '#/components/schemas/StringFilter'
-        phoneNumber:
-          $ref: '#/components/schemas/StringFilter'
-        contactTypes:
-          $ref: '#/components/schemas/CarrierContactTypeFilter'
-        invitedUserId:
-          $ref: '#/components/schemas/UUIDFilter'
-        deletedById:
-          $ref: '#/components/schemas/UUIDFilter'
-        key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-    CarrierContactPatch:
-      type: object
-      description: 'Partial carrier contact update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-
-        Note: carrierId cannot be updated after creation.
-
-        '
-      properties:
-        name:
-          type: string
-          description: Contact person's name (should match contactInfo.name if updating both)
-          example: Jane Dispatcher
-        contactInfo:
-          anyOf:
-          - $ref: '#/components/schemas/ContactInfoPatch'
-          - type: 'null'
-          description: 'Contact information update. Provide partial or full contact data to update the parent Contact record.
-
-            Cannot be set to null (contact info is required).
-
-            '
-        contactTypes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CarrierContactType'
-          description: Types/roles this contact serves (replaces entire array)
-          example:
-          - DISPATCH
-          - AFTER_HOURS
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CARRIER-CONTACT-001
-    ContactInfo:
-      type: object
-      description: 'Contact information details (nested, without id).
-
-
-        This is an embedded object representing a Contact record. The id is managed
-
-        internally and not exposed in the API.
-
-        '
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Contact person's full name
-          example: John Smith
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Email address
-          example: john.smith@example.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Phone number
-          example: +1-555-0100
-        title:
-          type:
-          - string
-          - 'null'
-          description: Job title or position
-          example: Operations Manager
-    ContactInfoInput:
-      type: object
-      description: Contact information for creating a new contact record
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Contact person's full name
-          example: John Smith
-        email:
-          type: string
-          format: email
-          description: Email address
-          example: john.smith@example.com
-        phoneNumber:
-          type: string
-          description: Phone number
-          example: +1-555-0100
-        title:
-          type: string
-          description: Job title or position
-          example: Operations Manager
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
     ClientKeyFilter:
       type: object
       description: Filter options for client key fields (limited operations - exact match only)
@@ -902,170 +991,75 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    CarrierContactInput:
+    IDFilter:
       type: object
-      required:
-      - carrierId
-      - name
-      - contactInfo
-      properties:
-        carrierId:
-          type: string
-          format: uuid
-          description: Carrier this contact belongs to
-          example: 550e8400-e29b-41d4-a716-446655440001
-        name:
-          type: string
-          description: Contact person's name (should match contactInfo.name)
-          example: Jane Dispatcher
-        contactInfo:
-          $ref: '#/components/schemas/ContactInfoInput'
-          description: Contact information details (will create new Contact record)
-        contactTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CarrierContactType'
-          description: Types/roles this contact serves
-          example:
-          - DISPATCH
-          - AFTER_HOURS
-        key:
-          type: string
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CARRIER-CONTACT-001
-    CarrierContactTypeFilter:
-      type: object
-      description: Filter for contact type enum array field
-      properties:
-        includes:
-          $ref: '#/components/schemas/CarrierContactType'
-          description: Array contains this contact type
-        notIncludes:
-          $ref: '#/components/schemas/CarrierContactType'
-          description: Array does not contain this contact type
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    StringFilter:
-      type: object
-      description: Filter options for string fields
+      description: Filter options for ID fields (limited operations - exact match only)
       properties:
         equalTo:
           type: string
+          format: uuid
           description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
         in:
           type: array
+          description: Matches any UUID in the array
           items:
             type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CarrierContactType:
-      type: string
-      description: Type of carrier contact role
-      enum:
-      - ACCOUNTING
-      - AFTER_HOURS
-      - CENSUS
-      - CLAIMS
-      - DISPATCH
-      - DRIVER
-      - EMERGENCY
-      - MANAGER
-      - OWNER
-    ContactInfoPatch:
-      type: object
-      description: 'Partial contact information update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
-      properties:
-        name:
-          type: string
-          description: Contact person's full name
-          example: John Smith
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Email address
-          example: john.smith@example.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Phone number
-          example: +1-555-0100
-        title:
-          type:
-          - string
-          - 'null'
-          description: Job title or position
-          example: Operations Manager
-    CarrierContactFilterRequest:
-      type: object
-      description: Request body for filtering carrier contacts
-      properties:
-        filter:
-          $ref: '#/components/schemas/CarrierContactFilter'
-          description: 'Filter criteria (optional - omit to return all contacts).
-
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - contactTypes:
-              includes: DISPATCH
-          - email:
-              isNotNull: true
-        pageSize: 50
+            format: uuid
+  responses:
+    ConflictError:
+      description: Conflict - resource already exists or constraint violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: conflict
+            message: A resource with this identifier already exists
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: internal_server_error
+            message: An unexpected error occurred
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+  parameters:
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
   securitySchemes:
     BearerAuth:
       type: http

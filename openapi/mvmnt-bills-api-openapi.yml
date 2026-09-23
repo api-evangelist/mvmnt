@@ -2,7 +2,9 @@ openapi: 3.2.0
 info:
   title: MVMNT Bills API
   version: 1.0.0
-  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  description: 'The MVMNT API enables you to automate freight brokerage workflows by integrating
+
+    directly with our Transportation Management System.'
   contact:
     name: MVMNT Support
     email: support@mvmnt.io
@@ -184,9 +186,7 @@ tags:
 - name: Bills
   description: 'AP bill management operations.
 
-    Bills represent carrier and vendor invoices to be paid.
-
-    '
+    Bills represent carrier and vendor invoices to be paid.'
 paths:
   /bills/filter:
     post:
@@ -205,9 +205,7 @@ paths:
 
         - By shipment: `{ "filter": { "shipmentId": { "equalTo": "uuid" } } }`
 
-        - Overdue: `{ "filter": { "overdue": true } }`
-
-        '
+        - Overdue: `{ "filter": { "overdue": true } }`'
       operationId: filterBills
       tags:
       - Bills
@@ -282,9 +280,7 @@ paths:
 
         - LoadCarrier or VendedService must exist
 
-        - Entity must be in `AWAITING_INVOICE` status
-
-        '
+        - Entity must be in `AWAITING_INVOICE` status'
       operationId: createBill
       tags:
       - Bills
@@ -338,9 +334,7 @@ paths:
       description: 'Retrieve a bill by ID.
 
 
-        The response includes payments applied and carrier/vendor details.
-
-        '
+        The response includes payments applied and carrier/vendor details.'
       operationId: getBill
       tags:
       - Bills
@@ -368,9 +362,7 @@ paths:
 
         - Cannot change amount if payments have been applied
 
-        - Status changes use action endpoints
-
-        '
+        - Status changes use action endpoints'
       operationId: updateBill
       tags:
       - Bills
@@ -429,9 +421,7 @@ paths:
 
         - Bill record is deleted
 
-        - Entity status reverts to `AWAITING_INVOICE`
-
-        '
+        - Entity status reverts to `AWAITING_INVOICE`'
       operationId: deleteBill
       tags:
       - Bills
@@ -468,9 +458,7 @@ paths:
         ## Prerequisites
 
 
-        - Bill must be in `IN_REVIEW` status
-
-        '
+        - Bill must be in `IN_REVIEW` status'
       operationId: approveBill
       tags:
       - Bills
@@ -500,9 +488,7 @@ paths:
       description: 'Approve multiple bills for payment in a single request.
 
 
-        Bills that cannot be approved will be returned in the `failed` array.
-
-        '
+        Bills that cannot be approved will be returned in the `failed` array.'
       operationId: batchApproveBills
       tags:
       - Bills
@@ -547,9 +533,7 @@ paths:
 
         - Bill must be in `APPROVED_TO_PAY` status
 
-        - Bill must not have any payments
-
-        '
+        - Bill must not have any payments'
       operationId: unapproveBill
       tags:
       - Bills
@@ -592,9 +576,7 @@ paths:
         ## Use case
 
 
-        Use when a bill was recorded incorrectly and needs to start over.
-
-        '
+        Use when a bill was recorded incorrectly and needs to start over.'
       operationId: revertBill
       tags:
       - Bills
@@ -676,9 +658,7 @@ paths:
 
         - JSON (default)
 
-        - CSV (set Accept header to text/csv)
-
-        '
+        - CSV (set Accept header to text/csv)'
       operationId: getApAgingReport
       tags:
       - Bills
@@ -726,6 +706,75 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
 components:
   schemas:
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    RevertBillRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          maxLength: 1000
+          description: Reason for reverting
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     BillInput:
       type: object
       required:
@@ -762,99 +811,23 @@ components:
           type: string
           format: uuid
           description: Payment term
-    ApAgingReportResponse:
+    CarrierFactorReference:
       type: object
-      required:
-      - asOfDate
-      - buckets
-      - payees
-      - totals
-      properties:
-        asOfDate:
-          type: string
-          format: date
-        buckets:
-          type: array
-          items:
-            type: string
-          example:
-          - Current
-          - 1-30
-          - 31-60
-          - 61-90
-          - 90+
-        payees:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-              name:
-                type: string
-              friendlyId:
-                type:
-                - string
-                - 'null'
-              entityType:
-                $ref: '#/components/schemas/BillEntityType'
-              current:
-                type: number
-              days1to30:
-                type: number
-              days31to60:
-                type: number
-              days61to90:
-                type: number
-              over90:
-                type: number
-              total:
-                type: number
-        totals:
-          type: object
-          properties:
-            current:
-              type: number
-            days1to30:
-              type: number
-            days31to60:
-              type: number
-            days61to90:
-              type: number
-            over90:
-              type: number
-            total:
-              type: number
-    BillEntityType:
-      type: string
-      enum:
-      - CARRIER
-      - VENDOR
-      description: 'Type of entity the bill is for.
+      description: 'Enhanced reference to a carrier factor (factoring company).
 
-        - `CARRIER`: Bill for a carrier (LoadCarrier)
-
-        - `VENDOR`: Bill for a vendor service (VendedService)
-
-        '
-    PaymentTermReference:
-      type: object
-      description: 'Enhanced reference to a payment term resource (returned in responses).
-
-        Includes full payment term details in addition to id/key.
+        Includes full carrier factor details in addition to id/key.
 
         '
       required:
       - id
-      - name
+      - companyName
       - createdAt
       - updatedAt
       properties:
         id:
           type: string
           format: uuid
-          description: Payment term UUID
+          description: Carrier factor UUID
           example: 550e8400-e29b-41d4-a716-446655440000
         key:
           type:
@@ -862,313 +835,40 @@ components:
           - 'null'
           maxLength: 512
           description: Client-defined reference ID if set
-          example: ERP-PAYTERM-NET30
-        name:
+          example: ERP-FACTOR-001
+        companyName:
           type: string
-          description: Payment term name
-          example: Net 30
-        description:
-          type:
-          - string
-          - 'null'
-          description: Payment term description or notes
-          example: Payment due 30 days from invoice date
-        days:
-          type:
-          - integer
-          - 'null'
-          description: Number of days until payment is due
-          example: 30
-        quickPayFee:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Quick pay fee percentage (e.g., 0.05 for 5%)
-          example: 0.05
-          x-parsed-md-description:
-            result:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 1
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 0
-                - 1
-                inline: false
-                attributes: {}
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 1
-                  inline: true
-                  attributes:
-                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: inline
-                annotations: []
-                slots: {}
-              type: paragraph
-              annotations: []
-              slots: {}
-        apOnly:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this payment term is for accounts payable only
-          example: false
-        doNotUse:
-          type:
-          - boolean
-          - 'null'
-          description: Flag to prevent using this payment term for new transactions
-          example: false
-        createdAt:
-          type: string
-          format: date-time
-          description: When the payment term was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the payment term was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the payment term was soft deleted (null if active)
-          example: null
-    BillPatch:
-      type: object
-      properties:
-        invoiceDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        amount:
-          type: number
-        reference:
-          type:
-          - string
-          - 'null'
-        paymentTermId:
-          type: string
-          format: uuid
-    BillStatus:
-      type: string
-      enum:
-      - AWAITING_INVOICE
-      - IN_REVIEW
-      - APPROVED_TO_PAY
-      - PAID
-      description: 'Current status of the bill (AP invoice).
-
-        - `AWAITING_INVOICE`: Waiting for carrier/vendor to submit invoice
-
-        - `IN_REVIEW`: Invoice received, under review
-
-        - `APPROVED_TO_PAY`: Approved and ready for payment
-
-        - `PAID`: Fully paid
-
-        '
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    FloatFilter:
-      type: object
-      description: Filter options for float/number fields
-      properties:
-        equalTo:
-          type: number
-          format: float
-          description: Exact match
-        notEqualTo:
-          type: number
-          format: float
-          description: Not equal to
-        lessThan:
-          type: number
-          format: float
-          description: Less than
-        lessThanOrEqualTo:
-          type: number
-          format: float
-          description: Less than or equal to
-        greaterThan:
-          type: number
-          format: float
-          description: Greater than
-        greaterThanOrEqualTo:
-          type: number
-          format: float
-          description: Greater than or equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    ApproveBillsRequest:
-      type: object
-      required:
-      - billIds
-      properties:
-        billIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          minItems: 1
-          maxItems: 100
-          description: Bill IDs to approve
-    CarrierReference:
-      type: object
-      description: 'Enhanced reference to a carrier resource (returned in responses).
-
-        Includes full carrier details in addition to id/key.
-
-
-        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Carrier UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CARRIER-SWIFT
-        name:
-          type: string
-          description: Carrier company name
-          example: Swift Transportation
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-987-6543
+          description: Factoring company legal name
+          example: Capital Factoring Services Inc
         email:
           type:
           - string
           - 'null'
           format: email
           description: Primary email address
-          example: dispatch@swifttrans.com
+          example: accounting@capitalfactoring.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-234-5678
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
         createdAt:
           type: string
           format: date-time
-          description: When the carrier was created
+          description: When the carrier factor was created
           example: '2025-01-15T10:00:00Z'
         updatedAt:
           type: string
           format: date-time
-          description: When the carrier was last updated
+          description: When the carrier factor was last updated
           example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the carrier was soft deleted (null if active)
-          example: null
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    BillFilterRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/BillFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
-          type: string
     VendorReference:
       type: object
       description: 'Enhanced reference to a vendor profile.
@@ -1238,6 +938,64 @@ components:
           format: date-time
           description: When the vendor was last updated
           example: '2025-01-15T14:30:00Z'
+    ApproveBillsRequest:
+      type: object
+      required:
+      - billIds
+      properties:
+        billIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+          description: Bill IDs to approve
+    BillFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/BillFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    BillStatus:
+      type: string
+      enum:
+      - AWAITING_INVOICE
+      - IN_REVIEW
+      - APPROVED_TO_PAY
+      - PAID
+      description: 'Current status of the bill (AP invoice).
+
+        - `AWAITING_INVOICE`: Waiting for carrier/vendor to submit invoice
+
+        - `IN_REVIEW`: Invoice received, under review
+
+        - `APPROVED_TO_PAY`: Approved and ready for payment
+
+        - `PAID`: Fully paid
+
+        '
+    BillStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/BillStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/BillStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillStatus'
     Error:
       type: object
       required:
@@ -1250,6 +1008,94 @@ components:
         message:
           type: string
           description: Human-readable error message
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    ApAgingReportResponse:
+      type: object
+      required:
+      - asOfDate
+      - buckets
+      - payees
+      - totals
+      properties:
+        asOfDate:
+          type: string
+          format: date
+        buckets:
+          type: array
+          items:
+            type: string
+          example:
+          - Current
+          - 1-30
+          - 31-60
+          - 61-90
+          - 90+
+        payees:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              friendlyId:
+                type:
+                - string
+                - 'null'
+              entityType:
+                $ref: '#/components/schemas/BillEntityType'
+              current:
+                type: number
+              days1to30:
+                type: number
+              days31to60:
+                type: number
+              days61to90:
+                type: number
+              over90:
+                type: number
+              total:
+                type: number
+        totals:
+          type: object
+          properties:
+            current:
+              type: number
+            days1to30:
+              type: number
+            days31to60:
+              type: number
+            days61to90:
+              type: number
+            over90:
+              type: number
+            total:
+              type: number
     Bill:
       type: object
       required:
@@ -1375,15 +1221,6 @@ components:
           - string
           - 'null'
           format: date-time
-    BillEntityTypeFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/BillEntityType'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillEntityType'
     ValidationError:
       type: object
       required:
@@ -1413,72 +1250,254 @@ components:
               message:
                 type: string
                 description: Validation error message
-    BillStatusFilter:
+    BillEntityType:
+      type: string
+      enum:
+      - CARRIER
+      - VENDOR
+      description: 'Type of entity the bill is for.
+
+        - `CARRIER`: Bill for a carrier (LoadCarrier)
+
+        - `VENDOR`: Bill for a vendor service (VendedService)
+
+        '
+    UUIDFilter:
       type: object
+      description: Filter options for UUID fields (all operations)
       properties:
         equalTo:
-          $ref: '#/components/schemas/BillStatus'
+          type: string
+          format: uuid
+          description: Exact match
         notEqualTo:
-          $ref: '#/components/schemas/BillStatus'
+          type: string
+          format: uuid
+          description: Not equal to
         in:
           type: array
           items:
-            $ref: '#/components/schemas/BillStatus'
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
         notIn:
           type: array
           items:
-            $ref: '#/components/schemas/BillStatus'
-    PaginationInfo:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentTermReference:
       type: object
+      description: 'Enhanced reference to a payment term resource (returned in responses).
+
+        Includes full payment term details in addition to id/key.
+
+        '
       required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    RevertBillRequest:
-      type: object
-      properties:
-        reason:
-          type: string
-          maxLength: 1000
-          description: Reason for reverting
-    BillPaymentApplied:
-      type: object
+      - id
+      - name
+      - createdAt
+      - updatedAt
       properties:
         id:
           type: string
           format: uuid
-        paymentGroupId:
-          type: string
-          format: uuid
-        amount:
-          type: number
-          description: Amount applied to this bill
-        paymentDate:
-          type: string
-          format: date
-        reference:
+          description: Payment term UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
           type:
           - string
           - 'null'
-          description: Check number, transaction ID, etc.
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-PAYTERM-NET30
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type:
+          - string
+          - 'null'
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type:
+          - integer
+          - 'null'
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          description: When the payment term was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the payment term was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the payment term was soft deleted (null if active)
+          example: null
+    ApproveBillsResponse:
+      type: object
+      properties:
+        approved:
+          type: array
+          items:
+            type: object
+            properties:
+              billId:
+                type: string
+                format: uuid
+              status:
+                $ref: '#/components/schemas/BillStatus'
+        failed:
+          type: array
+          items:
+            type: object
+            properties:
+              billId:
+                type: string
+                format: uuid
+              error:
+                type: string
+    CarrierReference:
+      type: object
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
+          type: string
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the carrier was soft deleted (null if active)
+          example: null
+    BillEntityTypeFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/BillEntityType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillEntityType'
     BillFilter:
       type: object
       properties:
@@ -1521,97 +1540,49 @@ components:
             $ref: '#/components/schemas/BillFilter'
         not:
           $ref: '#/components/schemas/BillFilter'
-    ApproveBillsResponse:
+    BillPaymentApplied:
       type: object
-      properties:
-        approved:
-          type: array
-          items:
-            type: object
-            properties:
-              billId:
-                type: string
-                format: uuid
-              status:
-                $ref: '#/components/schemas/BillStatus'
-        failed:
-          type: array
-          items:
-            type: object
-            properties:
-              billId:
-                type: string
-                format: uuid
-              error:
-                type: string
-    CarrierFactorReference:
-      type: object
-      description: 'Enhanced reference to a carrier factor (factoring company).
-
-        Includes full carrier factor details in addition to id/key.
-
-        '
-      required:
-      - id
-      - companyName
-      - createdAt
-      - updatedAt
       properties:
         id:
           type: string
           format: uuid
-          description: Carrier factor UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-FACTOR-001
-        companyName:
+        paymentGroupId:
           type: string
-          description: Factoring company legal name
-          example: Capital Factoring Services Inc
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: accounting@capitalfactoring.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-234-5678
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Preferred currency code (ISO 4217)
-          example: USD
-        createdAt:
+          format: uuid
+        amount:
+          type: number
+          description: Amount applied to this bill
+        paymentDate:
           type: string
-          format: date-time
-          description: When the carrier factor was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
+          format: date
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Check number, transaction ID, etc.
+    BillPatch:
+      type: object
+      properties:
+        invoiceDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        amount:
+          type: number
+        reference:
+          type:
+          - string
+          - 'null'
+        paymentTermId:
           type: string
-          format: date-time
-          description: When the carrier factor was last updated
-          example: '2025-01-15T14:30:00Z'
+          format: uuid
   responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
     ValidationError:
       description: Validation error - invalid field values
       content:
@@ -1635,6 +1606,15 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
     UnauthorizedError:
       description: Unauthorized - invalid or missing access token
       content:
@@ -1645,14 +1625,6 @@ components:
             error: unauthorized
             message: Invalid or expired access token
   parameters:
-    IdOrClientKey:
-      name: id
-      in: path
-      required: true
-      description: Resource ID (UUID) or client key
-      schema:
-        type: string
-      example: 550e8400-e29b-41d4-a716-446655440000
     LookupBy:
       name: by
       in: query
@@ -1775,6 +1747,14 @@ components:
           type: paragraph
           annotations: []
           slots: {}
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
   securitySchemes:
     BearerAuth:
       type: http

@@ -2,7 +2,9 @@ openapi: 3.2.0
 info:
   title: MVMNT Shipments API
   version: 1.0.0
-  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  description: 'The MVMNT API enables you to automate freight brokerage workflows by integrating
+
+    directly with our Transportation Management System.'
   contact:
     name: MVMNT Support
     email: support@mvmnt.io
@@ -184,9 +186,7 @@ tags:
 - name: Shipments
   description: 'Shipment tracking and management operations.
 
-    Shipments contain orders, loads, and services.
-
-    '
+    Shipments contain orders, loads, and services.'
 paths:
   /shipments/track:
     post:
@@ -233,9 +233,7 @@ paths:
 
         - Maximum 100 searches per request
 
-        - Standard API rate limits apply (see Rate Limiting documentation)
-
-        '
+        - Standard API rate limits apply (see Rate Limiting documentation)'
       operationId: trackShipments
       tags:
       - Shipments
@@ -391,9 +389,7 @@ paths:
 
         - Delivered today: `{ "filter": { "deliveredAt": { "greaterThanOrEqualTo": "2025-01-15T00:00:00Z" } } }`
 
-        - By customer: `{ "filter": { "customerId": { "equalTo": "uuid" } } }`
-
-        '
+        - By customer: `{ "filter": { "customerId": { "equalTo": "uuid" } } }`'
       operationId: filterShipments
       tags:
       - Shipments
@@ -471,9 +467,7 @@ paths:
 
         If you have a Quote, use `POST /quotes/{id}/convert-to-shipment` instead.
 
-        Direct shipment creation is for cases without a quote.
-
-        '
+        Direct shipment creation is for cases without a quote.'
       operationId: createShipment
       tags:
       - Shipments
@@ -525,9 +519,7 @@ paths:
 
         The response includes embedded orders, loads, and services.
 
-        The internal ShipmentDetail layer is hidden - all data is flattened.
-
-        '
+        The internal ShipmentDetail layer is hidden - all data is flattened.'
       operationId: getShipment
       tags:
       - Shipments
@@ -556,9 +548,7 @@ paths:
 
         - Loads: PATCH /loads/{id}
 
-        - Services: PATCH /services/{id}
-
-        '
+        - Services: PATCH /services/{id}'
       operationId: updateShipment
       tags:
       - Shipments
@@ -597,9 +587,7 @@ paths:
       description: 'Soft delete a shipment.
 
 
-        The shipment and all associated orders, loads, and services are marked as deleted.
-
-        '
+        The shipment and all associated orders, loads, and services are marked as deleted.'
       operationId: deleteShipment
       tags:
       - Shipments
@@ -634,9 +622,7 @@ paths:
         ## Prerequisites
 
 
-        - Shipment must not already be delivered or canceled
-
-        '
+        - Shipment must not already be delivered or canceled'
       operationId: cancelShipment
       tags:
       - Shipments
@@ -690,9 +676,7 @@ paths:
         ## Prerequisites
 
 
-        - Shipment must be in CANCELED status
-
-        '
+        - Shipment must be in CANCELED status'
       operationId: uncancelShipment
       tags:
       - Shipments
@@ -749,9 +733,7 @@ paths:
         ## New shipment
 
 
-        The duplicate is created in DRAFT status with new dates if provided.
-
-        '
+        The duplicate is created in DRAFT status with new dates if provided.'
       operationId: duplicateShipment
       tags:
       - Shipments
@@ -806,9 +788,7 @@ paths:
 
         - Shipment must have delivery documents attached
 
-        - Shipment must be in DOCS_NEEDED or NOT_READY_TO_INVOICE status
-
-        '
+        - Shipment must be in DOCS_NEEDED or NOT_READY_TO_INVOICE status'
       operationId: markShipmentReadyToInvoice
       tags:
       - Shipments
@@ -851,9 +831,7 @@ paths:
 
         - Shipment must be in READY_TO_INVOICE status
 
-        - Shipment must not already be invoiced
-
-        '
+        - Shipment must not already be invoiced'
       operationId: markShipmentNotReadyToInvoice
       tags:
       - Shipments
@@ -898,9 +876,7 @@ paths:
         ## Prerequisites
 
 
-        - Shipment must be in READY_TO_INVOICE status
-
-        '
+        - Shipment must be in READY_TO_INVOICE status'
       operationId: generateShipmentInvoice
       tags:
       - Shipments
@@ -943,178 +919,104 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
-    RateLimitExceeded:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: rate_limit_exceeded
-            message: Too many requests. Please retry after 60 seconds.
-      headers:
-        X-RateLimit-Limit:
-          description: Request limit per minute
-          schema:
-            type: integer
-        X-RateLimit-Remaining:
-          description: Remaining requests in current window
-          schema:
-            type: integer
-        X-RateLimit-Reset:
-          description: Unix timestamp when rate limit resets
-          schema:
-            type: integer
-        Retry-After:
-          description: Seconds to wait before retrying
-          schema:
-            type: integer
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
   schemas:
-    OrderCharge:
+    ShipmentInput:
+      type: object
+      required:
+      - customer
+      - orders
+      properties:
+        customer:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Customer reference
+        customerRep:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Assigned customer rep
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderInput'
+          minItems: 1
+          description: Orders to create (at least one required)
+        loads:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadInput'
+          description: Optional loads to create
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceInput'
+          description: Optional services to create
+    LoadCarrierSummary:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        chargeCode:
-          $ref: '#/components/schemas/ResourceReference'
-        description:
-          type:
-          - string
-          - 'null'
-        amount:
-          type: number
-        quantity:
-          type: number
-          default: 1
-        rate:
-          type:
-          - number
-          - 'null'
-    ShipmentFilter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDFilter'
-        key:
-          $ref: '#/components/schemas/StringFilter'
+        carrier:
+          $ref: '#/components/schemas/CarrierReference'
         status:
-          $ref: '#/components/schemas/ShipmentStatusFilter'
-        customerId:
-          $ref: '#/components/schemas/UUIDFilter'
-        customerRepId:
-          $ref: '#/components/schemas/UUIDFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deliveredAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentFilter'
-        not:
-          $ref: '#/components/schemas/ShipmentFilter'
-    OrderFreight:
-      type: object
-      properties:
-        handlingUnitQuantity:
-          type:
-          - integer
-          - 'null'
-        handlingUnitType:
+          type: string
+          enum:
+          - ACTIVE
+          - TONU
+          - BOUNCED
+        bookedAt:
           type:
           - string
           - 'null'
-        weight:
-          type:
-          - number
-          - 'null'
-          description: Weight in pounds
-        volume:
-          type:
-          - number
-          - 'null'
-          description: Volume in cubic feet
-        length:
-          type:
-          - number
-          - 'null'
-        width:
-          type:
-          - number
-          - 'null'
-        height:
-          type:
-          - number
-          - 'null'
-        commodityDescription:
+          format: date-time
+        dispatchedAt:
           type:
           - string
           - 'null'
-        hazmat:
-          type: boolean
-        stackable:
-          type: boolean
-    DuplicateShipmentRequest:
+          format: date-time
+        totalCost:
+          type:
+          - number
+          - 'null'
+    StringFilter:
       type: object
+      description: Filter options for string fields
       properties:
-        pickUpDate:
+        equalTo:
           type: string
-          format: date
-          description: New pickup date for the duplicate
-        deliveryDate:
+          description: Exact match
+        notEqualTo:
           type: string
-          format: date
-          description: New delivery date for the duplicate
-      description: Request body for duplicating a shipment
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     OrderStop:
       type: object
       properties:
@@ -1168,62 +1070,119 @@ components:
           type:
           - string
           - 'null'
-    LoadInput:
+    Shipment:
       type: object
       required:
-      - mode
+      - id
+      - key
+      - status
+      - createdAt
       properties:
-        mode:
-          $ref: '#/components/schemas/TransportMode'
-        orderStopIds:
+        id:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type: string
+          description: Human-readable shipment ID (e.g., "SHP-12345")
+          example: SHP-12345
+        status:
+          $ref: '#/components/schemas/ShipmentLifecycleStatus'
+        customer:
+          $ref: '#/components/schemas/CustomerReference'
+        customerRep:
+          $ref: '#/components/schemas/UserReference'
+          description: Customer representative
+        orders:
           type: array
           items:
-            type: string
-            format: uuid
-          description: Order stop IDs to include in this load
-        carrier:
-          $ref: '#/components/schemas/LoadCarrierInput'
-          description: Initial carrier assignment
-    ShipmentStatusFilter:
+            $ref: '#/components/schemas/Order'
+          description: Orders in this shipment
+        loads:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadSummary'
+          description: Loads for carrier execution
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceSummary'
+          description: Vended services
+        totalRevenue:
+          type:
+          - number
+          - 'null'
+          description: Sum of all order charges
+        totalCost:
+          type:
+          - number
+          - 'null'
+          description: Sum of all load and service costs
+        margin:
+          type:
+          - number
+          - 'null'
+          description: Revenue minus cost
+        marginPercent:
+          type:
+          - number
+          - 'null'
+          description: Margin as percentage of revenue
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deliveredAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    ResourceReference:
       type: object
+      description: Reference to another resource (returned in responses)
+      required:
+      - id
       properties:
-        equalTo:
-          $ref: '#/components/schemas/ShipmentLifecycleStatus'
-        notEqualTo:
-          $ref: '#/components/schemas/ShipmentLifecycleStatus'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentLifecycleStatus'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentLifecycleStatus'
-    LoadCarrierSummary:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type:
+          - string
+          - 'null'
+          description: Client-defined reference ID if set
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+        key: ERP-USER-12345
+    ServiceSummary:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        carrier:
-          $ref: '#/components/schemas/CarrierReference'
+        key:
+          type:
+          - string
+          - 'null'
+        vendor:
+          $ref: '#/components/schemas/VendorReference'
+        serviceType:
+          type: string
         status:
           type: string
           enum:
           - ACTIVE
-          - TONU
-          - BOUNCED
-        bookedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dispatchedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        totalCost:
+          - AWAITING_INVOICE
+          - INVOICE_IN_REVIEW
+          - APPROVED_TO_PAY
+          - PAID
+          - CANCELED
+        cost:
           type:
           - number
           - 'null'
@@ -1270,130 +1229,226 @@ components:
           maxLength: 2000
           description: Special instructions for the stop
       description: Stop definition for an order
-    ShipmentInput:
+    OrderFreight:
       type: object
-      required:
-      - customer
-      - orders
       properties:
-        customer:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Customer reference
-        customerRep:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Assigned customer rep
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderInput'
-          minItems: 1
-          description: Orders to create (at least one required)
-        loads:
-          type: array
-          items:
-            $ref: '#/components/schemas/LoadInput'
-          description: Optional loads to create
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceInput'
-          description: Optional services to create
-    UUIDFilter:
+        handlingUnitQuantity:
+          type:
+          - integer
+          - 'null'
+        handlingUnitType:
+          type:
+          - string
+          - 'null'
+        weight:
+          type:
+          - number
+          - 'null'
+          description: Weight in pounds
+        volume:
+          type:
+          - number
+          - 'null'
+          description: Volume in cubic feet
+        length:
+          type:
+          - number
+          - 'null'
+        width:
+          type:
+          - number
+          - 'null'
+        height:
+          type:
+          - number
+          - 'null'
+        commodityDescription:
+          type:
+          - string
+          - 'null'
+        hazmat:
+          type: boolean
+        stackable:
+          type: boolean
+    OrderBillingStatus:
+      type: string
+      enum:
+      - DOCS_NEEDED
+      - NOT_READY_TO_INVOICE
+      - READY_TO_INVOICE
+      - INVOICED
+      - PARTIALLY_PAID
+      - PAID
+      description: 'Billing status for the order (AR side).
+
+        - `DOCS_NEEDED`: Waiting for delivery documents
+
+        - `NOT_READY_TO_INVOICE`: Not ready to invoice
+
+        - `READY_TO_INVOICE`: Ready to generate invoice
+
+        - `INVOICED`: Invoice generated and sent
+
+        - `PARTIALLY_PAID`: Partial payment received
+
+        - `PAID`: Fully paid
+
+        '
+    DatetimeFilter:
       type: object
-      description: Filter options for UUID fields (all operations)
+      description: Filter options for datetime fields
       properties:
         equalTo:
           type: string
-          format: uuid
+          format: date-time
           description: Exact match
         notEqualTo:
           type: string
-          format: uuid
+          format: date-time
           description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    ShipmentTrackResponse:
+    OrderFreightInput:
       type: object
-      required:
-      - results
       properties:
-        results:
+        handlingUnitQuantity:
+          type: integer
+          minimum: 1
+          description: Number of handling units
+        handlingUnitType:
+          type: string
+          enum:
+          - PALLET
+          - SKID
+          - CARTON
+          - CRATE
+          - DRUM
+          - BUNDLE
+          - ROLL
+          - BAG
+          - TOTE
+          - OTHER
+          description: Type of handling unit
+        weight:
+          type: number
+          minimum: 0
+          description: Total weight in pounds
+        volume:
+          type: number
+          minimum: 0
+          description: Total volume in cubic feet
+        length:
+          type: number
+          minimum: 0
+          description: Length in inches
+        width:
+          type: number
+          minimum: 0
+          description: Width in inches
+        height:
+          type: number
+          minimum: 0
+          description: Height in inches
+        commodityDescription:
+          type: string
+          maxLength: 500
+          description: Description of the commodity
+        hazmat:
+          type: boolean
+          default: false
+          description: Whether freight is hazardous materials
+        stackable:
+          type: boolean
+          default: true
+          description: Whether freight is stackable
+      description: Freight details for an order
+    ShipmentPatch:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+        customerRep:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+      description: Partial update fields for a shipment
+    ShipmentStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/ShipmentLifecycleStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/ShipmentLifecycleStatus'
+        in:
           type: array
           items:
-            $ref: '#/components/schemas/ShipmentTrackResult'
-          description: 'Array of tracking results in the same order as input searches.
-
-
-            Each result contains the original query plus matching shipment data.
-
-            If no match is found, only the `query` field is populated (all other fields are null).
-
-
-            If multiple shipments match a query, the most recently created shipment is returned.
-
-            '
-      example:
-        results:
-        - query: MAWB123456
-          id: 550e8400-e29b-41d4-a716-446655440000
-          key: SHIP-001
-          friendlyId: SHP-12345
-          status: IN_TRANSIT
-          field: MASTER_AIRWAYBILL_NUMBER
-          value: MAWB123456
-          origin: Los Angeles, CA 90210
-          destination: New York, NY 10001
-          pickUpDate: '2025-01-15'
-          deliveryDate: '2025-01-20'
-          trackingUrl: https://app.mvmnt.io/shipments/550e8400-e29b-41d4-a716-446655440000
-        - query: NOTFOUND123
-          id: null
-          key: null
-          friendlyId: null
-          status: null
-          field: null
-          value: null
-          origin: null
-          destination: null
-          pickUpDate: null
-          deliveryDate: null
-          trackingUrl: null
-    UserReference:
+            $ref: '#/components/schemas/ShipmentLifecycleStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentLifecycleStatus'
+    ShipmentFilter:
       type: object
-      description: 'Enhanced reference to a user resource (returned in responses).
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        key:
+          $ref: '#/components/schemas/StringFilter'
+        status:
+          $ref: '#/components/schemas/ShipmentStatusFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        customerRepId:
+          $ref: '#/components/schemas/UUIDFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deliveredAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentFilter'
+        not:
+          $ref: '#/components/schemas/ShipmentFilter'
+    VendorReference:
+      type: object
+      description: 'Enhanced reference to a vendor profile.
 
-        Includes full user details in addition to id/key.
-
-
-        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
+        Includes full vendor details in addition to id/key.
 
         '
       required:
       - id
-      - email
-      - status
+      - friendlyId
+      - name
       - createdAt
       - updatedAt
       properties:
         id:
           type: string
           format: uuid
-          description: User UUID
+          description: Vendor UUID
           example: 550e8400-e29b-41d4-a716-446655440000
         key:
           type:
@@ -1401,62 +1456,229 @@ components:
           - 'null'
           maxLength: 512
           description: Client-defined reference ID if set
-          example: ERP-USER-12345
-        email:
+          example: ERP-VENDOR-ABC-001
+        friendlyId:
           type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
+          description: Human-readable vendor identifier
+          example: V123456
         name:
+          type: string
+          description: Vendor legal name
+          example: ABC Warehouse Services
+        email:
           type:
           - string
           - 'null'
-          description: User's full name
-          example: John Doe
+          format: email
+          description: Primary email address
+          example: billing@abcwarehouse.com
         phone:
           type:
           - string
           - 'null'
-          description: User's phone number
+          description: Primary phone number
           example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
         status:
-          type: string
-          description: User account status
-          enum:
-          - PENDING
-          - ACTIVE
-          - INACTIVE
-          example: ACTIVE
-        avatarId:
           type:
           - string
           - 'null'
-          format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+          description: Vendor status
+          example: ACTIVE
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
         createdAt:
           type: string
           format: date-time
-          description: When the user was created
+          description: When the vendor was created
           example: '2025-01-15T10:00:00Z'
         updatedAt:
           type: string
           format: date-time
-          description: When the user was last updated
+          description: When the vendor was last updated
           example: '2025-01-15T14:30:00Z'
-        deletedAt:
+    ServiceType:
+      type: string
+      enum:
+      - DRAYAGE
+      - CUSTOMS_CLEARANCE
+      - WAREHOUSING
+      - CROSS_DOCK
+      - TRANSLOAD
+      - FUMIGATION
+      - INSPECTION
+      - DOCUMENTATION
+      - INSURANCE
+      - CARGO_HANDLING
+      - OTHER
+      description: 'Type of service.
+
+        - `DRAYAGE`: Port/rail drayage
+
+        - `CUSTOMS_CLEARANCE`: Customs brokerage
+
+        - `WAREHOUSING`: Warehouse storage
+
+        - `CROSS_DOCK`: Cross-dock handling
+
+        - `TRANSLOAD`: Transloading service
+
+        - `FUMIGATION`: Cargo fumigation
+
+        - `INSPECTION`: Cargo inspection
+
+        - `DOCUMENTATION`: Documentation handling
+
+        - `INSURANCE`: Cargo insurance
+
+        - `CARGO_HANDLING`: General cargo handling
+
+        - `OTHER`: Other service type
+
+        '
+    DuplicateShipmentResponse:
+      type: object
+      required:
+      - originalShipmentId
+      - newShipmentId
+      - newShipmentKey
+      properties:
+        originalShipmentId:
+          type: string
+          format: uuid
+        newShipmentId:
+          type: string
+          format: uuid
+        newShipmentKey:
+          type: string
+    OrderReference:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          description: Reference type (e.g., BOL_NUMBER)
+        value:
+          type: string
+          description: Reference value
+    ShipmentStatus:
+      type: string
+      enum:
+      - DRAFT
+      - TENDER_PENDING
+      - ON_HOLD
+      - PLANNING
+      - SELECTED
+      - BOOKED
+      - DISPATCHED
+      - LOADING
+      - PICKED_UP
+      - IN_TRANSIT
+      - UNLOADING
+      - ARRIVED_AT_DELIVERY_TERMINAL
+      - OUT_FOR_DELIVERY
+      - RECOVERED
+      - DELIVERED
+      - CANCELED
+      - TENDER_REJECTED
+      description: 'Current status of the shipment.
+
+
+        Lifecycle stages:
+
+        - `DRAFT`: Shipment is being created, not yet ready for processing
+
+        - `TENDER_PENDING`: Awaiting carrier tender acceptance
+
+        - `TENDER_REJECTED`: Carrier rejected the tender
+
+        - `ON_HOLD`: Shipment is temporarily paused
+
+        - `PLANNING`: Shipment is being planned/scheduled
+
+        - `SELECTED`: Carrier has been selected
+
+        - `BOOKED`: Carrier has confirmed the booking
+
+        - `DISPATCHED`: Shipment has been dispatched to carrier
+
+
+        In-transit stages:
+
+        - `LOADING`: Freight is being loaded at pickup
+
+        - `PICKED_UP`: Freight has been picked up
+
+        - `IN_TRANSIT`: Shipment is in transit
+
+        - `UNLOADING`: Freight is being unloaded at delivery
+
+        - `ARRIVED_AT_DELIVERY_TERMINAL`: Arrived at delivery terminal (LTL)
+
+        - `OUT_FOR_DELIVERY`: Out for final delivery
+
+        - `RECOVERED`: Shipment has been recovered
+
+
+        Final stages:
+
+        - `DELIVERED`: Shipment has been delivered
+
+        - `CANCELED`: Shipment has been canceled
+
+        '
+    OrderCharge:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        chargeCode:
+          $ref: '#/components/schemas/ResourceReference'
+        description:
           type:
           - string
           - 'null'
-          format: date-time
-          description: When the user was soft deleted (null if active)
-          example: null
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+        rate:
+          type:
+          - number
+          - 'null'
+    ResourceReferenceInput:
+      type: object
+      description: Reference to another resource by either ID or client key (used in create/update requests)
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type: string
+          description: Client-defined reference ID
+      oneOf:
+      - required:
+        - id
+      - required:
+        - key
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+    CancelShipmentRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          maxLength: 1000
+          description: Reason for cancellation
+      description: Request body for canceling a shipment
     ShipmentReferenceField:
       type: string
       enum:
@@ -1583,311 +1805,168 @@ components:
         - `AMS_HOUSE_BILL_OF_LADING_NUMBER`: AMS House Bill of Lading Number
 
         '
-    ShipmentTrackRequest:
+    Address:
       type: object
-      required:
-      - searches
-      properties:
-        searches:
-          type: array
-          minItems: 1
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/ShipmentTrackSearch'
-          description: 'Array of search queries. Results are returned in the same order as the input searches.
-
-            Maximum 100 searches per request.
-
-            '
-        referenceFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/ShipmentReferenceField'
-          description: 'Optional filter for reference field types to search.
-
-            If omitted, searches all reference field types.
+      description: 'Physical address/location details (nested, without id).
 
 
-            Common use: limit search to specific field types for faster results
+        This is an embedded object representing a Location record. The id is managed
 
-            or to avoid false matches across different reference types.
-
-            '
-          example:
-          - MASTER_AIRWAYBILL_NUMBER
-          - BOL_NUMBER
-          - PRO_NUMBER
-      example:
-        searches:
-        - query: MAWB123456
-        - query: BOL789
-        referenceFields:
-        - MASTER_AIRWAYBILL_NUMBER
-        - BOL_NUMBER
-    CarrierReference:
-      type: object
-      description: 'Enhanced reference to a carrier resource (returned in responses).
-
-        Includes full carrier details in addition to id/key.
-
-
-        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
+        internally and not exposed in the API.
 
         '
       required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
+      - line1
+      - city
+      - country
+      - market
+      - isAirportOrAirbase
+      - isConstructionOrUtilitySite
+      - isSmartyValidated
+      - obeysDst
       properties:
-        id:
+        line1:
           type: string
-          format: uuid
-          description: Carrier UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
+          description: Primary street address line
+          example: 123 Main St
+        line2:
           type:
           - string
           - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CARRIER-SWIFT
-        name:
+          description: Secondary address line (suite, floor, etc.)
+          example: Suite 400
+        city:
           type: string
-          description: Carrier company name
-          example: Swift Transportation
-        phoneNumber:
+          description: City name
+          example: Chicago
+        country:
+          type: string
+          description: Country name or code
+          example: USA
+        market:
+          type: string
+          description: Market or region identifier
+          example: CHI
+        latitude:
           type:
           - string
           - 'null'
-          description: Primary phone number
-          example: +1-555-987-6543
-        email:
+          description: Latitude coordinate
+          example: '41.8781'
+        longitude:
           type:
           - string
           - 'null'
-          format: email
-          description: Primary email address
-          example: dispatch@swifttrans.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the carrier was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the carrier was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the carrier was soft deleted (null if active)
-          example: null
-    OrderBillingStatus:
-      type: string
-      enum:
-      - DOCS_NEEDED
-      - NOT_READY_TO_INVOICE
-      - READY_TO_INVOICE
-      - INVOICED
-      - PARTIALLY_PAID
-      - PAID
-      description: 'Billing status for the order (AR side).
-
-        - `DOCS_NEEDED`: Waiting for delivery documents
-
-        - `NOT_READY_TO_INVOICE`: Not ready to invoice
-
-        - `READY_TO_INVOICE`: Ready to generate invoice
-
-        - `INVOICED`: Invoice generated and sent
-
-        - `PARTIALLY_PAID`: Partial payment received
-
-        - `PAID`: Fully paid
-
-        '
-    ShipmentPatch:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-        customerRep:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-      description: Partial update fields for a shipment
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
+          description: Longitude coordinate
+          example: '-87.6298'
+        isAirportOrAirbase:
           type: boolean
-          description: Field is null (true) or not null (false)
-    Shipment:
+          description: Whether this location is an airport or airbase
+          example: false
+        isConstructionOrUtilitySite:
+          type: boolean
+          description: Whether this location is a construction or utility site
+          example: false
+        isSmartyValidated:
+          type: boolean
+          description: Whether address has been validated by SmartyStreets
+          example: true
+        obeysDst:
+          type: boolean
+          description: Whether this location observes daylight saving time
+          example: true
+        cityId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Reference to standardized city record (internal use)
+          example: null
+    LoadSummary:
       type: object
-      required:
-      - id
-      - key
-      - status
-      - createdAt
       properties:
         id:
           type: string
           format: uuid
-          example: 550e8400-e29b-41d4-a716-446655440000
         key:
-          type: string
-          description: Human-readable shipment ID (e.g., "SHP-12345")
-          example: SHP-12345
+          type:
+          - string
+          - 'null'
         status:
           $ref: '#/components/schemas/ShipmentLifecycleStatus'
-        customer:
-          $ref: '#/components/schemas/CustomerReference'
-        customerRep:
-          $ref: '#/components/schemas/UserReference'
-          description: Customer representative
-        orders:
+        mode:
+          $ref: '#/components/schemas/TransportMode'
+        carriers:
           type: array
           items:
-            $ref: '#/components/schemas/Order'
-          description: Orders in this shipment
-        loads:
-          type: array
-          items:
-            $ref: '#/components/schemas/LoadSummary'
-          description: Loads for carrier execution
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceSummary'
-          description: Vended services
-        totalRevenue:
-          type:
-          - number
-          - 'null'
-          description: Sum of all order charges
+            $ref: '#/components/schemas/LoadCarrierSummary'
+          description: Flattened carriers array
         totalCost:
           type:
           - number
           - 'null'
-          description: Sum of all load and service costs
-        margin:
-          type:
-          - number
-          - 'null'
-          description: Revenue minus cost
-        marginPercent:
-          type:
-          - number
-          - 'null'
-          description: Margin as percentage of revenue
-        createdAt:
+    ShipmentTrackSearch:
+      type: object
+      required:
+      - query
+      properties:
+        query:
           type: string
-          format: date-time
-        updatedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        deliveredAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    ShipmentStatus:
-      type: string
-      enum:
-      - DRAFT
-      - TENDER_PENDING
-      - ON_HOLD
-      - PLANNING
-      - SELECTED
-      - BOOKED
-      - DISPATCHED
-      - LOADING
-      - PICKED_UP
-      - IN_TRANSIT
-      - UNLOADING
-      - ARRIVED_AT_DELIVERY_TERMINAL
-      - OUT_FOR_DELIVERY
-      - RECOVERED
-      - DELIVERED
-      - CANCELED
-      - TENDER_REJECTED
-      description: 'Current status of the shipment.
-
-
-        Lifecycle stages:
-
-        - `DRAFT`: Shipment is being created, not yet ready for processing
-
-        - `TENDER_PENDING`: Awaiting carrier tender acceptance
-
-        - `TENDER_REJECTED`: Carrier rejected the tender
-
-        - `ON_HOLD`: Shipment is temporarily paused
-
-        - `PLANNING`: Shipment is being planned/scheduled
-
-        - `SELECTED`: Carrier has been selected
-
-        - `BOOKED`: Carrier has confirmed the booking
-
-        - `DISPATCHED`: Shipment has been dispatched to carrier
-
-
-        In-transit stages:
-
-        - `LOADING`: Freight is being loaded at pickup
-
-        - `PICKED_UP`: Freight has been picked up
-
-        - `IN_TRANSIT`: Shipment is in transit
-
-        - `UNLOADING`: Freight is being unloaded at delivery
-
-        - `ARRIVED_AT_DELIVERY_TERMINAL`: Arrived at delivery terminal (LTL)
-
-        - `OUT_FOR_DELIVERY`: Out for final delivery
-
-        - `RECOVERED`: Shipment has been recovered
-
-
-        Final stages:
-
-        - `DELIVERED`: Shipment has been delivered
-
-        - `CANCELED`: Shipment has been canceled
-
-        '
+          minLength: 4
+          maxLength: 255
+          description: Reference value to search for (minimum 4 characters)
+          example: MAWB123456
+    DuplicateShipmentRequest:
+      type: object
+      properties:
+        pickUpDate:
+          type: string
+          format: date
+          description: New pickup date for the duplicate
+        deliveryDate:
+          type: string
+          format: date
+          description: New delivery date for the duplicate
+      description: Request body for duplicating a shipment
+    ServiceInput:
+      type: object
+      required:
+      - vendor
+      - serviceType
+      properties:
+        vendor:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Vendor reference
+        vendorContact:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Vendor contact
+        serviceType:
+          $ref: '#/components/schemas/ServiceType'
+        description:
+          type: string
+          maxLength: 2000
+        charges:
+          type: array
+          items:
+            type: object
+            required:
+            - chargeCode
+            - amount
+            properties:
+              chargeCode:
+                $ref: '#/components/schemas/ResourceReferenceInput'
+              description:
+                type: string
+              amount:
+                type: number
+              quantity:
+                type: number
+                default: 1
+        scheduledDate:
+          type: string
+          format: date
+        referenceNumber:
+          type: string
     LoadCarrierInput:
       type: object
       required:
@@ -1924,19 +2003,109 @@ components:
           type: string
         trailerNumber:
           type: string
-    OrderReference:
+    Error:
       type: object
+      required:
+      - error
+      - message
       properties:
-        id:
+        error:
           type: string
-          format: uuid
-        type:
+          description: Error code
+        message:
           type: string
-          description: Reference type (e.g., BOL_NUMBER)
-        value:
-          type: string
-          description: Reference value
-    ServiceSummary:
+          description: Human-readable error message
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    ShipmentLifecycleStatus:
+      type: string
+      enum:
+      - DRAFT
+      - TENDER_PENDING
+      - ON_HOLD
+      - PLANNING
+      - SELECTED
+      - BOOKED
+      - DISPATCHED
+      - LOADING
+      - PICKED_UP
+      - IN_TRANSIT
+      - UNLOADING
+      - ARRIVED_AT_DELIVERY_TERMINAL
+      - OUT_FOR_DELIVERY
+      - RECOVERED
+      - DELIVERED
+      - CANCELED
+      - TENDER_REJECTED
+      description: 'Current status of the shipment lifecycle.
+
+
+        **Pre-transit:**
+
+        - `DRAFT`: Shipment being created
+
+        - `TENDER_PENDING`: Awaiting carrier tender acceptance
+
+        - `TENDER_REJECTED`: Carrier rejected the tender
+
+        - `ON_HOLD`: Shipment temporarily paused
+
+        - `PLANNING`: Being planned/scheduled
+
+        - `SELECTED`: Carrier selected
+
+        - `BOOKED`: Carrier confirmed booking
+
+        - `DISPATCHED`: Dispatched to carrier
+
+
+        **In-transit:**
+
+        - `LOADING`: Loading at pickup
+
+        - `PICKED_UP`: Picked up
+
+        - `IN_TRANSIT`: In transit
+
+        - `UNLOADING`: Unloading at delivery
+
+        - `ARRIVED_AT_DELIVERY_TERMINAL`: At delivery terminal (LTL)
+
+        - `OUT_FOR_DELIVERY`: Out for final delivery
+
+        - `RECOVERED`: Shipment has been recovered
+
+
+        **Final:**
+
+        - `DELIVERED`: Delivered
+
+        - `CANCELED`: Canceled
+
+        '
+    Order:
       type: object
       properties:
         id:
@@ -1946,23 +2115,53 @@ components:
           type:
           - string
           - 'null'
-        vendor:
-          $ref: '#/components/schemas/VendorReference'
-        serviceType:
-          type: string
+          description: Friendly order ID
+        mode:
+          $ref: '#/components/schemas/TransportMode'
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - AWAITING_INVOICE
-          - INVOICE_IN_REVIEW
-          - APPROVED_TO_PAY
-          - PAID
-          - CANCELED
-        cost:
+          $ref: '#/components/schemas/ShipmentLifecycleStatus'
+        billingStatus:
+          $ref: '#/components/schemas/OrderBillingStatus'
+        stops:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderStop'
+          description: Flattened stops array
+        freight:
+          $ref: '#/components/schemas/OrderFreight'
+        references:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderReference'
+        charges:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderCharge'
+        equipment:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
+        specialRequirements:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceReference'
+        mileage:
           type:
           - number
           - 'null'
+        totalRevenue:
+          type:
+          - number
+          - 'null'
+          description: Sum of all charges
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
     ShipmentTrackResult:
       type: object
       required:
@@ -2062,321 +2261,59 @@ components:
 
             '
           example: https://app.mvmnt.io/shipments/550e8400-e29b-41d4-a716-446655440000
-    ServiceType:
-      type: string
-      enum:
-      - DRAYAGE
-      - CUSTOMS_CLEARANCE
-      - WAREHOUSING
-      - CROSS_DOCK
-      - TRANSLOAD
-      - FUMIGATION
-      - INSPECTION
-      - DOCUMENTATION
-      - INSURANCE
-      - CARGO_HANDLING
-      - OTHER
-      description: 'Type of service.
-
-        - `DRAYAGE`: Port/rail drayage
-
-        - `CUSTOMS_CLEARANCE`: Customs brokerage
-
-        - `WAREHOUSING`: Warehouse storage
-
-        - `CROSS_DOCK`: Cross-dock handling
-
-        - `TRANSLOAD`: Transloading service
-
-        - `FUMIGATION`: Cargo fumigation
-
-        - `INSPECTION`: Cargo inspection
-
-        - `DOCUMENTATION`: Documentation handling
-
-        - `INSURANCE`: Cargo insurance
-
-        - `CARGO_HANDLING`: General cargo handling
-
-        - `OTHER`: Other service type
-
-        '
-    ServiceInput:
+    ShipmentTrackRequest:
       type: object
       required:
-      - vendor
-      - serviceType
+      - searches
       properties:
-        vendor:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Vendor reference
-        vendorContact:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Vendor contact
-        serviceType:
-          $ref: '#/components/schemas/ServiceType'
-        description:
-          type: string
-          maxLength: 2000
-        charges:
+        searches:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ShipmentTrackSearch'
+          description: 'Array of search queries. Results are returned in the same order as the input searches.
+
+            Maximum 100 searches per request.
+
+            '
+        referenceFields:
           type: array
           items:
-            type: object
-            required:
-            - chargeCode
-            - amount
-            properties:
-              chargeCode:
-                $ref: '#/components/schemas/ResourceReferenceInput'
-              description:
-                type: string
-              amount:
-                type: number
-              quantity:
-                type: number
-                default: 1
-        scheduledDate:
-          type: string
-          format: date
-        referenceNumber:
-          type: string
-    DuplicateShipmentResponse:
-      type: object
-      required:
-      - originalShipmentId
-      - newShipmentId
-      - newShipmentKey
-      properties:
-        originalShipmentId:
-          type: string
-          format: uuid
-        newShipmentId:
-          type: string
-          format: uuid
-        newShipmentKey:
-          type: string
-    ShipmentTrackSearch:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          minLength: 4
-          maxLength: 255
-          description: Reference value to search for (minimum 4 characters)
-          example: MAWB123456
-    VendorReference:
-      type: object
-      description: 'Enhanced reference to a vendor profile.
+            $ref: '#/components/schemas/ShipmentReferenceField'
+          description: 'Optional filter for reference field types to search.
 
-        Includes full vendor details in addition to id/key.
+            If omitted, searches all reference field types.
 
-        '
-      required:
-      - id
-      - friendlyId
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Vendor UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-VENDOR-ABC-001
-        friendlyId:
-          type: string
-          description: Human-readable vendor identifier
-          example: V123456
-        name:
-          type: string
-          description: Vendor legal name
-          example: ABC Warehouse Services
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: billing@abcwarehouse.com
-        phone:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        status:
-          type:
-          - string
-          - 'null'
-          description: Vendor status
-          example: ACTIVE
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Preferred currency code (ISO 4217)
-          example: USD
-        createdAt:
-          type: string
-          format: date-time
-          description: When the vendor was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the vendor was last updated
-          example: '2025-01-15T14:30:00Z'
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    ResourceReference:
-      type: object
-      description: Reference to another resource (returned in responses)
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type:
-          - string
-          - 'null'
-          description: Client-defined reference ID if set
+
+            Common use: limit search to specific field types for faster results
+
+            or to avoid false matches across different reference types.
+
+            '
+          example:
+          - MASTER_AIRWAYBILL_NUMBER
+          - BOL_NUMBER
+          - PRO_NUMBER
       example:
-        id: 550e8400-e29b-41d4-a716-446655440000
-        key: ERP-USER-12345
-    CancelShipmentRequest:
+        searches:
+        - query: MAWB123456
+        - query: BOL789
+        referenceFields:
+        - MASTER_AIRWAYBILL_NUMBER
+        - BOL_NUMBER
+    ShipmentFilterRequest:
       type: object
       properties:
-        reason:
+        filter:
+          $ref: '#/components/schemas/ShipmentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
           type: string
-          maxLength: 1000
-          description: Reason for cancellation
-      description: Request body for canceling a shipment
-    TransportMode:
-      type: string
-      enum:
-      - TL
-      - LTL
-      - AIR
-      - OCEAN
-      - RAIL
-      - INTERMODAL
-      - DRAYAGE
-      description: 'Transportation mode.
-
-        - `TL`: Full Truckload
-
-        - `LTL`: Less than Truckload
-
-        - `AIR`: Air freight
-
-        - `OCEAN`: Ocean freight
-
-        - `RAIL`: Rail freight
-
-        - `INTERMODAL`: Intermodal (multiple modes)
-
-        - `DRAYAGE`: Drayage/cartage
-
-        '
-    Address:
-      type: object
-      description: 'Physical address/location details (nested, without id).
-
-
-        This is an embedded object representing a Location record. The id is managed
-
-        internally and not exposed in the API.
-
-        '
-      required:
-      - line1
-      - city
-      - country
-      - market
-      - isAirportOrAirbase
-      - isConstructionOrUtilitySite
-      - isSmartyValidated
-      - obeysDst
-      properties:
-        line1:
-          type: string
-          description: Primary street address line
-          example: 123 Main St
-        line2:
-          type:
-          - string
-          - 'null'
-          description: Secondary address line (suite, floor, etc.)
-          example: Suite 400
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        country:
-          type: string
-          description: Country name or code
-          example: USA
-        market:
-          type: string
-          description: Market or region identifier
-          example: CHI
-        latitude:
-          type:
-          - string
-          - 'null'
-          description: Latitude coordinate
-          example: '41.8781'
-        longitude:
-          type:
-          - string
-          - 'null'
-          description: Longitude coordinate
-          example: '-87.6298'
-        isAirportOrAirbase:
-          type: boolean
-          description: Whether this location is an airport or airbase
-          example: false
-        isConstructionOrUtilitySite:
-          type: boolean
-          description: Whether this location is a construction or utility site
-          example: false
-        isSmartyValidated:
-          type: boolean
-          description: Whether address has been validated by SmartyStreets
-          example: true
-        obeysDst:
-          type: boolean
-          description: Whether this location observes daylight saving time
-          example: true
-        cityId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Reference to standardized city record (internal use)
-          example: null
     ValidationError:
       type: object
       required:
@@ -2406,344 +2343,162 @@ components:
               message:
                 type: string
                 description: Validation error message
-    ShipmentLifecycleStatus:
-      type: string
-      enum:
-      - DRAFT
-      - TENDER_PENDING
-      - ON_HOLD
-      - PLANNING
-      - SELECTED
-      - BOOKED
-      - DISPATCHED
-      - LOADING
-      - PICKED_UP
-      - IN_TRANSIT
-      - UNLOADING
-      - ARRIVED_AT_DELIVERY_TERMINAL
-      - OUT_FOR_DELIVERY
-      - RECOVERED
-      - DELIVERED
-      - CANCELED
-      - TENDER_REJECTED
-      description: 'Current status of the shipment lifecycle.
-
-
-        **Pre-transit:**
-
-        - `DRAFT`: Shipment being created
-
-        - `TENDER_PENDING`: Awaiting carrier tender acceptance
-
-        - `TENDER_REJECTED`: Carrier rejected the tender
-
-        - `ON_HOLD`: Shipment temporarily paused
-
-        - `PLANNING`: Being planned/scheduled
-
-        - `SELECTED`: Carrier selected
-
-        - `BOOKED`: Carrier confirmed booking
-
-        - `DISPATCHED`: Dispatched to carrier
-
-
-        **In-transit:**
-
-        - `LOADING`: Loading at pickup
-
-        - `PICKED_UP`: Picked up
-
-        - `IN_TRANSIT`: In transit
-
-        - `UNLOADING`: Unloading at delivery
-
-        - `ARRIVED_AT_DELIVERY_TERMINAL`: At delivery terminal (LTL)
-
-        - `OUT_FOR_DELIVERY`: Out for final delivery
-
-        - `RECOVERED`: Shipment has been recovered
-
-
-        **Final:**
-
-        - `DELIVERED`: Delivered
-
-        - `CANCELED`: Canceled
-
-        '
-    PaginationInfo:
+    LoadInput:
       type: object
       required:
-      - pageSize
-      - hasNextPage
+      - mode
       properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    ShipmentFilterRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/ShipmentFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
-          type: string
-    OrderFreightInput:
-      type: object
-      properties:
-        handlingUnitQuantity:
-          type: integer
-          minimum: 1
-          description: Number of handling units
-        handlingUnitType:
-          type: string
-          enum:
-          - PALLET
-          - SKID
-          - CARTON
-          - CRATE
-          - DRUM
-          - BUNDLE
-          - ROLL
-          - BAG
-          - TOTE
-          - OTHER
-          description: Type of handling unit
-        weight:
-          type: number
-          minimum: 0
-          description: Total weight in pounds
-        volume:
-          type: number
-          minimum: 0
-          description: Total volume in cubic feet
-        length:
-          type: number
-          minimum: 0
-          description: Length in inches
-        width:
-          type: number
-          minimum: 0
-          description: Width in inches
-        height:
-          type: number
-          minimum: 0
-          description: Height in inches
-        commodityDescription:
-          type: string
-          maxLength: 500
-          description: Description of the commodity
-        hazmat:
-          type: boolean
-          default: false
-          description: Whether freight is hazardous materials
-        stackable:
-          type: boolean
-          default: true
-          description: Whether freight is stackable
-      description: Freight details for an order
-    LoadSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        key:
-          type:
-          - string
-          - 'null'
-        status:
-          $ref: '#/components/schemas/ShipmentLifecycleStatus'
         mode:
           $ref: '#/components/schemas/TransportMode'
-        carriers:
+        orderStopIds:
           type: array
           items:
-            $ref: '#/components/schemas/LoadCarrierSummary'
-          description: Flattened carriers array
-        totalCost:
-          type:
-          - number
-          - 'null'
-    Order:
+            type: string
+            format: uuid
+          description: Order stop IDs to include in this load
+        carrier:
+          $ref: '#/components/schemas/LoadCarrierInput'
+          description: Initial carrier assignment
+    UUIDFilter:
       type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        key:
-          type:
-          - string
-          - 'null'
-          description: Friendly order ID
-        mode:
-          $ref: '#/components/schemas/TransportMode'
-        status:
-          $ref: '#/components/schemas/ShipmentLifecycleStatus'
-        billingStatus:
-          $ref: '#/components/schemas/OrderBillingStatus'
-        stops:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderStop'
-          description: Flattened stops array
-        freight:
-          $ref: '#/components/schemas/OrderFreight'
-        references:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderReference'
-        charges:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderCharge'
-        equipment:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReference'
-        specialRequirements:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceReference'
-        mileage:
-          type:
-          - number
-          - 'null'
-        totalRevenue:
-          type:
-          - number
-          - 'null'
-          description: Sum of all charges
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-    AddressInput:
-      type: object
-      description: Address data for creating a new location
-      required:
-      - line1
-      - city
-      - country
-      - market
-      properties:
-        line1:
-          type: string
-          description: Primary street address line
-          example: 123 Main St
-        line2:
-          type: string
-          description: Secondary address line (suite, floor, etc.)
-          example: Suite 400
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        country:
-          type: string
-          description: Country name or code
-          example: USA
-        market:
-          type: string
-          description: Market or region identifier
-          example: CHI
-        latitude:
-          type: string
-          description: Latitude coordinate
-          example: '41.8781'
-        longitude:
-          type: string
-          description: Longitude coordinate
-          example: '-87.6298'
-        isAirportOrAirbase:
-          type: boolean
-          default: false
-          description: Whether this location is an airport or airbase
-          example: false
-        isConstructionOrUtilitySite:
-          type: boolean
-          default: false
-          description: Whether this location is a construction or utility site
-          example: false
-        isSmartyValidated:
-          type: boolean
-          default: false
-          description: Whether address has been validated by SmartyStreets
-          example: true
-        obeysDst:
-          type: boolean
-          default: true
-          description: Whether this location observes daylight saving time
-          example: true
-        cityId:
-          type: string
-          format: uuid
-          description: Reference to standardized city record (internal use)
-    StringFilter:
-      type: object
-      description: Filter options for string fields
+      description: Filter options for UUID fields (all operations)
       properties:
         equalTo:
           type: string
+          format: uuid
           description: Exact match
         notEqualTo:
           type: string
+          format: uuid
           description: Not equal to
         in:
           type: array
           items:
             type: string
-          description: Matches any value in the array
+            format: uuid
+          description: Matches any UUID in the array
         notIn:
           type: array
           items:
             type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
+            format: uuid
+          description: Does not match any UUID in the array
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
+    TransportMode:
+      type: string
+      enum:
+      - TL
+      - LTL
+      - AIR
+      - OCEAN
+      - RAIL
+      - INTERMODAL
+      - DRAYAGE
+      description: 'Transportation mode.
+
+        - `TL`: Full Truckload
+
+        - `LTL`: Less than Truckload
+
+        - `AIR`: Air freight
+
+        - `OCEAN`: Ocean freight
+
+        - `RAIL`: Rail freight
+
+        - `INTERMODAL`: Intermodal (multiple modes)
+
+        - `DRAYAGE`: Drayage/cartage
+
+        '
+    UserReference:
+      type: object
+      description: 'Enhanced reference to a user resource (returned in responses).
+
+        Includes full user details in addition to id/key.
+
+
+        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-USER-12345
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          type: string
+          description: User account status
+          enum:
+          - PENDING
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the user was soft deleted (null if active)
+          example: null
     CustomerReference:
       type: object
       description: 'Enhanced reference to a customer resource (returned in responses).
@@ -2822,24 +2577,177 @@ components:
           format: date-time
           description: When the customer was soft deleted (null if active)
           example: null
-    ResourceReferenceInput:
+    ShipmentTrackResponse:
       type: object
-      description: Reference to another resource by either ID or client key (used in create/update requests)
+      required:
+      - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShipmentTrackResult'
+          description: 'Array of tracking results in the same order as input searches.
+
+
+            Each result contains the original query plus matching shipment data.
+
+            If no match is found, only the `query` field is populated (all other fields are null).
+
+
+            If multiple shipments match a query, the most recently created shipment is returned.
+
+            '
+      example:
+        results:
+        - query: MAWB123456
+          id: 550e8400-e29b-41d4-a716-446655440000
+          key: SHIP-001
+          friendlyId: SHP-12345
+          status: IN_TRANSIT
+          field: MASTER_AIRWAYBILL_NUMBER
+          value: MAWB123456
+          origin: Los Angeles, CA 90210
+          destination: New York, NY 10001
+          pickUpDate: '2025-01-15'
+          deliveryDate: '2025-01-20'
+          trackingUrl: https://app.mvmnt.io/shipments/550e8400-e29b-41d4-a716-446655440000
+        - query: NOTFOUND123
+          id: null
+          key: null
+          friendlyId: null
+          status: null
+          field: null
+          value: null
+          origin: null
+          destination: null
+          pickUpDate: null
+          deliveryDate: null
+          trackingUrl: null
+    CarrierReference:
+      type: object
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
       properties:
         id:
           type: string
           format: uuid
-          description: Resource UUID
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
         key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
           type: string
-          description: Client-defined reference ID
-      oneOf:
-      - required:
-        - id
-      - required:
-        - key
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the carrier was soft deleted (null if active)
+          example: null
+    AddressInput:
+      type: object
+      description: Address data for creating a new location
+      required:
+      - line1
+      - city
+      - country
+      - market
+      properties:
+        line1:
+          type: string
+          description: Primary street address line
+          example: 123 Main St
+        line2:
+          type: string
+          description: Secondary address line (suite, floor, etc.)
+          example: Suite 400
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        country:
+          type: string
+          description: Country name or code
+          example: USA
+        market:
+          type: string
+          description: Market or region identifier
+          example: CHI
+        latitude:
+          type: string
+          description: Latitude coordinate
+          example: '41.8781'
+        longitude:
+          type: string
+          description: Longitude coordinate
+          example: '-87.6298'
+        isAirportOrAirbase:
+          type: boolean
+          default: false
+          description: Whether this location is an airport or airbase
+          example: false
+        isConstructionOrUtilitySite:
+          type: boolean
+          default: false
+          description: Whether this location is a construction or utility site
+          example: false
+        isSmartyValidated:
+          type: boolean
+          default: false
+          description: Whether address has been validated by SmartyStreets
+          example: true
+        obeysDst:
+          type: boolean
+          default: true
+          description: Whether this location observes daylight saving time
+          example: true
+        cityId:
+          type: string
+          format: uuid
+          description: Reference to standardized city record (internal use)
     OrderInput:
       type: object
       required:
@@ -2886,15 +2794,75 @@ components:
         Contains route (stops), freight details, and requirements.
 
         '
+  responses:
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: rate_limit_exceeded
+            message: Too many requests. Please retry after 60 seconds.
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per minute
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Remaining requests in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Unix timestamp when rate limit resets
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema:
+            type: integer
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   parameters:
-    IdOrClientKey:
-      name: id
-      in: path
-      required: true
-      description: Resource ID (UUID) or client key
-      schema:
-        type: string
-      example: 550e8400-e29b-41d4-a716-446655440000
     LookupBy:
       name: by
       in: query
@@ -3017,6 +2985,14 @@ components:
           type: paragraph
           annotations: []
           slots: {}
+    IdOrClientKey:
+      name: id
+      in: path
+      required: true
+      description: Resource ID (UUID) or client key
+      schema:
+        type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
   securitySchemes:
     BearerAuth:
       type: http

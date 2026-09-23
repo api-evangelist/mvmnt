@@ -2,7 +2,9 @@ openapi: 3.2.0
 info:
   title: MVMNT Search API
   version: 1.0.0
-  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  description: 'The MVMNT API enables you to automate freight brokerage workflows by integrating
+
+    directly with our Transportation Management System.'
   contact:
     name: MVMNT Support
     email: support@mvmnt.io
@@ -223,9 +225,7 @@ paths:
 
         This endpoint queries OpenSearch indices which are updated asynchronously.
 
-        Changes typically appear within 2 seconds, but this is not guaranteed.
-
-        '
+        Changes typically appear within 2 seconds, but this is not guaranteed.'
       operationId: globalSearch
       tags:
       - Search
@@ -293,87 +293,84 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimitExceeded'
 components:
-  responses:
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    RateLimitExceeded:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: rate_limit_exceeded
-            message: Too many requests. Please retry after 60 seconds.
-      headers:
-        X-RateLimit-Limit:
-          description: Request limit per minute
-          schema:
-            type: integer
-        X-RateLimit-Remaining:
-          description: Remaining requests in current window
-          schema:
-            type: integer
-        X-RateLimit-Reset:
-          description: Unix timestamp when rate limit resets
-          schema:
-            type: integer
-        Retry-After:
-          description: Seconds to wait before retrying
-          schema:
-            type: integer
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
-    ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
   schemas:
-    GlobalSearchObjectType:
-      type: string
-      enum:
-      - SHIPMENT
-      - CUSTOMER
-      - CARRIER
-      - USER
-      - VENDOR
-      description: 'Object types available for global search:
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    GlobalSearchResponse:
+      type: object
+      description: Response for global search requests
+      required:
+      - data
+      - pagination
+      - totalResults
+      properties:
+        data:
+          type: array
+          description: 'Search results sorted by object type priority:
 
-        - `SHIPMENT`: Shipment records
+            SHIPMENT → CUSTOMER → CARRIER → USER → VENDOR
 
-        - `CUSTOMER`: Customer/shipper profiles
-
-        - `CARRIER`: Carrier profiles
-
-        - `USER`: User accounts
-
-        - `VENDOR`: Vendor profiles
-
-        '
+            '
+          items:
+            $ref: '#/components/schemas/GlobalSearchRow'
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInfo'
+        totalResults:
+          type: integer
+          description: Total number of matching results across all object types
+          minimum: 0
+          example: 42
+    SearchPaginationInfo:
+      type: object
+      required:
+      - pageNumber
+      - pageSize
+      - totalPages
+      description: Pagination information for search results
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of results returned on this page
+          example: 50
+        totalPages:
+          type: integer
+          description: Total number of pages available
+          example: 25
+      example:
+        pageNumber: 1
+        pageSize: 50
+        totalPages: 25
     Error:
       type: object
       required:
@@ -446,59 +443,27 @@ components:
 
             '
           example: <em>Acme</em> Corporation
-    GlobalSearchResponse:
-      type: object
-      description: Response for global search requests
-      required:
-      - data
-      - pagination
-      - totalResults
-      properties:
-        data:
-          type: array
-          description: 'Search results sorted by object type priority:
+    GlobalSearchObjectType:
+      type: string
+      enum:
+      - SHIPMENT
+      - CUSTOMER
+      - CARRIER
+      - USER
+      - VENDOR
+      description: 'Object types available for global search:
 
-            SHIPMENT → CUSTOMER → CARRIER → USER → VENDOR
+        - `SHIPMENT`: Shipment records
 
-            '
-          items:
-            $ref: '#/components/schemas/GlobalSearchRow'
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInfo'
-        totalResults:
-          type: integer
-          description: Total number of matching results across all object types
-          minimum: 0
-          example: 42
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
+        - `CUSTOMER`: Customer/shipper profiles
+
+        - `CARRIER`: Carrier profiles
+
+        - `USER`: User accounts
+
+        - `VENDOR`: Vendor profiles
+
+        '
     SearchPaginationInput:
       type: object
       description: Pagination options for search requests
@@ -519,30 +484,6 @@ components:
       example:
         pageNumber: 1
         pageSize: 50
-    SearchPaginationInfo:
-      type: object
-      required:
-      - pageNumber
-      - pageSize
-      - totalPages
-      description: Pagination information for search results
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number
-          example: 1
-        pageSize:
-          type: integer
-          description: Number of results returned on this page
-          example: 50
-        totalPages:
-          type: integer
-          description: Total number of pages available
-          example: 25
-      example:
-        pageNumber: 1
-        pageSize: 50
-        totalPages: 25
     GlobalSearchRequest:
       type: object
       description: Request body for global search across multiple entity types
@@ -578,6 +519,65 @@ components:
           - CUSTOMER
         pagination:
           $ref: '#/components/schemas/SearchPaginationInput'
+  responses:
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: rate_limit_exceeded
+            message: Too many requests. Please retry after 60 seconds.
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per minute
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Remaining requests in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Unix timestamp when rate limit resets
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema:
+            type: integer
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   securitySchemes:
     BearerAuth:
       type: http

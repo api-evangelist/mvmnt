@@ -2,7 +2,9 @@ openapi: 3.2.0
 info:
   title: MVMNT Event Notifications API
   version: 1.0.0
-  description: "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n"
+  description: 'The MVMNT API enables you to automate freight brokerage workflows by integrating
+
+    directly with our Transportation Management System.'
   contact:
     name: MVMNT Support
     email: support@mvmnt.io
@@ -213,9 +215,7 @@ webhooks:
 
         - Implement idempotency using event ID and timestamp
 
-        - Handle unknown event types gracefully for forward compatibility
-
-        '
+        - Handle unknown event types gracefully for forward compatibility'
       operationId: webhookCallback
       tags:
       - Event Notifications
@@ -1143,6 +1143,24 @@ webhooks:
           description: Invalid or missing x-api-key header
 components:
   schemas:
+    WebhookDelivery:
+      type: object
+      description: The top-level webhook delivery payload containing one or more events
+      required:
+      - sentAt
+      - events
+      properties:
+        sentAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the webhook was sent from MVMNT
+          example: '2025-01-15T14:30:00Z'
+        events:
+          type: array
+          description: Array of webhook events (typically contains a single event)
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/WebhookPayload'
     WebhookEvent:
       type: string
       description: The type of webhook event
@@ -1220,73 +1238,6 @@ components:
       - LOCATION_CONTACT_CREATED
       - LOCATION_CONTACT_UPDATED
       - LOCATION_CONTACT_DELETED
-    DiffOperation:
-      type: string
-      description: The type of diff operation from json-diff-ts
-      enum:
-      - REMOVE
-      - ADD
-      - UPDATE
-    WebhookDelivery:
-      type: object
-      description: The top-level webhook delivery payload containing one or more events
-      required:
-      - sentAt
-      - events
-      properties:
-        sentAt:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when the webhook was sent from MVMNT
-          example: '2025-01-15T14:30:00Z'
-        events:
-          type: array
-          description: Array of webhook events (typically contains a single event)
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/WebhookPayload'
-    DiffChange:
-      type: object
-      description: 'Represents a single change from json-diff-ts IChange interface.
-
-        For nested object changes, the changes array will contain child changes.
-
-        '
-      required:
-      - type
-      - key
-      properties:
-        type:
-          $ref: '#/components/schemas/DiffOperation'
-        key:
-          type: string
-          description: The property name that changed
-          example: status
-        embeddedKey:
-          type: string
-          description: Optional key used when comparing array elements by identifier
-          example: id
-        value:
-          description: 'The new value being set.
-
-            - For ADD: The value being added
-
-            - For UPDATE: The new value replacing the old one
-
-            - For REMOVE: Not present
-
-            '
-          example: INACTIVE
-        oldValue:
-          description: 'The previous value (only present for UPDATE operations).
-
-            '
-          example: ACTIVE
-        changes:
-          type: array
-          description: Nested changes for complex objects
-          items:
-            $ref: '#/components/schemas/DiffChange'
     WebhookPayload:
       type: object
       required:
@@ -1358,6 +1309,55 @@ components:
             Each change follows the IChange interface from json-diff-ts library.
 
             '
+          items:
+            $ref: '#/components/schemas/DiffChange'
+    DiffOperation:
+      type: string
+      description: The type of diff operation from json-diff-ts
+      enum:
+      - REMOVE
+      - ADD
+      - UPDATE
+    DiffChange:
+      type: object
+      description: 'Represents a single change from json-diff-ts IChange interface.
+
+        For nested object changes, the changes array will contain child changes.
+
+        '
+      required:
+      - type
+      - key
+      properties:
+        type:
+          $ref: '#/components/schemas/DiffOperation'
+        key:
+          type: string
+          description: The property name that changed
+          example: status
+        embeddedKey:
+          type: string
+          description: Optional key used when comparing array elements by identifier
+          example: id
+        value:
+          description: 'The new value being set.
+
+            - For ADD: The value being added
+
+            - For UPDATE: The new value replacing the old one
+
+            - For REMOVE: Not present
+
+            '
+          example: INACTIVE
+        oldValue:
+          description: 'The previous value (only present for UPDATE operations).
+
+            '
+          example: ACTIVE
+        changes:
+          type: array
+          description: Nested changes for complex objects
           items:
             $ref: '#/components/schemas/DiffChange'
   securitySchemes:

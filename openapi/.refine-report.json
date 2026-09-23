@@ -39,7 +39,8 @@
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "mvmnt-openapi-original.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "mvmnt-openapi-original.yml: declared missing tag: Event Notifications"
+    "mvmnt-openapi-original.yml: declared missing tag: Event Notifications",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "mvmnt-bill-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -53,6 +54,7 @@
     "mvmnt-customer-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mvmnt-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mvmnt-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mvmnt-event-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mvmnt-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mvmnt-loads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "mvmnt-location-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
