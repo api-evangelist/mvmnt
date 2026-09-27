@@ -687,492 +687,6 @@ paths:
           $ref: '#/components/responses/NotFoundError'
 components:
   schemas:
-    FloatFilter:
-      type: object
-      description: Filter options for float/number fields
-      properties:
-        equalTo:
-          type: number
-          format: float
-          description: Exact match
-        notEqualTo:
-          type: number
-          format: float
-          description: Not equal to
-        lessThan:
-          type: number
-          format: float
-          description: Less than
-        lessThanOrEqualTo:
-          type: number
-          format: float
-          description: Less than or equal to
-        greaterThan:
-          type: number
-          format: float
-          description: Greater than
-        greaterThanOrEqualTo:
-          type: number
-          format: float
-          description: Greater than or equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    InvoiceFilterRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/InvoiceFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
-          type: string
-    BatchGenerateInvoicesRequest:
-      type: object
-      required:
-      - orderIds
-      properties:
-        orderIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Order IDs to generate invoices for
-          maxItems: 100
-        sendEmail:
-          type: boolean
-          default: false
-          description: Email invoices to customers after generation
-        emailConfig:
-          type: object
-          properties:
-            ccEmails:
-              type: array
-              items:
-                type: string
-                format: email
-            groupByCustomer:
-              type: boolean
-              default: true
-              description: Group invoices by customer in emails
-    InvoicePayment:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        paymentGroupId:
-          type: string
-          format: uuid
-        amount:
-          type: number
-          description: Amount applied to this invoice
-        paymentDate:
-          type: string
-          format: date
-        reference:
-          type:
-          - string
-          - 'null'
-          description: Check number, transaction ID, etc.
-        paymentMethodType:
-          type:
-          - string
-          - 'null'
-          description: Payment method (check, ach_wire, etc.)
-    InvoiceFilter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDFilter'
-        orderId:
-          $ref: '#/components/schemas/UUIDFilter'
-        shipmentId:
-          $ref: '#/components/schemas/UUIDFilter'
-        customerId:
-          $ref: '#/components/schemas/UUIDFilter'
-        status:
-          $ref: '#/components/schemas/InvoiceStatusFilter'
-        invoiceDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        dueDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        amount:
-          $ref: '#/components/schemas/FloatFilter'
-        amountOwed:
-          $ref: '#/components/schemas/FloatFilter'
-        overdue:
-          type: boolean
-          description: Filter to overdue invoices only
-        factored:
-          type: boolean
-          description: Filter to factored invoices only
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceFilter'
-        not:
-          $ref: '#/components/schemas/InvoiceFilter'
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    FactoringProvider:
-      type: string
-      enum:
-      - DENIM
-      - HAULPAY
-      description: 'Factoring provider for invoice financing.
-
-        - `DENIM`: Denim factoring
-
-        - `HAULPAY`: HaulPay factoring
-
-        '
-    AgingReportResponse:
-      type: object
-      required:
-      - asOfDate
-      - buckets
-      - customers
-      - totals
-      properties:
-        asOfDate:
-          type: string
-          format: date
-        buckets:
-          type: array
-          items:
-            type: string
-          example:
-          - Current
-          - 1-30
-          - 31-60
-          - 61-90
-          - 90+
-        customers:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-              name:
-                type: string
-              friendlyId:
-                type: string
-              current:
-                type: number
-              days1to30:
-                type: number
-              days31to60:
-                type: number
-              days61to90:
-                type: number
-              over90:
-                type: number
-              total:
-                type: number
-        totals:
-          type: object
-          properties:
-            current:
-              type: number
-            days1to30:
-              type: number
-            days31to60:
-              type: number
-            days61to90:
-              type: number
-            over90:
-              type: number
-            total:
-              type: number
-    InvoiceStatus:
-      type: string
-      enum:
-      - DRAFT
-      - AWAITING_PAYMENT
-      - PARTIALLY_PAID
-      - PAID
-      - VOIDED
-      description: 'Current status of the invoice.
-
-        - `DRAFT`: Invoice record exists but not finalized
-
-        - `AWAITING_PAYMENT`: Invoice finalized, awaiting payment
-
-        - `PARTIALLY_PAID`: Some payments received, balance remains
-
-        - `PAID`: Fully paid
-
-        - `VOIDED`: Invoice cancelled/voided
-
-        '
-    BatchGenerateInvoicesResponse:
-      type: object
-      properties:
-        generated:
-          type: array
-          items:
-            type: object
-            properties:
-              orderId:
-                type: string
-                format: uuid
-              invoiceId:
-                type: string
-                format: uuid
-              documentId:
-                type: string
-                format: uuid
-        failed:
-          type: array
-          items:
-            type: object
-            properties:
-              orderId:
-                type: string
-                format: uuid
-              error:
-                type: string
-        emailsSent:
-          type: integer
-    InvoiceInput:
-      type: object
-      required:
-      - orderId
-      - invoiceDate
-      - amount
-      properties:
-        orderId:
-          type: string
-          format: uuid
-          description: Order to invoice
-        invoiceDate:
-          type: string
-          format: date
-          description: Invoice date
-        dueDate:
-          type: string
-          format: date
-          description: Payment due date
-        amount:
-          type: number
-          description: Invoice amount (typically calculated from order charges)
-        reference:
-          type: string
-          maxLength: 500
-          description: External reference number
-        currency:
-          type: string
-          description: Currency code (defaults to customer currency)
-        paymentTermId:
-          type: string
-          format: uuid
-          description: Payment term (defaults to customer default)
-    MarkAwaitingPaymentRequest:
-      type: object
-      properties:
-        invoiceDate:
-          type: string
-          format: date
-          description: Invoice date (defaults to today)
-        dueDate:
-          type: string
-          format: date
-          description: Due date (defaults based on payment term)
-    InvoiceStatusFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/InvoiceStatus'
-        notEqualTo:
-          $ref: '#/components/schemas/InvoiceStatus'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceStatus'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceStatus'
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    InvoicePatch:
-      type: object
-      properties:
-        dueDate:
-          type:
-          - string
-          - 'null'
-          format: date
-        reference:
-          type:
-          - string
-          - 'null'
-        paymentTermId:
-          type: string
-          format: uuid
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    AvailableCreditsResponse:
-      type: object
-      required:
-      - availableCredits
-      - totalAvailable
-      properties:
-        availableCredits:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-              reference:
-                type:
-                - string
-                - 'null'
-              remainingBalance:
-                type: number
-              currency:
-                type: string
-              memoDate:
-                type: string
-                format: date
-              notes:
-                type:
-                - string
-                - 'null'
-        totalAvailable:
-          type: number
-          description: Total available credit balance
     CustomerReference:
       type: object
       description: 'Enhanced reference to a customer resource (returned in responses).
@@ -1251,6 +765,249 @@ components:
           format: date-time
           description: When the customer was soft deleted (null if active)
           example: null
+    AvailableCreditsResponse:
+      type: object
+      required:
+      - availableCredits
+      - totalAvailable
+      properties:
+        availableCredits:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              reference:
+                type:
+                - string
+                - 'null'
+              remainingBalance:
+                type: number
+              currency:
+                type: string
+              memoDate:
+                type: string
+                format: date
+              notes:
+                type:
+                - string
+                - 'null'
+        totalAvailable:
+          type: number
+          description: Total available credit balance
+    FactoringProvider:
+      type: string
+      enum:
+      - DENIM
+      - HAULPAY
+      description: 'Factoring provider for invoice financing.
+
+        - `DENIM`: Denim factoring
+
+        - `HAULPAY`: HaulPay factoring
+
+        '
+    InvoiceFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        orderId:
+          $ref: '#/components/schemas/UUIDFilter'
+        shipmentId:
+          $ref: '#/components/schemas/UUIDFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        status:
+          $ref: '#/components/schemas/InvoiceStatusFilter'
+        invoiceDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        dueDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        amount:
+          $ref: '#/components/schemas/FloatFilter'
+        amountOwed:
+          $ref: '#/components/schemas/FloatFilter'
+        overdue:
+          type: boolean
+          description: Filter to overdue invoices only
+        factored:
+          type: boolean
+          description: Filter to factored invoices only
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceFilter'
+        not:
+          $ref: '#/components/schemas/InvoiceFilter'
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    BatchGenerateInvoicesResponse:
+      type: object
+      properties:
+        generated:
+          type: array
+          items:
+            type: object
+            properties:
+              orderId:
+                type: string
+                format: uuid
+              invoiceId:
+                type: string
+                format: uuid
+              documentId:
+                type: string
+                format: uuid
+        failed:
+          type: array
+          items:
+            type: object
+            properties:
+              orderId:
+                type: string
+                format: uuid
+              error:
+                type: string
+        emailsSent:
+          type: integer
+    MarkAwaitingPaymentRequest:
+      type: object
+      properties:
+        invoiceDate:
+          type: string
+          format: date
+          description: Invoice date (defaults to today)
+        dueDate:
+          type: string
+          format: date
+          description: Due date (defaults based on payment term)
+    InvoiceStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/InvoiceStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/InvoiceStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceStatus'
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    InvoiceFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/InvoiceFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    InvoiceCredit:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        creditMemoId:
+          type: string
+          format: uuid
+        creditMemoReference:
+          type:
+          - string
+          - 'null'
+        amount:
+          type: number
+          description: Credit amount applied
+        appliedAt:
+          type: string
+          format: date-time
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     SendInvoiceEmailRequest:
       type: object
       required:
@@ -1273,138 +1030,81 @@ components:
         message:
           type: string
           description: Email body message
-    PaymentTermReference:
+    InvoicePatch:
       type: object
-      description: 'Enhanced reference to a payment term resource (returned in responses).
-
-        Includes full payment term details in addition to id/key.
-
-        '
+      properties:
+        dueDate:
+          type:
+          - string
+          - 'null'
+          format: date
+        reference:
+          type:
+          - string
+          - 'null'
+        paymentTermId:
+          type: string
+          format: uuid
+    InvoiceInput:
+      type: object
       required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
+      - orderId
+      - invoiceDate
+      - amount
       properties:
-        id:
+        orderId:
           type: string
           format: uuid
-          description: Payment term UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-PAYTERM-NET30
-        name:
+          description: Order to invoice
+        invoiceDate:
           type: string
-          description: Payment term name
-          example: Net 30
-        description:
-          type:
-          - string
-          - 'null'
-          description: Payment term description or notes
-          example: Payment due 30 days from invoice date
-        days:
-          type:
-          - integer
-          - 'null'
-          description: Number of days until payment is due
-          example: 30
-        quickPayFee:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Quick pay fee percentage (e.g., 0.05 for 5%)
-          example: 0.05
-          x-parsed-md-description:
-            result:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 1
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 0
-                - 1
-                inline: false
-                attributes: {}
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 1
-                  inline: true
-                  attributes:
-                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: inline
-                annotations: []
-                slots: {}
-              type: paragraph
-              annotations: []
-              slots: {}
-        apOnly:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this payment term is for accounts payable only
-          example: false
-        doNotUse:
-          type:
-          - boolean
-          - 'null'
-          description: Flag to prevent using this payment term for new transactions
-          example: false
-        createdAt:
+          format: date
+          description: Invoice date
+        dueDate:
           type: string
-          format: date-time
-          description: When the payment term was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the payment term was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the payment term was soft deleted (null if active)
-          example: null
-    InvoiceCredit:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        creditMemoId:
-          type: string
-          format: uuid
-        creditMemoReference:
-          type:
-          - string
-          - 'null'
+          format: date
+          description: Payment due date
         amount:
           type: number
-          description: Credit amount applied
-        appliedAt:
+          description: Invoice amount (typically calculated from order charges)
+        reference:
           type: string
-          format: date-time
+          maxLength: 500
+          description: External reference number
+        currency:
+          type: string
+          description: Currency code (defaults to customer currency)
+        paymentTermId:
+          type: string
+          format: uuid
+          description: Payment term (defaults to customer default)
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     Invoice:
       type: object
       required:
@@ -1533,7 +1233,334 @@ components:
           - string
           - 'null'
           format: date-time
+    InvoicePayment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        paymentGroupId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          description: Amount applied to this invoice
+        paymentDate:
+          type: string
+          format: date
+        reference:
+          type:
+          - string
+          - 'null'
+          description: Check number, transaction ID, etc.
+        paymentMethodType:
+          type:
+          - string
+          - 'null'
+          description: Payment method (check, ach_wire, etc.)
+    PaymentTermReference:
+      type: object
+      description: 'Enhanced reference to a payment term resource (returned in responses).
+
+        Includes full payment term details in addition to id/key.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Payment term UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-PAYTERM-NET30
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type:
+          - string
+          - 'null'
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type:
+          - integer
+          - 'null'
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          description: When the payment term was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the payment term was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the payment term was soft deleted (null if active)
+          example: null
+    InvoiceStatus:
+      type: string
+      enum:
+      - DRAFT
+      - AWAITING_PAYMENT
+      - PARTIALLY_PAID
+      - PAID
+      - VOIDED
+      description: 'Current status of the invoice.
+
+        - `DRAFT`: Invoice record exists but not finalized
+
+        - `AWAITING_PAYMENT`: Invoice finalized, awaiting payment
+
+        - `PARTIALLY_PAID`: Some payments received, balance remains
+
+        - `PAID`: Fully paid
+
+        - `VOIDED`: Invoice cancelled/voided
+
+        '
+    AgingReportResponse:
+      type: object
+      required:
+      - asOfDate
+      - buckets
+      - customers
+      - totals
+      properties:
+        asOfDate:
+          type: string
+          format: date
+        buckets:
+          type: array
+          items:
+            type: string
+          example:
+          - Current
+          - 1-30
+          - 31-60
+          - 61-90
+          - 90+
+        customers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              friendlyId:
+                type: string
+              current:
+                type: number
+              days1to30:
+                type: number
+              days31to60:
+                type: number
+              days61to90:
+                type: number
+              over90:
+                type: number
+              total:
+                type: number
+        totals:
+          type: object
+          properties:
+            current:
+              type: number
+            days1to30:
+              type: number
+            days31to60:
+              type: number
+            days61to90:
+              type: number
+            over90:
+              type: number
+            total:
+              type: number
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    BatchGenerateInvoicesRequest:
+      type: object
+      required:
+      - orderIds
+      properties:
+        orderIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Order IDs to generate invoices for
+          maxItems: 100
+        sendEmail:
+          type: boolean
+          default: false
+          description: Email invoices to customers after generation
+        emailConfig:
+          type: object
+          properties:
+            ccEmails:
+              type: array
+              items:
+                type: string
+                format: email
+            groupByCustomer:
+              type: boolean
+              default: true
+              description: Group invoices by customer in emails
   responses:
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
     ValidationError:
       description: Validation error - invalid field values
       content:
@@ -1548,33 +1575,6 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
   parameters:
     LookupBy:
       name: by

@@ -354,74 +354,33 @@ paths:
           $ref: '#/components/responses/RateLimitExceeded'
 components:
   schemas:
-    SavedSearchType:
-      type: string
-      description: 'Type of entity this saved search applies to. Each type corresponds to a specific entity''s search view.
-
-
-        **Entity Mapping:**
-
-        - `INVOICE`: Customer invoices (AR Invoices) - money owed to you
-
-        - `BILL`: Vendor/Carrier bills (AP Invoices) - money you owe
-
-        - `INVOICE_PAYMENT`: Customer payment groups (AR Payment Groups)
-
-        - `BILL_PAYMENT`: Vendor/Carrier payment groups (AP Payment Groups)
-
-        '
-      enum:
-      - SHIPMENT
-      - INVOICE
-      - BILL
-      - USER
-      - CUSTOMER
-      - VENDOR
-      - QUOTE
-      - COMMISSION
-      - CARRIER
-      - INVOICE_PAYMENT
-      - BILL_PAYMENT
-      - LOAD
-      - TRUCK_POSTING
-      - LOCATION
-      example: SHIPMENT
-    SavedSearchPatch:
+    SavedSearchFilterRequest:
       type: object
-      description: 'Partial saved search update. All fields are optional.
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
+      description: Request body for filtering saved searches
       properties:
-        name:
+        filter:
+          $ref: '#/components/schemas/SavedSearchFilter'
+          description: 'Filter criteria (optional - omit to return all saved searches).
+
+            Returns only saved searches accessible to the authenticated user.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
           type: string
-          description: Display name for the saved search
-          example: Updated Shipments View
-        jsonValue:
-          allOf:
-          - $ref: '#/components/schemas/SearchConfigurationState'
-          description: The saved search configuration
-        isPublic:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this saved search is visible to all users
-          example: true
-        groupId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Optional group this saved search belongs to
-          example: null
+          description: Pagination cursor for next page
       example:
-        name: Updated Shipments View
-        isPublic: true
+        filter:
+          preferenceType:
+            equalTo: SHIPMENT
+          isPublic:
+            equalTo: true
+        pageSize: 50
     SavedSearchInput:
       type: object
       required:
@@ -471,74 +430,6 @@ components:
           - id: createdAt
             desc: true
         isPublic: true
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    SavedSearchFilterRequest:
-      type: object
-      description: Request body for filtering saved searches
-      properties:
-        filter:
-          $ref: '#/components/schemas/SavedSearchFilter'
-          description: 'Filter criteria (optional - omit to return all saved searches).
-
-            Returns only saved searches accessible to the authenticated user.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          preferenceType:
-            equalTo: SHIPMENT
-          isPublic:
-            equalTo: true
-        pageSize: 50
     DatetimeFilter:
       type: object
       description: Filter options for datetime fields
@@ -570,35 +461,63 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    SavedSearchFilter:
+    SavedSearchType:
+      type: string
+      description: 'Type of entity this saved search applies to. Each type corresponds to a specific entity''s search view.
+
+
+        **Entity Mapping:**
+
+        - `INVOICE`: Customer invoices (AR Invoices) - money owed to you
+
+        - `BILL`: Vendor/Carrier bills (AP Invoices) - money you owe
+
+        - `INVOICE_PAYMENT`: Customer payment groups (AR Payment Groups)
+
+        - `BILL_PAYMENT`: Vendor/Carrier payment groups (AP Payment Groups)
+
+        '
+      enum:
+      - SHIPMENT
+      - INVOICE
+      - BILL
+      - USER
+      - CUSTOMER
+      - VENDOR
+      - QUOTE
+      - COMMISSION
+      - CARRIER
+      - INVOICE_PAYMENT
+      - BILL_PAYMENT
+      - LOAD
+      - TRUCK_POSTING
+      - LOCATION
+      example: SHIPMENT
+    Error:
       type: object
-      description: Filter criteria for saved searches with AND/OR logic support
+      required:
+      - error
+      - message
       properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/SavedSearchFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/SavedSearchFilter'
-        not:
-          $ref: '#/components/schemas/SavedSearchFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        preferenceType:
-          $ref: '#/components/schemas/StringFilter'
-        isPublic:
-          $ref: '#/components/schemas/BooleanFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    BooleanFilter:
+      type: object
+      description: Filter options for boolean fields
+      properties:
+        equalTo:
+          type: boolean
+          description: Exact match
+        notEqualTo:
+          type: boolean
+          description: Not equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     SearchConfigurationState:
       type: object
       description: 'The saved search configuration state containing criteria, sorting, and display preferences.
@@ -758,84 +677,35 @@ components:
         - id
         - status
         - createdAt
-    Error:
+    SavedSearchFilter:
       type: object
-      required:
-      - error
-      - message
+      description: Filter criteria for saved searches with AND/OR logic support
       properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
+        and:
           type: array
-          description: Validation error details
+          description: All conditions must match (recursive)
           items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    BooleanFilter:
-      type: object
-      description: Filter options for boolean fields
-      properties:
-        equalTo:
-          type: boolean
-          description: Exact match
-        notEqualTo:
-          type: boolean
-          description: Not equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
+            $ref: '#/components/schemas/SavedSearchFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/SavedSearchFilter'
+        not:
+          $ref: '#/components/schemas/SavedSearchFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        preferenceType:
+          $ref: '#/components/schemas/StringFilter'
+        isPublic:
+          $ref: '#/components/schemas/BooleanFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
     IDFilter:
       type: object
       description: Filter options for ID fields (limited operations - exact match only)
@@ -936,21 +806,146 @@ components:
           readOnly: true
           description: Timestamp when saved search was last updated
           example: '2025-01-15T14:30:00Z'
-  responses:
+    SavedSearchPatch:
+      type: object
+      description: 'Partial saved search update. All fields are optional.
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Display name for the saved search
+          example: Updated Shipments View
+        jsonValue:
+          allOf:
+          - $ref: '#/components/schemas/SearchConfigurationState'
+          description: The saved search configuration
+        isPublic:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this saved search is visible to all users
+          example: true
+        groupId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Optional group this saved search belongs to
+          example: null
+      example:
+        name: Updated Shipments View
+        isPublic: true
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     ValidationError:
-      description: Validation error - invalid field values
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+  responses:
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/Error'
           example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
+            error: unauthorized
+            message: Invalid or expired access token
     RateLimitExceeded:
       description: Rate limit exceeded
       content:
@@ -977,15 +972,6 @@ components:
           description: Seconds to wait before retrying
           schema:
             type: integer
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
     NotFoundError:
       description: Resource not found
       content:
@@ -995,15 +981,29 @@ components:
           example:
             error: not_found
             message: Resource not found
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
+    BadRequestError:
+      description: Bad request - invalid input
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
           example:
-            error: unauthorized
-            message: Invalid or expired access token
+            error: bad_request
+            message: Invalid request parameters
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
   securitySchemes:
     BearerAuth:
       type: http

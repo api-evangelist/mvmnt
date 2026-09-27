@@ -1143,6 +1143,13 @@ webhooks:
           description: Invalid or missing x-api-key header
 components:
   schemas:
+    DiffOperation:
+      type: string
+      description: The type of diff operation from json-diff-ts
+      enum:
+      - REMOVE
+      - ADD
+      - UPDATE
     WebhookDelivery:
       type: object
       description: The top-level webhook delivery payload containing one or more events
@@ -1161,6 +1168,121 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/WebhookPayload'
+    DiffChange:
+      type: object
+      description: 'Represents a single change from json-diff-ts IChange interface.
+
+        For nested object changes, the changes array will contain child changes.
+
+        '
+      required:
+      - type
+      - key
+      properties:
+        type:
+          $ref: '#/components/schemas/DiffOperation'
+        key:
+          type: string
+          description: The property name that changed
+          example: status
+        embeddedKey:
+          type: string
+          description: Optional key used when comparing array elements by identifier
+          example: id
+        value:
+          description: 'The new value being set.
+
+            - For ADD: The value being added
+
+            - For UPDATE: The new value replacing the old one
+
+            - For REMOVE: Not present
+
+            '
+          example: INACTIVE
+        oldValue:
+          description: 'The previous value (only present for UPDATE operations).
+
+            '
+          example: ACTIVE
+        changes:
+          type: array
+          description: Nested changes for complex objects
+          items:
+            $ref: '#/components/schemas/DiffChange'
+    WebhookPayload:
+      type: object
+      required:
+      - event
+      - timestamp
+      - data
+      discriminator:
+        propertyName: event
+        mapping:
+          CUSTOMER_CREATED: '#/components/schemas/CustomerChangedPayload'
+          CUSTOMER_UPDATED: '#/components/schemas/CustomerChangedPayload'
+          CUSTOMER_DELETED: '#/components/schemas/CustomerChangedPayload'
+          COMPANY_CREATED: '#/components/schemas/CompanyChangedPayload'
+          COMPANY_UPDATED: '#/components/schemas/CompanyChangedPayload'
+          COMPANY_DELETED: '#/components/schemas/CompanyChangedPayload'
+          CUSTOMER_CONTACT_CREATED: '#/components/schemas/CustomerContactChangedPayload'
+          CUSTOMER_CONTACT_UPDATED: '#/components/schemas/CustomerContactChangedPayload'
+          CUSTOMER_CONTACT_DELETED: '#/components/schemas/CustomerContactChangedPayload'
+          CARRIER_CONTACT_CREATED: '#/components/schemas/CarrierContactChangedPayload'
+          CARRIER_CONTACT_UPDATED: '#/components/schemas/CarrierContactChangedPayload'
+          CARRIER_CONTACT_DELETED: '#/components/schemas/CarrierContactChangedPayload'
+          CARRIER_CREATED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_UPDATED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_DELETED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_ACTIVATED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_DEACTIVATED: '#/components/schemas/CarrierChangedPayload'
+          CARRIER_FACTOR_CREATED: '#/components/schemas/CarrierFactorChangedPayload'
+          CARRIER_FACTOR_UPDATED: '#/components/schemas/CarrierFactorChangedPayload'
+          CARRIER_FACTOR_DELETED: '#/components/schemas/CarrierFactorChangedPayload'
+          CARRIER_PAYMENT_METHOD_CREATED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
+          CARRIER_PAYMENT_METHOD_UPDATED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
+          CARRIER_PAYMENT_METHOD_DELETED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
+          VENDOR_CREATED: '#/components/schemas/VendorChangedPayload'
+          VENDOR_UPDATED: '#/components/schemas/VendorChangedPayload'
+          VENDOR_DELETED: '#/components/schemas/VendorChangedPayload'
+          VENDOR_CONTACT_CREATED: '#/components/schemas/VendorContactChangedPayload'
+          VENDOR_CONTACT_UPDATED: '#/components/schemas/VendorContactChangedPayload'
+          VENDOR_CONTACT_DELETED: '#/components/schemas/VendorContactChangedPayload'
+          VENDOR_PAYMENT_METHOD_CREATED: '#/components/schemas/VendorPaymentMethodChangedPayload'
+          VENDOR_PAYMENT_METHOD_UPDATED: '#/components/schemas/VendorPaymentMethodChangedPayload'
+          VENDOR_PAYMENT_METHOD_DELETED: '#/components/schemas/VendorPaymentMethodChangedPayload'
+          LOCATION_CREATED: '#/components/schemas/LocationChangedPayload'
+          LOCATION_UPDATED: '#/components/schemas/LocationChangedPayload'
+          LOCATION_DELETED: '#/components/schemas/LocationChangedPayload'
+          LOCATION_CONTACT_CREATED: '#/components/schemas/LocationContactChangedPayload'
+          LOCATION_CONTACT_UPDATED: '#/components/schemas/LocationContactChangedPayload'
+          LOCATION_CONTACT_DELETED: '#/components/schemas/LocationContactChangedPayload'
+          SHIPMENT_DELIVERED: '#/components/schemas/ShipmentDeliveredPayload'
+      properties:
+        event:
+          $ref: '#/components/schemas/WebhookEvent'
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the event occurred
+          example: '2025-01-15T14:30:00Z'
+        data:
+          type: object
+          description: Event-specific data. Structure varies by event type.
+          additionalProperties: true
+        diff:
+          type:
+          - array
+          - 'null'
+          description: 'Array of changes made during an UPDATE operation using json-diff-ts.
+
+            Only present for UPDATE events. Null for CREATE and DELETE events.
+
+            Each change follows the IChange interface from json-diff-ts library.
+
+            '
+          items:
+            $ref: '#/components/schemas/DiffChange'
     WebhookEvent:
       type: string
       description: The type of webhook event
@@ -1238,128 +1360,6 @@ components:
       - LOCATION_CONTACT_CREATED
       - LOCATION_CONTACT_UPDATED
       - LOCATION_CONTACT_DELETED
-    WebhookPayload:
-      type: object
-      required:
-      - event
-      - timestamp
-      - data
-      discriminator:
-        propertyName: event
-        mapping:
-          CUSTOMER_CREATED: '#/components/schemas/CustomerChangedPayload'
-          CUSTOMER_UPDATED: '#/components/schemas/CustomerChangedPayload'
-          CUSTOMER_DELETED: '#/components/schemas/CustomerChangedPayload'
-          COMPANY_CREATED: '#/components/schemas/CompanyChangedPayload'
-          COMPANY_UPDATED: '#/components/schemas/CompanyChangedPayload'
-          COMPANY_DELETED: '#/components/schemas/CompanyChangedPayload'
-          CUSTOMER_CONTACT_CREATED: '#/components/schemas/CustomerContactChangedPayload'
-          CUSTOMER_CONTACT_UPDATED: '#/components/schemas/CustomerContactChangedPayload'
-          CUSTOMER_CONTACT_DELETED: '#/components/schemas/CustomerContactChangedPayload'
-          CARRIER_CONTACT_CREATED: '#/components/schemas/CarrierContactChangedPayload'
-          CARRIER_CONTACT_UPDATED: '#/components/schemas/CarrierContactChangedPayload'
-          CARRIER_CONTACT_DELETED: '#/components/schemas/CarrierContactChangedPayload'
-          CARRIER_CREATED: '#/components/schemas/CarrierChangedPayload'
-          CARRIER_UPDATED: '#/components/schemas/CarrierChangedPayload'
-          CARRIER_DELETED: '#/components/schemas/CarrierChangedPayload'
-          CARRIER_ACTIVATED: '#/components/schemas/CarrierChangedPayload'
-          CARRIER_DEACTIVATED: '#/components/schemas/CarrierChangedPayload'
-          CARRIER_FACTOR_CREATED: '#/components/schemas/CarrierFactorChangedPayload'
-          CARRIER_FACTOR_UPDATED: '#/components/schemas/CarrierFactorChangedPayload'
-          CARRIER_FACTOR_DELETED: '#/components/schemas/CarrierFactorChangedPayload'
-          CARRIER_PAYMENT_METHOD_CREATED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
-          CARRIER_PAYMENT_METHOD_UPDATED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
-          CARRIER_PAYMENT_METHOD_DELETED: '#/components/schemas/CarrierPaymentMethodChangedPayload'
-          VENDOR_CREATED: '#/components/schemas/VendorChangedPayload'
-          VENDOR_UPDATED: '#/components/schemas/VendorChangedPayload'
-          VENDOR_DELETED: '#/components/schemas/VendorChangedPayload'
-          VENDOR_CONTACT_CREATED: '#/components/schemas/VendorContactChangedPayload'
-          VENDOR_CONTACT_UPDATED: '#/components/schemas/VendorContactChangedPayload'
-          VENDOR_CONTACT_DELETED: '#/components/schemas/VendorContactChangedPayload'
-          VENDOR_PAYMENT_METHOD_CREATED: '#/components/schemas/VendorPaymentMethodChangedPayload'
-          VENDOR_PAYMENT_METHOD_UPDATED: '#/components/schemas/VendorPaymentMethodChangedPayload'
-          VENDOR_PAYMENT_METHOD_DELETED: '#/components/schemas/VendorPaymentMethodChangedPayload'
-          LOCATION_CREATED: '#/components/schemas/LocationChangedPayload'
-          LOCATION_UPDATED: '#/components/schemas/LocationChangedPayload'
-          LOCATION_DELETED: '#/components/schemas/LocationChangedPayload'
-          LOCATION_CONTACT_CREATED: '#/components/schemas/LocationContactChangedPayload'
-          LOCATION_CONTACT_UPDATED: '#/components/schemas/LocationContactChangedPayload'
-          LOCATION_CONTACT_DELETED: '#/components/schemas/LocationContactChangedPayload'
-          SHIPMENT_DELIVERED: '#/components/schemas/ShipmentDeliveredPayload'
-      properties:
-        event:
-          $ref: '#/components/schemas/WebhookEvent'
-        timestamp:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when the event occurred
-          example: '2025-01-15T14:30:00Z'
-        data:
-          type: object
-          description: Event-specific data. Structure varies by event type.
-          additionalProperties: true
-        diff:
-          type:
-          - array
-          - 'null'
-          description: 'Array of changes made during an UPDATE operation using json-diff-ts.
-
-            Only present for UPDATE events. Null for CREATE and DELETE events.
-
-            Each change follows the IChange interface from json-diff-ts library.
-
-            '
-          items:
-            $ref: '#/components/schemas/DiffChange'
-    DiffOperation:
-      type: string
-      description: The type of diff operation from json-diff-ts
-      enum:
-      - REMOVE
-      - ADD
-      - UPDATE
-    DiffChange:
-      type: object
-      description: 'Represents a single change from json-diff-ts IChange interface.
-
-        For nested object changes, the changes array will contain child changes.
-
-        '
-      required:
-      - type
-      - key
-      properties:
-        type:
-          $ref: '#/components/schemas/DiffOperation'
-        key:
-          type: string
-          description: The property name that changed
-          example: status
-        embeddedKey:
-          type: string
-          description: Optional key used when comparing array elements by identifier
-          example: id
-        value:
-          description: 'The new value being set.
-
-            - For ADD: The value being added
-
-            - For UPDATE: The new value replacing the old one
-
-            - For REMOVE: Not present
-
-            '
-          example: INACTIVE
-        oldValue:
-          description: 'The previous value (only present for UPDATE operations).
-
-            '
-          example: ACTIVE
-        changes:
-          type: array
-          description: Nested changes for complex objects
-          items:
-            $ref: '#/components/schemas/DiffChange'
   securitySchemes:
     BearerAuth:
       type: http

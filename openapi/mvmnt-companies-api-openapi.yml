@@ -345,47 +345,143 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    StringFilter:
+    UserReference:
       type: object
-      description: Filter options for string fields
+      description: 'Enhanced reference to a user resource (returned in responses).
+
+        Includes full user details in addition to id/key.
+
+
+        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - createdAt
+      - updatedAt
       properties:
-        equalTo:
+        id:
           type: string
-          description: Exact match
-        notEqualTo:
+          format: uuid
+          description: User UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-USER-12345
+        email:
           type: string
-          description: Not equal to
-        in:
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          type: string
+          description: User account status
+          enum:
+          - PENDING
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the user was soft deleted (null if active)
+          example: null
+    CompanyFilter:
+      type: object
+      description: Filter criteria for companies with AND/OR logic support
+      properties:
+        and:
           type: array
+          description: All conditions must match (recursive)
           items:
-            type: string
-          description: Matches any value in the array
-        notIn:
+            $ref: '#/components/schemas/CompanyFilter'
+        or:
           type: array
+          description: At least one condition must match (recursive)
           items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
+            $ref: '#/components/schemas/CompanyFilter'
+        not:
+          $ref: '#/components/schemas/CompanyFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        addressLine1:
+          $ref: '#/components/schemas/StringFilter'
+        addressLine2:
+          $ref: '#/components/schemas/StringFilter'
+        city:
+          $ref: '#/components/schemas/StringFilter'
+        country:
+          $ref: '#/components/schemas/StringFilter'
+        fax:
+          $ref: '#/components/schemas/StringFilter'
+        invoiceOnly:
+          $ref: '#/components/schemas/BooleanFilter'
+        invoiceVerbiage:
+          $ref: '#/components/schemas/StringFilter'
+        primaryContactName:
+          $ref: '#/components/schemas/StringFilter'
+        primaryContactEmail:
+          $ref: '#/components/schemas/StringFilter'
+        primaryContactPhone:
+          $ref: '#/components/schemas/StringFilter'
+        createdById:
+          $ref: '#/components/schemas/UUIDFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
     DatetimeFilter:
       type: object
       description: Filter options for datetime fields
@@ -414,6 +510,186 @@ components:
           type: string
           format: date-time
           description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    BooleanFilter:
+      type: object
+      description: Filter options for boolean fields
+      properties:
+        equalTo:
+          type: boolean
+          description: Exact match
+        notEqualTo:
+          type: boolean
+          description: Not equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    CompanyPatch:
+      type: object
+      description: 'Partial company update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Company legal name
+          example: Acme Logistics Inc
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          description: Primary street address
+          example: 123 Main St
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          description: Secondary address line
+          example: Suite 400
+        city:
+          type:
+          - string
+          - 'null'
+          description: City name
+          example: Chicago
+        country:
+          type:
+          - string
+          - 'null'
+          description: Country code or name
+          example: USA
+        fax:
+          type:
+          - string
+          - 'null'
+          description: Fax number
+          example: +1-555-0123
+        invoiceOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this company is used only for invoicing purposes
+          example: false
+        invoiceVerbiage:
+          type:
+          - string
+          - 'null'
+          description: Custom text to include on invoices
+          example: Please remit payment within 30 days
+        primaryContactName:
+          type:
+          - string
+          - 'null'
+          description: Name of primary contact person
+          example: John Smith
+        primaryContactEmail:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address of primary contact
+          example: john.smith@acmelogistics.com
+        primaryContactPhone:
+          type:
+          - string
+          - 'null'
+          description: Phone number of primary contact
+          example: +1-555-0100
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-COMPANY-ACME-001
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
+    CompanyFilterRequest:
+      type: object
+      description: Request body for filtering companies
+      properties:
+        filter:
+          $ref: '#/components/schemas/CompanyFilter'
+          description: 'Filter criteria (optional - omit to return all companies).
+
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - invoiceOnly:
+              equalTo: false
+          - name:
+              includes: Inc
+        pageSize: 50
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
@@ -536,98 +812,6 @@ components:
           readOnly: true
           description: When the company was soft deleted (null if active)
           example: null
-    CompanyFilter:
-      type: object
-      description: Filter criteria for companies with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/CompanyFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/CompanyFilter'
-        not:
-          $ref: '#/components/schemas/CompanyFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        addressLine1:
-          $ref: '#/components/schemas/StringFilter'
-        addressLine2:
-          $ref: '#/components/schemas/StringFilter'
-        city:
-          $ref: '#/components/schemas/StringFilter'
-        country:
-          $ref: '#/components/schemas/StringFilter'
-        fax:
-          $ref: '#/components/schemas/StringFilter'
-        invoiceOnly:
-          $ref: '#/components/schemas/BooleanFilter'
-        invoiceVerbiage:
-          $ref: '#/components/schemas/StringFilter'
-        primaryContactName:
-          $ref: '#/components/schemas/StringFilter'
-        primaryContactEmail:
-          $ref: '#/components/schemas/StringFilter'
-        primaryContactPhone:
-          $ref: '#/components/schemas/StringFilter'
-        createdById:
-          $ref: '#/components/schemas/UUIDFilter'
-        key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    CompanyFilterRequest:
-      type: object
-      description: Request body for filtering companies
-      properties:
-        filter:
-          $ref: '#/components/schemas/CompanyFilter'
-          description: 'Filter criteria (optional - omit to return all companies).
-
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - invoiceOnly:
-              equalTo: false
-          - name:
-              includes: Inc
-        pageSize: 50
     PaginationInfo:
       type: object
       required:
@@ -652,91 +836,47 @@ components:
           - 'null'
           description: Cursor for the next page (null if no next page)
           example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    CompanyPatch:
+    StringFilter:
       type: object
-      description: 'Partial company update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
+      description: Filter options for string fields
       properties:
-        name:
+        equalTo:
           type: string
-          description: Company legal name
-          example: Acme Logistics Inc
-        addressLine1:
-          type:
-          - string
-          - 'null'
-          description: Primary street address
-          example: 123 Main St
-        addressLine2:
-          type:
-          - string
-          - 'null'
-          description: Secondary address line
-          example: Suite 400
-        city:
-          type:
-          - string
-          - 'null'
-          description: City name
-          example: Chicago
-        country:
-          type:
-          - string
-          - 'null'
-          description: Country code or name
-          example: USA
-        fax:
-          type:
-          - string
-          - 'null'
-          description: Fax number
-          example: +1-555-0123
-        invoiceOnly:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this company is used only for invoicing purposes
-          example: false
-        invoiceVerbiage:
-          type:
-          - string
-          - 'null'
-          description: Custom text to include on invoices
-          example: Please remit payment within 30 days
-        primaryContactName:
-          type:
-          - string
-          - 'null'
-          description: Name of primary contact person
-          example: John Smith
-        primaryContactEmail:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Email address of primary contact
-          example: john.smith@acmelogistics.com
-        primaryContactPhone:
-          type:
-          - string
-          - 'null'
-          description: Phone number of primary contact
-          example: +1-555-0100
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-COMPANY-ACME-001
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     CompanyInput:
       type: object
       required:
@@ -821,132 +961,6 @@ components:
               message:
                 type: string
                 description: Validation error message
-    BooleanFilter:
-      type: object
-      description: Filter options for boolean fields
-      properties:
-        equalTo:
-          type: boolean
-          description: Exact match
-        notEqualTo:
-          type: boolean
-          description: Not equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    UserReference:
-      type: object
-      description: 'Enhanced reference to a user resource (returned in responses).
-
-        Includes full user details in addition to id/key.
-
-
-        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - email
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: User UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-USER-12345
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: User's full name
-          example: John Doe
-        phone:
-          type:
-          - string
-          - 'null'
-          description: User's phone number
-          example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
-        status:
-          type: string
-          description: User account status
-          enum:
-          - PENDING
-          - ACTIVE
-          - INACTIVE
-          example: ACTIVE
-        avatarId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        createdAt:
-          type: string
-          format: date-time
-          description: When the user was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the user was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the user was soft deleted (null if active)
-          example: null
     ClientKeyFilter:
       type: object
       description: Filter options for client key fields (limited operations - exact match only)
@@ -962,35 +976,16 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
   responses:
-    ValidationError:
-      description: Validation error - invalid field values
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/Error'
           example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
+            error: unauthorized
+            message: Invalid or expired access token
     RateLimitExceeded:
       description: Rate limit exceeded
       content:
@@ -1017,33 +1012,6 @@ components:
           description: Seconds to wait before retrying
           schema:
             type: integer
-    ConflictError:
-      description: Conflict - resource already exists or constraint violation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: conflict
-            message: A resource with this identifier already exists
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: internal_server_error
-            message: An unexpected error occurred
     NotFoundError:
       description: Resource not found
       content:
@@ -1053,15 +1021,47 @@ components:
           example:
             error: not_found
             message: Resource not found
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
+    BadRequestError:
+      description: Bad request - invalid input
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
           example:
-            error: unauthorized
-            message: Invalid or expired access token
+            error: bad_request
+            message: Invalid request parameters
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: internal_server_error
+            message: An unexpected error occurred
+    ConflictError:
+      description: Conflict - resource already exists or constraint violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: conflict
+            message: A resource with this identifier already exists
   parameters:
     IdOrClientKey:
       name: id

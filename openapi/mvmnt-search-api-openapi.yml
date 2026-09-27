@@ -294,95 +294,26 @@ paths:
           $ref: '#/components/responses/RateLimitExceeded'
 components:
   schemas:
-    ValidationError:
+    SearchPaginationInput:
       type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    GlobalSearchResponse:
-      type: object
-      description: Response for global search requests
-      required:
-      - data
-      - pagination
-      - totalResults
-      properties:
-        data:
-          type: array
-          description: 'Search results sorted by object type priority:
-
-            SHIPMENT → CUSTOMER → CARRIER → USER → VENDOR
-
-            '
-          items:
-            $ref: '#/components/schemas/GlobalSearchRow'
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInfo'
-        totalResults:
-          type: integer
-          description: Total number of matching results across all object types
-          minimum: 0
-          example: 42
-    SearchPaginationInfo:
-      type: object
-      required:
-      - pageNumber
-      - pageSize
-      - totalPages
-      description: Pagination information for search results
+      description: Pagination options for search requests
       properties:
         pageNumber:
           type: integer
-          description: Current page number
+          minimum: 1
+          default: 1
+          description: Page number (1-based)
           example: 1
         pageSize:
           type: integer
-          description: Number of results returned on this page
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page (max 250)
           example: 50
-        totalPages:
-          type: integer
-          description: Total number of pages available
-          example: 25
       example:
         pageNumber: 1
         pageSize: 50
-        totalPages: 25
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
     GlobalSearchRow:
       type: object
       description: 'A single global search result row.
@@ -443,6 +374,66 @@ components:
 
             '
           example: <em>Acme</em> Corporation
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    SearchPaginationInfo:
+      type: object
+      required:
+      - pageNumber
+      - pageSize
+      - totalPages
+      description: Pagination information for search results
+      properties:
+        pageNumber:
+          type: integer
+          description: Current page number
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of results returned on this page
+          example: 50
+        totalPages:
+          type: integer
+          description: Total number of pages available
+          example: 25
+      example:
+        pageNumber: 1
+        pageSize: 50
+        totalPages: 25
+    GlobalSearchResponse:
+      type: object
+      description: Response for global search requests
+      required:
+      - data
+      - pagination
+      - totalResults
+      properties:
+        data:
+          type: array
+          description: 'Search results sorted by object type priority:
+
+            SHIPMENT → CUSTOMER → CARRIER → USER → VENDOR
+
+            '
+          items:
+            $ref: '#/components/schemas/GlobalSearchRow'
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInfo'
+        totalResults:
+          type: integer
+          description: Total number of matching results across all object types
+          minimum: 0
+          example: 42
     GlobalSearchObjectType:
       type: string
       enum:
@@ -464,26 +455,35 @@ components:
         - `VENDOR`: Vendor profiles
 
         '
-    SearchPaginationInput:
+    ValidationError:
       type: object
-      description: Pagination options for search requests
+      required:
+      - error
+      - message
+      - details
       properties:
-        pageNumber:
-          type: integer
-          minimum: 1
-          default: 1
-          description: Page number (1-based)
-          example: 1
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page (max 250)
-          example: 50
-      example:
-        pageNumber: 1
-        pageSize: 50
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
     GlobalSearchRequest:
       type: object
       description: Request body for global search across multiple entity types
@@ -555,6 +555,15 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
     ValidationError:
       description: Validation error - invalid field values
       content:
@@ -569,15 +578,6 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
   securitySchemes:
     BearerAuth:
       type: http

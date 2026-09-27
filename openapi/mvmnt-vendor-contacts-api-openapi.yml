@@ -375,190 +375,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    VendorContactPatch:
-      type: object
-      description: 'Partial vendor contact update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-
-        Note: vendorId cannot be updated after creation.
-
-        '
-      properties:
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Contact email address
-          example: john.smith@abcwarehouse.com
-        phone:
-          type:
-          - string
-          - 'null'
-          description: Contact phone number
-          example: +1-555-123-4567
-        role:
-          type:
-          - string
-          - 'null'
-          description: Contact role or title (deprecated - use roles array)
-          example: Billing Manager
-        roles:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorContactRole'
-          description: Types/roles this contact serves (replaces entire array)
-          example:
-          - BILLING
-          - AGENT
-    VendorContactFilter:
-      type: object
-      description: Filter criteria for vendor contacts with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/VendorContactFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/VendorContactFilter'
-        not:
-          $ref: '#/components/schemas/VendorContactFilter'
-          description: Negates the filter
-        vendorId:
-          $ref: '#/components/schemas/UUIDFilter'
-        email:
-          $ref: '#/components/schemas/StringFilter'
-        phone:
-          $ref: '#/components/schemas/StringFilter'
-        role:
-          $ref: '#/components/schemas/StringFilter'
-        roles:
-          $ref: '#/components/schemas/VendorContactRoleFilter'
-        deletedById:
-          $ref: '#/components/schemas/UUIDFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-    VendorContact:
-      type: object
-      required:
-      - vendor
-      - createdAt
-      properties:
-        object:
-          type: string
-          enum:
-          - VENDOR_CONTACT
-          readOnly: true
-          description: Object type identifier
-          example: VENDOR_CONTACT
-        vendor:
-          $ref: '#/components/schemas/ResourceReference'
-          description: Vendor this contact belongs to (id and key only)
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Contact email address
-          example: john.smith@abcwarehouse.com
-        phone:
-          type:
-          - string
-          - 'null'
-          description: Contact phone number
-          example: +1-555-123-4567
-        role:
-          type:
-          - string
-          - 'null'
-          description: Contact role or title (deprecated - use roles array)
-          example: Billing Manager
-        roles:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorContactRole'
-          description: Types/roles this contact serves
-          example:
-          - BILLING
-          - AGENT
-        deletedBy:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User who deleted this contact (full user details)
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the contact was created
-          example: '2025-01-15T10:00:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: When the contact was soft deleted (null if active)
-          example: null
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
     VendorContactRoleFilter:
       type: object
       description: Filter for contact role enum array field
@@ -569,157 +385,6 @@ components:
         notIncludes:
           $ref: '#/components/schemas/VendorContactRole'
           description: Array does not contain this contact role
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    ResourceReference:
-      type: object
-      description: Reference to another resource (returned in responses)
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type:
-          - string
-          - 'null'
-          description: Client-defined reference ID if set
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
-        key: ERP-USER-12345
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    VendorContactInput:
-      type: object
-      required:
-      - vendorId
-      properties:
-        vendorId:
-          type: string
-          format: uuid
-          description: Vendor this contact belongs to
-          example: 550e8400-e29b-41d4-a716-446655440001
-        email:
-          type: string
-          format: email
-          description: Contact email address
-          example: john.smith@abcwarehouse.com
-        phone:
-          type: string
-          description: Contact phone number
-          example: +1-555-123-4567
-        role:
-          type: string
-          description: Contact role or title (deprecated - use roles array)
-          example: Billing Manager
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/VendorContactRole'
-          description: Types/roles this contact serves
-          example:
-          - BILLING
-          - AGENT
-    VendorContactRole:
-      type: string
-      description: Type of vendor contact role
-      enum:
-      - AGENT
-      - BILLING
-      - OPERATION
-      - OWNER
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
@@ -809,6 +474,341 @@ components:
           format: date-time
           description: When the user was soft deleted (null if active)
           example: null
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    VendorContactInput:
+      type: object
+      required:
+      - vendorId
+      properties:
+        vendorId:
+          type: string
+          format: uuid
+          description: Vendor this contact belongs to
+          example: 550e8400-e29b-41d4-a716-446655440001
+        email:
+          type: string
+          format: email
+          description: Contact email address
+          example: john.smith@abcwarehouse.com
+        phone:
+          type: string
+          description: Contact phone number
+          example: +1-555-123-4567
+        role:
+          type: string
+          description: Contact role or title (deprecated - use roles array)
+          example: Billing Manager
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorContactRole'
+          description: Types/roles this contact serves
+          example:
+          - BILLING
+          - AGENT
+    VendorContact:
+      type: object
+      required:
+      - vendor
+      - createdAt
+      properties:
+        object:
+          type: string
+          enum:
+          - VENDOR_CONTACT
+          readOnly: true
+          description: Object type identifier
+          example: VENDOR_CONTACT
+        vendor:
+          $ref: '#/components/schemas/ResourceReference'
+          description: Vendor this contact belongs to (id and key only)
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Contact email address
+          example: john.smith@abcwarehouse.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Contact phone number
+          example: +1-555-123-4567
+        role:
+          type:
+          - string
+          - 'null'
+          description: Contact role or title (deprecated - use roles array)
+          example: Billing Manager
+        roles:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorContactRole'
+          description: Types/roles this contact serves
+          example:
+          - BILLING
+          - AGENT
+        deletedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User who deleted this contact (full user details)
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the contact was created
+          example: '2025-01-15T10:00:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: When the contact was soft deleted (null if active)
+          example: null
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    VendorContactRole:
+      type: string
+      description: Type of vendor contact role
+      enum:
+      - AGENT
+      - BILLING
+      - OPERATION
+      - OWNER
+    VendorContactFilter:
+      type: object
+      description: Filter criteria for vendor contacts with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/VendorContactFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/VendorContactFilter'
+        not:
+          $ref: '#/components/schemas/VendorContactFilter'
+          description: Negates the filter
+        vendorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        phone:
+          $ref: '#/components/schemas/StringFilter'
+        role:
+          $ref: '#/components/schemas/StringFilter'
+        roles:
+          $ref: '#/components/schemas/VendorContactRoleFilter'
+        deletedById:
+          $ref: '#/components/schemas/UUIDFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    VendorContactPatch:
+      type: object
+      description: 'Partial vendor contact update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+
+        Note: vendorId cannot be updated after creation.
+
+        '
+      properties:
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Contact email address
+          example: john.smith@abcwarehouse.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Contact phone number
+          example: +1-555-123-4567
+        role:
+          type:
+          - string
+          - 'null'
+          description: Contact role or title (deprecated - use roles array)
+          example: Billing Manager
+        roles:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorContactRole'
+          description: Types/roles this contact serves (replaces entire array)
+          example:
+          - BILLING
+          - AGENT
+    ResourceReference:
+      type: object
+      description: Reference to another resource (returned in responses)
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type:
+          - string
+          - 'null'
+          description: Client-defined reference ID if set
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+        key: ERP-USER-12345
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     VendorContactFilterRequest:
       type: object
       description: Request body for filtering vendor contacts
@@ -839,24 +839,6 @@ components:
               equalTo: 550e8400-e29b-41d4-a716-446655440001
         pageSize: 50
   responses:
-    ConflictError:
-      description: Conflict - resource already exists or constraint violation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: conflict
-            message: A resource with this identifier already exists
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
     UnauthorizedError:
       description: Unauthorized - invalid or missing access token
       content:
@@ -866,15 +848,6 @@ components:
           example:
             error: unauthorized
             message: Invalid or expired access token
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: internal_server_error
-            message: An unexpected error occurred
     NotFoundError:
       description: Resource not found
       content:
@@ -884,6 +857,33 @@ components:
           example:
             error: not_found
             message: Resource not found
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: internal_server_error
+            message: An unexpected error occurred
+    ConflictError:
+      description: Conflict - resource already exists or constraint violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: conflict
+            message: A resource with this identifier already exists
   parameters:
     IdOrClientKey:
       name: id

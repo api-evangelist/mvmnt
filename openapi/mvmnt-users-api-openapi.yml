@@ -459,314 +459,6 @@ paths:
           $ref: '#/components/responses/RateLimitExceeded'
 components:
   schemas:
-    UserStatusFilter:
-      type: object
-      description: Filter options for UserStatus enum
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/UserStatus'
-          description: Exact match
-        notEqualTo:
-          $ref: '#/components/schemas/UserStatus'
-          description: Not equal to
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserStatus'
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserStatus'
-          description: Does not match any value in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    FloatSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for float/decimal fields
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - GREATER_THAN
-          - LESS_THAN
-          - BETWEEN
-          - NOT_BETWEEN
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `GREATER_THAN`: Greater than value
-
-            - `LESS_THAN`: Less than value
-
-            - `BETWEEN`: Between min and max (inclusive)
-
-            - `NOT_BETWEEN`: Not between min and max
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        value:
-          type: number
-          format: float
-          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
-        min:
-          type: number
-          format: float
-          description: Minimum value for BETWEEN or NOT_BETWEEN
-        max:
-          type: number
-          format: float
-          description: Maximum value for BETWEEN or NOT_BETWEEN
-      example:
-        operator: GREATER_THAN
-        value: 1000.5
-    SearchPaginationInfo:
-      type: object
-      required:
-      - pageNumber
-      - pageSize
-      - totalPages
-      description: Pagination information for search results
-      properties:
-        pageNumber:
-          type: integer
-          description: Current page number
-          example: 1
-        pageSize:
-          type: integer
-          description: Number of results returned on this page
-          example: 50
-        totalPages:
-          type: integer
-          description: Total number of pages available
-          example: 25
-      example:
-        pageNumber: 1
-        pageSize: 50
-        totalPages: 25
-    RelativeTimeUnit:
-      type: string
-      enum:
-      - YEAR
-      - MONTH
-      - WEEK
-      - DAY
-      - HOUR
-      - MINUTE
-      - SECOND
-      description: 'Time unit for relative time calculations:
-
-        - `YEAR`: Years
-
-        - `MONTH`: Months
-
-        - `WEEK`: Weeks
-
-        - `DAY`: Days
-
-        - `HOUR`: Hours
-
-        - `MINUTE`: Minutes
-
-        - `SECOND`: Seconds
-
-        '
-    User:
-      type: object
-      required:
-      - id
-      - email
-      - status
-      - roles
-      - createdAt
-      - updatedAt
-      properties:
-        object:
-          type: string
-          enum:
-          - USER
-          readOnly: true
-          description: Object type identifier
-          example: USER
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique user identifier
-          example: 550e8400-e29b-41d4-a716-446655440000
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: User's full name
-          example: John Doe
-        phone:
-          type:
-          - string
-          - 'null'
-          description: User's phone number
-          example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
-        status:
-          $ref: '#/components/schemas/UserStatus'
-        roles:
-          type: array
-          description: User's roles within the organization
-          items:
-            $ref: '#/components/schemas/UserRole'
-          example:
-          - CUSTOMER_REP
-          - ADMIN
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier for this user
-          example: ERP-USER-12345
-        datUsername:
-          type:
-          - string
-          - 'null'
-          description: DAT (Load Board) integration username
-          example: johndoe_dat
-        mcpUsername:
-          type:
-          - string
-          - 'null'
-          description: MyCarrierPortal integration username
-          example: johndoe_mcp
-        avatarId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        teams:
-          type: array
-          description: Teams this user belongs to
-          items:
-            $ref: '#/components/schemas/TeamReference'
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Timestamp when user was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Timestamp when user was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: Timestamp when user was soft-deleted (null if active)
-          example: null
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    UserSearchRequest:
-      type: object
-      description: Request body for searching users
-      properties:
-        criteria:
-          $ref: '#/components/schemas/UserSearchCriteria'
-          description: Search criteria to filter users
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInput'
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchSortOption'
-          maxItems: 3
-          description: Sort options for the search results
-        savedSearch:
-          $ref: '#/components/schemas/SavedSearchLookup'
-          description: 'Optional saved search to load preferences from.
-
-            When provided, the saved search criteria will be loaded and merged with any explicit criteria.
-
-            '
-        format:
-          type: string
-          enum:
-          - flat
-          - full
-          default: flat
-          description: 'Response format:
-
-            - flat: Returns only indexed fields (default, faster)
-
-            - full: Returns complete user objects
-
-            '
     UserRoleFilter:
       type: object
       description: Filter options for UserRole enum array
@@ -787,194 +479,6 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    IntSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for integer fields
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - GREATER_THAN
-          - LESS_THAN
-          - BETWEEN
-          - NOT_BETWEEN
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `GREATER_THAN`: Greater than value
-
-            - `LESS_THAN`: Less than value
-
-            - `BETWEEN`: Between min and max (inclusive)
-
-            - `NOT_BETWEEN`: Not between min and max
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        value:
-          type: integer
-          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
-        min:
-          type: integer
-          description: Minimum value for BETWEEN or NOT_BETWEEN
-        max:
-          type: integer
-          description: Maximum value for BETWEEN or NOT_BETWEEN
-      example:
-        operator: BETWEEN
-        min: 10
-        max: 100
-    TextSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for text fields (supports wildcards and partial matching)
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - STARTS_WITH
-          - ENDS_WITH
-          - INCLUDES
-          - ONE_OF
-          - NOT_ONE_OF
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `STARTS_WITH`: Begins with prefix
-
-            - `ENDS_WITH`: Ends with suffix
-
-            - `INCLUDES`: Contains substring
-
-            - `ONE_OF`: Matches any value in array
-
-            - `NOT_ONE_OF`: Does not match any value in array
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        values:
-          type: array
-          items:
-            type: string
-          description: Array of values for ONE_OF or NOT_ONE_OF operators
-          example:
-          - value1
-          - value2
-      example:
-        operator: INCLUDES
-        values:
-        - search term
-    TeamReference:
-      type: object
-      description: 'Team reference for embedding in User responses.
-
-        Identical to Team but excludes the users array to avoid circular references.
-
-        '
-      required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        object:
-          type: string
-          enum:
-          - TEAM
-          readOnly: true
-          description: Object type identifier
-          example: TEAM
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique team identifier
-          example: 123e4567-e89b-12d3-a456-426614174000
-        name:
-          type: string
-          description: Team name
-          example: Sales Team - West Coast
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier for this team
-          example: ERP-TEAM-WEST
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Timestamp when team was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Timestamp when team was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: Timestamp when team was soft-deleted (null if active)
-          example: null
     UserSearchRow:
       type: object
       description: 'Flattened user data from search index.
@@ -1095,89 +599,240 @@ components:
       - ordersTotalGrossProfit
       - carriersCount
       - createdAt
-    BooleanSearchCriteria:
+    SearchPaginationInfo:
       type: object
       required:
-      - operator
-      description: Search criteria for boolean fields
-      properties:
-        operator:
-          type: string
-          enum:
-          - 'TRUE'
-          - 'FALSE'
-          description: 'Search operator:
-
-            - `TRUE`: Field is true
-
-            - `FALSE`: Field is false
-
-            '
-      example:
-        operator: 'TRUE'
-    UUIDSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for UUID fields
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - ONE_OF
-          - NOT_ONE_OF
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `ONE_OF`: Matches any UUID in array
-
-            - `NOT_ONE_OF`: Does not match any UUID in array
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        values:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Array of UUIDs for ONE_OF or NOT_ONE_OF operators
-          example:
-          - 550e8400-e29b-41d4-a716-446655440000
-          - 550e8400-e29b-41d4-a716-446655440001
-      example:
-        operator: EQUALS
-        values:
-        - 550e8400-e29b-41d4-a716-446655440000
-    SearchPaginationInput:
-      type: object
-      description: Pagination options for search requests
+      - pageNumber
+      - pageSize
+      - totalPages
+      description: Pagination information for search results
       properties:
         pageNumber:
           type: integer
-          minimum: 1
-          default: 1
-          description: Page number (1-based)
+          description: Current page number
           example: 1
         pageSize:
           type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page (max 250)
+          description: Number of results returned on this page
           example: 50
+        totalPages:
+          type: integer
+          description: Total number of pages available
+          example: 25
       example:
         pageNumber: 1
         pageSize: 50
+        totalPages: 25
+    UserSearchCriteria:
+      type: object
+      description: 'Search criteria for filtering users.
+
+        Note: Only active (non-deleted) users are searchable. Soft-deleted records are automatically excluded.
+
+        '
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDSearchCriteria'
+        name:
+          $ref: '#/components/schemas/TextSearchCriteria'
+          description: User name
+        email:
+          $ref: '#/components/schemas/TextSearchCriteria'
+          description: Email address
+        emailVerified:
+          $ref: '#/components/schemas/BooleanSearchCriteria'
+          description: Whether email is verified
+        phone:
+          $ref: '#/components/schemas/TextSearchCriteria'
+          description: Phone number
+        status:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+          description: Status (pending, active, inactive)
+        roles:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+          description: User roles
+        visibility:
+          $ref: '#/components/schemas/KeywordSearchCriteria'
+          description: Visibility level (ALL, LIMITED)
+        teamIds:
+          $ref: '#/components/schemas/UUIDSearchCriteria'
+          description: Team IDs (internal field groupIds)
+        teamNames:
+          $ref: '#/components/schemas/TextSearchCriteria'
+          description: Team names (internal field groupNames)
+        customersCount:
+          $ref: '#/components/schemas/IntSearchCriteria'
+          description: Number of customers (internal field shippersCount)
+        quotesCount:
+          $ref: '#/components/schemas/IntSearchCriteria'
+          description: Number of quotes
+        quotesWon:
+          $ref: '#/components/schemas/IntSearchCriteria'
+          description: Number of quotes won
+        quoteWinRate:
+          $ref: '#/components/schemas/FloatSearchCriteria'
+          description: Quote win rate percentage
+        ordersCount:
+          $ref: '#/components/schemas/IntSearchCriteria'
+          description: Number of shipments
+        ordersTotalRevenue:
+          $ref: '#/components/schemas/FloatSearchCriteria'
+          description: Total shipment revenue
+        ordersTotalTransportationCost:
+          $ref: '#/components/schemas/FloatSearchCriteria'
+          description: Total shipment transportation cost
+        ordersTotalGrossProfit:
+          $ref: '#/components/schemas/FloatSearchCriteria'
+          description: Total shipment gross profit
+        averageGrossProfitPerOrder:
+          $ref: '#/components/schemas/FloatSearchCriteria'
+          description: Average gross profit per shipment
+        carriersCount:
+          $ref: '#/components/schemas/IntSearchCriteria'
+          description: Number of carriers
+        createdAt:
+          $ref: '#/components/schemas/DatetimeSearchCriteria'
+        lastInvitedAt:
+          $ref: '#/components/schemas/DatetimeSearchCriteria'
+          description: When the user was last invited
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    User:
+      type: object
+      required:
+      - id
+      - email
+      - status
+      - roles
+      - createdAt
+      - updatedAt
+      properties:
+        object:
+          type: string
+          enum:
+          - USER
+          readOnly: true
+          description: Object type identifier
+          example: USER
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique user identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        roles:
+          type: array
+          description: User's roles within the organization
+          items:
+            $ref: '#/components/schemas/UserRole'
+          example:
+          - CUSTOMER_REP
+          - ADMIN
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier for this user
+          example: ERP-USER-12345
+        datUsername:
+          type:
+          - string
+          - 'null'
+          description: DAT (Load Board) integration username
+          example: johndoe_dat
+        mcpUsername:
+          type:
+          - string
+          - 'null'
+          description: MyCarrierPortal integration username
+          example: johndoe_mcp
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        teams:
+          type: array
+          description: Teams this user belongs to
+          items:
+            $ref: '#/components/schemas/TeamReference'
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: Timestamp when user was soft-deleted (null if active)
+          example: null
     UserStatus:
       type: string
       enum:
@@ -1380,24 +1035,69 @@ components:
           type: list
           annotations: []
           slots: {}
-    ResourceReferenceInput:
+    UUIDSearchCriteria:
       type: object
-      description: Reference to another resource by either ID or client key (used in create/update requests)
+      required:
+      - operator
+      description: Search criteria for UUID fields
       properties:
-        id:
+        operator:
           type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type: string
-          description: Client-defined reference ID
-      oneOf:
-      - required:
-        - id
-      - required:
-        - key
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - ONE_OF
+          - NOT_ONE_OF
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `ONE_OF`: Matches any UUID in array
+
+            - `NOT_ONE_OF`: Does not match any UUID in array
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        values:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Array of UUIDs for ONE_OF or NOT_ONE_OF operators
+          example:
+          - 550e8400-e29b-41d4-a716-446655440000
+          - 550e8400-e29b-41d4-a716-446655440001
       example:
-        id: 550e8400-e29b-41d4-a716-446655440000
+        operator: EQUALS
+        values:
+        - 550e8400-e29b-41d4-a716-446655440000
+    SearchPaginationInput:
+      type: object
+      description: Pagination options for search requests
+      properties:
+        pageNumber:
+          type: integer
+          minimum: 1
+          default: 1
+          description: Page number (1-based)
+          example: 1
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page (max 250)
+          example: 50
+      example:
+        pageNumber: 1
+        pageSize: 50
     Error:
       type: object
       required:
@@ -1410,78 +1110,6 @@ components:
         message:
           type: string
           description: Human-readable error message
-    UserSearchCriteria:
-      type: object
-      description: 'Search criteria for filtering users.
-
-        Note: Only active (non-deleted) users are searchable. Soft-deleted records are automatically excluded.
-
-        '
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDSearchCriteria'
-        name:
-          $ref: '#/components/schemas/TextSearchCriteria'
-          description: User name
-        email:
-          $ref: '#/components/schemas/TextSearchCriteria'
-          description: Email address
-        emailVerified:
-          $ref: '#/components/schemas/BooleanSearchCriteria'
-          description: Whether email is verified
-        phone:
-          $ref: '#/components/schemas/TextSearchCriteria'
-          description: Phone number
-        status:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-          description: Status (pending, active, inactive)
-        roles:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-          description: User roles
-        visibility:
-          $ref: '#/components/schemas/KeywordSearchCriteria'
-          description: Visibility level (ALL, LIMITED)
-        teamIds:
-          $ref: '#/components/schemas/UUIDSearchCriteria'
-          description: Team IDs (internal field groupIds)
-        teamNames:
-          $ref: '#/components/schemas/TextSearchCriteria'
-          description: Team names (internal field groupNames)
-        customersCount:
-          $ref: '#/components/schemas/IntSearchCriteria'
-          description: Number of customers (internal field shippersCount)
-        quotesCount:
-          $ref: '#/components/schemas/IntSearchCriteria'
-          description: Number of quotes
-        quotesWon:
-          $ref: '#/components/schemas/IntSearchCriteria'
-          description: Number of quotes won
-        quoteWinRate:
-          $ref: '#/components/schemas/FloatSearchCriteria'
-          description: Quote win rate percentage
-        ordersCount:
-          $ref: '#/components/schemas/IntSearchCriteria'
-          description: Number of shipments
-        ordersTotalRevenue:
-          $ref: '#/components/schemas/FloatSearchCriteria'
-          description: Total shipment revenue
-        ordersTotalTransportationCost:
-          $ref: '#/components/schemas/FloatSearchCriteria'
-          description: Total shipment transportation cost
-        ordersTotalGrossProfit:
-          $ref: '#/components/schemas/FloatSearchCriteria'
-          description: Total shipment gross profit
-        averageGrossProfitPerOrder:
-          $ref: '#/components/schemas/FloatSearchCriteria'
-          description: Average gross profit per shipment
-        carriersCount:
-          $ref: '#/components/schemas/IntSearchCriteria'
-          description: Number of carriers
-        createdAt:
-          $ref: '#/components/schemas/DatetimeSearchCriteria'
-        lastInvitedAt:
-          $ref: '#/components/schemas/DatetimeSearchCriteria'
-          description: When the user was last invited
     SearchSortOption:
       type: object
       required:
@@ -1503,465 +1131,154 @@ components:
       example:
         field: createdAt
         order: desc
-    PaginationInfo:
+    BooleanSearchCriteria:
       type: object
       required:
-      - pageSize
-      - hasNextPage
+      - operator
+      description: Search criteria for boolean fields
       properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    UserPatch:
+        operator:
+          type: string
+          enum:
+          - 'TRUE'
+          - 'FALSE'
+          description: 'Search operator:
+
+            - `TRUE`: Field is true
+
+            - `FALSE`: Field is false
+
+            '
+      example:
+        operator: 'TRUE'
+    UserSearchResponse:
       type: object
-      description: 'Partial user update. All fields are optional.
+      description: 'Response for user search requests.
 
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
+        Note: Only active (non-deleted) users are included in results.
 
         '
+      required:
+      - data
+      - pagination
+      - totalResults
       properties:
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: User's full name
-          example: John Doe
-        phone:
-          type:
-          - string
-          - 'null'
-          description: User's phone number
-          example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
-        status:
-          $ref: '#/components/schemas/UserStatus'
-        roles:
+        data:
           type: array
-          description: User's roles (replaces all existing roles)
+          description: Search results - either flat rows or full user objects based on format parameter
           items:
-            $ref: '#/components/schemas/UserRole'
-          minItems: 1
-          example:
-          - CUSTOMER_REP
-          - ADMIN
+            oneOf:
+            - $ref: '#/components/schemas/UserSearchRow'
+            - $ref: '#/components/schemas/User'
+            discriminator:
+              propertyName: object
+              mapping:
+                USER_SEARCH_ROW: '#/components/schemas/UserSearchRow'
+                USER: '#/components/schemas/User'
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInfo'
+        totalResults:
+          type: integer
+          description: Total number of matching results (excluding soft-deleted records)
+          minimum: 0
+    TeamReference:
+      type: object
+      description: 'Team reference for embedding in User responses.
+
+        Identical to Team but excludes the users array to avoid circular references.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        object:
+          type: string
+          enum:
+          - TEAM
+          readOnly: true
+          description: Object type identifier
+          example: TEAM
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique team identifier
+          example: 123e4567-e89b-12d3-a456-426614174000
+        name:
+          type: string
+          description: Team name
+          example: Sales Team - West Coast
         key:
           type:
           - string
           - 'null'
           maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-USER-12345
-        datUsername:
+          description: Client-defined reference identifier for this team
+          example: ERP-TEAM-WEST
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when team was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when team was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
           type:
           - string
           - 'null'
-          description: DAT integration username
-          example: johndoe_dat
-        mcpUsername:
-          type:
-          - string
-          - 'null'
-          description: MyCarrierPortal integration username
-          example: johndoe_mcp
-        avatarId:
-          type:
-          - string
-          - 'null'
+          format: date-time
+          readOnly: true
+          description: Timestamp when team was soft-deleted (null if active)
+          example: null
+    RelativeTimeUnit:
+      type: string
+      enum:
+      - YEAR
+      - MONTH
+      - WEEK
+      - DAY
+      - HOUR
+      - MINUTE
+      - SECOND
+      description: 'Time unit for relative time calculations:
+
+        - `YEAR`: Years
+
+        - `MONTH`: Months
+
+        - `WEEK`: Weeks
+
+        - `DAY`: Days
+
+        - `HOUR`: Hours
+
+        - `MINUTE`: Minutes
+
+        - `SECOND`: Seconds
+
+        '
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
           format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        teams:
+          description: Exact match
+        in:
           type: array
-          description: Teams this user belongs to (replaces all existing team memberships)
-          items:
-            $ref: '#/components/schemas/ResourceReferenceInput'
-          example:
-          - id: 123e4567-e89b-12d3-a456-426614174000
-          - key: TEAM-WEST-COAST
-      x-parsed-md-description:
-        result:
-        - $$mdtype: Node
-          errors: []
-          lines:
-          - 0
-          - 1
-          inline: false
-          attributes: {}
-          children:
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 0
-            - 1
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 1
-              inline: true
-              attributes:
-                content: Partial user update. All fields are optional.
-              children: []
-              type: text
-              annotations: []
-              slots: {}
-            type: inline
-            annotations: []
-            slots: {}
-          type: paragraph
-          annotations: []
-          slots: {}
-        - $$mdtype: Node
-          errors: []
-          lines:
-          - 1
-          - 4
-          inline: false
-          attributes:
-            ordered: false
-            marker: '-'
-          children:
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 1
-            - 2
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 1
-              - 2
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 1
-                - 2
-                inline: true
-                attributes:
-                  marker: '**'
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 1
-                  - 2
-                  inline: true
-                  attributes:
-                    content: Omitted fields
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: strong
-                annotations: []
-                slots: {}
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 1
-                - 2
-                inline: true
-                attributes:
-                  content: ': Not modified (current value preserved)'
-                children: []
-                type: text
-                annotations: []
-                slots: {}
-              type: inline
-              annotations: []
-              slots: {}
-            type: item
-            annotations: []
-            slots: {}
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 2
-            - 3
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 2
-              - 3
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 2
-                - 3
-                inline: true
-                attributes:
-                  marker: '**'
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 2
-                  - 3
-                  inline: true
-                  attributes:
-                    content: Provided fields
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: strong
-                annotations: []
-                slots: {}
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 2
-                - 3
-                inline: true
-                attributes:
-                  content: ': Updated to the new value'
-                children: []
-                type: text
-                annotations: []
-                slots: {}
-              type: inline
-              annotations: []
-              slots: {}
-            type: item
-            annotations: []
-            slots: {}
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 3
-            - 4
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 3
-              - 4
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 3
-                - 4
-                inline: true
-                attributes:
-                  marker: '**'
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 3
-                  - 4
-                  inline: true
-                  attributes:
-                    content: Null values
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: strong
-                annotations: []
-                slots: {}
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 3
-                - 4
-                inline: true
-                attributes:
-                  content: ': Clear the field (set to null) where applicable'
-                children: []
-                type: text
-                annotations: []
-                slots: {}
-              type: inline
-              annotations: []
-              slots: {}
-            type: item
-            annotations: []
-            slots: {}
-          type: list
-          annotations: []
-          slots: {}
-    UserFilterRequest:
-      type: object
-      description: Request body for filtering users
-      properties:
-        filter:
-          $ref: '#/components/schemas/UserFilter'
-          description: 'Filter criteria (optional - omit to return all users).
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-          x-parsed-md-description:
-            result:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 2
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 0
-                - 2
-                inline: false
-                attributes: {}
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 2
-                  inline: true
-                  attributes:
-                    content: Filter criteria (optional - omit to return all users).
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 2
-                  inline: true
-                  attributes: {}
-                  children: []
-                  type: softbreak
-                  annotations: []
-                  slots: {}
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 2
-                  inline: true
-                  attributes:
-                    content: 'Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.'
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: inline
-                annotations: []
-                slots: {}
-              type: paragraph
-              annotations: []
-              slots: {}
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - status:
-              equalTo: ACTIVE
-          - roles:
-              contains: CUSTOMER_REP
-          - email:
-              includes: '@example.com'
-        pageSize: 50
-    KeywordSearchCriteria:
-      type: object
-      required:
-      - operator
-      description: Search criteria for keyword fields (exact match, no partial matching)
-      properties:
-        operator:
-          type: string
-          enum:
-          - EQUALS
-          - NOT_EQUALS
-          - ONE_OF
-          - NOT_ONE_OF
-          - EXISTS
-          - DOES_NOT_EXIST
-          description: 'Search operator:
-
-            - `EQUALS`: Exact match
-
-            - `NOT_EQUALS`: Not equal to
-
-            - `ONE_OF`: Matches any value in array
-
-            - `NOT_ONE_OF`: Does not match any value in array
-
-            - `EXISTS`: Field has a value (not null)
-
-            - `DOES_NOT_EXIST`: Field is null
-
-            '
-        values:
-          type: array
+          description: Matches any UUID in the array
           items:
             type: string
-          description: Array of values for ONE_OF or NOT_ONE_OF operators
-          example:
-          - ACTIVE
-          - PENDING
-      example:
-        operator: ONE_OF
-        values:
-        - ACTIVE
-        - PENDING
+            format: uuid
     UserInput:
       type: object
       required:
@@ -2022,78 +1339,51 @@ components:
           example:
           - id: 123e4567-e89b-12d3-a456-426614174000
           - key: TEAM-WEST-COAST
-    ValidationError:
+    UUIDFilter:
       type: object
-      required:
-      - error
-      - message
-      - details
+      description: Filter options for UUID fields (all operations)
       properties:
-        error:
+        equalTo:
           type: string
-          description: Error code
-          example: validation_error
-        message:
+          format: uuid
+          description: Exact match
+        notEqualTo:
           type: string
-          description: Human-readable error message
-        details:
+          format: uuid
+          description: Not equal to
+        in:
           type: array
-          description: Validation error details
           items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    UserFilter:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ResourceReferenceInput:
       type: object
-      description: Filter criteria for users with AND/OR logic support
+      description: Reference to another resource by either ID or client key (used in create/update requests)
       properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/UserFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/UserFilter'
-        not:
-          $ref: '#/components/schemas/UserFilter'
-          description: Negates the filter
         id:
-          $ref: '#/components/schemas/IDFilter'
-        email:
-          $ref: '#/components/schemas/StringFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        phone:
-          $ref: '#/components/schemas/StringFilter'
-        status:
-          $ref: '#/components/schemas/UserStatusFilter'
-        roles:
-          $ref: '#/components/schemas/UserRoleFilter'
+          type: string
+          format: uuid
+          description: Resource UUID
         key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        datUsername:
-          $ref: '#/components/schemas/StringFilter'
-        mcpUsername:
-          $ref: '#/components/schemas/StringFilter'
-        avatarId:
-          $ref: '#/components/schemas/UUIDFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
+          type: string
+          description: Client-defined reference ID
+      oneOf:
+      - required:
+        - id
+      - required:
+        - key
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
     DatetimeSearchCriteria:
       type: object
       required:
@@ -2171,30 +1461,126 @@ components:
       example:
         operator: AFTER
         value: '2025-01-01T00:00:00Z'
-    UUIDFilter:
+    FloatSearchCriteria:
       type: object
-      description: Filter options for UUID fields (all operations)
+      required:
+      - operator
+      description: Search criteria for float/decimal fields
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - GREATER_THAN
+          - LESS_THAN
+          - BETWEEN
+          - NOT_BETWEEN
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `GREATER_THAN`: Greater than value
+
+            - `LESS_THAN`: Less than value
+
+            - `BETWEEN`: Between min and max (inclusive)
+
+            - `NOT_BETWEEN`: Not between min and max
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        value:
+          type: number
+          format: float
+          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
+        min:
+          type: number
+          format: float
+          description: Minimum value for BETWEEN or NOT_BETWEEN
+        max:
+          type: number
+          format: float
+          description: Maximum value for BETWEEN or NOT_BETWEEN
+      example:
+        operator: GREATER_THAN
+        value: 1000.5
+    IntSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for integer fields
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - GREATER_THAN
+          - LESS_THAN
+          - BETWEEN
+          - NOT_BETWEEN
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `GREATER_THAN`: Greater than value
+
+            - `LESS_THAN`: Less than value
+
+            - `BETWEEN`: Between min and max (inclusive)
+
+            - `NOT_BETWEEN`: Not between min and max
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        value:
+          type: integer
+          description: Single value for EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN
+        min:
+          type: integer
+          description: Minimum value for BETWEEN or NOT_BETWEEN
+        max:
+          type: integer
+          description: Maximum value for BETWEEN or NOT_BETWEEN
+      example:
+        operator: BETWEEN
+        min: 10
+        max: 100
+    UserStatusFilter:
+      type: object
+      description: Filter options for UserStatus enum
       properties:
         equalTo:
-          type: string
-          format: uuid
+          $ref: '#/components/schemas/UserStatus'
           description: Exact match
         notEqualTo:
-          type: string
-          format: uuid
+          $ref: '#/components/schemas/UserStatus'
           description: Not equal to
         in:
           type: array
           items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
+            $ref: '#/components/schemas/UserStatus'
+          description: Matches any value in the array
         notIn:
           type: array
           items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
+            $ref: '#/components/schemas/UserStatus'
+          description: Does not match any value in the array
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
@@ -2498,65 +1884,425 @@ components:
           type: list
           annotations: []
           slots: {}
-    UserSearchResponse:
+    TextSearchCriteria:
       type: object
-      description: 'Response for user search requests.
+      required:
+      - operator
+      description: Search criteria for text fields (supports wildcards and partial matching)
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - STARTS_WITH
+          - ENDS_WITH
+          - INCLUDES
+          - ONE_OF
+          - NOT_ONE_OF
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
 
-        Note: Only active (non-deleted) users are included in results.
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `STARTS_WITH`: Begins with prefix
+
+            - `ENDS_WITH`: Ends with suffix
+
+            - `INCLUDES`: Contains substring
+
+            - `ONE_OF`: Matches any value in array
+
+            - `NOT_ONE_OF`: Does not match any value in array
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of values for ONE_OF or NOT_ONE_OF operators
+          example:
+          - value1
+          - value2
+      example:
+        operator: INCLUDES
+        values:
+        - search term
+    UserPatch:
+      type: object
+      description: 'Partial user update. All fields are optional.
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
 
         '
-      required:
-      - data
-      - pagination
-      - totalResults
       properties:
-        data:
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          $ref: '#/components/schemas/UserStatus'
+        roles:
           type: array
-          description: Search results - either flat rows or full user objects based on format parameter
+          description: User's roles (replaces all existing roles)
           items:
-            oneOf:
-            - $ref: '#/components/schemas/UserSearchRow'
-            - $ref: '#/components/schemas/User'
-            discriminator:
-              propertyName: object
-              mapping:
-                USER_SEARCH_ROW: '#/components/schemas/UserSearchRow'
-                USER: '#/components/schemas/User'
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInfo'
-        totalResults:
-          type: integer
-          description: Total number of matching results (excluding soft-deleted records)
-          minimum: 0
-    ClientKeyFilter:
+            $ref: '#/components/schemas/UserRole'
+          minItems: 1
+          example:
+          - CUSTOMER_REP
+          - ADMIN
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-USER-12345
+        datUsername:
+          type:
+          - string
+          - 'null'
+          description: DAT integration username
+          example: johndoe_dat
+        mcpUsername:
+          type:
+          - string
+          - 'null'
+          description: MyCarrierPortal integration username
+          example: johndoe_mcp
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        teams:
+          type: array
+          description: Teams this user belongs to (replaces all existing team memberships)
+          items:
+            $ref: '#/components/schemas/ResourceReferenceInput'
+          example:
+          - id: 123e4567-e89b-12d3-a456-426614174000
+          - key: TEAM-WEST-COAST
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 1
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 1
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: true
+              attributes:
+                content: Partial user update. All fields are optional.
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 1
+          - 4
+          inline: false
+          attributes:
+            ordered: false
+            marker: '-'
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 1
+            - 2
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 1
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 1
+                  - 2
+                  inline: true
+                  attributes:
+                    content: Omitted fields
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: ': Not modified (current value preserved)'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 2
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 2
+              - 3
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 2
+                  - 3
+                  inline: true
+                  attributes:
+                    content: Provided fields
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: ': Updated to the new value'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 3
+            - 4
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 3
+              - 4
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  marker: '**'
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 3
+                  - 4
+                  inline: true
+                  attributes:
+                    content: Null values
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: strong
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: ': Clear the field (set to null) where applicable'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          type: list
+          annotations: []
+          slots: {}
+    PaginationInfo:
       type: object
-      description: Filter options for client key fields (limited operations - exact match only)
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    StringFilter:
+      type: object
+      description: Filter options for string fields
       properties:
         equalTo:
           type: string
           description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
         in:
           type: array
-          description: Matches any value in the array
           items:
             type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
     SavedSearchLookup:
       type: object
       description: 'Reference to a saved search by ID or client key.
@@ -2577,21 +2323,270 @@ components:
           example: my-carrier-search
       example:
         id: 550e8400-e29b-41d4-a716-446655440000
-  responses:
     ValidationError:
-      description: Validation error - invalid field values
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    UserSearchRequest:
+      type: object
+      description: Request body for searching users
+      properties:
+        criteria:
+          $ref: '#/components/schemas/UserSearchCriteria'
+          description: Search criteria to filter users
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInput'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchSortOption'
+          maxItems: 3
+          description: Sort options for the search results
+        savedSearch:
+          $ref: '#/components/schemas/SavedSearchLookup'
+          description: 'Optional saved search to load preferences from.
+
+            When provided, the saved search criteria will be loaded and merged with any explicit criteria.
+
+            '
+        format:
+          type: string
+          enum:
+          - flat
+          - full
+          default: flat
+          description: 'Response format:
+
+            - flat: Returns only indexed fields (default, faster)
+
+            - full: Returns complete user objects
+
+            '
+    KeywordSearchCriteria:
+      type: object
+      required:
+      - operator
+      description: Search criteria for keyword fields (exact match, no partial matching)
+      properties:
+        operator:
+          type: string
+          enum:
+          - EQUALS
+          - NOT_EQUALS
+          - ONE_OF
+          - NOT_ONE_OF
+          - EXISTS
+          - DOES_NOT_EXIST
+          description: 'Search operator:
+
+            - `EQUALS`: Exact match
+
+            - `NOT_EQUALS`: Not equal to
+
+            - `ONE_OF`: Matches any value in array
+
+            - `NOT_ONE_OF`: Does not match any value in array
+
+            - `EXISTS`: Field has a value (not null)
+
+            - `DOES_NOT_EXIST`: Field is null
+
+            '
+        values:
+          type: array
+          items:
+            type: string
+          description: Array of values for ONE_OF or NOT_ONE_OF operators
+          example:
+          - ACTIVE
+          - PENDING
+      example:
+        operator: ONE_OF
+        values:
+        - ACTIVE
+        - PENDING
+    ClientKeyFilter:
+      type: object
+      description: Filter options for client key fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        in:
+          type: array
+          description: Matches any value in the array
+          items:
+            type: string
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    UserFilterRequest:
+      type: object
+      description: Request body for filtering users
+      properties:
+        filter:
+          $ref: '#/components/schemas/UserFilter'
+          description: 'Filter criteria (optional - omit to return all users).
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 2
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes:
+                    content: Filter criteria (optional - omit to return all users).
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes: {}
+                  children: []
+                  type: softbreak
+                  annotations: []
+                  slots: {}
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes:
+                    content: 'Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.'
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - status:
+              equalTo: ACTIVE
+          - roles:
+              contains: CUSTOMER_REP
+          - email:
+              includes: '@example.com'
+        pageSize: 50
+    UserFilter:
+      type: object
+      description: Filter criteria for users with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/UserFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/UserFilter'
+        not:
+          $ref: '#/components/schemas/UserFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        phone:
+          $ref: '#/components/schemas/StringFilter'
+        status:
+          $ref: '#/components/schemas/UserStatusFilter'
+        roles:
+          $ref: '#/components/schemas/UserRoleFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        datUsername:
+          $ref: '#/components/schemas/StringFilter'
+        mcpUsername:
+          $ref: '#/components/schemas/StringFilter'
+        avatarId:
+          $ref: '#/components/schemas/UUIDFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+  responses:
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/Error'
           example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
+            error: unauthorized
+            message: Invalid or expired access token
     RateLimitExceeded:
       description: Rate limit exceeded
       content:
@@ -2618,24 +2613,6 @@ components:
           description: Seconds to wait before retrying
           schema:
             type: integer
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
     NotFoundError:
       description: Resource not found
       content:
@@ -2645,6 +2622,29 @@ components:
           example:
             error: not_found
             message: Resource not found
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
   parameters:
     LookupBy:
       name: by

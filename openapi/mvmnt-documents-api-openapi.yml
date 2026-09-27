@@ -511,117 +511,6 @@ components:
           description: Optional key-value tags
           example:
             invoiceNumber: INV-2025-001
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    DocumentType:
-      type: string
-      enum:
-      - INVOICE
-      - BILL_OF_LADING
-      - RATE_CON
-      - PROOF_OF_DELIVERY
-      - CERTIFICATE_OF_INSURANCE
-      - W9
-      - CARRIER_INVOICE
-      - LUMPER_RECEIPT
-      - DETENTION
-      - DELIVERY_ORDER
-      - LOAD_TENDER
-      - HOUSE_AIRWAY_BILL
-      - MASTER_AIRWAY_BILL
-      - QUOTE
-      - OTHER
-      description: 'Type of document.
-
-
-        Common types:
-
-        - `INVOICE`: Customer invoice
-
-        - `BILL_OF_LADING`: Bill of lading document
-
-        - `RATE_CON`: Rate confirmation
-
-        - `PROOF_OF_DELIVERY`: Proof of delivery (POD)
-
-        - `CERTIFICATE_OF_INSURANCE`: Certificate of insurance (COI)
-
-        - `W9`: W-9 tax form
-
-        - `CARRIER_INVOICE`: Carrier invoice/bill
-
-        - `LUMPER_RECEIPT`: Lumper receipt
-
-        - `DETENTION`: Detention documentation
-
-        - `DELIVERY_ORDER`: Delivery order
-
-        - `LOAD_TENDER`: Load tender
-
-        - `HOUSE_AIRWAY_BILL`: House airway bill (HAWB)
-
-        - `MASTER_AIRWAY_BILL`: Master airway bill (MAWB)
-
-        - `QUOTE`: Quote document
-
-        - `OTHER`: Other document type
-
-        '
-    DocumentTypeFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/DocumentType'
-        notEqualTo:
-          $ref: '#/components/schemas/DocumentType'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentType'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentType'
-      description: Filter for document type field
     DatetimeFilter:
       type: object
       description: Filter options for datetime fields
@@ -653,33 +542,18 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    DocumentStatus:
-      type: string
-      enum:
-      - PENDING_UPLOAD
-      - UPLOADED
-      description: 'Upload status of the document.
-
-        - `PENDING_UPLOAD`: Document record created, file not yet uploaded
-
-        - `UPLOADED`: File has been uploaded to storage
-
-        '
-    DocumentFilterRequest:
+    Error:
       type: object
+      required:
+      - error
+      - message
       properties:
-        filter:
-          $ref: '#/components/schemas/DocumentFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-          description: Number of results per page
-        cursor:
+        error:
           type: string
-          description: Pagination cursor from previous response
-      description: Request body for filtering documents
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
     DocumentStatusFilter:
       type: object
       properties:
@@ -696,71 +570,45 @@ components:
           items:
             $ref: '#/components/schemas/DocumentStatus'
       description: Filter for document status field
-    Error:
+    DocumentPatch:
       type: object
-      required:
-      - error
-      - message
       properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
+        key:
           type:
           - string
           - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    ValidationError:
+          maxLength: 512
+          description: Update client-defined key
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        fileName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Update file name
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+          description: Update or clear tags (null to clear)
+      description: Partial update fields for a document
+    DocumentTypeFilter:
       type: object
-      required:
-      - error
-      - message
-      - details
       properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
+        equalTo:
+          $ref: '#/components/schemas/DocumentType'
+        notEqualTo:
+          $ref: '#/components/schemas/DocumentType'
+        in:
           type: array
-          description: Validation error details
           items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
+            $ref: '#/components/schemas/DocumentType'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentType'
+      description: Filter for document type field
     DocumentFilter:
       type: object
       properties:
@@ -818,29 +666,75 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    DocumentPatch:
+    DocumentType:
+      type: string
+      enum:
+      - INVOICE
+      - BILL_OF_LADING
+      - RATE_CON
+      - PROOF_OF_DELIVERY
+      - CERTIFICATE_OF_INSURANCE
+      - W9
+      - CARRIER_INVOICE
+      - LUMPER_RECEIPT
+      - DETENTION
+      - DELIVERY_ORDER
+      - LOAD_TENDER
+      - HOUSE_AIRWAY_BILL
+      - MASTER_AIRWAY_BILL
+      - QUOTE
+      - OTHER
+      description: 'Type of document.
+
+
+        Common types:
+
+        - `INVOICE`: Customer invoice
+
+        - `BILL_OF_LADING`: Bill of lading document
+
+        - `RATE_CON`: Rate confirmation
+
+        - `PROOF_OF_DELIVERY`: Proof of delivery (POD)
+
+        - `CERTIFICATE_OF_INSURANCE`: Certificate of insurance (COI)
+
+        - `W9`: W-9 tax form
+
+        - `CARRIER_INVOICE`: Carrier invoice/bill
+
+        - `LUMPER_RECEIPT`: Lumper receipt
+
+        - `DETENTION`: Detention documentation
+
+        - `DELIVERY_ORDER`: Delivery order
+
+        - `LOAD_TENDER`: Load tender
+
+        - `HOUSE_AIRWAY_BILL`: House airway bill (HAWB)
+
+        - `MASTER_AIRWAY_BILL`: Master airway bill (MAWB)
+
+        - `QUOTE`: Quote document
+
+        - `OTHER`: Other document type
+
+        '
+    DocumentFilterRequest:
       type: object
       properties:
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Update client-defined key
-        type:
-          $ref: '#/components/schemas/DocumentType'
-        fileName:
+        filter:
+          $ref: '#/components/schemas/DocumentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+          description: Number of results per page
+        cursor:
           type: string
-          minLength: 1
-          maxLength: 255
-          description: Update file name
-        tags:
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
-          description: Update or clear tags (null to clear)
-      description: Partial update fields for a document
+          description: Pagination cursor from previous response
+      description: Request body for filtering documents
     Document:
       type: object
       required:
@@ -932,30 +826,113 @@ components:
           format: date-time
           description: When the document was last updated
           example: '2025-01-15T10:35:00Z'
-  responses:
+    DocumentStatus:
+      type: string
+      enum:
+      - PENDING_UPLOAD
+      - UPLOADED
+      description: 'Upload status of the document.
+
+        - `PENDING_UPLOAD`: Document record created, file not yet uploaded
+
+        - `UPLOADED`: File has been uploaded to storage
+
+        '
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+  responses:
     UnauthorizedError:
       description: Unauthorized - invalid or missing access token
       content:
@@ -974,6 +951,29 @@ components:
           example:
             error: not_found
             message: Resource not found
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
   parameters:
     LookupBy:
       name: by

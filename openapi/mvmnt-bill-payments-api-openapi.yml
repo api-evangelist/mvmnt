@@ -641,241 +641,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    FloatFilter:
-      type: object
-      description: Filter options for float/number fields
-      properties:
-        equalTo:
-          type: number
-          format: float
-          description: Exact match
-        notEqualTo:
-          type: number
-          format: float
-          description: Not equal to
-        lessThan:
-          type: number
-          format: float
-          description: Less than
-        lessThanOrEqualTo:
-          type: number
-          format: float
-          description: Less than or equal to
-        greaterThan:
-          type: number
-          format: float
-          description: Greater than
-        greaterThanOrEqualTo:
-          type: number
-          format: float
-          description: Greater than or equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    BillPaymentInput:
-      type: object
-      required:
-      - paymentDate
-      - applications
-      properties:
-        paymentDate:
-          type: string
-          format: date
-          description: Date of payment
-        paymentMethodType:
-          $ref: '#/components/schemas/BillPaymentMethodType'
-        carrierFactorId:
-          type: string
-          format: uuid
-          description: Carrier factor to pay (for factored payments)
-        reference:
-          type: string
-          maxLength: 500
-          description: Check number, transaction ID, etc.
-        notes:
-          type: string
-          maxLength: 2000
-          description: Additional notes
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillPaymentApplicationInput'
-          minItems: 1
-          description: Bills to pay
-        allowOverpayment:
-          type: boolean
-          default: false
-          description: Allow payment amount to exceed bill totals
-    BillPaymentRecipientType:
-      type: string
-      enum:
-      - CARRIER
-      - VENDOR
-      description: 'Type of recipient for the payment.
-
-        - `CARRIER`: Payment to a carrier
-
-        - `VENDOR`: Payment to a vendor
-
-        '
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    BillPaymentApplicationInput:
-      type: object
-      required:
-      - billId
-      - amount
-      properties:
-        billId:
-          type: string
-          format: uuid
-          description: Bill (invoice) to apply payment to
-        amount:
-          type: number
-          minimum: 0.01
-          description: Amount to apply to this bill
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    BillPaymentApplicationPatch:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Existing application ID (for update)
-        billId:
-          type: string
-          format: uuid
-          description: Bill ID (for new applications)
-        amount:
-          type: number
-          minimum: 0.01
-        delete:
-          type: boolean
-          description: Set to true to remove this application
-    BillPaymentApplication:
-      type: object
-      required:
-      - id
-      - billId
-      - amount
-      properties:
-        id:
-          type: string
-          format: uuid
-        billId:
-          type: string
-          format: uuid
-          description: Bill (invoice) this payment applies to
-        billFriendlyId:
-          type:
-          - string
-          - 'null'
-          description: Human-readable bill ID
-        amount:
-          type: number
-          description: Amount applied to this bill
-        loadCarrierId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Associated load carrier (for carrier bills)
-        vendedServiceId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Associated vended service (for vendor bills)
-        shipmentId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        shipmentFriendlyId:
-          type:
-          - string
-          - 'null'
-    bill-payments_CarrierFactorReference:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        companyName:
-          type: string
-        bankName:
-          type:
-          - string
-          - 'null'
     VendorReference:
       type: object
       description: 'Enhanced reference to a vendor profile.
@@ -945,6 +710,503 @@ components:
           format: date-time
           description: When the vendor was last updated
           example: '2025-01-15T14:30:00Z'
+    CarrierReference:
+      type: object
+      description: 'Enhanced reference to a carrier resource (returned in responses).
+
+        Includes full carrier details in addition to id/key.
+
+
+        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Carrier UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CARRIER-SWIFT
+        name:
+          type: string
+          description: Carrier company name
+          example: Swift Transportation
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-987-6543
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: dispatch@swifttrans.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the carrier was soft deleted (null if active)
+          example: null
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    BillPaymentFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/BillPaymentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    BillPaymentInput:
+      type: object
+      required:
+      - paymentDate
+      - applications
+      properties:
+        paymentDate:
+          type: string
+          format: date
+          description: Date of payment
+        paymentMethodType:
+          $ref: '#/components/schemas/BillPaymentMethodType'
+        carrierFactorId:
+          type: string
+          format: uuid
+          description: Carrier factor to pay (for factored payments)
+        reference:
+          type: string
+          maxLength: 500
+          description: Check number, transaction ID, etc.
+        notes:
+          type: string
+          maxLength: 2000
+          description: Additional notes
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentApplicationInput'
+          minItems: 1
+          description: Bills to pay
+        allowOverpayment:
+          type: boolean
+          default: false
+          description: Allow payment amount to exceed bill totals
+    BillPaymentMethodTypeFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/BillPaymentMethodType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentMethodType'
+    BillPaymentApplicationPatch:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Existing application ID (for update)
+        billId:
+          type: string
+          format: uuid
+          description: Bill ID (for new applications)
+        amount:
+          type: number
+          minimum: 0.01
+        delete:
+          type: boolean
+          description: Set to true to remove this application
+    BillPaymentApplicationInput:
+      type: object
+      required:
+      - billId
+      - amount
+      properties:
+        billId:
+          type: string
+          format: uuid
+          description: Bill (invoice) to apply payment to
+        amount:
+          type: number
+          minimum: 0.01
+          description: Amount to apply to this bill
+    bill-payments_CarrierFactorReference:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        companyName:
+          type: string
+        bankName:
+          type:
+          - string
+          - 'null'
+    BillPaymentPatch:
+      type: object
+      properties:
+        paymentDate:
+          type: string
+          format: date
+        paymentMethodType:
+          $ref: '#/components/schemas/BillPaymentMethodType'
+        reference:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentApplicationPatch'
+          description: Update payment applications
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    BillPaymentApplication:
+      type: object
+      required:
+      - id
+      - billId
+      - amount
+      properties:
+        id:
+          type: string
+          format: uuid
+        billId:
+          type: string
+          format: uuid
+          description: Bill (invoice) this payment applies to
+        billFriendlyId:
+          type:
+          - string
+          - 'null'
+          description: Human-readable bill ID
+        amount:
+          type: number
+          description: Amount applied to this bill
+        loadCarrierId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated load carrier (for carrier bills)
+        vendedServiceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated vended service (for vendor bills)
+        shipmentId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        shipmentFriendlyId:
+          type:
+          - string
+          - 'null'
+    BillPaymentRecipientType:
+      type: string
+      enum:
+      - CARRIER
+      - VENDOR
+      description: 'Type of recipient for the payment.
+
+        - `CARRIER`: Payment to a carrier
+
+        - `VENDOR`: Payment to a vendor
+
+        '
+    BillPaymentFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        carrierId:
+          $ref: '#/components/schemas/UUIDFilter'
+        vendorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        carrierFactorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        recipientType:
+          type: object
+          properties:
+            equalTo:
+              $ref: '#/components/schemas/BillPaymentRecipientType'
+            in:
+              type: array
+              items:
+                $ref: '#/components/schemas/BillPaymentRecipientType'
+        paymentMethodType:
+          $ref: '#/components/schemas/BillPaymentMethodTypeFilter'
+        paymentDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        totalAmount:
+          $ref: '#/components/schemas/FloatFilter'
+        reference:
+          $ref: '#/components/schemas/StringFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillPaymentFilter'
+        not:
+          $ref: '#/components/schemas/BillPaymentFilter'
+    BillPaymentMethodType:
+      type: string
+      enum:
+      - ACH_WIRE
+      - CHECK
+      - CREDIT_CARD
+      - EFT_DIRECT_DEPOSIT
+      - E_TRANSFER
+      - VENMO
+      description: 'Payment method used for the bill payment.
+
+        - `ACH_WIRE`: ACH wire transfer
+
+        - `CHECK`: Paper check
+
+        - `CREDIT_CARD`: Credit card payment
+
+        - `EFT_DIRECT_DEPOSIT`: EFT direct deposit
+
+        - `E_TRANSFER`: Electronic transfer
+
+        - `VENMO`: Venmo payment
+
+        '
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
     BillPayment:
       type: object
       required:
@@ -1034,269 +1296,34 @@ components:
           - string
           - 'null'
           format: date-time
-    BillPaymentFilter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDFilter'
-        carrierId:
-          $ref: '#/components/schemas/UUIDFilter'
-        vendorId:
-          $ref: '#/components/schemas/UUIDFilter'
-        carrierFactorId:
-          $ref: '#/components/schemas/UUIDFilter'
-        recipientType:
-          type: object
-          properties:
-            equalTo:
-              $ref: '#/components/schemas/BillPaymentRecipientType'
-            in:
-              type: array
-              items:
-                $ref: '#/components/schemas/BillPaymentRecipientType'
-        paymentMethodType:
-          $ref: '#/components/schemas/BillPaymentMethodTypeFilter'
-        paymentDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        totalAmount:
-          $ref: '#/components/schemas/FloatFilter'
-        reference:
-          $ref: '#/components/schemas/StringFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillPaymentFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillPaymentFilter'
-        not:
-          $ref: '#/components/schemas/BillPaymentFilter'
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    BillPaymentMethodTypeFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/BillPaymentMethodType'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillPaymentMethodType'
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    BillPaymentPatch:
-      type: object
-      properties:
-        paymentDate:
-          type: string
-          format: date
-        paymentMethodType:
-          $ref: '#/components/schemas/BillPaymentMethodType'
-        reference:
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillPaymentApplicationPatch'
-          description: Update payment applications
-    BillPaymentMethodType:
-      type: string
-      enum:
-      - ACH_WIRE
-      - CHECK
-      - CREDIT_CARD
-      - EFT_DIRECT_DEPOSIT
-      - E_TRANSFER
-      - VENMO
-      description: 'Payment method used for the bill payment.
-
-        - `ACH_WIRE`: ACH wire transfer
-
-        - `CHECK`: Paper check
-
-        - `CREDIT_CARD`: Credit card payment
-
-        - `EFT_DIRECT_DEPOSIT`: EFT direct deposit
-
-        - `E_TRANSFER`: Electronic transfer
-
-        - `VENMO`: Venmo payment
-
-        '
-    CarrierReference:
-      type: object
-      description: 'Enhanced reference to a carrier resource (returned in responses).
-
-        Includes full carrier details in addition to id/key.
-
-
-        Note: Does NOT include nested references (contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Carrier UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CARRIER-SWIFT
-        name:
-          type: string
-          description: Carrier company name
-          example: Swift Transportation
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-987-6543
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: dispatch@swifttrans.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the carrier was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the carrier was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the carrier was soft deleted (null if active)
-          example: null
-    BillPaymentFilterRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/BillPaymentFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
-          type: string
   responses:
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
     ValidationError:
       description: Validation error - invalid field values
       content:
@@ -1311,33 +1338,6 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
   parameters:
     LookupBy:
       name: by
