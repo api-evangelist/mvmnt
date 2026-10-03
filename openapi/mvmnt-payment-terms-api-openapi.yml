@@ -410,6 +410,24 @@ paths:
           $ref: '#/components/responses/RateLimitExceeded'
 components:
   responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
     UnauthorizedError:
       description: Unauthorized - invalid or missing access token
       content:
@@ -419,6 +437,20 @@ components:
           example:
             error: unauthorized
             message: Invalid or expired access token
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
     RateLimitExceeded:
       description: Rate limit exceeded
       content:
@@ -445,169 +477,7 @@ components:
           description: Seconds to wait before retrying
           schema:
             type: integer
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
   schemas:
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    PaymentTermFilterRequest:
-      type: object
-      description: Request body for filtering payment terms
-      properties:
-        filter:
-          $ref: '#/components/schemas/PaymentTermFilter'
-          description: 'Filter criteria (optional - omit to return all payment terms).
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-          x-parsed-md-description:
-            result:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 2
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 0
-                - 2
-                inline: false
-                attributes: {}
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 2
-                  inline: true
-                  attributes:
-                    content: Filter criteria (optional - omit to return all payment terms).
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 2
-                  inline: true
-                  attributes: {}
-                  children: []
-                  type: softbreak
-                  annotations: []
-                  slots: {}
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 2
-                  inline: true
-                  attributes:
-                    content: 'Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.'
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: inline
-                annotations: []
-                slots: {}
-              type: paragraph
-              annotations: []
-              slots: {}
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - doNotUse:
-              equalTo: false
-          - days:
-              greaterThan: 0
-        pageSize: 50
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
     BooleanFilter:
       type: object
       description: Filter options for boolean fields
@@ -621,122 +491,6 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    FloatFilter:
-      type: object
-      description: Filter options for float/number fields
-      properties:
-        equalTo:
-          type: number
-          format: float
-          description: Exact match
-        notEqualTo:
-          type: number
-          format: float
-          description: Not equal to
-        lessThan:
-          type: number
-          format: float
-          description: Less than
-        lessThanOrEqualTo:
-          type: number
-          format: float
-          description: Less than or equal to
-        greaterThan:
-          type: number
-          format: float
-          description: Greater than
-        greaterThanOrEqualTo:
-          type: number
-          format: float
-          description: Greater than or equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    PaymentTermInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Payment term name
-          example: Net 30
-        description:
-          type: string
-          description: Payment term description or notes
-          example: Payment due 30 days from invoice date
-        days:
-          type: integer
-          description: Number of days until payment is due
-          example: 30
-        quickPayFee:
-          type: number
-          format: float
-          description: Quick pay fee percentage (e.g., 0.05 for 5%)
-          example: 0.05
-          x-parsed-md-description:
-            result:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 1
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 0
-                - 1
-                inline: false
-                attributes: {}
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 1
-                  inline: true
-                  attributes:
-                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: inline
-                annotations: []
-                slots: {}
-              type: paragraph
-              annotations: []
-              slots: {}
-        apOnly:
-          type: boolean
-          description: Whether this payment term is for accounts payable only
-          example: false
-        doNotUse:
-          type: boolean
-          description: Flag to prevent using this payment term for new transactions
-          example: false
-        key:
-          type: string
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-PAYTERM-NET30
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
     PaymentTermPatch:
       type: object
       description: 'Partial payment term update. All fields are optional.
@@ -1014,6 +768,374 @@ components:
           type: list
           annotations: []
           slots: {}
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentTermFilterRequest:
+      type: object
+      description: Request body for filtering payment terms
+      properties:
+        filter:
+          $ref: '#/components/schemas/PaymentTermFilter'
+          description: 'Filter criteria (optional - omit to return all payment terms).
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 2
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes:
+                    content: Filter criteria (optional - omit to return all payment terms).
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes: {}
+                  children: []
+                  type: softbreak
+                  annotations: []
+                  slots: {}
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 2
+                  inline: true
+                  attributes:
+                    content: 'Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.'
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - doNotUse:
+              equalTo: false
+          - days:
+              greaterThan: 0
+        pageSize: 50
+    PaymentTermFilter:
+      type: object
+      description: Filter criteria for payment terms with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/PaymentTermFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/PaymentTermFilter'
+        not:
+          $ref: '#/components/schemas/PaymentTermFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        description:
+          $ref: '#/components/schemas/StringFilter'
+        days:
+          $ref: '#/components/schemas/IntFilter'
+        quickPayFee:
+          $ref: '#/components/schemas/FloatFilter'
+        apOnly:
+          $ref: '#/components/schemas/BooleanFilter'
+        doNotUse:
+          $ref: '#/components/schemas/BooleanFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
+          description: Not equal to
+        lessThan:
+          type: number
+          format: float
+          description: Less than
+        lessThanOrEqualTo:
+          type: number
+          format: float
+          description: Less than or equal to
+        greaterThan:
+          type: number
+          format: float
+          description: Greater than
+        greaterThanOrEqualTo:
+          type: number
+          format: float
+          description: Greater than or equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentTermInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type: string
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type: integer
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type: number
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type: boolean
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type: boolean
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-PAYTERM-NET30
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    ClientKeyFilter:
+      type: object
+      description: Filter options for client key fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        in:
+          type: array
+          description: Matches any value in the array
+          items:
+            type: string
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     PaymentTerm:
       type: object
       required:
@@ -1126,110 +1248,6 @@ components:
           readOnly: true
           description: When the payment term was soft deleted (null if active)
           example: null
-    PaymentTermFilter:
-      type: object
-      description: Filter criteria for payment terms with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/PaymentTermFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/PaymentTermFilter'
-        not:
-          $ref: '#/components/schemas/PaymentTermFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        description:
-          $ref: '#/components/schemas/StringFilter'
-        days:
-          $ref: '#/components/schemas/IntFilter'
-        quickPayFee:
-          $ref: '#/components/schemas/FloatFilter'
-        apOnly:
-          $ref: '#/components/schemas/BooleanFilter'
-        doNotUse:
-          $ref: '#/components/schemas/BooleanFilter'
-        key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
     IntFilter:
       type: object
       description: Filter options for integer fields
@@ -1265,50 +1283,32 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    ValidationError:
+    Error:
       type: object
       required:
       - error
       - message
-      - details
       properties:
         error:
           type: string
           description: Error code
-          example: validation_error
         message:
           type: string
           description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    ClientKeyFilter:
+    IDFilter:
       type: object
-      description: Filter options for client key fields (limited operations - exact match only)
+      description: Filter options for ID fields (limited operations - exact match only)
       properties:
         equalTo:
           type: string
+          format: uuid
           description: Exact match
         in:
           type: array
-          description: Matches any value in the array
+          description: Matches any UUID in the array
           items:
             type: string
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
+            format: uuid
   parameters:
     LookupBy:
       name: by

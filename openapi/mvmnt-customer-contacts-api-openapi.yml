@@ -348,237 +348,42 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    CustomerReference:
+    ContactInfoPatch:
       type: object
-      description: 'Enhanced reference to a customer resource (returned in responses).
-
-        Includes full customer details in addition to id/key.
+      description: 'Partial contact information update. All fields are optional.
 
 
-        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+        - **Omitted fields**: Not modified (current value preserved)
 
-        Maximum nesting depth: 1 level.
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
 
         '
-      required:
-      - id
-      - name
-      - friendlyId
-      - status
-      - createdAt
-      - updatedAt
       properties:
-        id:
+        name:
           type: string
-          format: uuid
-          description: Customer UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
+          description: Contact person's full name
+          example: John Smith
+        email:
           type:
           - string
           - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CUSTOMER-ACME
-        name:
-          type: string
-          description: Customer company name
-          example: Acme Manufacturing Corp
-        friendlyId:
-          type: string
-          description: Human-readable customer identifier
-          example: A123456
-        status:
-          type: string
-          description: Customer status
-          enum:
-          - PROSPECT
-          - ACTIVE
-          - INACTIVE
-          - CHURNED
-          example: ACTIVE
+          format: email
+          description: Email address
+          example: john.smith@example.com
         phoneNumber:
           type:
           - string
           - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        website:
+          description: Phone number
+          example: +1-555-0100
+        title:
           type:
           - string
           - 'null'
-          description: Customer website URL
-          example: https://acme-manufacturing.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the customer was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the customer was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the customer was soft deleted (null if active)
-          example: null
-    UserReference:
-      type: object
-      description: 'Enhanced reference to a user resource (returned in responses).
-
-        Includes full user details in addition to id/key.
-
-
-        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - email
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: User UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-USER-12345
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: User's full name
-          example: John Doe
-        phone:
-          type:
-          - string
-          - 'null'
-          description: User's phone number
-          example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
-        status:
-          type: string
-          description: User account status
-          enum:
-          - PENDING
-          - ACTIVE
-          - INACTIVE
-          example: ACTIVE
-        avatarId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        createdAt:
-          type: string
-          format: date-time
-          description: When the user was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the user was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the user was soft deleted (null if active)
-          example: null
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CustomerContactNotificationType:
-      type: string
-      description: Types of shipment notifications the contact should receive
-      enum:
-      - SHIPMENT_DELIVERED
-      - SHIPMENT_IN_TRANSIT
-      - SHIPMENT_LOADING
-      - SHIPMENT_OUT_FOR_DELIVERY
-      - SHIPMENT_PICKED_UP
-      - SHIPMENT_TENDER_REJECTED
-      - SHIPMENT_UNLOADING
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    BooleanFilter:
-      type: object
-      description: Filter options for boolean fields
-      properties:
-        equalTo:
-          type: boolean
-          description: Exact match
-        notEqualTo:
-          type: boolean
-          description: Not equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
+          description: Job title or position
+          example: Operations Manager
     ContactInfo:
       type: object
       description: 'Contact information details (nested, without id).
@@ -615,73 +420,16 @@ components:
           - 'null'
           description: Job title or position
           example: Operations Manager
-    CustomerContactFilterRequest:
+    BooleanFilter:
       type: object
-      description: Request body for filtering contacts
-      properties:
-        filter:
-          $ref: '#/components/schemas/CustomerContactFilter'
-          description: 'Filter criteria (optional - omit to return all contacts).
-
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - isPrimary:
-              equalTo: true
-          - contactTypes:
-              includes: BILLING
-        pageSize: 50
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
+      description: Filter options for boolean fields
       properties:
         equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
+          type: boolean
           description: Exact match
         notEqualTo:
-          type: string
-          format: uuid
+          type: boolean
           description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
@@ -698,29 +446,6 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    ContactInfoInput:
-      type: object
-      description: Contact information for creating a new contact record
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Contact person's full name
-          example: John Smith
-        email:
-          type: string
-          format: email
-          description: Email address
-          example: john.smith@example.com
-        phoneNumber:
-          type: string
-          description: Phone number
-          example: +1-555-0100
-        title:
-          type: string
-          description: Job title or position
-          example: Operations Manager
     CustomerContactTypeFilter:
       type: object
       description: Filter for contact type enum array field
@@ -734,117 +459,61 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    CustomerContactPatch:
+    PaginationInfo:
       type: object
-      description: 'Partial contact update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-
-        Note: customerId cannot be updated after creation.
-
-        '
+      required:
+      - pageSize
+      - hasNextPage
       properties:
-        name:
-          type: string
-          description: Contact person's name (should match contactInfo.name if updating both)
-          example: John Smith
-        contactInfo:
-          anyOf:
-          - $ref: '#/components/schemas/ContactInfoPatch'
-          - type: 'null'
-          description: 'Contact information update. Provide partial or full contact data to update the parent Contact record.
-
-            Cannot be set to null (contact info is required).
-
-            '
-        phoneExtension:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '1234'
-        isPrimary:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
           type: boolean
-          description: Whether this is the primary contact
+          description: Whether there are more pages
           example: true
-        contactTypes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CustomerContactType'
-          description: Types/roles this contact serves (replaces entire array)
-          example:
-          - BILLING
-          - ACCOUNT_MANAGER
-        notifications:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CustomerContactNotificationType'
-          description: Notification types (replaces entire array)
-          example:
-          - SHIPMENT_PICKED_UP
-          - SHIPMENT_DELIVERED
-        key:
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
           type:
           - string
           - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CONTACT-JOHN-001
-    CustomerContactFilter:
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    DatetimeFilter:
       type: object
-      description: Filter criteria for contacts with AND/OR logic support
+      description: Filter options for datetime fields
       properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/CustomerContactFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/CustomerContactFilter'
-        not:
-          $ref: '#/components/schemas/CustomerContactFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        customerId:
-          $ref: '#/components/schemas/UUIDFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        email:
-          $ref: '#/components/schemas/StringFilter'
-        phoneNumber:
-          $ref: '#/components/schemas/StringFilter'
-        phoneExtension:
-          $ref: '#/components/schemas/StringFilter'
-        isPrimary:
-          $ref: '#/components/schemas/BooleanFilter'
-        contactTypes:
-          $ref: '#/components/schemas/CustomerContactTypeFilter'
-        notifications:
-          $ref: '#/components/schemas/CustomerContactNotificationTypeFilter'
-        invitedUserId:
-          $ref: '#/components/schemas/UUIDFilter'
-        deletedById:
-          $ref: '#/components/schemas/UUIDFilter'
-        key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     CustomerContact:
       type: object
       required:
@@ -942,134 +611,30 @@ components:
           readOnly: true
           description: When the contact was soft deleted (null if active)
           example: null
-    PaginationInfo:
+    UUIDFilter:
       type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    StringFilter:
-      type: object
-      description: Filter options for string fields
+      description: Filter options for UUID fields (all operations)
       properties:
         equalTo:
           type: string
+          format: uuid
           description: Exact match
         notEqualTo:
           type: string
+          format: uuid
           description: Not equal to
         in:
           type: array
           items:
             type: string
-          description: Matches any value in the array
+            format: uuid
+          description: Matches any UUID in the array
         notIn:
           type: array
           items:
             type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CustomerContactType:
-      type: string
-      description: Type of customer contact role
-      enum:
-      - ACCOUNT_MANAGER
-      - BILLING
-      - DOCK_SHIPPING
-      - EMERGENCY
-      - LOCATION_MANAGER
-      - OWNER
-      - PROCUREMENT
-      - PURCHASING
-      - RATES_PRICING
-      - RECEIVING
-      - SHIPPING
-    ContactInfoPatch:
-      type: object
-      description: 'Partial contact information update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
-      properties:
-        name:
-          type: string
-          description: Contact person's full name
-          example: John Smith
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Email address
-          example: john.smith@example.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Phone number
-          example: +1-555-0100
-        title:
-          type:
-          - string
-          - 'null'
-          description: Job title or position
-          example: Operations Manager
-    ClientKeyFilter:
-      type: object
-      description: Filter options for client key fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        in:
-          type: array
-          description: Matches any value in the array
-          items:
-            type: string
+            format: uuid
+          description: Does not match any UUID in the array
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
@@ -1122,16 +687,442 @@ components:
           maxLength: 512
           description: Client-defined reference identifier
           example: ERP-CONTACT-JOHN-001
-  responses:
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    CustomerContactType:
+      type: string
+      description: Type of customer contact role
+      enum:
+      - ACCOUNT_MANAGER
+      - BILLING
+      - DOCK_SHIPPING
+      - EMERGENCY
+      - LOCATION_MANAGER
+      - OWNER
+      - PROCUREMENT
+      - PURCHASING
+      - RATES_PRICING
+      - RECEIVING
+      - SHIPPING
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    CustomerContactPatch:
+      type: object
+      description: 'Partial contact update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+
+        Note: customerId cannot be updated after creation.
+
+        '
+      properties:
+        name:
+          type: string
+          description: Contact person's name (should match contactInfo.name if updating both)
+          example: John Smith
+        contactInfo:
+          anyOf:
+          - $ref: '#/components/schemas/ContactInfoPatch'
+          - type: 'null'
+          description: 'Contact information update. Provide partial or full contact data to update the parent Contact record.
+
+            Cannot be set to null (contact info is required).
+
+            '
+        phoneExtension:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '1234'
+        isPrimary:
+          type: boolean
+          description: Whether this is the primary contact
+          example: true
+        contactTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerContactType'
+          description: Types/roles this contact serves (replaces entire array)
           example:
-            error: unauthorized
-            message: Invalid or expired access token
+          - BILLING
+          - ACCOUNT_MANAGER
+        notifications:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerContactNotificationType'
+          description: Notification types (replaces entire array)
+          example:
+          - SHIPMENT_PICKED_UP
+          - SHIPMENT_DELIVERED
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CONTACT-JOHN-001
+    CustomerReference:
+      type: object
+      description: 'Enhanced reference to a customer resource (returned in responses).
+
+        Includes full customer details in addition to id/key.
+
+
+        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - friendlyId
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CUSTOMER-ACME
+        name:
+          type: string
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          description: Human-readable customer identifier
+          example: A123456
+        status:
+          type: string
+          description: Customer status
+          enum:
+          - PROSPECT
+          - ACTIVE
+          - INACTIVE
+          - CHURNED
+          example: ACTIVE
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        website:
+          type:
+          - string
+          - 'null'
+          description: Customer website URL
+          example: https://acme-manufacturing.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the customer was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the customer was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer was soft deleted (null if active)
+          example: null
+    ContactInfoInput:
+      type: object
+      description: Contact information for creating a new contact record
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contact person's full name
+          example: John Smith
+        email:
+          type: string
+          format: email
+          description: Email address
+          example: john.smith@example.com
+        phoneNumber:
+          type: string
+          description: Phone number
+          example: +1-555-0100
+        title:
+          type: string
+          description: Job title or position
+          example: Operations Manager
+    CustomerContactFilterRequest:
+      type: object
+      description: Request body for filtering contacts
+      properties:
+        filter:
+          $ref: '#/components/schemas/CustomerContactFilter'
+          description: 'Filter criteria (optional - omit to return all contacts).
+
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - isPrimary:
+              equalTo: true
+          - contactTypes:
+              includes: BILLING
+        pageSize: 50
+    CustomerContactNotificationType:
+      type: string
+      description: Types of shipment notifications the contact should receive
+      enum:
+      - SHIPMENT_DELIVERED
+      - SHIPMENT_IN_TRANSIT
+      - SHIPMENT_LOADING
+      - SHIPMENT_OUT_FOR_DELIVERY
+      - SHIPMENT_PICKED_UP
+      - SHIPMENT_TENDER_REJECTED
+      - SHIPMENT_UNLOADING
+    ClientKeyFilter:
+      type: object
+      description: Filter options for client key fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        in:
+          type: array
+          description: Matches any value in the array
+          items:
+            type: string
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    CustomerContactFilter:
+      type: object
+      description: Filter criteria for contacts with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/CustomerContactFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/CustomerContactFilter'
+        not:
+          $ref: '#/components/schemas/CustomerContactFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        phoneNumber:
+          $ref: '#/components/schemas/StringFilter'
+        phoneExtension:
+          $ref: '#/components/schemas/StringFilter'
+        isPrimary:
+          $ref: '#/components/schemas/BooleanFilter'
+        contactTypes:
+          $ref: '#/components/schemas/CustomerContactTypeFilter'
+        notifications:
+          $ref: '#/components/schemas/CustomerContactNotificationTypeFilter'
+        invitedUserId:
+          $ref: '#/components/schemas/UUIDFilter'
+        deletedById:
+          $ref: '#/components/schemas/UUIDFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    UserReference:
+      type: object
+      description: 'Enhanced reference to a user resource (returned in responses).
+
+        Includes full user details in addition to id/key.
+
+
+        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-USER-12345
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          type: string
+          description: User account status
+          enum:
+          - PENDING
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the user was soft deleted (null if active)
+          example: null
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
+  responses:
     NotFoundError:
       description: Resource not found
       content:
@@ -1150,6 +1141,15 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
     InternalServerError:
       description: Internal server error
       content:

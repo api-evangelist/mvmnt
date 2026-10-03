@@ -379,182 +379,58 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    CustomerContactReference:
+    LocationContactInput:
       type: object
-      description: 'Customer contact reference for embedding in Customer responses.
-
-        Identical to CustomerContact but excludes the customer and customerId fields to avoid circular references.
-
-        '
       required:
-      - id
-      - name
+      - locationId
+      - customerContactId
       - isPrimary
-      - contactInfo
-      - createdAt
       properties:
-        object:
-          type: string
-          enum:
-          - CUSTOMER_CONTACT
-          readOnly: true
-          description: Object type identifier
-          example: CUSTOMER_CONTACT
-        id:
+        locationId:
           type: string
           format: uuid
-          readOnly: true
-          description: Unique contact identifier
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CONTACT-JOHN-001
-        name:
+          description: Location this contact is associated with (required)
+          example: 770e8400-e29b-41d4-a716-446655440000
+        customerContactId:
           type: string
-          description: Contact person's name
-          example: John Smith
-        contactInfo:
-          allOf:
-          - $ref: '#/components/schemas/ContactInfo'
-          description: Contact information details (email, phone, title)
-        phoneExtension:
-          type:
-          - string
-          - 'null'
-          description: Phone extension specific to this contact role
-          example: '1234'
+          format: uuid
+          description: Customer contact to link to this location (required)
+          example: 660e8400-e29b-41d4-a716-446655440000
         isPrimary:
           type: boolean
-          description: Whether this is the primary contact
+          description: Whether this is the primary contact for the location (required)
           example: true
         contactTypes:
-          type:
-          - array
-          - 'null'
+          type: array
           items:
-            $ref: '#/components/schemas/CustomerContactType'
-          description: Types/roles this contact serves
+            $ref: '#/components/schemas/LocationContactType'
+          description: Roles/types for this location contact
           example:
-          - BILLING
-          - ACCOUNT_MANAGER
-        notifications:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CustomerContactNotificationType'
-          description: Shipment notification types
-          example:
-          - SHIPMENT_PICKED_UP
-          - SHIPMENT_DELIVERED
-        invitedUser:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User account invited/created for this contact
-        deletedBy:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User who deleted this contact
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the contact was created
-          example: '2025-01-15T10:00:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: When the contact was soft deleted
-          example: null
-    CustomerReference:
-      type: object
-      description: 'Enhanced reference to a customer resource (returned in responses).
-
-        Includes full customer details in addition to id/key.
-
-
-        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - friendlyId
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Customer UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
+          - LOCATION_MANAGER
+          - SHIPPING
         key:
-          type:
-          - string
-          - 'null'
+          type: string
           maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CUSTOMER-ACME
-        name:
-          type: string
-          description: Customer company name
-          example: Acme Manufacturing Corp
-        friendlyId:
-          type: string
-          description: Human-readable customer identifier
-          example: A123456
-        status:
-          type: string
-          description: Customer status
-          enum:
-          - PROSPECT
-          - ACTIVE
-          - INACTIVE
-          - CHURNED
-          example: ACTIVE
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        website:
-          type:
-          - string
-          - 'null'
-          description: Customer website URL
-          example: https://acme-manufacturing.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the customer was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the customer was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the customer was soft deleted (null if active)
-          example: null
+          description: Client-defined reference identifier
+          example: ERP-LOC-CONTACT-001
+    CustomerIndustry:
+      type: string
+      enum:
+      - AGRICULTURE_FORESTRY
+      - CONSTRUCTION
+      - CONSUMER_GOODS
+      - EDUCATIONAL_SERVICES
+      - ENTERTAINMENT
+      - FOOD_SERVICES
+      - HEALTHCARE
+      - INDUSTRIAL_MACHINERY
+      - MANUFACTURING
+      - MINING
+      - RETAIL_TRADE
+      - TRANSPORTATION_WAREHOUSING
+      - UTILITIES
+      - WHOLESALE_TRADE
+      description: Industry classification for the customer
     CustomerAnnualSpend:
       type: string
       enum:
@@ -567,928 +443,6 @@ components:
       - _25M_TO_75M
       - _75M_PLUS
       description: Annual freight spend estimate range
-    UserReference:
-      type: object
-      description: 'Enhanced reference to a user resource (returned in responses).
-
-        Includes full user details in addition to id/key.
-
-
-        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - email
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: User UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-USER-12345
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: User's full name
-          example: John Doe
-        phone:
-          type:
-          - string
-          - 'null'
-          description: User's phone number
-          example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
-        status:
-          type: string
-          description: User account status
-          enum:
-          - PENDING
-          - ACTIVE
-          - INACTIVE
-          example: ACTIVE
-        avatarId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        createdAt:
-          type: string
-          format: date-time
-          description: When the user was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the user was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the user was soft deleted (null if active)
-          example: null
-    Customer:
-      type: object
-      required:
-      - id
-      - name
-      - status
-      - friendlyId
-      - createdAt
-      - updatedAt
-      properties:
-        object:
-          type: string
-          enum:
-          - CUSTOMER
-          readOnly: true
-          description: Object type identifier
-          example: CUSTOMER
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique customer identifier
-          example: 550e8400-e29b-41d4-a716-446655440000
-        name:
-          type: string
-          description: Customer company name
-          example: Acme Manufacturing Corp
-        friendlyId:
-          type: string
-          readOnly: true
-          description: Human-readable customer identifier, starts with "A"
-          example: A123456
-        status:
-          $ref: '#/components/schemas/CustomerStatus'
-        serviceTier:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerServiceTier'
-          - type: 'null'
-          description: Service tier level
-        website:
-          type:
-          - string
-          - 'null'
-          description: Customer website URL
-          example: https://acme-manufacturing.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        industry:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerIndustry'
-          - type: 'null'
-          description: Industry classification
-        annualRevenue:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerAnnualRevenue'
-          - type: 'null'
-          description: Annual revenue range
-        annualSpend:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerAnnualSpend'
-          - type: 'null'
-          description: Annual freight spend estimate
-        spendType:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerSpendType'
-          - type: 'null'
-          description: Customer spend type (contract vs spot pricing)
-        naics:
-          type:
-          - string
-          - 'null'
-          description: NAICS industry code
-          example: '336411'
-        ein:
-          type:
-          - string
-          - 'null'
-          description: Employer Identification Number
-          example: 12-3456789
-        duns:
-          type:
-          - string
-          - 'null'
-          description: Dun & Bradstreet number
-          example: '123456789'
-          x-parsed-md-description:
-            result:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 1
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 0
-                - 1
-                inline: false
-                attributes: {}
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 1
-                  inline: true
-                  attributes:
-                    content: Dun & Bradstreet number
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: inline
-                annotations: []
-                slots: {}
-              type: paragraph
-              annotations: []
-              slots: {}
-        leadSource:
-          type:
-          - string
-          - 'null'
-          description: How this customer was acquired
-          example: Referral
-        dbaName:
-          type:
-          - string
-          - 'null'
-          description: Doing business as name
-          example: Acme Corp DBA
-        numberOfEmployees:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerNumberOfEmployees'
-          - type: 'null'
-          description: Company size by number of employees
-        externalId:
-          type:
-          - string
-          - 'null'
-          description: External system identifier
-          example: EXT-12345
-        currency:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerCurrency'
-          - type: 'null'
-          description: Preferred currency for transactions
-        creditLimit:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Maximum credit allowed
-          example: 50000
-        creditUsageWarning:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Credit usage warning threshold
-          example: 40000
-        freeCreditReq:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Free credit requirement
-          example: 5000
-        defaultMode:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerTransportationMode'
-          - type: 'null'
-          description: Default transportation mode
-        defaultMargin:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Default margin percentage (0-1, e.g., 0.15 for 15%)
-          example: 0.15
-        minMargin:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Minimum margin threshold
-          example: 0.1
-        maxMargin:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Maximum margin threshold
-          example: 0.25
-        defaultInternalNotes:
-          type:
-          - string
-          - 'null'
-          description: Default internal notes template
-          example: Contact via email only
-        defaultCarrierNotes:
-          type:
-          - string
-          - 'null'
-          description: Default carrier-facing notes template used when note splitting is enabled
-          example: Call pickup contact before arrival
-        defaultExternalNotes:
-          type:
-          - string
-          - 'null'
-          description: Default external notes template
-          example: Please call 1 hour before delivery
-        defaultShowNotes:
-          anyOf:
-          - $ref: '#/components/schemas/ShowNotes'
-          - type: 'null'
-          description: Controls whether default external notes are reused on carrier docs or split from default carrier notes
-        autoAcceptTender:
-          type:
-          - boolean
-          - 'null'
-          description: Auto-accept tender flag
-          example: false
-        group:
-          anyOf:
-          - $ref: '#/components/schemas/ResourceReference'
-          - type: 'null'
-          description: Customer group reference (minimal - id and key only)
-        paymentTerm:
-          anyOf:
-          - $ref: '#/components/schemas/PaymentTermReference'
-          - type: 'null'
-          description: Payment term configuration reference with full details
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Internal notes about this customer
-          example: Prefers email communication
-        deactivationReason:
-          anyOf:
-          - $ref: '#/components/schemas/CustomerDeactivationReason'
-          - type: 'null'
-          description: Reason for deactivation if status is INACTIVE
-        deactivationNotes:
-          type:
-          - string
-          - 'null'
-          description: Additional details about deactivation
-        deactivationDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the customer was deactivated
-          example: null
-        closedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the customer account was closed
-          example: null
-        closedBy:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User who closed the account (full user details)
-        closedNotes:
-          type:
-          - string
-          - 'null'
-          description: Notes about account closure
-        corporateAddress:
-          anyOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
-          description: Corporate headquarters address (nested location data)
-        billingAddress:
-          anyOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
-          description: Billing address (nested location data)
-        qboCustomerId:
-          type:
-          - string
-          - 'null'
-          description: QuickBooks Online customer ID
-          example: null
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier for this customer
-          example: ERP-CUSTOMER-12345
-        contacts:
-          type: array
-          description: Contacts for this customer
-          items:
-            $ref: '#/components/schemas/CustomerContactReference'
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Timestamp when customer was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Timestamp when customer was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: Timestamp when customer was soft-deleted (null if active)
-          example: null
-        deletedBy:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User who deleted the customer (full user details)
-    LocationContactTypeFilter:
-      type: object
-      description: Filter for contact type enum array field
-      properties:
-        includes:
-          $ref: '#/components/schemas/LocationContactType'
-          description: Array contains this contact type
-        notIncludes:
-          $ref: '#/components/schemas/LocationContactType'
-          description: Array does not contain this contact type
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CustomerDeactivationReason:
-      type: string
-      enum:
-      - NOT_PAYING_INVOICE
-      - ACQUIRED
-      - DUPLICATE
-      - NOT_IN_BUSINESS
-      - OTHER
-      description: 'Reason for customer deactivation:
-
-        - `NOT_PAYING_INVOICE`: Customer is not paying invoices
-
-        - `ACQUIRED`: Customer was acquired by another company
-
-        - `DUPLICATE`: Duplicate customer record
-
-        - `NOT_IN_BUSINESS`: Customer is no longer in business
-
-        - `OTHER`: Other reason (see deactivationNotes for details)
-
-        '
-      x-parsed-md-description:
-        result:
-        - $$mdtype: Node
-          errors: []
-          lines:
-          - 0
-          - 1
-          inline: false
-          attributes: {}
-          children:
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 0
-            - 1
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 1
-              inline: true
-              attributes:
-                content: 'Reason for customer deactivation:'
-              children: []
-              type: text
-              annotations: []
-              slots: {}
-            type: inline
-            annotations: []
-            slots: {}
-          type: paragraph
-          annotations: []
-          slots: {}
-        - $$mdtype: Node
-          errors: []
-          lines:
-          - 1
-          - 6
-          inline: false
-          attributes:
-            ordered: false
-            marker: '-'
-          children:
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 1
-            - 2
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 1
-              - 2
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 1
-                - 2
-                inline: true
-                attributes:
-                  content: NOT_PAYING_INVOICE
-                children: []
-                type: code
-                annotations: []
-                slots: {}
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 1
-                - 2
-                inline: true
-                attributes:
-                  content: ': Customer is not paying invoices'
-                children: []
-                type: text
-                annotations: []
-                slots: {}
-              type: inline
-              annotations: []
-              slots: {}
-            type: item
-            annotations: []
-            slots: {}
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 2
-            - 3
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 2
-              - 3
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 2
-                - 3
-                inline: true
-                attributes:
-                  content: ACQUIRED
-                children: []
-                type: code
-                annotations: []
-                slots: {}
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 2
-                - 3
-                inline: true
-                attributes:
-                  content: ': Customer was acquired by another company'
-                children: []
-                type: text
-                annotations: []
-                slots: {}
-              type: inline
-              annotations: []
-              slots: {}
-            type: item
-            annotations: []
-            slots: {}
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 3
-            - 4
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 3
-              - 4
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 3
-                - 4
-                inline: true
-                attributes:
-                  content: DUPLICATE
-                children: []
-                type: code
-                annotations: []
-                slots: {}
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 3
-                - 4
-                inline: true
-                attributes:
-                  content: ': Duplicate customer record'
-                children: []
-                type: text
-                annotations: []
-                slots: {}
-              type: inline
-              annotations: []
-              slots: {}
-            type: item
-            annotations: []
-            slots: {}
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 4
-            - 5
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 4
-              - 5
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 4
-                - 5
-                inline: true
-                attributes:
-                  content: NOT_IN_BUSINESS
-                children: []
-                type: code
-                annotations: []
-                slots: {}
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 4
-                - 5
-                inline: true
-                attributes:
-                  content: ': Customer is no longer in business'
-                children: []
-                type: text
-                annotations: []
-                slots: {}
-              type: inline
-              annotations: []
-              slots: {}
-            type: item
-            annotations: []
-            slots: {}
-          - $$mdtype: Node
-            errors: []
-            lines:
-            - 5
-            - 6
-            inline: false
-            attributes: {}
-            children:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 5
-              - 6
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 5
-                - 6
-                inline: true
-                attributes:
-                  content: OTHER
-                children: []
-                type: code
-                annotations: []
-                slots: {}
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 5
-                - 6
-                inline: true
-                attributes:
-                  content: ': Other reason (see deactivationNotes for details)'
-                children: []
-                type: text
-                annotations: []
-                slots: {}
-              type: inline
-              annotations: []
-              slots: {}
-            type: item
-            annotations: []
-            slots: {}
-          type: list
-          annotations: []
-          slots: {}
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CustomerAnnualRevenue:
-      type: string
-      enum:
-      - _0_TO_500K
-      - _500K_TO_3M
-      - _3M_TO_10M
-      - _10M_TO_25M
-      - _25M_TO_50M
-      - _50M_TO_100M
-      - _100M_TO_500M
-      - _500M_PLUS
-      description: Annual revenue range
-    CustomerContactNotificationType:
-      type: string
-      description: Types of shipment notifications the contact should receive
-      enum:
-      - SHIPMENT_DELIVERED
-      - SHIPMENT_IN_TRANSIT
-      - SHIPMENT_LOADING
-      - SHIPMENT_OUT_FOR_DELIVERY
-      - SHIPMENT_PICKED_UP
-      - SHIPMENT_TENDER_REJECTED
-      - SHIPMENT_UNLOADING
-    LocationContactReference:
-      type: object
-      description: 'Location contact reference for embedding in Location responses.
-
-        Identical to LocationContact but excludes the location and locationId fields to avoid circular references.
-
-        '
-      required:
-      - id
-      - customerContactId
-      - isPrimary
-      - createdAt
-      - updatedAt
-      properties:
-        object:
-          type: string
-          enum:
-          - LOCATION_CONTACT
-          readOnly: true
-          description: Object type identifier
-          example: LOCATION_CONTACT
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique location contact identifier
-          example: 880e8400-e29b-41d4-a716-446655440000
-        customerContactId:
-          type: string
-          format: uuid
-          description: Customer contact linked to this location
-          example: 660e8400-e29b-41d4-a716-446655440000
-        customerContact:
-          $ref: '#/components/schemas/CustomerContact'
-          readOnly: true
-          description: The customer contact details
-        isPrimary:
-          type: boolean
-          description: Whether this is the primary contact for the location
-          example: true
-        contactTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationContactType'
-          description: Roles/types for this location contact
-          example:
-          - LOCATION_MANAGER
-          - SHIPPING
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier for this location contact
-          example: ERP-LOC-CONTACT-001
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Timestamp when location contact was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: Timestamp when location contact was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: Timestamp when location contact was soft-deleted (null if active)
-          example: null
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    BooleanFilter:
-      type: object
-      description: Filter options for boolean fields
-      properties:
-        equalTo:
-          type: boolean
-          description: Exact match
-        notEqualTo:
-          type: boolean
-          description: Not equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    LocationContactFilter:
-      type: object
-      description: Filter criteria for location contacts with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/LocationContactFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/LocationContactFilter'
-        not:
-          $ref: '#/components/schemas/LocationContactFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        locationId:
-          $ref: '#/components/schemas/UUIDFilter'
-        customerContactId:
-          $ref: '#/components/schemas/UUIDFilter'
-        isPrimary:
-          $ref: '#/components/schemas/BooleanFilter'
-        contactTypes:
-          $ref: '#/components/schemas/LocationContactTypeFilter'
-        key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
     CustomerStatus:
       type: string
       enum:
@@ -2034,21 +988,340 @@ components:
           type: list
           annotations: []
           slots: {}
-    LocationContactType:
-      type: string
-      description: Type of location contact role
-      enum:
-      - ACCOUNT_MANAGER
-      - BILLING
-      - DOCK_SHIPPING
-      - EMERGENCY
-      - LOCATION_MANAGER
-      - OWNER
-      - PROCUREMENT
-      - PURCHASING
-      - RATES_PRICING
-      - RECEIVING
-      - SHIPPING
+    Customer:
+      type: object
+      required:
+      - id
+      - name
+      - status
+      - friendlyId
+      - createdAt
+      - updatedAt
+      properties:
+        object:
+          type: string
+          enum:
+          - CUSTOMER
+          readOnly: true
+          description: Object type identifier
+          example: CUSTOMER
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique customer identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        name:
+          type: string
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          readOnly: true
+          description: Human-readable customer identifier, starts with "A"
+          example: A123456
+        status:
+          $ref: '#/components/schemas/CustomerStatus'
+        serviceTier:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerServiceTier'
+          - type: 'null'
+          description: Service tier level
+        website:
+          type:
+          - string
+          - 'null'
+          description: Customer website URL
+          example: https://acme-manufacturing.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        industry:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerIndustry'
+          - type: 'null'
+          description: Industry classification
+        annualRevenue:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerAnnualRevenue'
+          - type: 'null'
+          description: Annual revenue range
+        annualSpend:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerAnnualSpend'
+          - type: 'null'
+          description: Annual freight spend estimate
+        spendType:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerSpendType'
+          - type: 'null'
+          description: Customer spend type (contract vs spot pricing)
+        naics:
+          type:
+          - string
+          - 'null'
+          description: NAICS industry code
+          example: '336411'
+        ein:
+          type:
+          - string
+          - 'null'
+          description: Employer Identification Number
+          example: 12-3456789
+        duns:
+          type:
+          - string
+          - 'null'
+          description: Dun & Bradstreet number
+          example: '123456789'
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Dun & Bradstreet number
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        leadSource:
+          type:
+          - string
+          - 'null'
+          description: How this customer was acquired
+          example: Referral
+        dbaName:
+          type:
+          - string
+          - 'null'
+          description: Doing business as name
+          example: Acme Corp DBA
+        numberOfEmployees:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerNumberOfEmployees'
+          - type: 'null'
+          description: Company size by number of employees
+        externalId:
+          type:
+          - string
+          - 'null'
+          description: External system identifier
+          example: EXT-12345
+        currency:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerCurrency'
+          - type: 'null'
+          description: Preferred currency for transactions
+        creditLimit:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Maximum credit allowed
+          example: 50000
+        creditUsageWarning:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Credit usage warning threshold
+          example: 40000
+        freeCreditReq:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Free credit requirement
+          example: 5000
+        defaultMode:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerTransportationMode'
+          - type: 'null'
+          description: Default transportation mode
+        defaultMargin:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Default margin percentage (0-1, e.g., 0.15 for 15%)
+          example: 0.15
+        minMargin:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Minimum margin threshold
+          example: 0.1
+        maxMargin:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Maximum margin threshold
+          example: 0.25
+        defaultInternalNotes:
+          type:
+          - string
+          - 'null'
+          description: Default internal notes template
+          example: Contact via email only
+        defaultCarrierNotes:
+          type:
+          - string
+          - 'null'
+          description: Default carrier-facing notes template used when note splitting is enabled
+          example: Call pickup contact before arrival
+        defaultExternalNotes:
+          type:
+          - string
+          - 'null'
+          description: Default external notes template
+          example: Please call 1 hour before delivery
+        defaultShowNotes:
+          anyOf:
+          - $ref: '#/components/schemas/ShowNotes'
+          - type: 'null'
+          description: Controls whether default external notes are reused on carrier docs or split from default carrier notes
+        autoAcceptTender:
+          type:
+          - boolean
+          - 'null'
+          description: Auto-accept tender flag
+          example: false
+        group:
+          anyOf:
+          - $ref: '#/components/schemas/ResourceReference'
+          - type: 'null'
+          description: Customer group reference (minimal - id and key only)
+        paymentTerm:
+          anyOf:
+          - $ref: '#/components/schemas/PaymentTermReference'
+          - type: 'null'
+          description: Payment term configuration reference with full details
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Internal notes about this customer
+          example: Prefers email communication
+        deactivationReason:
+          anyOf:
+          - $ref: '#/components/schemas/CustomerDeactivationReason'
+          - type: 'null'
+          description: Reason for deactivation if status is INACTIVE
+        deactivationNotes:
+          type:
+          - string
+          - 'null'
+          description: Additional details about deactivation
+        deactivationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer was deactivated
+          example: null
+        closedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer account was closed
+          example: null
+        closedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User who closed the account (full user details)
+        closedNotes:
+          type:
+          - string
+          - 'null'
+          description: Notes about account closure
+        corporateAddress:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+          description: Corporate headquarters address (nested location data)
+        billingAddress:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+          description: Billing address (nested location data)
+        qboCustomerId:
+          type:
+          - string
+          - 'null'
+          description: QuickBooks Online customer ID
+          example: null
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier for this customer
+          example: ERP-CUSTOMER-12345
+        contacts:
+          type: array
+          description: Contacts for this customer
+          items:
+            $ref: '#/components/schemas/CustomerContactReference'
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when customer was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when customer was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: Timestamp when customer was soft-deleted (null if active)
+          example: null
+        deletedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User who deleted the customer (full user details)
     ContactInfo:
       type: object
       description: 'Contact information details (nested, without id).
@@ -2085,88 +1358,245 @@ components:
           - 'null'
           description: Job title or position
           example: Operations Manager
-    IDFilter:
+    BooleanFilter:
       type: object
-      description: Filter options for ID fields (limited operations - exact match only)
+      description: Filter options for boolean fields
       properties:
         equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
-    CustomerServiceTier:
-      type: string
-      enum:
-      - TIER_1
-      - TIER_2
-      - TIER_3
-      description: Service tier level for the customer
-    LocationContactInput:
-      type: object
-      required:
-      - locationId
-      - customerContactId
-      - isPrimary
-      properties:
-        locationId:
-          type: string
-          format: uuid
-          description: Location this contact is associated with (required)
-          example: 770e8400-e29b-41d4-a716-446655440000
-        customerContactId:
-          type: string
-          format: uuid
-          description: Customer contact to link to this location (required)
-          example: 660e8400-e29b-41d4-a716-446655440000
-        isPrimary:
           type: boolean
-          description: Whether this is the primary contact for the location (required)
-          example: true
-        contactTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationContactType'
-          description: Roles/types for this location contact
-          example:
-          - LOCATION_MANAGER
-          - SHIPPING
-        key:
-          type: string
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-LOC-CONTACT-001
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
           description: Exact match
         notEqualTo:
-          type: string
-          format: uuid
+          type: boolean
           description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
+    PaymentTermReference:
+      type: object
+      description: 'Enhanced reference to a payment term resource (returned in responses).
+
+        Includes full payment term details in addition to id/key.
+
+        '
+      required:
+      - id
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Payment term UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-PAYTERM-NET30
+        name:
+          type: string
+          description: Payment term name
+          example: Net 30
+        description:
+          type:
+          - string
+          - 'null'
+          description: Payment term description or notes
+          example: Payment due 30 days from invoice date
+        days:
+          type:
+          - integer
+          - 'null'
+          description: Number of days until payment is due
+          example: 30
+        quickPayFee:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: Quick pay fee percentage (e.g., 0.05 for 5%)
+          example: 0.05
+          x-parsed-md-description:
+            result:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 0
+                - 1
+                inline: false
+                attributes: {}
+                children:
+                - $$mdtype: Node
+                  errors: []
+                  lines:
+                  - 0
+                  - 1
+                  inline: true
+                  attributes:
+                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
+                  children: []
+                  type: text
+                  annotations: []
+                  slots: {}
+                type: inline
+                annotations: []
+                slots: {}
+              type: paragraph
+              annotations: []
+              slots: {}
+        apOnly:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this payment term is for accounts payable only
+          example: false
+        doNotUse:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to prevent using this payment term for new transactions
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          description: When the payment term was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the payment term was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the payment term was soft deleted (null if active)
+          example: null
+    CustomerTransportationMode:
+      type: string
+      enum:
+      - FTL
+      - LTL
+      - AIR
+      - OCEAN
+      - RAIL
+      - INTERMODAL
+      - DRAYAGE
+      - EXPEDITED_GROUND
+      - EXPEDITED_AIR
+      - AUTO
+      - PTL
+      description: Transportation mode type
+    CustomerContactReference:
+      type: object
+      description: 'Customer contact reference for embedding in Customer responses.
+
+        Identical to CustomerContact but excludes the customer and customerId fields to avoid circular references.
+
+        '
+      required:
+      - id
+      - name
+      - isPrimary
+      - contactInfo
+      - createdAt
+      properties:
+        object:
+          type: string
+          enum:
+          - CUSTOMER_CONTACT
+          readOnly: true
+          description: Object type identifier
+          example: CUSTOMER_CONTACT
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique contact identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CONTACT-JOHN-001
+        name:
+          type: string
+          description: Contact person's name
+          example: John Smith
+        contactInfo:
+          allOf:
+          - $ref: '#/components/schemas/ContactInfo'
+          description: Contact information details (email, phone, title)
+        phoneExtension:
+          type:
+          - string
+          - 'null'
+          description: Phone extension specific to this contact role
+          example: '1234'
+        isPrimary:
+          type: boolean
+          description: Whether this is the primary contact
+          example: true
+        contactTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerContactType'
+          description: Types/roles this contact serves
+          example:
+          - BILLING
+          - ACCOUNT_MANAGER
+        notifications:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerContactNotificationType'
+          description: Shipment notification types
+          example:
+          - SHIPMENT_PICKED_UP
+          - SHIPMENT_DELIVERED
+        invitedUser:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User account invited/created for this contact
+        deletedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User who deleted this contact
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the contact was created
+          example: '2025-01-15T10:00:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: When the contact was soft deleted
+          example: null
     Address:
       type: object
       description: 'Physical address/location details (nested, without id).
@@ -2244,6 +1674,37 @@ components:
           format: uuid
           description: Reference to standardized city record (internal use)
           example: null
+    CustomerServiceTier:
+      type: string
+      enum:
+      - TIER_1
+      - TIER_2
+      - TIER_3
+      description: Service tier level for the customer
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    CustomerAnnualRevenue:
+      type: string
+      enum:
+      - _0_TO_500K
+      - _500K_TO_3M
+      - _3M_TO_10M
+      - _10M_TO_25M
+      - _25M_TO_50M
+      - _50M_TO_100M
+      - _100M_TO_500M
+      - _500M_PLUS
+      description: Annual revenue range
     Location:
       type: object
       required:
@@ -2331,6 +1792,343 @@ components:
           format: date-time
           readOnly: true
           description: Timestamp when location was soft-deleted (null if active)
+          example: null
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    LocationContactType:
+      type: string
+      description: Type of location contact role
+      enum:
+      - ACCOUNT_MANAGER
+      - BILLING
+      - DOCK_SHIPPING
+      - EMERGENCY
+      - LOCATION_MANAGER
+      - OWNER
+      - PROCUREMENT
+      - PURCHASING
+      - RATES_PRICING
+      - RECEIVING
+      - SHIPPING
+    CustomerContact:
+      type: object
+      required:
+      - id
+      - customer
+      - name
+      - isPrimary
+      - contactInfo
+      - createdAt
+      properties:
+        object:
+          type: string
+          enum:
+          - CUSTOMER_CONTACT
+          readOnly: true
+          description: Object type identifier
+          example: CUSTOMER_CONTACT
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique contact identifier
+          example: 550e8400-e29b-41d4-a716-446655440000
+        customer:
+          $ref: '#/components/schemas/CustomerReference'
+          description: Customer this contact belongs to (full customer details)
+        name:
+          type: string
+          description: Contact person's name (denormalized from ContactInfo for convenience)
+          example: John Smith
+        contactInfo:
+          allOf:
+          - $ref: '#/components/schemas/ContactInfo'
+          description: Contact information details (email, phone, title) - nested from parent Contact record
+        phoneExtension:
+          type:
+          - string
+          - 'null'
+          description: Phone extension specific to this contact role
+          example: '1234'
+        isPrimary:
+          type: boolean
+          description: Whether this is the primary contact for the customer
+          example: true
+        contactTypes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerContactType'
+          description: Types/roles this contact serves
+          example:
+          - BILLING
+          - ACCOUNT_MANAGER
+        notifications:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerContactNotificationType'
+          description: Shipment notification types to send to this contact
+          example:
+          - SHIPMENT_PICKED_UP
+          - SHIPMENT_DELIVERED
+        invitedUser:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User account invited/created for this contact (full user details)
+        deletedBy:
+          anyOf:
+          - $ref: '#/components/schemas/UserReference'
+          - type: 'null'
+          readOnly: true
+          description: User who deleted this contact (full user details)
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CONTACT-JOHN-001
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the contact was created
+          example: '2025-01-15T10:00:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: When the contact was soft deleted (null if active)
+          example: null
+    ShowNotes:
+      type: string
+      enum:
+      - ALL
+      - SPLIT
+      description: 'Controls whether external notes are shown on all documents or split from carrier-facing notes.
+
+        - `ALL`: Use external notes on customer-facing and carrier-facing documents
+
+        - `SPLIT`: Use external notes on customer-facing documents and carrier notes on carrier-facing documents
+
+        '
+    CustomerNumberOfEmployees:
+      type: string
+      enum:
+      - _0_TO_1
+      - _2_TO_5
+      - _6_TO_9
+      - _10_TO_24
+      - _25_TO_99
+      - _100_TO_249
+      - _250_TO_499
+      - _500_OR_MORE
+      description: Number of employees in the company
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    CustomerContactType:
+      type: string
+      description: Type of customer contact role
+      enum:
+      - ACCOUNT_MANAGER
+      - BILLING
+      - DOCK_SHIPPING
+      - EMERGENCY
+      - LOCATION_MANAGER
+      - OWNER
+      - PROCUREMENT
+      - PURCHASING
+      - RATES_PRICING
+      - RECEIVING
+      - SHIPPING
+    LocationContactFilterRequest:
+      type: object
+      description: Request body for filtering location contacts
+      properties:
+        filter:
+          $ref: '#/components/schemas/LocationContactFilter'
+          description: 'Filter criteria (optional - omit to return all location contacts).
+
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - locationId:
+              equalTo: 770e8400-e29b-41d4-a716-446655440000
+          - isPrimary:
+              equalTo: true
+        pageSize: 50
+    LocationContactReference:
+      type: object
+      description: 'Location contact reference for embedding in Location responses.
+
+        Identical to LocationContact but excludes the location and locationId fields to avoid circular references.
+
+        '
+      required:
+      - id
+      - customerContactId
+      - isPrimary
+      - createdAt
+      - updatedAt
+      properties:
+        object:
+          type: string
+          enum:
+          - LOCATION_CONTACT
+          readOnly: true
+          description: Object type identifier
+          example: LOCATION_CONTACT
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique location contact identifier
+          example: 880e8400-e29b-41d4-a716-446655440000
+        customerContactId:
+          type: string
+          format: uuid
+          description: Customer contact linked to this location
+          example: 660e8400-e29b-41d4-a716-446655440000
+        customerContact:
+          $ref: '#/components/schemas/CustomerContact'
+          readOnly: true
+          description: The customer contact details
+        isPrimary:
+          type: boolean
+          description: Whether this is the primary contact for the location
+          example: true
+        contactTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationContactType'
+          description: Roles/types for this location contact
+          example:
+          - LOCATION_MANAGER
+          - SHIPPING
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier for this location contact
+          example: ERP-LOC-CONTACT-001
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when location contact was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Timestamp when location contact was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          description: Timestamp when location contact was soft-deleted (null if active)
           example: null
     CustomerSpendType:
       type: string
@@ -2485,68 +2283,30 @@ components:
           type: list
           annotations: []
           slots: {}
-    CustomerIndustry:
-      type: string
-      enum:
-      - AGRICULTURE_FORESTRY
-      - CONSTRUCTION
-      - CONSUMER_GOODS
-      - EDUCATIONAL_SERVICES
-      - ENTERTAINMENT
-      - FOOD_SERVICES
-      - HEALTHCARE
-      - INDUSTRIAL_MACHINERY
-      - MANUFACTURING
-      - MINING
-      - RETAIL_TRADE
-      - TRANSPORTATION_WAREHOUSING
-      - UTILITIES
-      - WHOLESALE_TRADE
-      description: Industry classification for the customer
-    CustomerTransportationMode:
-      type: string
-      enum:
-      - FTL
-      - LTL
-      - AIR
-      - OCEAN
-      - RAIL
-      - INTERMODAL
-      - DRAYAGE
-      - EXPEDITED_GROUND
-      - EXPEDITED_AIR
-      - AUTO
-      - PTL
-      description: Transportation mode type
-    ShowNotes:
-      type: string
-      enum:
-      - ALL
-      - SPLIT
-      description: 'Controls whether external notes are shown on all documents or split from carrier-facing notes.
-
-        - `ALL`: Use external notes on customer-facing and carrier-facing documents
-
-        - `SPLIT`: Use external notes on customer-facing documents and carrier notes on carrier-facing documents
-
-        '
-    PaymentTermReference:
+    CustomerReference:
       type: object
-      description: 'Enhanced reference to a payment term resource (returned in responses).
+      description: 'Enhanced reference to a customer resource (returned in responses).
 
-        Includes full payment term details in addition to id/key.
+        Includes full customer details in addition to id/key.
+
+
+        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
 
         '
       required:
       - id
       - name
+      - friendlyId
+      - status
       - createdAt
       - updatedAt
       properties:
         id:
           type: string
           format: uuid
-          description: Payment term UUID
+          description: Customer UUID
           example: 550e8400-e29b-41d4-a716-446655440000
         key:
           type:
@@ -2554,234 +2314,398 @@ components:
           - 'null'
           maxLength: 512
           description: Client-defined reference ID if set
-          example: ERP-PAYTERM-NET30
+          example: ERP-CUSTOMER-ACME
         name:
           type: string
-          description: Payment term name
-          example: Net 30
-        description:
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          description: Human-readable customer identifier
+          example: A123456
+        status:
+          type: string
+          description: Customer status
+          enum:
+          - PROSPECT
+          - ACTIVE
+          - INACTIVE
+          - CHURNED
+          example: ACTIVE
+        phoneNumber:
           type:
           - string
           - 'null'
-          description: Payment term description or notes
-          example: Payment due 30 days from invoice date
-        days:
+          description: Primary phone number
+          example: +1-555-123-4567
+        website:
           type:
-          - integer
+          - string
           - 'null'
-          description: Number of days until payment is due
-          example: 30
-        quickPayFee:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: Quick pay fee percentage (e.g., 0.05 for 5%)
-          example: 0.05
-          x-parsed-md-description:
-            result:
-            - $$mdtype: Node
-              errors: []
-              lines:
-              - 0
-              - 1
-              inline: false
-              attributes: {}
-              children:
-              - $$mdtype: Node
-                errors: []
-                lines:
-                - 0
-                - 1
-                inline: false
-                attributes: {}
-                children:
-                - $$mdtype: Node
-                  errors: []
-                  lines:
-                  - 0
-                  - 1
-                  inline: true
-                  attributes:
-                    content: Quick pay fee percentage (e.g., 0.05 for 5%)
-                  children: []
-                  type: text
-                  annotations: []
-                  slots: {}
-                type: inline
-                annotations: []
-                slots: {}
-              type: paragraph
-              annotations: []
-              slots: {}
-        apOnly:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this payment term is for accounts payable only
-          example: false
-        doNotUse:
-          type:
-          - boolean
-          - 'null'
-          description: Flag to prevent using this payment term for new transactions
-          example: false
+          description: Customer website URL
+          example: https://acme-manufacturing.com
         createdAt:
           type: string
           format: date-time
-          description: When the payment term was created
+          description: When the customer was created
           example: '2025-01-15T10:00:00Z'
         updatedAt:
           type: string
           format: date-time
-          description: When the payment term was last updated
+          description: When the customer was last updated
           example: '2025-01-15T14:30:00Z'
         deletedAt:
           type:
           - string
           - 'null'
           format: date-time
-          description: When the payment term was soft deleted (null if active)
+          description: When the customer was soft deleted (null if active)
           example: null
-    CustomerContact:
+    CustomerCurrency:
+      type: string
+      enum:
+      - USD
+      - CAD
+      - MXN
+      - EUR
+      - GBP
+      - JPY
+      - CNY
+      - AUD
+      - BRL
+      - INR
+      - KRW
+      - RUB
+      - SAR
+      - TRY
+      - IDR
+      - ARS
+      - ZAR
+      description: Preferred currency for transactions
+    LocationContactTypeFilter:
       type: object
-      required:
-      - id
-      - customer
-      - name
-      - isPrimary
-      - contactInfo
-      - createdAt
+      description: Filter for contact type enum array field
       properties:
-        object:
-          type: string
-          enum:
-          - CUSTOMER_CONTACT
-          readOnly: true
-          description: Object type identifier
-          example: CUSTOMER_CONTACT
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique contact identifier
-          example: 550e8400-e29b-41d4-a716-446655440000
-        customer:
-          $ref: '#/components/schemas/CustomerReference'
-          description: Customer this contact belongs to (full customer details)
-        name:
-          type: string
-          description: Contact person's name (denormalized from ContactInfo for convenience)
-          example: John Smith
-        contactInfo:
-          allOf:
-          - $ref: '#/components/schemas/ContactInfo'
-          description: Contact information details (email, phone, title) - nested from parent Contact record
-        phoneExtension:
-          type:
-          - string
-          - 'null'
-          description: Phone extension specific to this contact role
-          example: '1234'
-        isPrimary:
+        includes:
+          $ref: '#/components/schemas/LocationContactType'
+          description: Array contains this contact type
+        notIncludes:
+          $ref: '#/components/schemas/LocationContactType'
+          description: Array does not contain this contact type
+        isNull:
           type: boolean
-          description: Whether this is the primary contact for the customer
-          example: true
-        contactTypes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CustomerContactType'
-          description: Types/roles this contact serves
-          example:
-          - BILLING
-          - ACCOUNT_MANAGER
-        notifications:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/CustomerContactNotificationType'
-          description: Shipment notification types to send to this contact
-          example:
-          - SHIPMENT_PICKED_UP
-          - SHIPMENT_DELIVERED
-        invitedUser:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User account invited/created for this contact (full user details)
-        deletedBy:
-          anyOf:
-          - $ref: '#/components/schemas/UserReference'
-          - type: 'null'
-          readOnly: true
-          description: User who deleted this contact (full user details)
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CONTACT-JOHN-001
-        createdAt:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the contact was created
-          example: '2025-01-15T10:00:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-          description: When the contact was soft deleted (null if active)
-          example: null
-    ResourceReference:
-      type: object
-      description: Reference to another resource (returned in responses)
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type:
-          - string
-          - 'null'
-          description: Client-defined reference ID if set
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
-        key: ERP-USER-12345
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+          description: Field is null (true) or not null (false)
+    CustomerContactNotificationType:
+      type: string
+      description: Types of shipment notifications the contact should receive
+      enum:
+      - SHIPMENT_DELIVERED
+      - SHIPMENT_IN_TRANSIT
+      - SHIPMENT_LOADING
+      - SHIPMENT_OUT_FOR_DELIVERY
+      - SHIPMENT_PICKED_UP
+      - SHIPMENT_TENDER_REJECTED
+      - SHIPMENT_UNLOADING
+    CustomerDeactivationReason:
+      type: string
+      enum:
+      - NOT_PAYING_INVOICE
+      - ACQUIRED
+      - DUPLICATE
+      - NOT_IN_BUSINESS
+      - OTHER
+      description: 'Reason for customer deactivation:
+
+        - `NOT_PAYING_INVOICE`: Customer is not paying invoices
+
+        - `ACQUIRED`: Customer was acquired by another company
+
+        - `DUPLICATE`: Duplicate customer record
+
+        - `NOT_IN_BUSINESS`: Customer is no longer in business
+
+        - `OTHER`: Other reason (see deactivationNotes for details)
+
+        '
+      x-parsed-md-description:
+        result:
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 0
+          - 1
+          inline: false
+          attributes: {}
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 0
+            - 1
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 0
+              - 1
+              inline: true
+              attributes:
+                content: 'Reason for customer deactivation:'
+              children: []
+              type: text
+              annotations: []
+              slots: {}
+            type: inline
+            annotations: []
+            slots: {}
+          type: paragraph
+          annotations: []
+          slots: {}
+        - $$mdtype: Node
+          errors: []
+          lines:
+          - 1
+          - 6
+          inline: false
+          attributes:
+            ordered: false
+            marker: '-'
+          children:
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 1
+            - 2
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 1
+              - 2
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: NOT_PAYING_INVOICE
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 1
+                - 2
+                inline: true
+                attributes:
+                  content: ': Customer is not paying invoices'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 2
+            - 3
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 2
+              - 3
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: ACQUIRED
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 2
+                - 3
+                inline: true
+                attributes:
+                  content: ': Customer was acquired by another company'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 3
+            - 4
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 3
+              - 4
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: DUPLICATE
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 3
+                - 4
+                inline: true
+                attributes:
+                  content: ': Duplicate customer record'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 4
+            - 5
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 4
+              - 5
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 4
+                - 5
+                inline: true
+                attributes:
+                  content: NOT_IN_BUSINESS
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 4
+                - 5
+                inline: true
+                attributes:
+                  content: ': Customer is no longer in business'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          - $$mdtype: Node
+            errors: []
+            lines:
+            - 5
+            - 6
+            inline: false
+            attributes: {}
+            children:
+            - $$mdtype: Node
+              errors: []
+              lines:
+              - 5
+              - 6
+              inline: false
+              attributes: {}
+              children:
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 5
+                - 6
+                inline: true
+                attributes:
+                  content: OTHER
+                children: []
+                type: code
+                annotations: []
+                slots: {}
+              - $$mdtype: Node
+                errors: []
+                lines:
+                - 5
+                - 6
+                inline: true
+                attributes:
+                  content: ': Other reason (see deactivationNotes for details)'
+                children: []
+                type: text
+                annotations: []
+                slots: {}
+              type: inline
+              annotations: []
+              slots: {}
+            type: item
+            annotations: []
+            slots: {}
+          type: list
+          annotations: []
+          slots: {}
     LocationContact:
       type: object
       required:
@@ -2862,77 +2786,21 @@ components:
           readOnly: true
           description: Timestamp when location contact was soft-deleted (null if active)
           example: null
-    CustomerContactType:
-      type: string
-      description: Type of customer contact role
-      enum:
-      - ACCOUNT_MANAGER
-      - BILLING
-      - DOCK_SHIPPING
-      - EMERGENCY
-      - LOCATION_MANAGER
-      - OWNER
-      - PROCUREMENT
-      - PURCHASING
-      - RATES_PRICING
-      - RECEIVING
-      - SHIPPING
-    LocationType:
-      type: string
-      enum:
-      - SHIPPER
-      - RECEIVER
-      - BOTH
-      description: 'The type of location:
-
-        - `SHIPPER`: Pickup location only
-
-        - `RECEIVER`: Delivery location only
-
-        - `BOTH`: Can be used for both pickup and delivery
-
-        '
-    LocationContactFilterRequest:
+    ClientKeyFilter:
       type: object
-      description: Request body for filtering location contacts
+      description: Filter options for client key fields (limited operations - exact match only)
       properties:
-        filter:
-          $ref: '#/components/schemas/LocationContactFilter'
-          description: 'Filter criteria (optional - omit to return all location contacts).
-
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
+        equalTo:
           type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - locationId:
-              equalTo: 770e8400-e29b-41d4-a716-446655440000
-          - isPrimary:
-              equalTo: true
-        pageSize: 50
-    CustomerNumberOfEmployees:
-      type: string
-      enum:
-      - _0_TO_1
-      - _2_TO_5
-      - _6_TO_9
-      - _10_TO_24
-      - _25_TO_99
-      - _100_TO_249
-      - _250_TO_499
-      - _500_OR_MORE
-      description: Number of employees in the company
+          description: Exact match
+        in:
+          type: array
+          description: Matches any value in the array
+          items:
+            type: string
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     LocationContactPatch:
       type: object
       description: 'Partial location contact update. All fields are optional.
@@ -2975,52 +2843,175 @@ components:
           maxLength: 512
           description: Client-defined reference identifier
           example: ERP-LOC-CONTACT-001
-    CustomerCurrency:
+    UserReference:
+      type: object
+      description: 'Enhanced reference to a user resource (returned in responses).
+
+        Includes full user details in addition to id/key.
+
+
+        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-USER-12345
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          type: string
+          description: User account status
+          enum:
+          - PENDING
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the user was soft deleted (null if active)
+          example: null
+    ResourceReference:
+      type: object
+      description: Reference to another resource (returned in responses)
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type:
+          - string
+          - 'null'
+          description: Client-defined reference ID if set
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+        key: ERP-USER-12345
+    LocationType:
       type: string
       enum:
-      - USD
-      - CAD
-      - MXN
-      - EUR
-      - GBP
-      - JPY
-      - CNY
-      - AUD
-      - BRL
-      - INR
-      - KRW
-      - RUB
-      - SAR
-      - TRY
-      - IDR
-      - ARS
-      - ZAR
-      description: Preferred currency for transactions
-    ClientKeyFilter:
+      - SHIPPER
+      - RECEIVER
+      - BOTH
+      description: 'The type of location:
+
+        - `SHIPPER`: Pickup location only
+
+        - `RECEIVER`: Delivery location only
+
+        - `BOTH`: Can be used for both pickup and delivery
+
+        '
+    IDFilter:
       type: object
-      description: Filter options for client key fields (limited operations - exact match only)
+      description: Filter options for ID fields (limited operations - exact match only)
       properties:
         equalTo:
           type: string
+          format: uuid
           description: Exact match
         in:
           type: array
-          description: Matches any value in the array
+          description: Matches any UUID in the array
           items:
             type: string
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
+            format: uuid
+    LocationContactFilter:
+      type: object
+      description: Filter criteria for location contacts with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/LocationContactFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/LocationContactFilter'
+        not:
+          $ref: '#/components/schemas/LocationContactFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        locationId:
+          $ref: '#/components/schemas/UUIDFilter'
+        customerContactId:
+          $ref: '#/components/schemas/UUIDFilter'
+        isPrimary:
+          $ref: '#/components/schemas/BooleanFilter'
+        contactTypes:
+          $ref: '#/components/schemas/LocationContactTypeFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
   responses:
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
     NotFoundError:
       description: Resource not found
       content:
@@ -3039,6 +3030,15 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
     InternalServerError:
       description: Internal server error
       content:

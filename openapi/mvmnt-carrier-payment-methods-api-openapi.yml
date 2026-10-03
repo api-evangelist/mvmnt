@@ -419,108 +419,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    PaymentMethodType:
-      type: string
-      description: Payment method type
-      enum:
-      - ACH_WIRE
-      - ZELLE
-      - VENMO
-      - ACH
-      - CHECK
-      - WIRE
-      - CAD_EFT
-      - TRIUMPH_PAY
-      - COMCHECK
-      - EFS
-      - ECHECK
-      example: ACH
-    UserReference:
-      type: object
-      description: 'Enhanced reference to a user resource (returned in responses).
-
-        Includes full user details in addition to id/key.
-
-
-        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - email
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: User UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-USER-12345
-        email:
-          type: string
-          format: email
-          description: User's email address
-          example: john.doe@example.com
-        name:
-          type:
-          - string
-          - 'null'
-          description: User's full name
-          example: John Doe
-        phone:
-          type:
-          - string
-          - 'null'
-          description: User's phone number
-          example: +1-555-123-4567
-        phoneExt:
-          type:
-          - string
-          - 'null'
-          description: Phone extension
-          example: '123'
-        status:
-          type: string
-          description: User account status
-          enum:
-          - PENDING
-          - ACTIVE
-          - INACTIVE
-          example: ACTIVE
-        avatarId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Profile avatar document ID
-          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-        createdAt:
-          type: string
-          format: date-time
-          description: When the user was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the user was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the user was soft deleted (null if active)
-          example: null
     CarrierReference:
       type: object
       description: 'Enhanced reference to a carrier resource (returned in responses).
@@ -585,79 +483,157 @@ components:
           format: date-time
           description: When the carrier was soft deleted (null if active)
           example: null
-    DatetimeFilter:
+    CarrierPaymentMethodPatch:
       type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    PaymentRecipientType:
-      type: string
-      description: 'Who receives the payment.
+      description: 'Partial carrier payment method update. All fields are optional.
 
 
-        - `DIRECT`: Payment goes directly to the carrier
+        **IMPORTANT**: The `carrierId` field cannot be changed after creation.
 
-        - `FACTOR`: Payment goes to a factoring company (requires carrierFactorId)
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
 
         '
-      enum:
-      - DIRECT
-      - FACTOR
-      example: DIRECT
-    Error:
-      type: object
-      required:
-      - error
-      - message
       properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    PaymentMethodTypeFilter:
-      type: object
-      description: Filter for payment method type
-      properties:
-        equalTo:
+        paymentRecipientType:
+          $ref: '#/components/schemas/PaymentRecipientType'
+          description: 'Who receives the payment.
+
+
+            - **DIRECT**: carrierFactorId must be null
+
+            - **FACTOR**: carrierFactorId is required
+
+            '
+        paymentMethodType:
           $ref: '#/components/schemas/PaymentMethodType'
-        notEqualTo:
-          $ref: '#/components/schemas/PaymentMethodType'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodType'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodType'
+          description: How payment is made
+        status:
+          type:
+          - string
+          - 'null'
+          description: Payment method status
+          example: ACTIVE
+        isPreferred:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this is the preferred payment method
+          example: true
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address for payment notifications
+          example: payments@carrier.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number for payment contact
+          example: +1-555-123-4567
+        companyName:
+          type:
+          - string
+          - 'null'
+          description: Company name for this payment method
+          example: Carrier Payments LLC
+        username:
+          type:
+          - string
+          - 'null'
+          description: Username for payment platforms
+          example: carrier_payments
+        bankName:
+          type:
+          - string
+          - 'null'
+          description: Bank name
+          example: Chase Bank
+        bankAddress:
+          type:
+          - string
+          - 'null'
+          description: Bank address
+          example: 123 Bank Street, Dallas, TX 75201
+        accountName:
+          type:
+          - string
+          - 'null'
+          description: Bank account holder name
+          example: Carrier Transport Inc
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: Bank account number
+          example: '1234567890'
+        abaAch:
+          type:
+          - string
+          - 'null'
+          description: ABA/ACH routing number
+          example: '021000021'
+        wire:
+          type:
+          - string
+          - 'null'
+          description: Wire transfer routing number
+          example: 026009593
+        swiftCode:
+          type:
+          - string
+          - 'null'
+          description: SWIFT/BIC code
+          example: CHASUS33
+        eftInstitution:
+          type:
+          - string
+          - 'null'
+          description: EFT institution number
+          example: '001'
+        eftTransit:
+          type:
+          - string
+          - 'null'
+          description: EFT transit number
+          example: '00010'
+        clabe:
+          type:
+          - string
+          - 'null'
+          description: CLABE number
+          example: 012180001234567897
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code
+          example: USD
+        carrierFactorId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: 'Carrier factor ID.
+
+
+            **Constraint**: Required when paymentRecipientType is FACTOR, must be null when DIRECT.
+
+            '
+          example: 550e8400-e29b-41d4-a716-446655440000
+        paymentTermId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Payment term ID
+          example: 550e8400-e29b-41d4-a716-446655440002
     BooleanFilter:
       type: object
       description: Filter options for boolean fields
@@ -671,199 +647,22 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    CarrierPaymentMethodFilter:
-      type: object
-      description: Filter criteria for carrier payment methods with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/CarrierPaymentMethodFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/CarrierPaymentMethodFilter'
-        not:
-          $ref: '#/components/schemas/CarrierPaymentMethodFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        carrierId:
-          $ref: '#/components/schemas/UUIDFilter'
-        paymentRecipientType:
-          $ref: '#/components/schemas/PaymentRecipientTypeFilter'
-        paymentMethodType:
-          $ref: '#/components/schemas/PaymentMethodTypeFilter'
-        status:
-          $ref: '#/components/schemas/StringFilter'
-        isPreferred:
-          $ref: '#/components/schemas/BooleanFilter'
-        email:
-          $ref: '#/components/schemas/StringFilter'
-        companyName:
-          $ref: '#/components/schemas/StringFilter'
-        bankName:
-          $ref: '#/components/schemas/StringFilter'
-        currency:
-          $ref: '#/components/schemas/StringFilter'
-        carrierFactorId:
-          $ref: '#/components/schemas/UUIDFilter'
-        paymentTermId:
-          $ref: '#/components/schemas/UUIDFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-    CarrierPaymentMethodFilterRequest:
-      type: object
-      description: Request body for filtering carrier payment methods
-      properties:
-        filter:
-          $ref: '#/components/schemas/CarrierPaymentMethodFilter'
-          description: 'Filter criteria (optional - omit to return all carrier payment methods).
-
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - carrierId:
-              equalTo: 770e8400-e29b-41d4-a716-446655440000
-          - paymentRecipientType:
-              equalTo: DIRECT
-          - isPreferred:
-              equalTo: true
-        pageSize: 50
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    PaymentRecipientTypeFilter:
-      type: object
-      description: Filter for payment recipient type
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/PaymentRecipientType'
-        notEqualTo:
-          $ref: '#/components/schemas/PaymentRecipientType'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentRecipientType'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentRecipientType'
-    CarrierFactorReference:
-      type: object
-      description: 'Enhanced reference to a carrier factor (factoring company).
-
-        Includes full carrier factor details in addition to id/key.
-
-        '
-      required:
-      - id
-      - companyName
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Carrier factor UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-FACTOR-001
-        companyName:
-          type: string
-          description: Factoring company legal name
-          example: Capital Factoring Services Inc
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: accounting@capitalfactoring.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-234-5678
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Preferred currency code (ISO 4217)
-          example: USD
-        createdAt:
-          type: string
-          format: date-time
-          description: When the carrier factor was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the carrier factor was last updated
-          example: '2025-01-15T14:30:00Z'
+    PaymentMethodType:
+      type: string
+      description: Payment method type
+      enum:
+      - ACH_WIRE
+      - ZELLE
+      - VENMO
+      - ACH
+      - CHECK
+      - WIRE
+      - CAD_EFT
+      - TRIUMPH_PAY
+      - COMCHECK
+      - EFS
+      - ECHECK
+      example: ACH
     PaymentTermReference:
       type: object
       description: 'Enhanced reference to a payment term resource (returned in responses).
@@ -977,6 +776,235 @@ components:
           format: date-time
           description: When the payment term was soft deleted (null if active)
           example: null
+    CarrierPaymentMethodFilter:
+      type: object
+      description: Filter criteria for carrier payment methods with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/CarrierPaymentMethodFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/CarrierPaymentMethodFilter'
+        not:
+          $ref: '#/components/schemas/CarrierPaymentMethodFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        carrierId:
+          $ref: '#/components/schemas/UUIDFilter'
+        paymentRecipientType:
+          $ref: '#/components/schemas/PaymentRecipientTypeFilter'
+        paymentMethodType:
+          $ref: '#/components/schemas/PaymentMethodTypeFilter'
+        status:
+          $ref: '#/components/schemas/StringFilter'
+        isPreferred:
+          $ref: '#/components/schemas/BooleanFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        companyName:
+          $ref: '#/components/schemas/StringFilter'
+        bankName:
+          $ref: '#/components/schemas/StringFilter'
+        currency:
+          $ref: '#/components/schemas/StringFilter'
+        carrierFactorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        paymentTermId:
+          $ref: '#/components/schemas/UUIDFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    StringFilter:
+      type: object
+      description: Filter options for string fields
+      properties:
+        equalTo:
+          type: string
+          description: Exact match
+        notEqualTo:
+          type: string
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentRecipientType:
+      type: string
+      description: 'Who receives the payment.
+
+
+        - `DIRECT`: Payment goes directly to the carrier
+
+        - `FACTOR`: Payment goes to a factoring company (requires carrierFactorId)
+
+        '
+      enum:
+      - DIRECT
+      - FACTOR
+      example: DIRECT
+    PaymentMethodTypeFilter:
+      type: object
+      description: Filter for payment method type
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/PaymentMethodType'
+        notEqualTo:
+          $ref: '#/components/schemas/PaymentMethodType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodType'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodType'
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
     CarrierPaymentMethodInput:
       type: object
       required:
@@ -1091,6 +1119,123 @@ components:
           format: uuid
           description: Payment term ID
           example: 550e8400-e29b-41d4-a716-446655440002
+    CarrierPaymentMethodFilterRequest:
+      type: object
+      description: Request body for filtering carrier payment methods
+      properties:
+        filter:
+          $ref: '#/components/schemas/CarrierPaymentMethodFilter'
+          description: 'Filter criteria (optional - omit to return all carrier payment methods).
+
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - carrierId:
+              equalTo: 770e8400-e29b-41d4-a716-446655440000
+          - paymentRecipientType:
+              equalTo: DIRECT
+          - isPreferred:
+              equalTo: true
+        pageSize: 50
+    UserReference:
+      type: object
+      description: 'Enhanced reference to a user resource (returned in responses).
+
+        Includes full user details in addition to id/key.
+
+
+        Note: Does NOT include nested references (teams, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - email
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-USER-12345
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: john.doe@example.com
+        name:
+          type:
+          - string
+          - 'null'
+          description: User's full name
+          example: John Doe
+        phone:
+          type:
+          - string
+          - 'null'
+          description: User's phone number
+          example: +1-555-123-4567
+        phoneExt:
+          type:
+          - string
+          - 'null'
+          description: Phone extension
+          example: '123'
+        status:
+          type: string
+          description: User account status
+          enum:
+          - PENDING
+          - ACTIVE
+          - INACTIVE
+          example: ACTIVE
+        avatarId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Profile avatar document ID
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        createdAt:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the user was soft deleted (null if active)
+          example: null
     CarrierPaymentMethod:
       type: object
       required:
@@ -1279,261 +1424,107 @@ components:
           - type: 'null'
           readOnly: true
           description: User who deleted this payment method
-    PaginationInfo:
+    PaymentRecipientTypeFilter:
       type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    StringFilter:
-      type: object
-      description: Filter options for string fields
+      description: Filter for payment recipient type
       properties:
         equalTo:
-          type: string
-          description: Exact match
+          $ref: '#/components/schemas/PaymentRecipientType'
         notEqualTo:
-          type: string
-          description: Not equal to
+          $ref: '#/components/schemas/PaymentRecipientType'
         in:
           type: array
           items:
-            type: string
-          description: Matches any value in the array
+            $ref: '#/components/schemas/PaymentRecipientType'
         notIn:
           type: array
           items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    ValidationError:
+            $ref: '#/components/schemas/PaymentRecipientType'
+    Error:
       type: object
       required:
       - error
       - message
-      - details
       properties:
         error:
           type: string
           description: Error code
-          example: validation_error
         message:
           type: string
           description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    CarrierPaymentMethodPatch:
+    IDFilter:
       type: object
-      description: 'Partial carrier payment method update. All fields are optional.
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
+    CarrierFactorReference:
+      type: object
+      description: 'Enhanced reference to a carrier factor (factoring company).
 
-
-        **IMPORTANT**: The `carrierId` field cannot be changed after creation.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
+        Includes full carrier factor details in addition to id/key.
 
         '
+      required:
+      - id
+      - companyName
+      - createdAt
+      - updatedAt
       properties:
-        paymentRecipientType:
-          $ref: '#/components/schemas/PaymentRecipientType'
-          description: 'Who receives the payment.
-
-
-            - **DIRECT**: carrierFactorId must be null
-
-            - **FACTOR**: carrierFactorId is required
-
-            '
-        paymentMethodType:
-          $ref: '#/components/schemas/PaymentMethodType'
-          description: How payment is made
-        status:
+        id:
+          type: string
+          format: uuid
+          description: Carrier factor UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
           type:
           - string
           - 'null'
-          description: Payment method status
-          example: ACTIVE
-        isPreferred:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this is the preferred payment method
-          example: true
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-FACTOR-001
+        companyName:
+          type: string
+          description: Factoring company legal name
+          example: Capital Factoring Services Inc
         email:
           type:
           - string
           - 'null'
           format: email
-          description: Email address for payment notifications
-          example: payments@carrier.com
-        phone:
+          description: Primary email address
+          example: accounting@capitalfactoring.com
+        phoneNumber:
           type:
           - string
           - 'null'
-          description: Phone number for payment contact
-          example: +1-555-123-4567
-        companyName:
-          type:
-          - string
-          - 'null'
-          description: Company name for this payment method
-          example: Carrier Payments LLC
-        username:
-          type:
-          - string
-          - 'null'
-          description: Username for payment platforms
-          example: carrier_payments
-        bankName:
-          type:
-          - string
-          - 'null'
-          description: Bank name
-          example: Chase Bank
-        bankAddress:
-          type:
-          - string
-          - 'null'
-          description: Bank address
-          example: 123 Bank Street, Dallas, TX 75201
-        accountName:
-          type:
-          - string
-          - 'null'
-          description: Bank account holder name
-          example: Carrier Transport Inc
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          description: Bank account number
-          example: '1234567890'
-        abaAch:
-          type:
-          - string
-          - 'null'
-          description: ABA/ACH routing number
-          example: '021000021'
-        wire:
-          type:
-          - string
-          - 'null'
-          description: Wire transfer routing number
-          example: 026009593
-        swiftCode:
-          type:
-          - string
-          - 'null'
-          description: SWIFT/BIC code
-          example: CHASUS33
-        eftInstitution:
-          type:
-          - string
-          - 'null'
-          description: EFT institution number
-          example: '001'
-        eftTransit:
-          type:
-          - string
-          - 'null'
-          description: EFT transit number
-          example: '00010'
-        clabe:
-          type:
-          - string
-          - 'null'
-          description: CLABE number
-          example: 012180001234567897
+          description: Primary phone number
+          example: +1-555-234-5678
         currency:
           type:
           - string
           - 'null'
-          description: Preferred currency code
+          description: Preferred currency code (ISO 4217)
           example: USD
-        carrierFactorId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: 'Carrier factor ID.
-
-
-            **Constraint**: Required when paymentRecipientType is FACTOR, must be null when DIRECT.
-
-            '
-          example: 550e8400-e29b-41d4-a716-446655440000
-        paymentTermId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Payment term ID
-          example: 550e8400-e29b-41d4-a716-446655440002
+        createdAt:
+          type: string
+          format: date-time
+          description: When the carrier factor was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the carrier factor was last updated
+          example: '2025-01-15T14:30:00Z'
   responses:
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
     NotFoundError:
       description: Resource not found
       content:
@@ -1552,6 +1543,24 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: internal_server_error
+            message: An unexpected error occurred
     ValidationError:
       description: Validation error - invalid field values
       content:
@@ -1566,15 +1575,6 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: internal_server_error
-            message: An unexpected error occurred
     ConflictError:
       description: Conflict - resource already exists or constraint violation
       content:

@@ -476,265 +476,6 @@ paths:
           $ref: '#/components/responses/NotFoundError'
 components:
   schemas:
-    DocumentInput:
-      type: object
-      required:
-      - type
-      - fileName
-      - contentType
-      properties:
-        key:
-          type: string
-          maxLength: 512
-          description: Optional client-defined key for external reference
-          example: doc-inv-2025-001
-        type:
-          $ref: '#/components/schemas/DocumentType'
-        fileName:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: File name (including extension)
-          example: invoice-2025-001.pdf
-        contentType:
-          type: string
-          description: MIME content type of the file
-          example: application/pdf
-        fileSize:
-          type: integer
-          minimum: 1
-          description: File size in bytes (optional, for validation)
-          example: 102400
-        tags:
-          type: object
-          additionalProperties: true
-          description: Optional key-value tags
-          example:
-            invoiceNumber: INV-2025-001
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    DocumentStatusFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/DocumentStatus'
-        notEqualTo:
-          $ref: '#/components/schemas/DocumentStatus'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentStatus'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentStatus'
-      description: Filter for document status field
-    DocumentPatch:
-      type: object
-      properties:
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Update client-defined key
-        type:
-          $ref: '#/components/schemas/DocumentType'
-        fileName:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: Update file name
-        tags:
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
-          description: Update or clear tags (null to clear)
-      description: Partial update fields for a document
-    DocumentTypeFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/DocumentType'
-        notEqualTo:
-          $ref: '#/components/schemas/DocumentType'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentType'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentType'
-      description: Filter for document type field
-    DocumentFilter:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/UUIDFilter'
-        type:
-          $ref: '#/components/schemas/DocumentTypeFilter'
-        status:
-          $ref: '#/components/schemas/DocumentStatusFilter'
-        fileName:
-          $ref: '#/components/schemas/StringFilter'
-        contentType:
-          $ref: '#/components/schemas/StringFilter'
-        extension:
-          $ref: '#/components/schemas/StringFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentFilter'
-        not:
-          $ref: '#/components/schemas/DocumentFilter'
-      description: Filter criteria for documents
-    UUIDFilter:
-      type: object
-      description: Filter options for UUID fields (all operations)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: uuid
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    DocumentType:
-      type: string
-      enum:
-      - INVOICE
-      - BILL_OF_LADING
-      - RATE_CON
-      - PROOF_OF_DELIVERY
-      - CERTIFICATE_OF_INSURANCE
-      - W9
-      - CARRIER_INVOICE
-      - LUMPER_RECEIPT
-      - DETENTION
-      - DELIVERY_ORDER
-      - LOAD_TENDER
-      - HOUSE_AIRWAY_BILL
-      - MASTER_AIRWAY_BILL
-      - QUOTE
-      - OTHER
-      description: 'Type of document.
-
-
-        Common types:
-
-        - `INVOICE`: Customer invoice
-
-        - `BILL_OF_LADING`: Bill of lading document
-
-        - `RATE_CON`: Rate confirmation
-
-        - `PROOF_OF_DELIVERY`: Proof of delivery (POD)
-
-        - `CERTIFICATE_OF_INSURANCE`: Certificate of insurance (COI)
-
-        - `W9`: W-9 tax form
-
-        - `CARRIER_INVOICE`: Carrier invoice/bill
-
-        - `LUMPER_RECEIPT`: Lumper receipt
-
-        - `DETENTION`: Detention documentation
-
-        - `DELIVERY_ORDER`: Delivery order
-
-        - `LOAD_TENDER`: Load tender
-
-        - `HOUSE_AIRWAY_BILL`: House airway bill (HAWB)
-
-        - `MASTER_AIRWAY_BILL`: Master airway bill (MAWB)
-
-        - `QUOTE`: Quote document
-
-        - `OTHER`: Other document type
-
-        '
-    DocumentFilterRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/DocumentFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor from previous response
-      description: Request body for filtering documents
     Document:
       type: object
       required:
@@ -826,6 +567,133 @@ components:
           format: date-time
           description: When the document was last updated
           example: '2025-01-15T10:35:00Z'
+    DocumentFilterRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/DocumentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor from previous response
+      description: Request body for filtering documents
+    DocumentType:
+      type: string
+      enum:
+      - INVOICE
+      - BILL_OF_LADING
+      - RATE_CON
+      - PROOF_OF_DELIVERY
+      - CERTIFICATE_OF_INSURANCE
+      - W9
+      - CARRIER_INVOICE
+      - LUMPER_RECEIPT
+      - DETENTION
+      - DELIVERY_ORDER
+      - LOAD_TENDER
+      - HOUSE_AIRWAY_BILL
+      - MASTER_AIRWAY_BILL
+      - QUOTE
+      - OTHER
+      description: 'Type of document.
+
+
+        Common types:
+
+        - `INVOICE`: Customer invoice
+
+        - `BILL_OF_LADING`: Bill of lading document
+
+        - `RATE_CON`: Rate confirmation
+
+        - `PROOF_OF_DELIVERY`: Proof of delivery (POD)
+
+        - `CERTIFICATE_OF_INSURANCE`: Certificate of insurance (COI)
+
+        - `W9`: W-9 tax form
+
+        - `CARRIER_INVOICE`: Carrier invoice/bill
+
+        - `LUMPER_RECEIPT`: Lumper receipt
+
+        - `DETENTION`: Detention documentation
+
+        - `DELIVERY_ORDER`: Delivery order
+
+        - `LOAD_TENDER`: Load tender
+
+        - `HOUSE_AIRWAY_BILL`: House airway bill (HAWB)
+
+        - `MASTER_AIRWAY_BILL`: Master airway bill (MAWB)
+
+        - `QUOTE`: Quote document
+
+        - `OTHER`: Other document type
+
+        '
+    DocumentInput:
+      type: object
+      required:
+      - type
+      - fileName
+      - contentType
+      properties:
+        key:
+          type: string
+          maxLength: 512
+          description: Optional client-defined key for external reference
+          example: doc-inv-2025-001
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        fileName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: File name (including extension)
+          example: invoice-2025-001.pdf
+        contentType:
+          type: string
+          description: MIME content type of the file
+          example: application/pdf
+        fileSize:
+          type: integer
+          minimum: 1
+          description: File size in bytes (optional, for validation)
+          example: 102400
+        tags:
+          type: object
+          additionalProperties: true
+          description: Optional key-value tags
+          example:
+            invoiceNumber: INV-2025-001
+    DocumentPatch:
+      type: object
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Update client-defined key
+        type:
+          $ref: '#/components/schemas/DocumentType'
+        fileName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Update file name
+        tags:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+          description: Update or clear tags (null to clear)
+      description: Partial update fields for a document
     DocumentStatus:
       type: string
       enum:
@@ -862,6 +730,64 @@ components:
           - 'null'
           description: Cursor for the next page (null if no next page)
           example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     StringFilter:
       type: object
       description: Filter options for string fields
@@ -903,6 +829,36 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
+    DocumentFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        type:
+          $ref: '#/components/schemas/DocumentTypeFilter'
+        status:
+          $ref: '#/components/schemas/DocumentStatusFilter'
+        fileName:
+          $ref: '#/components/schemas/StringFilter'
+        contentType:
+          $ref: '#/components/schemas/StringFilter'
+        extension:
+          $ref: '#/components/schemas/StringFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentFilter'
+        not:
+          $ref: '#/components/schemas/DocumentFilter'
+      description: Filter criteria for documents
     ValidationError:
       type: object
       required:
@@ -932,16 +888,51 @@ components:
               message:
                 type: string
                 description: Validation error message
+    DocumentStatusFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/DocumentStatus'
+        notEqualTo:
+          $ref: '#/components/schemas/DocumentStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentStatus'
+      description: Filter for document status field
+    DocumentTypeFilter:
+      type: object
+      properties:
+        equalTo:
+          $ref: '#/components/schemas/DocumentType'
+        notEqualTo:
+          $ref: '#/components/schemas/DocumentType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentType'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentType'
+      description: Filter for document type field
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
   responses:
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
     NotFoundError:
       description: Resource not found
       content:
@@ -960,6 +951,15 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
     ValidationError:
       description: Validation error - invalid field values
       content:

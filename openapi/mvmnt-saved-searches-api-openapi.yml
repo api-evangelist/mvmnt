@@ -354,113 +354,6 @@ paths:
           $ref: '#/components/responses/RateLimitExceeded'
 components:
   schemas:
-    SavedSearchFilterRequest:
-      type: object
-      description: Request body for filtering saved searches
-      properties:
-        filter:
-          $ref: '#/components/schemas/SavedSearchFilter'
-          description: 'Filter criteria (optional - omit to return all saved searches).
-
-            Returns only saved searches accessible to the authenticated user.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
-          type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          preferenceType:
-            equalTo: SHIPMENT
-          isPublic:
-            equalTo: true
-        pageSize: 50
-    SavedSearchInput:
-      type: object
-      required:
-      - name
-      - preferenceType
-      - jsonValue
-      description: Input for creating a new saved search
-      properties:
-        name:
-          type: string
-          description: Display name for the saved search (required)
-          example: Active Shipments - West Coast
-        preferenceType:
-          allOf:
-          - $ref: '#/components/schemas/SavedSearchType'
-          description: 'The entity type this saved search applies to (required).
-
-            Determines which search endpoint can use this saved search.
-
-            '
-        jsonValue:
-          allOf:
-          - $ref: '#/components/schemas/SearchConfigurationState'
-          description: The saved search configuration (required)
-        isPublic:
-          type: boolean
-          description: Whether this saved search is visible to all users in the organization
-          default: false
-          example: true
-        groupId:
-          type: string
-          format: uuid
-          description: Optional group this saved search belongs to
-      example:
-        name: Active Shipments - West Coast
-        preferenceType: SHIPMENT
-        jsonValue:
-          searchCriteria:
-            filters:
-            - field: status
-              searchCriteria:
-                operator: ONE_OF
-                values:
-                - ACTIVE
-                - PENDING
-          sorting:
-          - id: createdAt
-            desc: true
-        isPublic: true
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
     SavedSearchType:
       type: string
       description: 'Type of entity this saved search applies to. Each type corresponds to a specific entity''s search view.
@@ -493,31 +386,6 @@ components:
       - TRUCK_POSTING
       - LOCATION
       example: SHIPMENT
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    BooleanFilter:
-      type: object
-      description: Filter options for boolean fields
-      properties:
-        equalTo:
-          type: boolean
-          description: Exact match
-        notEqualTo:
-          type: boolean
-          description: Not equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
     SearchConfigurationState:
       type: object
       description: 'The saved search configuration state containing criteria, sorting, and display preferences.
@@ -677,49 +545,19 @@ components:
         - id
         - status
         - createdAt
-    SavedSearchFilter:
+    BooleanFilter:
       type: object
-      description: Filter criteria for saved searches with AND/OR logic support
-      properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/SavedSearchFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/SavedSearchFilter'
-        not:
-          $ref: '#/components/schemas/SavedSearchFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        preferenceType:
-          $ref: '#/components/schemas/StringFilter'
-        isPublic:
-          $ref: '#/components/schemas/BooleanFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        updatedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
+      description: Filter options for boolean fields
       properties:
         equalTo:
-          type: string
-          format: uuid
+          type: boolean
           description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
+        notEqualTo:
+          type: boolean
+          description: Not equal to
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     SavedSearch:
       type: object
       required:
@@ -806,42 +644,6 @@ components:
           readOnly: true
           description: Timestamp when saved search was last updated
           example: '2025-01-15T14:30:00Z'
-    SavedSearchPatch:
-      type: object
-      description: 'Partial saved search update. All fields are optional.
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
-      properties:
-        name:
-          type: string
-          description: Display name for the saved search
-          example: Updated Shipments View
-        jsonValue:
-          allOf:
-          - $ref: '#/components/schemas/SearchConfigurationState'
-          description: The saved search configuration
-        isPublic:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this saved search is visible to all users
-          example: true
-        groupId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Optional group this saved search belongs to
-          example: null
-      example:
-        name: Updated Shipments View
-        isPublic: true
     PaginationInfo:
       type: object
       required:
@@ -866,6 +668,66 @@ components:
           - 'null'
           description: Cursor for the next page (null if no next page)
           example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    SavedSearchFilter:
+      type: object
+      description: Filter criteria for saved searches with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/SavedSearchFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/SavedSearchFilter'
+        not:
+          $ref: '#/components/schemas/SavedSearchFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        preferenceType:
+          $ref: '#/components/schemas/StringFilter'
+        isPublic:
+          $ref: '#/components/schemas/BooleanFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        updatedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
     StringFilter:
       type: object
       description: Filter options for string fields
@@ -907,6 +769,91 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
+    SavedSearchInput:
+      type: object
+      required:
+      - name
+      - preferenceType
+      - jsonValue
+      description: Input for creating a new saved search
+      properties:
+        name:
+          type: string
+          description: Display name for the saved search (required)
+          example: Active Shipments - West Coast
+        preferenceType:
+          allOf:
+          - $ref: '#/components/schemas/SavedSearchType'
+          description: 'The entity type this saved search applies to (required).
+
+            Determines which search endpoint can use this saved search.
+
+            '
+        jsonValue:
+          allOf:
+          - $ref: '#/components/schemas/SearchConfigurationState'
+          description: The saved search configuration (required)
+        isPublic:
+          type: boolean
+          description: Whether this saved search is visible to all users in the organization
+          default: false
+          example: true
+        groupId:
+          type: string
+          format: uuid
+          description: Optional group this saved search belongs to
+      example:
+        name: Active Shipments - West Coast
+        preferenceType: SHIPMENT
+        jsonValue:
+          searchCriteria:
+            filters:
+            - field: status
+              searchCriteria:
+                operator: ONE_OF
+                values:
+                - ACTIVE
+                - PENDING
+          sorting:
+          - id: createdAt
+            desc: true
+        isPublic: true
+    SavedSearchPatch:
+      type: object
+      description: 'Partial saved search update. All fields are optional.
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Display name for the saved search
+          example: Updated Shipments View
+        jsonValue:
+          allOf:
+          - $ref: '#/components/schemas/SearchConfigurationState'
+          description: The saved search configuration
+        isPublic:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this saved search is visible to all users
+          example: true
+        groupId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Optional group this saved search belongs to
+          example: null
+      example:
+        name: Updated Shipments View
+        isPublic: true
     ValidationError:
       type: object
       required:
@@ -936,7 +883,78 @@ components:
               message:
                 type: string
                 description: Validation error message
+    SavedSearchFilterRequest:
+      type: object
+      description: Request body for filtering saved searches
+      properties:
+        filter:
+          $ref: '#/components/schemas/SavedSearchFilter'
+          description: 'Filter criteria (optional - omit to return all saved searches).
+
+            Returns only saved searches accessible to the authenticated user.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          preferenceType:
+            equalTo: SHIPMENT
+          isPublic:
+            equalTo: true
+        pageSize: 50
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    IDFilter:
+      type: object
+      description: Filter options for ID fields (limited operations - exact match only)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
   responses:
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
     UnauthorizedError:
       description: Unauthorized - invalid or missing access token
       content:
@@ -946,6 +964,20 @@ components:
           example:
             error: unauthorized
             message: Invalid or expired access token
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
     RateLimitExceeded:
       description: Rate limit exceeded
       content:
@@ -972,38 +1004,6 @@ components:
           description: Seconds to wait before retrying
           schema:
             type: integer
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
   securitySchemes:
     BearerAuth:
       type: http

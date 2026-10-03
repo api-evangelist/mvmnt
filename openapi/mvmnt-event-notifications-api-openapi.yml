@@ -1150,66 +1150,6 @@ components:
       - REMOVE
       - ADD
       - UPDATE
-    WebhookDelivery:
-      type: object
-      description: The top-level webhook delivery payload containing one or more events
-      required:
-      - sentAt
-      - events
-      properties:
-        sentAt:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when the webhook was sent from MVMNT
-          example: '2025-01-15T14:30:00Z'
-        events:
-          type: array
-          description: Array of webhook events (typically contains a single event)
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/WebhookPayload'
-    DiffChange:
-      type: object
-      description: 'Represents a single change from json-diff-ts IChange interface.
-
-        For nested object changes, the changes array will contain child changes.
-
-        '
-      required:
-      - type
-      - key
-      properties:
-        type:
-          $ref: '#/components/schemas/DiffOperation'
-        key:
-          type: string
-          description: The property name that changed
-          example: status
-        embeddedKey:
-          type: string
-          description: Optional key used when comparing array elements by identifier
-          example: id
-        value:
-          description: 'The new value being set.
-
-            - For ADD: The value being added
-
-            - For UPDATE: The new value replacing the old one
-
-            - For REMOVE: Not present
-
-            '
-          example: INACTIVE
-        oldValue:
-          description: 'The previous value (only present for UPDATE operations).
-
-            '
-          example: ACTIVE
-        changes:
-          type: array
-          description: Nested changes for complex objects
-          items:
-            $ref: '#/components/schemas/DiffChange'
     WebhookPayload:
       type: object
       required:
@@ -1360,6 +1300,66 @@ components:
       - LOCATION_CONTACT_CREATED
       - LOCATION_CONTACT_UPDATED
       - LOCATION_CONTACT_DELETED
+    WebhookDelivery:
+      type: object
+      description: The top-level webhook delivery payload containing one or more events
+      required:
+      - sentAt
+      - events
+      properties:
+        sentAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the webhook was sent from MVMNT
+          example: '2025-01-15T14:30:00Z'
+        events:
+          type: array
+          description: Array of webhook events (typically contains a single event)
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/WebhookPayload'
+    DiffChange:
+      type: object
+      description: 'Represents a single change from json-diff-ts IChange interface.
+
+        For nested object changes, the changes array will contain child changes.
+
+        '
+      required:
+      - type
+      - key
+      properties:
+        type:
+          $ref: '#/components/schemas/DiffOperation'
+        key:
+          type: string
+          description: The property name that changed
+          example: status
+        embeddedKey:
+          type: string
+          description: Optional key used when comparing array elements by identifier
+          example: id
+        value:
+          description: 'The new value being set.
+
+            - For ADD: The value being added
+
+            - For UPDATE: The new value replacing the old one
+
+            - For REMOVE: Not present
+
+            '
+          example: INACTIVE
+        oldValue:
+          description: 'The previous value (only present for UPDATE operations).
+
+            '
+          example: ACTIVE
+        changes:
+          type: array
+          description: Nested changes for complex objects
+          items:
+            $ref: '#/components/schemas/DiffChange'
   securitySchemes:
     BearerAuth:
       type: http
