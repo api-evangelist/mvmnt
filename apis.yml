@@ -48,10 +48,10 @@ tags:
 - Logistics
 - Transportation Management System
 - Supply Chain
-- Brokerage
 - Shipping
 - Payments
 - Company
+- Freight Brokerage
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -608,3 +608,5 @@ x-enrichment:
   status: enriched
   artifacts_added: 21
   pass: local-v1
+x-tags-removed:
+- Brokerage
