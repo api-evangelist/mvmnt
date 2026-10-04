@@ -1143,13 +1143,6 @@ webhooks:
           description: Invalid or missing x-api-key header
 components:
   schemas:
-    DiffOperation:
-      type: string
-      description: The type of diff operation from json-diff-ts
-      enum:
-      - REMOVE
-      - ADD
-      - UPDATE
     WebhookPayload:
       type: object
       required:
@@ -1300,24 +1293,6 @@ components:
       - LOCATION_CONTACT_CREATED
       - LOCATION_CONTACT_UPDATED
       - LOCATION_CONTACT_DELETED
-    WebhookDelivery:
-      type: object
-      description: The top-level webhook delivery payload containing one or more events
-      required:
-      - sentAt
-      - events
-      properties:
-        sentAt:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp when the webhook was sent from MVMNT
-          example: '2025-01-15T14:30:00Z'
-        events:
-          type: array
-          description: Array of webhook events (typically contains a single event)
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/WebhookPayload'
     DiffChange:
       type: object
       description: 'Represents a single change from json-diff-ts IChange interface.
@@ -1360,6 +1335,31 @@ components:
           description: Nested changes for complex objects
           items:
             $ref: '#/components/schemas/DiffChange'
+    WebhookDelivery:
+      type: object
+      description: The top-level webhook delivery payload containing one or more events
+      required:
+      - sentAt
+      - events
+      properties:
+        sentAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp when the webhook was sent from MVMNT
+          example: '2025-01-15T14:30:00Z'
+        events:
+          type: array
+          description: Array of webhook events (typically contains a single event)
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/WebhookPayload'
+    DiffOperation:
+      type: string
+      description: The type of diff operation from json-diff-ts
+      enum:
+      - REMOVE
+      - ADD
+      - UPDATE
   securitySchemes:
     BearerAuth:
       type: http

@@ -293,65 +293,6 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimitExceeded'
 components:
-  responses:
-    BadRequestError:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: bad_request
-            message: Invalid request parameters
-    ValidationError:
-      description: Validation error - invalid field values
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          example:
-            error: validation_error
-            message: Invalid field values
-            details:
-            - field: email
-              message: Must be a valid email address
-            - field: status
-              message: Must be one of PENDING, ACTIVE, INACTIVE
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
-    RateLimitExceeded:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: rate_limit_exceeded
-            message: Too many requests. Please retry after 60 seconds.
-      headers:
-        X-RateLimit-Limit:
-          description: Request limit per minute
-          schema:
-            type: integer
-        X-RateLimit-Remaining:
-          description: Remaining requests in current window
-          schema:
-            type: integer
-        X-RateLimit-Reset:
-          description: Unix timestamp when rate limit resets
-          schema:
-            type: integer
-        Retry-After:
-          description: Seconds to wait before retrying
-          schema:
-            type: integer
   schemas:
     GlobalSearchResponse:
       type: object
@@ -377,122 +318,6 @@ components:
           description: Total number of matching results across all object types
           minimum: 0
           example: 42
-    GlobalSearchObjectType:
-      type: string
-      enum:
-      - SHIPMENT
-      - CUSTOMER
-      - CARRIER
-      - USER
-      - VENDOR
-      description: 'Object types available for global search:
-
-        - `SHIPMENT`: Shipment records
-
-        - `CUSTOMER`: Customer/shipper profiles
-
-        - `CARRIER`: Carrier profiles
-
-        - `USER`: User accounts
-
-        - `VENDOR`: Vendor profiles
-
-        '
-    GlobalSearchRow:
-      type: object
-      description: 'A single global search result row.
-
-        Results are sorted by object type priority: SHIPMENT, CUSTOMER, CARRIER, USER, VENDOR.
-
-        '
-      required:
-      - object
-      - id
-      - entityName
-      - title
-      - field
-      properties:
-        object:
-          $ref: '#/components/schemas/GlobalSearchObjectType'
-          description: The type of object this result represents
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of the matched record
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference identifier if set
-          example: ERP-CUST-12345
-        entityName:
-          type: string
-          description: 'Internal entity type name (for backwards compatibility).
-
-            Prefer using the `object` field instead.
-
-            '
-          example: SHIPPER_PROFILE
-        title:
-          type: string
-          description: Primary display text for the result (e.g., name, friendlyId)
-          example: Acme Corporation
-        subtitle:
-          type:
-          - string
-          - 'null'
-          description: Secondary display text (varies by entity type)
-          example: CUST-12345
-        field:
-          type: string
-          description: Name of the field that matched the search query
-          example: Name
-        highlight:
-          type:
-          - string
-          - 'null'
-          description: 'Matched text with highlight markers.
-
-            Contains HTML &lt;em&gt; tags around matched portions.
-
-            '
-          example: <em>Acme</em> Corporation
-    GlobalSearchRequest:
-      type: object
-      description: Request body for global search across multiple entity types
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: 'Search query string. Searches across default searchable fields for each entity type.
-
-
-            Supports prefix filtering using "type:query" syntax:
-
-            - `carrier:acme` - searches only carriers for "acme"
-
-            - `shipment:12345` - searches only shipments for "12345"
-
-            - `user:john` - searches only users for "john"
-
-            '
-          example: acme corp
-        objects:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalSearchObjectType'
-          description: 'Optional filter to limit search to specific object types.
-
-            If not provided, searches across all object types.
-
-            '
-          example:
-          - SHIPMENT
-          - CUSTOMER
-        pagination:
-          $ref: '#/components/schemas/SearchPaginationInput'
     ValidationError:
       type: object
       required:
@@ -578,6 +403,181 @@ components:
       example:
         pageNumber: 1
         pageSize: 50
+    GlobalSearchRequest:
+      type: object
+      description: Request body for global search across multiple entity types
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: 'Search query string. Searches across default searchable fields for each entity type.
+
+
+            Supports prefix filtering using "type:query" syntax:
+
+            - `carrier:acme` - searches only carriers for "acme"
+
+            - `shipment:12345` - searches only shipments for "12345"
+
+            - `user:john` - searches only users for "john"
+
+            '
+          example: acme corp
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalSearchObjectType'
+          description: 'Optional filter to limit search to specific object types.
+
+            If not provided, searches across all object types.
+
+            '
+          example:
+          - SHIPMENT
+          - CUSTOMER
+        pagination:
+          $ref: '#/components/schemas/SearchPaginationInput'
+    GlobalSearchObjectType:
+      type: string
+      enum:
+      - SHIPMENT
+      - CUSTOMER
+      - CARRIER
+      - USER
+      - VENDOR
+      description: 'Object types available for global search:
+
+        - `SHIPMENT`: Shipment records
+
+        - `CUSTOMER`: Customer/shipper profiles
+
+        - `CARRIER`: Carrier profiles
+
+        - `USER`: User accounts
+
+        - `VENDOR`: Vendor profiles
+
+        '
+    GlobalSearchRow:
+      type: object
+      description: 'A single global search result row.
+
+        Results are sorted by object type priority: SHIPMENT, CUSTOMER, CARRIER, USER, VENDOR.
+
+        '
+      required:
+      - object
+      - id
+      - entityName
+      - title
+      - field
+      properties:
+        object:
+          $ref: '#/components/schemas/GlobalSearchObjectType'
+          description: The type of object this result represents
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the matched record
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference identifier if set
+          example: ERP-CUST-12345
+        entityName:
+          type: string
+          description: 'Internal entity type name (for backwards compatibility).
+
+            Prefer using the `object` field instead.
+
+            '
+          example: SHIPPER_PROFILE
+        title:
+          type: string
+          description: Primary display text for the result (e.g., name, friendlyId)
+          example: Acme Corporation
+        subtitle:
+          type:
+          - string
+          - 'null'
+          description: Secondary display text (varies by entity type)
+          example: CUST-12345
+        field:
+          type: string
+          description: Name of the field that matched the search query
+          example: Name
+        highlight:
+          type:
+          - string
+          - 'null'
+          description: 'Matched text with highlight markers.
+
+            Contains HTML &lt;em&gt; tags around matched portions.
+
+            '
+          example: <em>Acme</em> Corporation
+  responses:
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: rate_limit_exceeded
+            message: Too many requests. Please retry after 60 seconds.
+      headers:
+        X-RateLimit-Limit:
+          description: Request limit per minute
+          schema:
+            type: integer
+        X-RateLimit-Remaining:
+          description: Remaining requests in current window
+          schema:
+            type: integer
+        X-RateLimit-Reset:
+          description: Unix timestamp when rate limit resets
+          schema:
+            type: integer
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema:
+            type: integer
+    BadRequestError:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: bad_request
+            message: Invalid request parameters
+    ValidationError:
+      description: Validation error - invalid field values
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          example:
+            error: validation_error
+            message: Invalid field values
+            details:
+            - field: email
+              message: Must be a valid email address
+            - field: status
+              message: Must be one of PENDING, ACTIVE, INACTIVE
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   securitySchemes:
     BearerAuth:
       type: http

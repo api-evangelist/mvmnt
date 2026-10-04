@@ -348,172 +348,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    ContactInfoPatch:
-      type: object
-      description: 'Partial contact information update. All fields are optional.
-
-
-        - **Omitted fields**: Not modified (current value preserved)
-
-        - **Provided fields**: Updated to the new value
-
-        - **Null values**: Clear the field (set to null) where applicable
-
-        '
-      properties:
-        name:
-          type: string
-          description: Contact person's full name
-          example: John Smith
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Email address
-          example: john.smith@example.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Phone number
-          example: +1-555-0100
-        title:
-          type:
-          - string
-          - 'null'
-          description: Job title or position
-          example: Operations Manager
-    ContactInfo:
-      type: object
-      description: 'Contact information details (nested, without id).
-
-
-        This is an embedded object representing a Contact record. The id is managed
-
-        internally and not exposed in the API.
-
-        '
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Contact person's full name
-          example: John Smith
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Email address
-          example: john.smith@example.com
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Phone number
-          example: +1-555-0100
-        title:
-          type:
-          - string
-          - 'null'
-          description: Job title or position
-          example: Operations Manager
-    BooleanFilter:
-      type: object
-      description: Filter options for boolean fields
-      properties:
-        equalTo:
-          type: boolean
-          description: Exact match
-        notEqualTo:
-          type: boolean
-          description: Not equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CustomerContactNotificationTypeFilter:
-      type: object
-      description: Filter for notification type enum array field
-      properties:
-        includes:
-          $ref: '#/components/schemas/CustomerContactNotificationType'
-          description: Array contains this notification type
-        notIncludes:
-          $ref: '#/components/schemas/CustomerContactNotificationType'
-          description: Array does not contain this notification type
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CustomerContactTypeFilter:
-      type: object
-      description: Filter for contact type enum array field
-      properties:
-        includes:
-          $ref: '#/components/schemas/CustomerContactType'
-          description: Array contains this contact type
-        notIncludes:
-          $ref: '#/components/schemas/CustomerContactType'
-          description: Array does not contain this contact type
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
-      properties:
-        equalTo:
-          type: string
-          format: date-time
-          description: Exact match
-        notEqualTo:
-          type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
     CustomerContact:
       type: object
       required:
@@ -611,97 +445,64 @@ components:
           readOnly: true
           description: When the contact was soft deleted (null if active)
           example: null
-    UUIDFilter:
+    CustomerContactFilter:
       type: object
-      description: Filter options for UUID fields (all operations)
+      description: Filter criteria for contacts with AND/OR logic support
+      properties:
+        and:
+          type: array
+          description: All conditions must match (recursive)
+          items:
+            $ref: '#/components/schemas/CustomerContactFilter'
+        or:
+          type: array
+          description: At least one condition must match (recursive)
+          items:
+            $ref: '#/components/schemas/CustomerContactFilter'
+        not:
+          $ref: '#/components/schemas/CustomerContactFilter'
+          description: Negates the filter
+        id:
+          $ref: '#/components/schemas/IDFilter'
+        customerId:
+          $ref: '#/components/schemas/UUIDFilter'
+        name:
+          $ref: '#/components/schemas/StringFilter'
+        email:
+          $ref: '#/components/schemas/StringFilter'
+        phoneNumber:
+          $ref: '#/components/schemas/StringFilter'
+        phoneExtension:
+          $ref: '#/components/schemas/StringFilter'
+        isPrimary:
+          $ref: '#/components/schemas/BooleanFilter'
+        contactTypes:
+          $ref: '#/components/schemas/CustomerContactTypeFilter'
+        notifications:
+          $ref: '#/components/schemas/CustomerContactNotificationTypeFilter'
+        invitedUserId:
+          $ref: '#/components/schemas/UUIDFilter'
+        deletedById:
+          $ref: '#/components/schemas/UUIDFilter'
+        key:
+          $ref: '#/components/schemas/ClientKeyFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        deletedAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+    BooleanFilter:
+      type: object
+      description: Filter options for boolean fields
       properties:
         equalTo:
-          type: string
-          format: uuid
+          type: boolean
           description: Exact match
         notEqualTo:
-          type: string
-          format: uuid
+          type: boolean
           description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Matches any UUID in the array
-        notIn:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Does not match any UUID in the array
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    CustomerContactInput:
-      type: object
-      required:
-      - customerId
-      - name
-      - contactInfo
-      properties:
-        customerId:
-          type: string
-          format: uuid
-          description: Customer this contact belongs to
-          example: 550e8400-e29b-41d4-a716-446655440001
-        name:
-          type: string
-          description: Contact person's name (should match contactInfo.name)
-          example: John Smith
-        contactInfo:
-          $ref: '#/components/schemas/ContactInfoInput'
-          description: Contact information details (will create new Contact record)
-        phoneExtension:
-          type: string
-          description: Phone extension specific to this contact role
-          example: '1234'
-        isPrimary:
-          type: boolean
-          default: false
-          description: Whether this is the primary contact for the customer
-          example: true
-        contactTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerContactType'
-          description: Types/roles this contact serves
-          example:
-          - BILLING
-          - ACCOUNT_MANAGER
-        notifications:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerContactNotificationType'
-          description: Shipment notification types to send to this contact
-          example:
-          - SHIPMENT_PICKED_UP
-          - SHIPMENT_DELIVERED
-        key:
-          type: string
-          maxLength: 512
-          description: Client-defined reference identifier
-          example: ERP-CONTACT-JOHN-001
-    CustomerContactType:
-      type: string
-      description: Type of customer contact role
-      enum:
-      - ACCOUNT_MANAGER
-      - BILLING
-      - DOCK_SHIPPING
-      - EMERGENCY
-      - LOCATION_MANAGER
-      - OWNER
-      - PROCUREMENT
-      - PURCHASING
-      - RATES_PRICING
-      - RECEIVING
-      - SHIPPING
     StringFilter:
       type: object
       description: Filter options for string fields
@@ -809,6 +610,110 @@ components:
           maxLength: 512
           description: Client-defined reference identifier
           example: ERP-CONTACT-JOHN-001
+    CustomerContactFilterRequest:
+      type: object
+      description: Request body for filtering contacts
+      properties:
+        filter:
+          $ref: '#/components/schemas/CustomerContactFilter'
+          description: 'Filter criteria (optional - omit to return all contacts).
+
+
+            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
+
+            '
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 250
+          default: 50
+          description: Number of results per page
+        cursor:
+          type: string
+          description: Pagination cursor for next page
+      example:
+        filter:
+          and:
+          - isPrimary:
+              equalTo: true
+          - contactTypes:
+              includes: BILLING
+        pageSize: 50
+    ContactInfoPatch:
+      type: object
+      description: 'Partial contact information update. All fields are optional.
+
+
+        - **Omitted fields**: Not modified (current value preserved)
+
+        - **Provided fields**: Updated to the new value
+
+        - **Null values**: Clear the field (set to null) where applicable
+
+        '
+      properties:
+        name:
+          type: string
+          description: Contact person's full name
+          example: John Smith
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address
+          example: john.smith@example.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Phone number
+          example: +1-555-0100
+        title:
+          type:
+          - string
+          - 'null'
+          description: Job title or position
+          example: Operations Manager
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    UUIDFilter:
+      type: object
+      description: Filter options for UUID fields (all operations)
+      properties:
+        equalTo:
+          type: string
+          format: uuid
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: uuid
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Matches any UUID in the array
+        notIn:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Does not match any UUID in the array
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     CustomerReference:
       type: object
       description: 'Enhanced reference to a customer resource (returned in responses).
@@ -887,6 +792,55 @@ components:
           format: date-time
           description: When the customer was soft deleted (null if active)
           example: null
+    CustomerContactInput:
+      type: object
+      required:
+      - customerId
+      - name
+      - contactInfo
+      properties:
+        customerId:
+          type: string
+          format: uuid
+          description: Customer this contact belongs to
+          example: 550e8400-e29b-41d4-a716-446655440001
+        name:
+          type: string
+          description: Contact person's name (should match contactInfo.name)
+          example: John Smith
+        contactInfo:
+          $ref: '#/components/schemas/ContactInfoInput'
+          description: Contact information details (will create new Contact record)
+        phoneExtension:
+          type: string
+          description: Phone extension specific to this contact role
+          example: '1234'
+        isPrimary:
+          type: boolean
+          default: false
+          description: Whether this is the primary contact for the customer
+          example: true
+        contactTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerContactType'
+          description: Types/roles this contact serves
+          example:
+          - BILLING
+          - ACCOUNT_MANAGER
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerContactNotificationType'
+          description: Shipment notification types to send to this contact
+          example:
+          - SHIPMENT_PICKED_UP
+          - SHIPMENT_DELIVERED
+        key:
+          type: string
+          maxLength: 512
+          description: Client-defined reference identifier
+          example: ERP-CONTACT-JOHN-001
     ContactInfoInput:
       type: object
       description: Contact information for creating a new contact record
@@ -910,35 +864,20 @@ components:
           type: string
           description: Job title or position
           example: Operations Manager
-    CustomerContactFilterRequest:
+    IDFilter:
       type: object
-      description: Request body for filtering contacts
+      description: Filter options for ID fields (limited operations - exact match only)
       properties:
-        filter:
-          $ref: '#/components/schemas/CustomerContactFilter'
-          description: 'Filter criteria (optional - omit to return all contacts).
-
-
-            Note: deletedAt automatically defaults to { isNull: true } unless explicitly overridden.
-
-            '
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 250
-          default: 50
-          description: Number of results per page
-        cursor:
+        equalTo:
           type: string
-          description: Pagination cursor for next page
-      example:
-        filter:
-          and:
-          - isPrimary:
-              equalTo: true
-          - contactTypes:
-              includes: BILLING
-        pageSize: 50
+          format: uuid
+          description: Exact match
+        in:
+          type: array
+          description: Matches any UUID in the array
+          items:
+            type: string
+            format: uuid
     CustomerContactNotificationType:
       type: string
       description: Types of shipment notifications the contact should receive
@@ -965,51 +904,50 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    CustomerContactFilter:
+    CustomerContactTypeFilter:
       type: object
-      description: Filter criteria for contacts with AND/OR logic support
+      description: Filter for contact type enum array field
       properties:
-        and:
-          type: array
-          description: All conditions must match (recursive)
-          items:
-            $ref: '#/components/schemas/CustomerContactFilter'
-        or:
-          type: array
-          description: At least one condition must match (recursive)
-          items:
-            $ref: '#/components/schemas/CustomerContactFilter'
-        not:
-          $ref: '#/components/schemas/CustomerContactFilter'
-          description: Negates the filter
-        id:
-          $ref: '#/components/schemas/IDFilter'
-        customerId:
-          $ref: '#/components/schemas/UUIDFilter'
-        name:
-          $ref: '#/components/schemas/StringFilter'
-        email:
-          $ref: '#/components/schemas/StringFilter'
-        phoneNumber:
-          $ref: '#/components/schemas/StringFilter'
-        phoneExtension:
-          $ref: '#/components/schemas/StringFilter'
-        isPrimary:
-          $ref: '#/components/schemas/BooleanFilter'
-        contactTypes:
-          $ref: '#/components/schemas/CustomerContactTypeFilter'
-        notifications:
-          $ref: '#/components/schemas/CustomerContactNotificationTypeFilter'
-        invitedUserId:
-          $ref: '#/components/schemas/UUIDFilter'
-        deletedById:
-          $ref: '#/components/schemas/UUIDFilter'
-        key:
-          $ref: '#/components/schemas/ClientKeyFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        deletedAt:
-          $ref: '#/components/schemas/DatetimeFilter'
+        includes:
+          $ref: '#/components/schemas/CustomerContactType'
+          description: Array contains this contact type
+        notIncludes:
+          $ref: '#/components/schemas/CustomerContactType'
+          description: Array does not contain this contact type
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     UserReference:
       type: object
       description: 'Enhanced reference to a user resource (returned in responses).
@@ -1096,42 +1034,95 @@ components:
           format: date-time
           description: When the user was soft deleted (null if active)
           example: null
-    Error:
+    CustomerContactType:
+      type: string
+      description: Type of customer contact role
+      enum:
+      - ACCOUNT_MANAGER
+      - BILLING
+      - DOCK_SHIPPING
+      - EMERGENCY
+      - LOCATION_MANAGER
+      - OWNER
+      - PROCUREMENT
+      - PURCHASING
+      - RATES_PRICING
+      - RECEIVING
+      - SHIPPING
+    CustomerContactNotificationTypeFilter:
+      type: object
+      description: Filter for notification type enum array field
+      properties:
+        includes:
+          $ref: '#/components/schemas/CustomerContactNotificationType'
+          description: Array contains this notification type
+        notIncludes:
+          $ref: '#/components/schemas/CustomerContactNotificationType'
+          description: Array does not contain this notification type
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    ContactInfo:
+      type: object
+      description: 'Contact information details (nested, without id).
+
+
+        This is an embedded object representing a Contact record. The id is managed
+
+        internally and not exposed in the API.
+
+        '
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contact person's full name
+          example: John Smith
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address
+          example: john.smith@example.com
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Phone number
+          example: +1-555-0100
+        title:
+          type:
+          - string
+          - 'null'
+          description: Job title or position
+          example: Operations Manager
+    PaginationInfo:
       type: object
       required:
-      - error
-      - message
+      - pageSize
+      - hasNextPage
       properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    IDFilter:
-      type: object
-      description: Filter options for ID fields (limited operations - exact match only)
-      properties:
-        equalTo:
-          type: string
-          format: uuid
-          description: Exact match
-        in:
-          type: array
-          description: Matches any UUID in the array
-          items:
-            type: string
-            format: uuid
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
   responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
     BadRequestError:
       description: Bad request - invalid input
       content:
@@ -1141,6 +1132,24 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
+    ConflictError:
+      description: Conflict - resource already exists or constraint violation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: conflict
+            message: A resource with this identifier already exists
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
     UnauthorizedError:
       description: Unauthorized - invalid or missing access token
       content:
@@ -1159,15 +1168,6 @@ components:
           example:
             error: internal_server_error
             message: An unexpected error occurred
-    ConflictError:
-      description: Conflict - resource already exists or constraint violation
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: conflict
-            message: A resource with this identifier already exists
   parameters:
     IdOrClientKey:
       name: id

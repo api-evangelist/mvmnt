@@ -434,75 +434,45 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    VendorReference:
+    ServiceInput:
       type: object
-      description: 'Enhanced reference to a vendor profile.
-
-        Includes full vendor details in addition to id/key.
-
-        '
       required:
-      - id
-      - friendlyId
-      - name
-      - createdAt
-      - updatedAt
+      - vendor
+      - serviceType
       properties:
-        id:
+        vendor:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Vendor reference
+        vendorContact:
+          $ref: '#/components/schemas/ResourceReferenceInput'
+          description: Vendor contact
+        serviceType:
+          $ref: '#/components/schemas/ServiceType'
+        description:
           type: string
-          format: uuid
-          description: Vendor UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-VENDOR-ABC-001
-        friendlyId:
+          maxLength: 2000
+        charges:
+          type: array
+          items:
+            type: object
+            required:
+            - chargeCode
+            - amount
+            properties:
+              chargeCode:
+                $ref: '#/components/schemas/ResourceReferenceInput'
+              description:
+                type: string
+              amount:
+                type: number
+              quantity:
+                type: number
+                default: 1
+        scheduledDate:
           type: string
-          description: Human-readable vendor identifier
-          example: V123456
-        name:
+          format: date
+        referenceNumber:
           type: string
-          description: Vendor legal name
-          example: ABC Warehouse Services
-        email:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Primary email address
-          example: billing@abcwarehouse.com
-        phone:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        status:
-          type:
-          - string
-          - 'null'
-          description: Vendor status
-          example: ACTIVE
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Preferred currency code (ISO 4217)
-          example: USD
-        createdAt:
-          type: string
-          format: date-time
-          description: When the vendor was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the vendor was last updated
-          example: '2025-01-15T14:30:00Z'
     Service:
       type: object
       required:
@@ -589,90 +559,50 @@ components:
           - string
           - 'null'
           format: date-time
-    ServiceFilter:
+    ServiceCharge:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/UUIDFilter'
-        shipmentId:
-          $ref: '#/components/schemas/UUIDFilter'
-        vendorId:
-          $ref: '#/components/schemas/UUIDFilter'
-        serviceType:
-          $ref: '#/components/schemas/ServiceTypeFilter'
-        status:
-          $ref: '#/components/schemas/ServiceStatusFilter'
-        scheduledDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        completedDate:
-          $ref: '#/components/schemas/DatetimeFilter'
-        createdAt:
-          $ref: '#/components/schemas/DatetimeFilter'
-        and:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceFilter'
-        or:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceFilter'
-        not:
-          $ref: '#/components/schemas/ServiceFilter'
-    PaginationInfo:
-      type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
+          type: string
+          format: uuid
+        chargeCode:
+          $ref: '#/components/schemas/ResourceReference'
+        description:
           type:
           - string
           - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    DatetimeFilter:
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+    ServiceStatusFilter:
       type: object
-      description: Filter options for datetime fields
       properties:
         equalTo:
-          type: string
-          format: date-time
-          description: Exact match
+          $ref: '#/components/schemas/ServiceStatus'
         notEqualTo:
+          $ref: '#/components/schemas/ServiceStatus'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceStatus'
+        notIn:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceStatus'
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
           type: string
-          format: date-time
-          description: Not equal to
-        lessThan:
+          description: Error code
+        message:
           type: string
-          format: date-time
-          description: Before this datetime
-        lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
-        greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
-        greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
+          description: Human-readable error message
     UUIDFilter:
       type: object
       description: Filter options for UUID fields (all operations)
@@ -712,45 +642,6 @@ components:
           default: 50
         cursor:
           type: string
-    ServiceInput:
-      type: object
-      required:
-      - vendor
-      - serviceType
-      properties:
-        vendor:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Vendor reference
-        vendorContact:
-          $ref: '#/components/schemas/ResourceReferenceInput'
-          description: Vendor contact
-        serviceType:
-          $ref: '#/components/schemas/ServiceType'
-        description:
-          type: string
-          maxLength: 2000
-        charges:
-          type: array
-          items:
-            type: object
-            required:
-            - chargeCode
-            - amount
-            properties:
-              chargeCode:
-                $ref: '#/components/schemas/ResourceReferenceInput'
-              description:
-                type: string
-              amount:
-                type: number
-              quantity:
-                type: number
-                default: 1
-        scheduledDate:
-          type: string
-          format: date
-        referenceNumber:
-          type: string
     ServiceStatus:
       type: string
       enum:
@@ -784,85 +675,6 @@ components:
         - `CANCELED`: Service canceled
 
         '
-    ServiceCharge:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        chargeCode:
-          $ref: '#/components/schemas/ResourceReference'
-        description:
-          type:
-          - string
-          - 'null'
-        amount:
-          type: number
-        quantity:
-          type: number
-          default: 1
-    ServiceStatusFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/ServiceStatus'
-        notEqualTo:
-          $ref: '#/components/schemas/ServiceStatus'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceStatus'
-        notIn:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceStatus'
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
-    ResourceReferenceInput:
-      type: object
-      description: Reference to another resource by either ID or client key (used in create/update requests)
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type: string
-          description: Client-defined reference ID
-      oneOf:
-      - required:
-        - id
-      - required:
-        - key
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
     ServicePatch:
       type: object
       properties:
@@ -888,36 +700,37 @@ components:
           type:
           - string
           - 'null'
-    ResourceReference:
+    DatetimeFilter:
       type: object
-      description: Reference to another resource (returned in responses)
-      required:
-      - id
+      description: Filter options for datetime fields
       properties:
-        id:
+        equalTo:
           type: string
-          format: uuid
-          description: Resource UUID
-        key:
-          type:
-          - string
-          - 'null'
-          description: Client-defined reference ID if set
-      example:
-        id: 550e8400-e29b-41d4-a716-446655440000
-        key: ERP-USER-12345
-    Error:
-      type: object
-      required:
-      - error
-      - message
-      properties:
-        error:
+          format: date-time
+          description: Exact match
+        notEqualTo:
           type: string
-          description: Error code
-        message:
+          format: date-time
+          description: Not equal to
+        lessThan:
           type: string
-          description: Human-readable error message
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
     ServiceType:
       type: string
       enum:
@@ -972,16 +785,194 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ServiceType'
+    ResourceReference:
+      type: object
+      description: Reference to another resource (returned in responses)
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type:
+          - string
+          - 'null'
+          description: Client-defined reference ID if set
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+        key: ERP-USER-12345
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
+    ResourceReferenceInput:
+      type: object
+      description: Reference to another resource by either ID or client key (used in create/update requests)
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Resource UUID
+        key:
+          type: string
+          description: Client-defined reference ID
+      oneOf:
+      - required:
+        - id
+      - required:
+        - key
+      example:
+        id: 550e8400-e29b-41d4-a716-446655440000
+    VendorReference:
+      type: object
+      description: 'Enhanced reference to a vendor profile.
+
+        Includes full vendor details in addition to id/key.
+
+        '
+      required:
+      - id
+      - friendlyId
+      - name
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Vendor UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-VENDOR-ABC-001
+        friendlyId:
+          type: string
+          description: Human-readable vendor identifier
+          example: V123456
+        name:
+          type: string
+          description: Vendor legal name
+          example: ABC Warehouse Services
+        email:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Primary email address
+          example: billing@abcwarehouse.com
+        phone:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        status:
+          type:
+          - string
+          - 'null'
+          description: Vendor status
+          example: ACTIVE
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Preferred currency code (ISO 4217)
+          example: USD
+        createdAt:
+          type: string
+          format: date-time
+          description: When the vendor was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the vendor was last updated
+          example: '2025-01-15T14:30:00Z'
+    ServiceFilter:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUIDFilter'
+        shipmentId:
+          $ref: '#/components/schemas/UUIDFilter'
+        vendorId:
+          $ref: '#/components/schemas/UUIDFilter'
+        serviceType:
+          $ref: '#/components/schemas/ServiceTypeFilter'
+        status:
+          $ref: '#/components/schemas/ServiceStatusFilter'
+        scheduledDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        completedDate:
+          $ref: '#/components/schemas/DatetimeFilter'
+        createdAt:
+          $ref: '#/components/schemas/DatetimeFilter'
+        and:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceFilter'
+        or:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceFilter'
+        not:
+          $ref: '#/components/schemas/ServiceFilter'
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
   responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
     BadRequestError:
       description: Bad request - invalid input
       content:
@@ -991,15 +982,6 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
     ValidationError:
       description: Validation error - invalid field values
       content:
@@ -1014,6 +996,24 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   parameters:
     LookupBy:
       name: by

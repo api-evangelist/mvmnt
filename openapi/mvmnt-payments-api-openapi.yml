@@ -493,32 +493,20 @@ paths:
           $ref: '#/components/responses/NotFoundError'
 components:
   schemas:
-    PaymentPatch:
+    PaymentCreditApplicationInput:
       type: object
+      required:
+      - creditMemoId
+      - amount
       properties:
-        paymentDate:
+        creditMemoId:
           type: string
-          format: date
-        paymentMethodType:
-          $ref: '#/components/schemas/payments_PaymentMethodType'
-        reference:
-          type:
-          - string
-          - 'null'
-        notes:
-          type:
-          - string
-          - 'null'
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentApplicationInput'
-          description: Replace all invoice applications
-        creditApplications:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentCreditApplicationInput'
-          description: Replace all credit applications
+          format: uuid
+          description: Credit memo to apply
+        amount:
+          type: number
+          minimum: 0.01
+          description: Credit amount to apply
     PaymentFilter:
       type: object
       properties:
@@ -550,88 +538,101 @@ components:
             $ref: '#/components/schemas/PaymentFilter'
         not:
           $ref: '#/components/schemas/PaymentFilter'
-    PaymentApplication:
+    PaymentApplicationInput:
       type: object
       required:
-      - id
       - invoiceId
       - amount
       properties:
-        id:
-          type: string
-          format: uuid
         invoiceId:
           type: string
           format: uuid
-        invoiceFriendlyId:
-          type:
-          - string
-          - 'null'
-        invoiceAmount:
-          type:
-          - number
-          - 'null'
-          description: Total invoice amount
-        invoiceOpenBalance:
-          type:
-          - number
-          - 'null'
-          description: Invoice balance before this payment
+          description: Invoice to apply payment to
         amount:
           type: number
-          description: Amount applied to this invoice
-    PaginationInfo:
+          minimum: 0.01
+          description: Amount to apply to this invoice
+    StringFilter:
       type: object
-      required:
-      - pageSize
-      - hasNextPage
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-          example: 50
-        hasNextPage:
-          type: boolean
-          description: Whether there are more pages
-          example: true
-        hasPreviousPage:
-          type: boolean
-          description: Whether there are previous pages
-          example: false
-        endCursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for the next page (null if no next page)
-          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
-    DatetimeFilter:
-      type: object
-      description: Filter options for datetime fields
+      description: Filter options for string fields
       properties:
         equalTo:
           type: string
-          format: date-time
           description: Exact match
         notEqualTo:
           type: string
-          format: date-time
+          description: Not equal to
+        in:
+          type: array
+          items:
+            type: string
+          description: Matches any value in the array
+        notIn:
+          type: array
+          items:
+            type: string
+          description: Does not match any value in the array
+        includes:
+          type: string
+          description: Contains substring (case-insensitive)
+        notIncludes:
+          type: string
+          description: Does not contain substring (case-insensitive)
+        startsWith:
+          type: string
+          description: Starts with prefix (case-insensitive)
+        notStartsWith:
+          type: string
+          description: Does not start with prefix (case-insensitive)
+        endsWith:
+          type: string
+          description: Ends with suffix (case-insensitive)
+        notEndsWith:
+          type: string
+          description: Does not end with suffix (case-insensitive)
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    Error:
+      type: object
+      required:
+      - error
+      - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+    FloatFilter:
+      type: object
+      description: Filter options for float/number fields
+      properties:
+        equalTo:
+          type: number
+          format: float
+          description: Exact match
+        notEqualTo:
+          type: number
+          format: float
           description: Not equal to
         lessThan:
-          type: string
-          format: date-time
-          description: Before this datetime
+          type: number
+          format: float
+          description: Less than
         lessThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or before this datetime
+          type: number
+          format: float
+          description: Less than or equal to
         greaterThan:
-          type: string
-          format: date-time
-          description: After this datetime
+          type: number
+          format: float
+          description: Greater than
         greaterThanOrEqualTo:
-          type: string
-          format: date-time
-          description: On or after this datetime
+          type: number
+          format: float
+          description: Greater than or equal to
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
@@ -662,18 +663,95 @@ components:
         isNull:
           type: boolean
           description: Field is null (true) or not null (false)
-    PaymentFilterRequest:
+    CustomerReference:
+      type: object
+      description: 'Enhanced reference to a customer resource (returned in responses).
+
+        Includes full customer details in addition to id/key.
+
+
+        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
+
+        Maximum nesting depth: 1 level.
+
+        '
+      required:
+      - id
+      - name
+      - friendlyId
+      - status
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        key:
+          type:
+          - string
+          - 'null'
+          maxLength: 512
+          description: Client-defined reference ID if set
+          example: ERP-CUSTOMER-ACME
+        name:
+          type: string
+          description: Customer company name
+          example: Acme Manufacturing Corp
+        friendlyId:
+          type: string
+          description: Human-readable customer identifier
+          example: A123456
+        status:
+          type: string
+          description: Customer status
+          enum:
+          - PROSPECT
+          - ACTIVE
+          - INACTIVE
+          - CHURNED
+          example: ACTIVE
+        phoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Primary phone number
+          example: +1-555-123-4567
+        website:
+          type:
+          - string
+          - 'null'
+          description: Customer website URL
+          example: https://acme-manufacturing.com
+        createdAt:
+          type: string
+          format: date-time
+          description: When the customer was created
+          example: '2025-01-15T10:00:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the customer was last updated
+          example: '2025-01-15T14:30:00Z'
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the customer was soft deleted (null if active)
+          example: null
+    payments_PaymentMethodTypeFilter:
       type: object
       properties:
-        filter:
-          $ref: '#/components/schemas/PaymentFilter'
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 50
-        cursor:
-          type: string
+        equalTo:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        notEqualTo:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        in:
+          type: array
+          items:
+            $ref: '#/components/schemas/payments_PaymentMethodType'
     Payment:
       type: object
       required:
@@ -764,210 +842,6 @@ components:
           - string
           - 'null'
           format: date-time
-    payments_PaymentMethodTypeFilter:
-      type: object
-      properties:
-        equalTo:
-          $ref: '#/components/schemas/payments_PaymentMethodType'
-        notEqualTo:
-          $ref: '#/components/schemas/payments_PaymentMethodType'
-        in:
-          type: array
-          items:
-            $ref: '#/components/schemas/payments_PaymentMethodType'
-    PaymentApplicationInput:
-      type: object
-      required:
-      - invoiceId
-      - amount
-      properties:
-        invoiceId:
-          type: string
-          format: uuid
-          description: Invoice to apply payment to
-        amount:
-          type: number
-          minimum: 0.01
-          description: Amount to apply to this invoice
-    StringFilter:
-      type: object
-      description: Filter options for string fields
-      properties:
-        equalTo:
-          type: string
-          description: Exact match
-        notEqualTo:
-          type: string
-          description: Not equal to
-        in:
-          type: array
-          items:
-            type: string
-          description: Matches any value in the array
-        notIn:
-          type: array
-          items:
-            type: string
-          description: Does not match any value in the array
-        includes:
-          type: string
-          description: Contains substring (case-insensitive)
-        notIncludes:
-          type: string
-          description: Does not contain substring (case-insensitive)
-        startsWith:
-          type: string
-          description: Starts with prefix (case-insensitive)
-        notStartsWith:
-          type: string
-          description: Does not start with prefix (case-insensitive)
-        endsWith:
-          type: string
-          description: Ends with suffix (case-insensitive)
-        notEndsWith:
-          type: string
-          description: Does not end with suffix (case-insensitive)
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    CustomerReference:
-      type: object
-      description: 'Enhanced reference to a customer resource (returned in responses).
-
-        Includes full customer details in addition to id/key.
-
-
-        Note: Does NOT include nested references (paymentTerm, contacts, etc.) to prevent recursion.
-
-        Maximum nesting depth: 1 level.
-
-        '
-      required:
-      - id
-      - name
-      - friendlyId
-      - status
-      - createdAt
-      - updatedAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Customer UUID
-          example: 550e8400-e29b-41d4-a716-446655440000
-        key:
-          type:
-          - string
-          - 'null'
-          maxLength: 512
-          description: Client-defined reference ID if set
-          example: ERP-CUSTOMER-ACME
-        name:
-          type: string
-          description: Customer company name
-          example: Acme Manufacturing Corp
-        friendlyId:
-          type: string
-          description: Human-readable customer identifier
-          example: A123456
-        status:
-          type: string
-          description: Customer status
-          enum:
-          - PROSPECT
-          - ACTIVE
-          - INACTIVE
-          - CHURNED
-          example: ACTIVE
-        phoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Primary phone number
-          example: +1-555-123-4567
-        website:
-          type:
-          - string
-          - 'null'
-          description: Customer website URL
-          example: https://acme-manufacturing.com
-        createdAt:
-          type: string
-          format: date-time
-          description: When the customer was created
-          example: '2025-01-15T10:00:00Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the customer was last updated
-          example: '2025-01-15T14:30:00Z'
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: When the customer was soft deleted (null if active)
-          example: null
-    FloatFilter:
-      type: object
-      description: Filter options for float/number fields
-      properties:
-        equalTo:
-          type: number
-          format: float
-          description: Exact match
-        notEqualTo:
-          type: number
-          format: float
-          description: Not equal to
-        lessThan:
-          type: number
-          format: float
-          description: Less than
-        lessThanOrEqualTo:
-          type: number
-          format: float
-          description: Less than or equal to
-        greaterThan:
-          type: number
-          format: float
-          description: Greater than
-        greaterThanOrEqualTo:
-          type: number
-          format: float
-          description: Greater than or equal to
-        isNull:
-          type: boolean
-          description: Field is null (true) or not null (false)
-    ValidationError:
-      type: object
-      required:
-      - error
-      - message
-      - details
-      properties:
-        error:
-          type: string
-          description: Error code
-          example: validation_error
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: array
-          description: Validation error details
-          items:
-            type: object
-            required:
-            - field
-            - message
-            properties:
-              field:
-                type: string
-                description: Field name that failed validation
-              message:
-                type: string
-                description: Validation error message
     PaymentInput:
       type: object
       required:
@@ -1004,20 +878,120 @@ components:
           items:
             $ref: '#/components/schemas/PaymentCreditApplicationInput'
           description: Credits to apply in this payment
-    PaymentCreditApplicationInput:
+    PaymentFilterRequest:
       type: object
-      required:
-      - creditMemoId
-      - amount
       properties:
+        filter:
+          $ref: '#/components/schemas/PaymentFilter'
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 50
+        cursor:
+          type: string
+    DatetimeFilter:
+      type: object
+      description: Filter options for datetime fields
+      properties:
+        equalTo:
+          type: string
+          format: date-time
+          description: Exact match
+        notEqualTo:
+          type: string
+          format: date-time
+          description: Not equal to
+        lessThan:
+          type: string
+          format: date-time
+          description: Before this datetime
+        lessThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or before this datetime
+        greaterThan:
+          type: string
+          format: date-time
+          description: After this datetime
+        greaterThanOrEqualTo:
+          type: string
+          format: date-time
+          description: On or after this datetime
+        isNull:
+          type: boolean
+          description: Field is null (true) or not null (false)
+    PaymentPatch:
+      type: object
+      properties:
+        paymentDate:
+          type: string
+          format: date
+        paymentMethodType:
+          $ref: '#/components/schemas/payments_PaymentMethodType'
+        reference:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentApplicationInput'
+          description: Replace all invoice applications
+        creditApplications:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCreditApplicationInput'
+          description: Replace all credit applications
+    PaymentCreditApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
         creditMemoId:
           type: string
           format: uuid
-          description: Credit memo to apply
+        creditMemoReference:
+          type:
+          - string
+          - 'null'
         amount:
           type: number
-          minimum: 0.01
-          description: Credit amount to apply
+          description: Credit amount applied in this payment
+    ValidationError:
+      type: object
+      required:
+      - error
+      - message
+      - details
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: validation_error
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          description: Validation error details
+          items:
+            type: object
+            required:
+            - field
+            - message
+            properties:
+              field:
+                type: string
+                description: Field name that failed validation
+              message:
+                type: string
+                description: Validation error message
     payments_PaymentMethodType:
       type: string
       enum:
@@ -1045,44 +1019,61 @@ components:
         - `CREDIT_CARD`: Credit card payment
 
         '
-    Error:
+    PaymentApplication:
       type: object
       required:
-      - error
-      - message
-      properties:
-        error:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-    PaymentCreditApplication:
-      type: object
+      - id
+      - invoiceId
+      - amount
       properties:
         id:
           type: string
           format: uuid
-        creditMemoId:
+        invoiceId:
           type: string
           format: uuid
-        creditMemoReference:
+        invoiceFriendlyId:
           type:
           - string
           - 'null'
+        invoiceAmount:
+          type:
+          - number
+          - 'null'
+          description: Total invoice amount
+        invoiceOpenBalance:
+          type:
+          - number
+          - 'null'
+          description: Invoice balance before this payment
         amount:
           type: number
-          description: Credit amount applied in this payment
+          description: Amount applied to this invoice
+    PaginationInfo:
+      type: object
+      required:
+      - pageSize
+      - hasNextPage
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 50
+        hasNextPage:
+          type: boolean
+          description: Whether there are more pages
+          example: true
+        hasPreviousPage:
+          type: boolean
+          description: Whether there are previous pages
+          example: false
+        endCursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for the next page (null if no next page)
+          example: eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9
   responses:
-    NotFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: not_found
-            message: Resource not found
     BadRequestError:
       description: Bad request - invalid input
       content:
@@ -1092,15 +1083,6 @@ components:
           example:
             error: bad_request
             message: Invalid request parameters
-    UnauthorizedError:
-      description: Unauthorized - invalid or missing access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error: unauthorized
-            message: Invalid or expired access token
     ValidationError:
       description: Validation error - invalid field values
       content:
@@ -1115,6 +1097,24 @@ components:
               message: Must be a valid email address
             - field: status
               message: Must be one of PENDING, ACTIVE, INACTIVE
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: not_found
+            message: Resource not found
+    UnauthorizedError:
+      description: Unauthorized - invalid or missing access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: unauthorized
+            message: Invalid or expired access token
   parameters:
     LookupBy:
       name: by
