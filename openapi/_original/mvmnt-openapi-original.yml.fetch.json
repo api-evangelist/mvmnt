@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.mvmnt.io/downloads/openapi.json",
+ "requested_url": "https://docs.mvmnt.io/downloads/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 1254918,
+ "sha256": "f8002ac7bbf05419b5da97fd04c446afe56154c23c4e2d78d2c10c109b9fb436",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.947), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
