@@ -1,365 +1,1519 @@
 {
+  "info": {
+    "_postman_id": "0a244e7a-e1e1-4443-ad24-f8aa31613d3a",
+    "name": "MVMNT Teams API",
+    "description": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:11:54.000Z",
+    "updatedAt": "2026-10-21T21:11:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0a244e7a-e1e1-4443-ad24-f8aa31613d3a"
+  },
   "item": [
     {
-      "id": "f7fcc4cd-c83f-4961-a089-dc8c97278137",
-      "name": "Teams",
-      "description": {
-        "content": "Team management operations",
-        "type": "text/plain"
-      },
+      "name": "teams",
       "item": [
         {
-          "id": "f86b7b4a-e718-4ac1-a500-dc53108bf9a7",
-          "name": "Filter teams",
-          "request": {
-            "name": "Filter teams",
-            "description": {
-              "content": "Filter teams using comprehensive query criteria with AND/OR logic and multiple operators.\nSupports complex filtering similar to GraphQL capabilities.\nNote: Soft-deleted teams are excluded by default (deletedAt defaults to { isNull: true }).\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "teams",
-                "filter"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "filter",
+          "item": [
             {
-              "id": "1c11c4c0-983e-4e2f-bc7a-284d933a014b",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Filter teams",
+              "id": "86074b86-7047-4ad8-9a5c-c751f37c54f8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"name\": {\n      \"includes\": \"Sales\"\n    }\n  },\n  \"pageSize\": 50\n}",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"Sales Team - West Coast\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"TEAM\",\n      \"key\": \"ERP-TEAM-WEST\",\n      \"users\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"ACTIVE\",\n          \"roles\": [\n            \"CUSTOMER_REP\",\n            \"ADMIN\"\n          ],\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"USER\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"key\": \"ERP-USER-12345\",\n          \"datUsername\": \"johndoe_dat\",\n          \"mcpUsername\": \"johndoe_mcp\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1964-06-24T10:33:52.263Z\"\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"PENDING\",\n          \"roles\": [\n            \"CUSTOMER_REP\",\n            \"ADMIN\"\n          ],\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"USER\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"key\": \"ERP-USER-12345\",\n          \"datUsername\": \"johndoe_dat\",\n          \"mcpUsername\": \"johndoe_mcp\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2021-11-20T00:56:19.738Z\"\n        }\n      ],\n      \"deletedAt\": \"1949-12-19T16:45:28.439Z\"\n    },\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"name\": \"Sales Team - West Coast\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"TEAM\",\n      \"key\": \"ERP-TEAM-WEST\",\n      \"users\": [\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"INACTIVE\",\n          \"roles\": [\n            \"CUSTOMER_REP\",\n            \"ADMIN\"\n          ],\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"USER\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"key\": \"ERP-USER-12345\",\n          \"datUsername\": \"johndoe_dat\",\n          \"mcpUsername\": \"johndoe_mcp\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"1995-04-10T16:01:27.969Z\"\n        },\n        {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"email\": \"john.doe@example.com\",\n          \"status\": \"PENDING\",\n          \"roles\": [\n            \"CUSTOMER_REP\",\n            \"ADMIN\"\n          ],\n          \"createdAt\": \"2025-01-15T10:00:00Z\",\n          \"updatedAt\": \"2025-01-15T14:30:00Z\",\n          \"object\": \"USER\",\n          \"name\": \"John Doe\",\n          \"phone\": \"+1-555-123-4567\",\n          \"phoneExt\": \"123\",\n          \"key\": \"ERP-USER-12345\",\n          \"datUsername\": \"johndoe_dat\",\n          \"mcpUsername\": \"johndoe_mcp\",\n          \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n          \"deletedAt\": \"2010-04-11T16:25:45.188Z\"\n        }\n      ],\n      \"deletedAt\": \"1966-04-18T16:50:44.754Z\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "997010c9-537d-48e3-8f08-90a39ee3f93b",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "teams",
-                    "filter"
-                  ],
+                  "raw": "{{baseUrl}}/teams/filter",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"name\": {\n      \"includes\": \"Sales\"\n    }\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b757b1d8-7f61-4af8-a30c-a782c75ce8eb",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "teams",
                     "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"name\": {\n      \"includes\": \"Sales\"\n    }\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Filter teams using comprehensive query criteria with AND/OR logic and multiple operators.\nSupports complex filtering similar to GraphQL capabilities.\nNote: Soft-deleted teams are excluded by default (deletedAt defaults to { isNull: true })."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "5eaa70d6-9644-442f-91a0-566fc2a92cab",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"object\": \"TEAM\",\n      \"key\": \"<string,null>\",\n      \"users\": [\n        {\n          \"id\": \"<uuid>\",\n          \"email\": \"<email>\",\n          \"status\": \"ACTIVE\",\n          \"roles\": [\n            \"ADMIN\",\n            \"CARRIER_REP\"\n          ],\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"object\": \"USER\",\n          \"name\": \"<string,null>\",\n          \"phone\": \"<string,null>\",\n          \"phoneExt\": \"<string,null>\",\n          \"key\": \"<string,null>\",\n          \"datUsername\": \"<string,null>\",\n          \"mcpUsername\": \"<string,null>\",\n          \"avatarId\": \"<string,null-uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"email\": \"<email>\",\n          \"status\": \"PENDING\",\n          \"roles\": [\n            \"AR_AP\",\n            \"AR_AP\"\n          ],\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"object\": \"USER\",\n          \"name\": \"<string,null>\",\n          \"phone\": \"<string,null>\",\n          \"phoneExt\": \"<string,null>\",\n          \"key\": \"<string,null>\",\n          \"datUsername\": \"<string,null>\",\n          \"mcpUsername\": \"<string,null>\",\n          \"avatarId\": \"<string,null-uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\"\n        }\n      ],\n      \"deletedAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"object\": \"TEAM\",\n      \"key\": \"<string,null>\",\n      \"users\": [\n        {\n          \"id\": \"<uuid>\",\n          \"email\": \"<email>\",\n          \"status\": \"ACTIVE\",\n          \"roles\": [\n            \"AR_AP\",\n            \"AR_AP\"\n          ],\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"object\": \"USER\",\n          \"name\": \"<string,null>\",\n          \"phone\": \"<string,null>\",\n          \"phoneExt\": \"<string,null>\",\n          \"key\": \"<string,null>\",\n          \"datUsername\": \"<string,null>\",\n          \"mcpUsername\": \"<string,null>\",\n          \"avatarId\": \"<string,null-uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"email\": \"<email>\",\n          \"status\": \"INACTIVE\",\n          \"roles\": [\n            \"CUSTOMER_REP\",\n            \"COMPLIANCE\"\n          ],\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"object\": \"USER\",\n          \"name\": \"<string,null>\",\n          \"phone\": \"<string,null>\",\n          \"phoneExt\": \"<string,null>\",\n          \"key\": \"<string,null>\",\n          \"datUsername\": \"<string,null>\",\n          \"mcpUsername\": \"<string,null>\",\n          \"avatarId\": \"<string,null-uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\"\n        }\n      ],\n      \"deletedAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": \"<integer>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"hasPreviousPage\": \"<boolean>\",\n    \"endCursor\": \"<string,null>\"\n  }\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-5eaa70d6-9644-442f-91a0-566fc2a92cab"
+                },
+                {
+                  "id": "6e62e71b-cbfc-41cb-b31e-e5ce3da4d9f1",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-6e62e71b-cbfc-41cb-b31e-e5ce3da4d9f1"
+                },
+                {
+                  "id": "6373b150-daf6-4fb4-b712-80ca11abf56d",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-6373b150-daf6-4fb4-b712-80ca11abf56d"
+                },
+                {
+                  "id": "c57583cb-089a-4bdb-a275-fc7364eb06f6",
+                  "name": "Validation error - invalid field values",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-c57583cb-089a-4bdb-a275-fc7364eb06f6"
+                },
+                {
+                  "id": "9d6efac3-2067-4077-b3a7-38b5c3b61c51",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/TeamFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Request limit per minute",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Remaining requests in current window",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Remaining",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp when rate limit resets",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-9d6efac3-2067-4077-b3a7-38b5c3b61c51"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "42447f02-6d9f-49d5-bf13-71538d5b8016",
-              "name": "Validation error - invalid field values",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"name\": {\n      \"includes\": \"Sales\"\n    }\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "56a564ef-2e47-4b83-8647-f47533142c4e",
-              "name": "Rate limit exceeded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"name\": {\n      \"includes\": \"Sales\"\n    }\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "1024"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-86074b86-7047-4ad8-9a5c-c751f37c54f8"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "f4c824fb-85c1-447a-83d2-3672646bef86",
+          "createdAt": "2026-10-21T21:11:54.000Z",
+          "updatedAt": "2026-10-21T21:11:54.000Z",
+          "uid": "35240-f4c824fb-85c1-447a-83d2-3672646bef86"
         },
         {
-          "id": "89e305a1-c05e-4691-8035-5652dd1adc66",
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get team",
+              "id": "e43963db-b7d0-41a2-81d5-5c5e5b4e6351",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/teams/:id?by=id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "teams",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                      "key": "by",
+                      "value": "id"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "243a60d9-9a40-471f-9d3e-e25c75184f61",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Retrieve a team by ID or client key"
+              },
+              "response": [
+                {
+                  "id": "d36265f5-7298-4702-b65e-fc9a46b5d4e9",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"object\": \"TEAM\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"COMPLIANCE\",\n        \"AR_AP\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"object\": \"USER\",\n      \"name\": \"<string,null>\",\n      \"phone\": \"<string,null>\",\n      \"phoneExt\": \"<string,null>\",\n      \"key\": \"<string,null>\",\n      \"datUsername\": \"<string,null>\",\n      \"mcpUsername\": \"<string,null>\",\n      \"avatarId\": \"<string,null-uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"AR_AP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"object\": \"USER\",\n      \"name\": \"<string,null>\",\n      \"phone\": \"<string,null>\",\n      \"phoneExt\": \"<string,null>\",\n      \"key\": \"<string,null>\",\n      \"datUsername\": \"<string,null>\",\n      \"mcpUsername\": \"<string,null>\",\n      \"avatarId\": \"<string,null-uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-d36265f5-7298-4702-b65e-fc9a46b5d4e9"
+                },
+                {
+                  "id": "becbf5e2-e6b5-4d24-9157-6b3270078101",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-becbf5e2-e6b5-4d24-9157-6b3270078101"
+                },
+                {
+                  "id": "adaafee1-aa1e-478f-a52a-d6208b56862a",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-adaafee1-aa1e-478f-a52a-d6208b56862a"
+                },
+                {
+                  "id": "f64820cf-47ae-4230-899e-759b890d8318",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Request limit per minute",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Remaining requests in current window",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Remaining",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp when rate limit resets",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-f64820cf-47ae-4230-899e-759b890d8318"
+                }
+              ],
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-e43963db-b7d0-41a2-81d5-5c5e5b4e6351"
+            },
+            {
+              "name": "Update team",
+              "id": "80222da0-b2f1-4583-87b0-1a2bdc667449",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": 55847744.74628079\n    },\n    {\n      \"id\": \"do aliquip adipisicing deserunt\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/teams/:id?by=id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "teams",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                      "key": "by",
+                      "value": "id"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "367ff4e6-5ed8-4862-87fb-d66efa1b6047",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Partially update a team. Only provided fields will be updated."
+              },
+              "response": [
+                {
+                  "id": "a85df9fe-3521-40fe-b62f-c53e70e7a1ac",
+                  "name": "Team updated successfully",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": 55847744.74628079\n    },\n    {\n      \"id\": \"do aliquip adipisicing deserunt\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"object\": \"TEAM\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"COMPLIANCE\",\n        \"AR_AP\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"object\": \"USER\",\n      \"name\": \"<string,null>\",\n      \"phone\": \"<string,null>\",\n      \"phoneExt\": \"<string,null>\",\n      \"key\": \"<string,null>\",\n      \"datUsername\": \"<string,null>\",\n      \"mcpUsername\": \"<string,null>\",\n      \"avatarId\": \"<string,null-uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"AR_AP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"object\": \"USER\",\n      \"name\": \"<string,null>\",\n      \"phone\": \"<string,null>\",\n      \"phoneExt\": \"<string,null>\",\n      \"key\": \"<string,null>\",\n      \"datUsername\": \"<string,null>\",\n      \"mcpUsername\": \"<string,null>\",\n      \"avatarId\": \"<string,null-uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-a85df9fe-3521-40fe-b62f-c53e70e7a1ac"
+                },
+                {
+                  "id": "a2de3786-f682-4680-9cb3-880819debb5a",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": 55847744.74628079\n    },\n    {\n      \"id\": \"do aliquip adipisicing deserunt\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-a2de3786-f682-4680-9cb3-880819debb5a"
+                },
+                {
+                  "id": "d51f6738-05a9-474e-b59a-ba664f01f3df",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": 55847744.74628079\n    },\n    {\n      \"id\": \"do aliquip adipisicing deserunt\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-d51f6738-05a9-474e-b59a-ba664f01f3df"
+                },
+                {
+                  "id": "299df09b-c967-43ec-94e2-3098a922179e",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": 55847744.74628079\n    },\n    {\n      \"id\": \"do aliquip adipisicing deserunt\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-299df09b-c967-43ec-94e2-3098a922179e"
+                },
+                {
+                  "id": "a81517b5-45cc-4d58-81d7-44eeae5f9956",
+                  "name": "Validation error - invalid field values",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": 55847744.74628079\n    },\n    {\n      \"id\": \"do aliquip adipisicing deserunt\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-a81517b5-45cc-4d58-81d7-44eeae5f9956"
+                },
+                {
+                  "id": "f18b2b50-34d7-4464-b625-4c6ca3e714d9",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": 55847744.74628079\n    },\n    {\n      \"id\": \"do aliquip adipisicing deserunt\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Request limit per minute",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Remaining requests in current window",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Remaining",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp when rate limit resets",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-f18b2b50-34d7-4464-b625-4c6ca3e714d9"
+                }
+              ],
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-80222da0-b2f1-4583-87b0-1a2bdc667449"
+            },
+            {
+              "name": "Delete team",
+              "id": "ca7f888d-a56a-4883-8ef9-3d4655731fec",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/teams/:id?by=id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "teams",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                      "key": "by",
+                      "value": "id"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "96515d7e-cead-4456-8d08-2ca234f31ba2",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Soft delete a team (sets deletedAt timestamp)"
+              },
+              "response": [
+                {
+                  "id": "5e2c21a6-6094-49cc-9199-1d9844c13735",
+                  "name": "Team deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-5e2c21a6-6094-49cc-9199-1d9844c13735"
+                },
+                {
+                  "id": "ab6c9174-4ac0-48bb-b1c2-3fb906deb513",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-ab6c9174-4ac0-48bb-b1c2-3fb906deb513"
+                },
+                {
+                  "id": "e52359e6-dfa1-42cc-88f2-f51220e7ee7b",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-e52359e6-dfa1-42cc-88f2-f51220e7ee7b"
+                },
+                {
+                  "id": "85765f60-4867-4eae-98d0-9434dfa737f9",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/:id?by=id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "id"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Request limit per minute",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Remaining requests in current window",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Remaining",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp when rate limit resets",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:54.000Z",
+                  "updatedAt": "2026-10-21T21:11:54.000Z",
+                  "uid": "35240-85765f60-4867-4eae-98d0-9434dfa737f9"
+                }
+              ],
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-ca7f888d-a56a-4883-8ef9-3d4655731fec"
+            }
+          ],
+          "id": "6334358a-3b3c-49f4-b23f-744fc3676e09",
+          "createdAt": "2026-10-21T21:11:54.000Z",
+          "updatedAt": "2026-10-21T21:11:54.000Z",
+          "uid": "35240-6334358a-3b3c-49f4-b23f-744fc3676e09"
+        },
+        {
           "name": "Create team",
+          "id": "fe21d710-e833-4e2d-adcc-f54f6822fc85",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create team",
-            "description": {
-              "content": "Create a new team in your organization",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "teams"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -370,1394 +1524,354 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string>\"\n}",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string>\",\n  \"users\": [\n    {\n      \"id\": -54039538.00631896\n    },\n    {\n      \"id\": false\n    }\n  ]\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/teams",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "teams"
+              ]
+            },
+            "description": "Create a new team in your organization"
           },
           "response": [
             {
-              "id": "b097b27d-0763-40e5-b188-b2cf695300ae",
+              "id": "81e67b80-1f4c-4ca1-9d36-cac643f2414f",
               "name": "Team created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string>\",\n  \"users\": [\n    {\n      \"id\": -54039538.00631896\n    },\n    {\n      \"id\": false\n    }\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/teams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "teams"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"name\": \"Sales Team - West Coast\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"TEAM\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"CUSTOMER_REP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"USER\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"key\": \"ERP-USER-12345\",\n      \"datUsername\": \"johndoe_dat\",\n      \"mcpUsername\": \"johndoe_mcp\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1973-04-05T02:29:51.189Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"roles\": [\n        \"CUSTOMER_REP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"USER\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"key\": \"ERP-USER-12345\",\n      \"datUsername\": \"johndoe_dat\",\n      \"mcpUsername\": \"johndoe_mcp\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1997-04-23T21:53:39.134Z\"\n    }\n  ],\n  \"deletedAt\": \"1958-12-16T20:39:21.466Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"object\": \"TEAM\",\n  \"key\": \"<string,null>\",\n  \"users\": [\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"COMPLIANCE\",\n        \"AR_AP\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"object\": \"USER\",\n      \"name\": \"<string,null>\",\n      \"phone\": \"<string,null>\",\n      \"phoneExt\": \"<string,null>\",\n      \"key\": \"<string,null>\",\n      \"datUsername\": \"<string,null>\",\n      \"mcpUsername\": \"<string,null>\",\n      \"avatarId\": \"<string,null-uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"email\": \"<email>\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"AR_AP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"object\": \"USER\",\n      \"name\": \"<string,null>\",\n      \"phone\": \"<string,null>\",\n      \"phoneExt\": \"<string,null>\",\n      \"key\": \"<string,null>\",\n      \"datUsername\": \"<string,null>\",\n      \"mcpUsername\": \"<string,null>\",\n      \"avatarId\": \"<string,null-uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-81e67b80-1f4c-4ca1-9d36-cac643f2414f"
             },
             {
-              "id": "f7b659cc-d72e-46b2-8bf0-81605d8cd319",
+              "id": "57436d6f-0d1e-4899-82b2-00ebe73408b2",
               "name": "Bad request - invalid input",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string>\",\n  \"users\": [\n    {\n      \"id\": -54039538.00631896\n    },\n    {\n      \"id\": false\n    }\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/teams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "teams"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-57436d6f-0d1e-4899-82b2-00ebe73408b2"
             },
             {
-              "id": "6f3e1f58-dbc3-495f-93c3-d80005a3da6a",
+              "id": "a0500b6f-ddff-40cc-bbf0-2501f5ddbefe",
               "name": "Unauthorized - invalid or missing access token",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string>\",\n  \"users\": [\n    {\n      \"id\": -54039538.00631896\n    },\n    {\n      \"id\": false\n    }\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/teams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "teams"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-a0500b6f-ddff-40cc-bbf0-2501f5ddbefe"
             },
             {
-              "id": "86116816-0975-48e8-8665-c2f63a025ce7",
+              "id": "3d15cbe2-3a1a-4635-9aab-3289fc688c52",
               "name": "Validation error - invalid field values",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string>\",\n  \"users\": [\n    {\n      \"id\": -54039538.00631896\n    },\n    {\n      \"id\": false\n    }\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/teams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "teams"
+                  ]
                 }
               },
               "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
               "code": 422,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-3d15cbe2-3a1a-4635-9aab-3289fc688c52"
             },
             {
-              "id": "1f2f7b32-c6c3-4c49-b110-61304fd93141",
+              "id": "d707cdca-1dee-4b75-b457-ae4f572ddaba",
               "name": "Rate limit exceeded",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string>\",\n  \"users\": [\n    {\n      \"id\": -54039538.00631896\n    },\n    {\n      \"id\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/teams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "teams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "Too Many Requests",
               "code": 429,
+              "_postman_previewlanguage": "json",
               "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "1024"
-                },
                 {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Request limit per minute",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Remaining requests in current window",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Remaining",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Unix timestamp when rate limit resets",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Reset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
                 }
               ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:54.000Z",
+              "updatedAt": "2026-10-21T21:11:54.000Z",
+              "uid": "35240-d707cdca-1dee-4b75-b457-ae4f572ddaba"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e9351f47-2f3d-45c2-a783-c3dc7036ad9f",
-          "name": "Get team",
-          "request": {
-            "name": "Get team",
-            "description": {
-              "content": "Retrieve a team by ID or client key",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "teams",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "by",
-                  "value": "<string>",
-                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b1a74610-ab09-4ecb-8213-21f07c22d03c",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"name\": \"Sales Team - West Coast\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"TEAM\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"CUSTOMER_REP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"USER\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"key\": \"ERP-USER-12345\",\n      \"datUsername\": \"johndoe_dat\",\n      \"mcpUsername\": \"johndoe_mcp\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1973-04-05T02:29:51.189Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"roles\": [\n        \"CUSTOMER_REP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"USER\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"key\": \"ERP-USER-12345\",\n      \"datUsername\": \"johndoe_dat\",\n      \"mcpUsername\": \"johndoe_mcp\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1997-04-23T21:53:39.134Z\"\n    }\n  ],\n  \"deletedAt\": \"1958-12-16T20:39:21.466Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b1d41de0-5757-4dfa-8e29-e3934f8b2ef3",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fc1d429e-23f7-4067-8298-f34bbb288ab7",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3208d072-fe94-4b25-ab47-71e67b9b770f",
-              "name": "Rate limit exceeded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "1024"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "07ea5a89-cdb2-4d8d-b108-8107cafbd4bb",
-          "name": "Update team",
-          "request": {
-            "name": "Update team",
-            "description": {
-              "content": "Partially update a team. Only provided fields will be updated.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "teams",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "by",
-                  "value": "<string>",
-                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"key\": \"<string,null>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "24406cef-2b5e-42cb-b529-22f6445d490f",
-              "name": "Team updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"name\": \"Sales Team - West Coast\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"object\": \"TEAM\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"PENDING\",\n      \"roles\": [\n        \"CUSTOMER_REP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"USER\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"key\": \"ERP-USER-12345\",\n      \"datUsername\": \"johndoe_dat\",\n      \"mcpUsername\": \"johndoe_mcp\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1973-04-05T02:29:51.189Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"email\": \"john.doe@example.com\",\n      \"status\": \"ACTIVE\",\n      \"roles\": [\n        \"CUSTOMER_REP\",\n        \"ADMIN\"\n      ],\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"object\": \"USER\",\n      \"name\": \"John Doe\",\n      \"phone\": \"+1-555-123-4567\",\n      \"phoneExt\": \"123\",\n      \"key\": \"ERP-USER-12345\",\n      \"datUsername\": \"johndoe_dat\",\n      \"mcpUsername\": \"johndoe_mcp\",\n      \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n      \"deletedAt\": \"1997-04-23T21:53:39.134Z\"\n    }\n  ],\n  \"deletedAt\": \"1958-12-16T20:39:21.466Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "88f2efca-db8c-470c-ad85-c7d197810420",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b1f02b68-39e6-4c91-9e63-9a4ab283368d",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c12cf5a9-b822-4331-8b07-ae07c73a5be6",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e8df1e8f-a97f-4005-8c0f-ce92b04dd2e0",
-              "name": "Validation error - invalid field values",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4fab865e-7301-4380-8a84-f74edb2f0f64",
-              "name": "Rate limit exceeded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Sales Team - West Coast\",\n  \"key\": \"ERP-TEAM-WEST\",\n  \"users\": [\n    {},\n    {\n      \"key\": \"ERP-USER-12345\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "1024"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1ad7d274-cf4e-4a89-b6a1-655413db2bba",
-          "name": "Delete team",
-          "request": {
-            "name": "Delete team",
-            "description": {
-              "content": "Soft delete a team (sets deletedAt timestamp)",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "teams",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "by",
-                  "value": "<string>",
-                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d183984e-254e-40b1-8eeb-c4814a2f4fe0",
-              "name": "Team deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "4ac96a45-7bb5-4d87-ac83-1767a4c58cba",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0d35de12-679c-44ec-8cde-149d9b6b3aa4",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "850d4532-1a65-4edc-b6a7-45bf039bda67",
-              "name": "Rate limit exceeded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "teams",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "1024"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "1024"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:11:54.000Z",
+          "updatedAt": "2026-10-21T21:11:54.000Z",
+          "uid": "35240-fe21d710-e833-4e2d-adcc-f54f6822fc85"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.mvmnt.io/v1",
-      "key": "baseUrl"
+      "id": "ecc08929-a665-44c0-8a54-83830788f769",
+      "createdAt": "2026-10-21T21:11:54.000Z",
+      "updatedAt": "2026-10-21T21:11:54.000Z",
+      "uid": "35240-ecc08929-a665-44c0-8a54-83830788f769"
     }
   ],
   "auth": {
@@ -1765,17 +1879,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "953c9715-2407-4332-921b-006cb0c2a8af",
-    "name": "MVMNT Bill Payments Teams API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mvmnt.io/v1"
     }
-  }
+  ]
 }

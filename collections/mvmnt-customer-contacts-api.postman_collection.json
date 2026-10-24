@@ -1,289 +1,1295 @@
 {
+  "info": {
+    "_postman_id": "55ac616f-74fc-4672-9386-248d62dc8666",
+    "name": "MVMNT Customer Contacts API",
+    "description": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:10:14.000Z",
+    "updatedAt": "2026-10-21T21:10:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-55ac616f-74fc-4672-9386-248d62dc8666"
+  },
   "item": [
     {
-      "id": "36d94646-c8df-4d7b-b424-d3f7ec2be140",
-      "name": "Customer Contacts",
-      "description": {
-        "content": "Customer contact management operations",
-        "type": "text/plain"
-      },
+      "name": "customer-contacts",
       "item": [
         {
-          "id": "685ddac5-9c7e-42ac-afd4-c29b910bcbb6",
-          "name": "Filter customer contacts",
-          "request": {
-            "name": "Filter customer contacts",
-            "description": {
-              "content": "Query customer contacts using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted customer contacts are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customer-contacts",
-                "filter"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneNumber\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneExtension\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPrimary\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"contactTypes\": {\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"notifications\": {\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"invitedUserId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "filter",
+          "item": [
             {
-              "id": "ea491eb9-3e71-468e-8f91-bafe6f328530",
-              "name": "Filtered customer contacts with pagination",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Filter customer contacts",
+              "id": "65a94149-cb03-4f39-a48f-453da8f20158",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"isPrimary\": {\n          \"equalTo\": true\n        }\n      },\n      {\n        \"contactTypes\": {\n          \"includes\": \"BILLING\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneNumber\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneExtension\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPrimary\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"contactTypes\": {\n      \"includes\": \"PROCUREMENT\",\n      \"notIncludes\": \"PROCUREMENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"notifications\": {\n      \"includes\": \"SHIPMENT_PICKED_UP\",\n      \"notIncludes\": \"SHIPMENT_IN_TRANSIT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"invitedUserId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"customer\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Acme Manufacturing Corp\",\n        \"friendlyId\": \"A123456\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CUSTOMER-ACME\",\n        \"phoneNumber\": \"+1-555-123-4567\",\n        \"website\": \"https://acme-manufacturing.com\",\n        \"deletedAt\": \"1952-12-13T03:47:45.553Z\"\n      },\n      \"name\": \"John Smith\",\n      \"isPrimary\": true,\n      \"contactInfo\": {\n        \"name\": \"John Smith\",\n        \"email\": \"john.smith@example.com\",\n        \"phoneNumber\": \"+1-555-0100\",\n        \"title\": \"Operations Manager\"\n      },\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"CUSTOMER_CONTACT\",\n      \"phoneExtension\": \"1234\",\n      \"contactTypes\": [\n        \"BILLING\",\n        \"ACCOUNT_MANAGER\"\n      ],\n      \"notifications\": [\n        \"SHIPMENT_PICKED_UP\",\n        \"SHIPMENT_DELIVERED\"\n      ],\n      \"invitedUser\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1966-07-29T02:46:10.007Z\"\n      },\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1968-02-09T01:01:26.585Z\"\n      },\n      \"key\": \"ERP-CONTACT-JOHN-001\",\n      \"deletedAt\": \"1972-07-07T17:08:02.006Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"customer\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Acme Manufacturing Corp\",\n        \"friendlyId\": \"A123456\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-CUSTOMER-ACME\",\n        \"phoneNumber\": \"+1-555-123-4567\",\n        \"website\": \"https://acme-manufacturing.com\",\n        \"deletedAt\": \"2023-04-25T05:48:24.256Z\"\n      },\n      \"name\": \"John Smith\",\n      \"isPrimary\": true,\n      \"contactInfo\": {\n        \"name\": \"John Smith\",\n        \"email\": \"john.smith@example.com\",\n        \"phoneNumber\": \"+1-555-0100\",\n        \"title\": \"Operations Manager\"\n      },\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"CUSTOMER_CONTACT\",\n      \"phoneExtension\": \"1234\",\n      \"contactTypes\": [\n        \"BILLING\",\n        \"ACCOUNT_MANAGER\"\n      ],\n      \"notifications\": [\n        \"SHIPMENT_PICKED_UP\",\n        \"SHIPMENT_DELIVERED\"\n      ],\n      \"invitedUser\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2021-12-12T17:30:10.540Z\"\n      },\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2013-10-08T18:40:16.397Z\"\n      },\n      \"key\": \"ERP-CONTACT-JOHN-001\",\n      \"deletedAt\": \"1960-01-04T17:59:43.286Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c2ac84cc-b845-46be-be81-e41143e52337",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "customer-contacts",
-                    "filter"
-                  ],
+                  "raw": "{{baseUrl}}/customer-contacts/filter",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"isPrimary\": {\n          \"equalTo\": true\n        }\n      },\n      {\n        \"contactTypes\": {\n          \"includes\": \"BILLING\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "aeb45240-780e-472f-9c6d-fce4e70a81a6",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "customer-contacts",
                     "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"isPrimary\": {\n          \"equalTo\": true\n        }\n      },\n      {\n        \"contactTypes\": {\n          \"includes\": \"BILLING\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Query customer contacts using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted customer contacts are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "57ffd593-5760-4565-9412-16dbf751b31d",
+                  "name": "Filtered customer contacts with pagination",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneNumber\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneExtension\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPrimary\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"contactTypes\": {\n      \"includes\": \"PROCUREMENT\",\n      \"notIncludes\": \"PROCUREMENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"notifications\": {\n      \"includes\": \"SHIPMENT_PICKED_UP\",\n      \"notIncludes\": \"SHIPMENT_IN_TRANSIT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"invitedUserId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"customer\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"friendlyId\": \"<string>\",\n        \"status\": \"PROSPECT\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"phoneNumber\": \"<string,null>\",\n        \"website\": \"<string,null>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"name\": \"<string>\",\n      \"isPrimary\": \"<boolean>\",\n      \"contactInfo\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string,null-email>\",\n        \"phoneNumber\": \"<string,null>\",\n        \"title\": \"<string,null>\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"object\": \"CUSTOMER_CONTACT\",\n      \"phoneExtension\": \"<string,null>\",\n      \"contactTypes\": \"<array,null>\",\n      \"notifications\": \"<array,null>\",\n      \"invitedUser\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<email>\",\n        \"status\": \"INACTIVE\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"name\": \"<string,null>\",\n        \"phone\": \"<string,null>\",\n        \"phoneExt\": \"<string,null>\",\n        \"avatarId\": \"<string,null-uuid>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"deletedBy\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<email>\",\n        \"status\": \"PENDING\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"name\": \"<string,null>\",\n        \"phone\": \"<string,null>\",\n        \"phoneExt\": \"<string,null>\",\n        \"avatarId\": \"<string,null-uuid>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"key\": \"<string,null>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"customer\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"friendlyId\": \"<string>\",\n        \"status\": \"INACTIVE\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"phoneNumber\": \"<string,null>\",\n        \"website\": \"<string,null>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"name\": \"<string>\",\n      \"isPrimary\": \"<boolean>\",\n      \"contactInfo\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string,null-email>\",\n        \"phoneNumber\": \"<string,null>\",\n        \"title\": \"<string,null>\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"object\": \"CUSTOMER_CONTACT\",\n      \"phoneExtension\": \"<string,null>\",\n      \"contactTypes\": \"<array,null>\",\n      \"notifications\": \"<array,null>\",\n      \"invitedUser\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<email>\",\n        \"status\": \"INACTIVE\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"name\": \"<string,null>\",\n        \"phone\": \"<string,null>\",\n        \"phoneExt\": \"<string,null>\",\n        \"avatarId\": \"<string,null-uuid>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"deletedBy\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<email>\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"name\": \"<string,null>\",\n        \"phone\": \"<string,null>\",\n        \"phoneExt\": \"<string,null>\",\n        \"avatarId\": \"<string,null-uuid>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"key\": \"<string,null>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"hasPreviousPage\": \"<boolean>\",\n    \"endCursor\": \"<string,null>\"\n  }\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-57ffd593-5760-4565-9412-16dbf751b31d"
+                },
+                {
+                  "id": "125c3a44-7ffa-4845-b07a-8ec38d9091e9",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneNumber\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneExtension\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPrimary\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"contactTypes\": {\n      \"includes\": \"PROCUREMENT\",\n      \"notIncludes\": \"PROCUREMENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"notifications\": {\n      \"includes\": \"SHIPMENT_PICKED_UP\",\n      \"notIncludes\": \"SHIPMENT_IN_TRANSIT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"invitedUserId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-125c3a44-7ffa-4845-b07a-8ec38d9091e9"
+                },
+                {
+                  "id": "0aea5410-aa01-4eea-a85a-399257643d01",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneNumber\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneExtension\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPrimary\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"contactTypes\": {\n      \"includes\": \"PROCUREMENT\",\n      \"notIncludes\": \"PROCUREMENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"notifications\": {\n      \"includes\": \"SHIPMENT_PICKED_UP\",\n      \"notIncludes\": \"SHIPMENT_IN_TRANSIT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"invitedUserId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-0aea5410-aa01-4eea-a85a-399257643d01"
+                },
+                {
+                  "id": "90196527-a797-496a-942f-d53862ddb183",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/CustomerContactFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"customerId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneNumber\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phoneExtension\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPrimary\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"contactTypes\": {\n      \"includes\": \"PROCUREMENT\",\n      \"notIncludes\": \"PROCUREMENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"notifications\": {\n      \"includes\": \"SHIPMENT_PICKED_UP\",\n      \"notIncludes\": \"SHIPMENT_IN_TRANSIT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"invitedUserId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-90196527-a797-496a-942f-d53862ddb183"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b509389f-1c95-4765-8b28-aa35d2fe7fa6",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"isPrimary\": {\n          \"equalTo\": true\n        }\n      },\n      {\n        \"contactTypes\": {\n          \"includes\": \"BILLING\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-65a94149-cb03-4f39-a48f-453da8f20158"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "bcae3550-ae42-4661-ab72-050953c5681d",
+          "createdAt": "2026-10-21T21:10:14.000Z",
+          "updatedAt": "2026-10-21T21:10:14.000Z",
+          "uid": "35240-bcae3550-ae42-4661-ab72-050953c5681d"
         },
         {
-          "id": "5ede9928-c13f-45e2-8bfb-bf74fd090467",
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get customer contact",
+              "id": "74f3a776-c348-4baf-a1f3-14faab676194",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customer-contacts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customer-contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d0b5e87c-2b04-4138-8e99-68be7cb5117c",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Retrieve a single customer contact by its unique identifier"
+              },
+              "response": [
+                {
+                  "id": "9394fbaa-9e7f-4378-8864-bbb7a55a88d9",
+                  "name": "Customer contact found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"friendlyId\": \"<string>\",\n    \"status\": \"CHURNED\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"website\": \"<string,null>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"name\": \"<string>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"object\": \"CUSTOMER_CONTACT\",\n  \"phoneExtension\": \"<string,null>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"invitedUser\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"PENDING\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"key\": \"<string,null>\",\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-9394fbaa-9e7f-4378-8864-bbb7a55a88d9"
+                },
+                {
+                  "id": "96b8e389-e43e-4d71-9cd4-0a11410cf655",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-96b8e389-e43e-4d71-9cd4-0a11410cf655"
+                },
+                {
+                  "id": "54d25998-2f2d-4735-821f-4650a9a7d370",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-54d25998-2f2d-4735-821f-4650a9a7d370"
+                },
+                {
+                  "id": "25ec536a-259a-4132-9222-249bf04e5dc3",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-25ec536a-259a-4132-9222-249bf04e5dc3"
+                },
+                {
+                  "id": "7df96e8b-2549-43d7-9107-069885751537",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-7df96e8b-2549-43d7-9107-069885751537"
+                }
+              ],
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-74f3a776-c348-4baf-a1f3-14faab676194"
+            },
+            {
+              "name": "Update customer contact",
+              "id": "c487edc6-ec44-46f9-921b-105756f853ee",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"phoneExtension\": \"<string,null>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"key\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customer-contacts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customer-contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cd95a0cf-a6d3-43e7-899d-190a6886c15a",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Partially update a customer contact. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n\nWhen updating contactInfo, the underlying Contact record is updated."
+              },
+              "response": [
+                {
+                  "id": "c073d107-82a8-4d28-90cd-46cdba7ed1ea",
+                  "name": "Customer contact updated successfully",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"phoneExtension\": \"<string,null>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"friendlyId\": \"<string>\",\n    \"status\": \"CHURNED\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"website\": \"<string,null>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"name\": \"<string>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"object\": \"CUSTOMER_CONTACT\",\n  \"phoneExtension\": \"<string,null>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"invitedUser\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"PENDING\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"key\": \"<string,null>\",\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-c073d107-82a8-4d28-90cd-46cdba7ed1ea"
+                },
+                {
+                  "id": "07b1a5b2-d752-4742-a2a7-97e484b8c060",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"phoneExtension\": \"<string,null>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-07b1a5b2-d752-4742-a2a7-97e484b8c060"
+                },
+                {
+                  "id": "a6b53129-f62b-4f17-8842-f03a3783918d",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"phoneExtension\": \"<string,null>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-a6b53129-f62b-4f17-8842-f03a3783918d"
+                },
+                {
+                  "id": "9301915f-1103-4395-90db-b7fd9eaa1a60",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"phoneExtension\": \"<string,null>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-9301915f-1103-4395-90db-b7fd9eaa1a60"
+                },
+                {
+                  "id": "c15b73b6-466d-493a-8d7f-5e1891175778",
+                  "name": "Conflict - resource already exists or constraint violation",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"phoneExtension\": \"<string,null>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-c15b73b6-466d-493a-8d7f-5e1891175778"
+                },
+                {
+                  "id": "b21607b8-1841-4a0e-b9a5-8cadb4e1fddb",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"phoneExtension\": \"<string,null>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-b21607b8-1841-4a0e-b9a5-8cadb4e1fddb"
+                }
+              ],
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-c487edc6-ec44-46f9-921b-105756f853ee"
+            },
+            {
+              "name": "Delete customer contact",
+              "id": "1132533f-5003-4a1e-b4c1-5a772e88b222",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customer-contacts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customer-contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6f64b433-8069-40d1-9433-d32a84a3e0f7",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Soft delete a customer contact (sets deletedAt timestamp).\n\nThe contact will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records."
+              },
+              "response": [
+                {
+                  "id": "a7dcdd71-1e60-40c0-9ac9-640b2dd76923",
+                  "name": "Customer contact deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-a7dcdd71-1e60-40c0-9ac9-640b2dd76923"
+                },
+                {
+                  "id": "43127a16-5ef8-49c2-adac-0e425eb610b9",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-43127a16-5ef8-49c2-adac-0e425eb610b9"
+                },
+                {
+                  "id": "5e5ca11d-af91-4472-a8be-37253754e629",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-5e5ca11d-af91-4472-a8be-37253754e629"
+                },
+                {
+                  "id": "607e13d2-2dae-4981-a51e-4a7022629246",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-607e13d2-2dae-4981-a51e-4a7022629246"
+                },
+                {
+                  "id": "d05807af-767d-4e29-be70-ec7f8cf9f4a9",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customer-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customer-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:10:14.000Z",
+                  "updatedAt": "2026-10-21T21:10:14.000Z",
+                  "uid": "35240-d05807af-767d-4e29-be70-ec7f8cf9f4a9"
+                }
+              ],
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-1132533f-5003-4a1e-b4c1-5a772e88b222"
+            }
+          ],
+          "id": "ae804a32-cea7-4aec-ae09-d81ed44b1144",
+          "createdAt": "2026-10-21T21:10:14.000Z",
+          "updatedAt": "2026-10-21T21:10:14.000Z",
+          "uid": "35240-ae804a32-cea7-4aec-ae09-d81ed44b1144"
+        },
+        {
           "name": "Create customer contact",
+          "id": "2b979711-ca3c-43c1-87a6-f98588a618f1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create customer contact",
-            "description": {
-              "content": "Create a new customer contact. The contactInfo will create a new Contact record,\nand the CustomerContact will reference it via parentContactId (managed internally).\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customer-contacts"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -294,1311 +1300,318 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"phoneExtension\": \"<string>\",\n  \"isPrimary\": false,\n  \"contactTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notifications\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key\": \"<string>\"\n}",
+              "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"phoneExtension\": \"<string>\",\n  \"isPrimary\": false,\n  \"contactTypes\": [\n    \"RECEIVING\",\n    \"RECEIVING\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_DELIVERED\",\n    \"SHIPMENT_IN_TRANSIT\"\n  ],\n  \"key\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customer-contacts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customer-contacts"
+              ]
+            },
+            "description": "Create a new customer contact. The contactInfo will create a new Contact record,\nand the CustomerContact will reference it via parentContactId (managed internally)."
           },
           "response": [
             {
-              "id": "487087ca-de2e-43e8-b1d2-243b2d9bb1d5",
+              "id": "56fd1c5d-7edc-49a7-9e69-b6adef0a4181",
               "name": "Customer contact created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
+                  "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"phoneExtension\": \"<string>\",\n  \"isPrimary\": false,\n  \"contactTypes\": [\n    \"RECEIVING\",\n    \"RECEIVING\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_DELIVERED\",\n    \"SHIPMENT_IN_TRANSIT\"\n  ],\n  \"key\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customer-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customer-contacts"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"1985-03-11T21:58:43.975Z\"\n  },\n  \"name\": \"John Smith\",\n  \"isPrimary\": true,\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"object\": \"CUSTOMER_CONTACT\",\n  \"phoneExtension\": \"1234\",\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"invitedUser\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"2020-08-14T08:36:13.359Z\"\n  },\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1972-08-18T14:16:22.391Z\"\n  },\n  \"key\": \"ERP-CONTACT-JOHN-001\",\n  \"deletedAt\": \"2010-09-26T04:05:18.948Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"customer\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"friendlyId\": \"<string>\",\n    \"status\": \"CHURNED\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"website\": \"<string,null>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"name\": \"<string>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"object\": \"CUSTOMER_CONTACT\",\n  \"phoneExtension\": \"<string,null>\",\n  \"contactTypes\": \"<array,null>\",\n  \"notifications\": \"<array,null>\",\n  \"invitedUser\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"PENDING\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"key\": \"<string,null>\",\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-56fd1c5d-7edc-49a7-9e69-b6adef0a4181"
             },
             {
-              "id": "363de741-fedb-4d55-a97f-66960f12ce71",
+              "id": "9726f0a9-463b-434c-9257-6a96f163d06e",
               "name": "Bad request - invalid input",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
+                  "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"phoneExtension\": \"<string>\",\n  \"isPrimary\": false,\n  \"contactTypes\": [\n    \"RECEIVING\",\n    \"RECEIVING\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_DELIVERED\",\n    \"SHIPMENT_IN_TRANSIT\"\n  ],\n  \"key\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customer-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customer-contacts"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-9726f0a9-463b-434c-9257-6a96f163d06e"
             },
             {
-              "id": "fa37a96f-3e2f-4617-9d69-2116a3f5ee1f",
+              "id": "006b399d-cfd3-4e69-a9c1-467a54e66f83",
               "name": "Unauthorized - invalid or missing access token",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
+                  "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"phoneExtension\": \"<string>\",\n  \"isPrimary\": false,\n  \"contactTypes\": [\n    \"RECEIVING\",\n    \"RECEIVING\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_DELIVERED\",\n    \"SHIPMENT_IN_TRANSIT\"\n  ],\n  \"key\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customer-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customer-contacts"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-006b399d-cfd3-4e69-a9c1-467a54e66f83"
             },
             {
-              "id": "464832e9-d02d-4413-a2d4-f12e207e2548",
+              "id": "5788d370-8d73-41a4-a6a1-19726d6c007f",
               "name": "Conflict - resource already exists or constraint violation",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
+                  "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"phoneExtension\": \"<string>\",\n  \"isPrimary\": false,\n  \"contactTypes\": [\n    \"RECEIVING\",\n    \"RECEIVING\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_DELIVERED\",\n    \"SHIPMENT_IN_TRANSIT\"\n  ],\n  \"key\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customer-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customer-contacts"
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-5788d370-8d73-41a4-a6a1-19726d6c007f"
             },
             {
-              "id": "bc8780ab-2a73-4f3c-9909-983e6c05c732",
+              "id": "73a25444-af58-4d2f-96f3-bda1ab55cffe",
               "name": "Internal server error",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"phoneExtension\": \"<string>\",\n  \"isPrimary\": false,\n  \"contactTypes\": [\n    \"RECEIVING\",\n    \"RECEIVING\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_DELIVERED\",\n    \"SHIPMENT_IN_TRANSIT\"\n  ],\n  \"key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/customer-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "customer-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "Internal Server Error",
               "code": 500,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:10:14.000Z",
+              "updatedAt": "2026-10-21T21:10:14.000Z",
+              "uid": "35240-73a25444-af58-4d2f-96f3-bda1ab55cffe"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a3583265-fee7-496a-8f2d-3070275d6531",
-          "name": "Get customer contact",
-          "request": {
-            "name": "Get customer contact",
-            "description": {
-              "content": "Retrieve a single customer contact by its unique identifier",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customer-contacts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d93f2354-224b-49c5-9ef2-cc0593043ffb",
-              "name": "Customer contact found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"1985-03-11T21:58:43.975Z\"\n  },\n  \"name\": \"John Smith\",\n  \"isPrimary\": true,\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"object\": \"CUSTOMER_CONTACT\",\n  \"phoneExtension\": \"1234\",\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"invitedUser\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"2020-08-14T08:36:13.359Z\"\n  },\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1972-08-18T14:16:22.391Z\"\n  },\n  \"key\": \"ERP-CONTACT-JOHN-001\",\n  \"deletedAt\": \"2010-09-26T04:05:18.948Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fbcb7aaf-c4c1-41f5-80d0-63213f906fe3",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "28e4fe60-642c-45a3-8465-1f10d0b49ae2",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "66c4189f-9f49-4c2d-a6e5-6ac1ee450a17",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b9febad8-8d51-41ac-b3c9-37f83fb56f67",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6e6cd4b5-dac7-46ea-8627-d33b261c17f5",
-          "name": "Update customer contact",
-          "request": {
-            "name": "Update customer contact",
-            "description": {
-              "content": "Partially update a customer contact. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n\nWhen updating contactInfo, the underlying Contact record is updated.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customer-contacts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"contactInfo\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string,null-email>\",\n    \"phoneNumber\": \"<string,null>\",\n    \"title\": \"<string,null>\"\n  },\n  \"phoneExtension\": \"<string,null>\",\n  \"isPrimary\": \"<boolean>\",\n  \"contactTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notifications\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key\": \"<string,null>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "41e792de-3839-44fd-99c7-0495cc61ce42",
-              "name": "Customer contact updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"customer\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Acme Manufacturing Corp\",\n    \"friendlyId\": \"A123456\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-CUSTOMER-ACME\",\n    \"phoneNumber\": \"+1-555-123-4567\",\n    \"website\": \"https://acme-manufacturing.com\",\n    \"deletedAt\": \"1985-03-11T21:58:43.975Z\"\n  },\n  \"name\": \"John Smith\",\n  \"isPrimary\": true,\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"object\": \"CUSTOMER_CONTACT\",\n  \"phoneExtension\": \"1234\",\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"invitedUser\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"2020-08-14T08:36:13.359Z\"\n  },\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1972-08-18T14:16:22.391Z\"\n  },\n  \"key\": \"ERP-CONTACT-JOHN-001\",\n  \"deletedAt\": \"2010-09-26T04:05:18.948Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "26be8034-fe74-45c2-9c51-16b1f7cbbb29",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8933c068-b959-435c-bad5-94413853c1da",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "26bf9ef1-62c6-4076-8b9e-6c4cf94335ae",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c723a77f-83c0-41d5-968e-da7c7361df88",
-              "name": "Conflict - resource already exists or constraint violation",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f871e4d9-3668-4982-87cf-80ef8166e2e4",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"John Smith\",\n  \"contactInfo\": {\n    \"name\": \"John Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+1-555-0100\",\n    \"title\": \"Operations Manager\"\n  },\n  \"phoneExtension\": \"1234\",\n  \"isPrimary\": true,\n  \"contactTypes\": [\n    \"BILLING\",\n    \"ACCOUNT_MANAGER\"\n  ],\n  \"notifications\": [\n    \"SHIPMENT_PICKED_UP\",\n    \"SHIPMENT_DELIVERED\"\n  ],\n  \"key\": \"ERP-CONTACT-JOHN-001\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "93578f98-176c-4736-9280-561c3a957648",
-          "name": "Delete customer contact",
-          "request": {
-            "name": "Delete customer contact",
-            "description": {
-              "content": "Soft delete a customer contact (sets deletedAt timestamp).\n\nThe contact will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customer-contacts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "9242718a-c5fc-4424-90b3-6560b7968b05",
-              "name": "Customer contact deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "202d7f15-380b-46e3-9ffc-d5f71f997cba",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a5d45642-26bd-4bb6-890b-53a899a490d1",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f4861623-7e26-4c35-aed2-9c81ec2e3fa1",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7d60bfc3-ece5-4f89-ad56-994f294ea87e",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customer-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:10:14.000Z",
+          "updatedAt": "2026-10-21T21:10:14.000Z",
+          "uid": "35240-2b979711-ca3c-43c1-87a6-f98588a618f1"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.mvmnt.io/v1",
-      "key": "baseUrl"
+      "id": "0806a218-4cc8-4e10-9418-a4f2ee3db7b1",
+      "createdAt": "2026-10-21T21:10:14.000Z",
+      "updatedAt": "2026-10-21T21:10:14.000Z",
+      "uid": "35240-0806a218-4cc8-4e10-9418-a4f2ee3db7b1"
     }
   ],
   "auth": {
@@ -1606,17 +1619,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "a36757be-de85-4352-94cd-6d770e206faa",
-    "name": "MVMNT Bill Payments Customer Contacts API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mvmnt.io/v1"
     }
-  }
+  ]
 }

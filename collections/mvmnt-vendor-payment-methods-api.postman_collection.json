@@ -1,289 +1,1357 @@
 {
+  "info": {
+    "_postman_id": "2ec2d390-72be-40b8-8cea-fc74bc23913c",
+    "name": "MVMNT Vendor Payment Methods API",
+    "description": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:12:17.000Z",
+    "updatedAt": "2026-10-21T21:12:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2ec2d390-72be-40b8-8cea-fc74bc23913c"
+  },
   "item": [
     {
-      "id": "13c87ea1-9348-46fd-8279-6b0ca4f04eb1",
-      "name": "Vendor Payment Methods",
-      "description": {
-        "content": "Vendor payment method management operations",
-        "type": "text/plain"
-      },
+      "name": "vendor-payment-methods",
       "item": [
         {
-          "id": "cce2cb1e-eebb-419f-95fc-6af438bcd293",
-          "name": "Filter vendor payment methods",
-          "request": {
-            "name": "Filter vendor payment methods",
-            "description": {
-              "content": "Query vendor payment methods using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted payment methods are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n\nVendor payment methods define how and where payments are sent for a specific vendor.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-payment-methods",
-                "filter"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPreferred\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"companyName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"bankName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"currency\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "filter",
+          "item": [
             {
-              "id": "d1209001-1756-4173-9b47-8b02a5cce69b",
-              "name": "Filtered vendor payment methods with pagination",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Filter vendor payment methods",
+              "id": "936ba945-0477-44a2-a6c6-eec7b5975d52",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"vendorId\": {\n          \"equalTo\": \"770e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"isPreferred\": {\n          \"equalTo\": true\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"CHECK\",\n      \"notEqualTo\": \"ACH_WIRE\",\n      \"in\": [\n        \"EFS\",\n        \"CHECK\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"COMCHECK\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPreferred\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"companyName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"bankName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"currency\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n      \"vendor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"friendlyId\": \"V123456\",\n        \"name\": \"ABC Warehouse Services\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-VENDOR-ABC-001\",\n        \"email\": \"billing@abcwarehouse.com\",\n        \"phone\": \"+1-555-123-4567\",\n        \"status\": \"ACTIVE\",\n        \"currency\": \"USD\"\n      },\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@vendor.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Vendor Payments LLC\",\n      \"username\": \"vendor_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Vendor Services Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1988-05-21T14:29:19.194Z\"\n      },\n      \"deletedAt\": \"1969-05-15T02:10:25.200Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"1948-01-12T09:50:07.167Z\"\n      }\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n      \"vendor\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"friendlyId\": \"V123456\",\n        \"name\": \"ABC Warehouse Services\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-VENDOR-ABC-001\",\n        \"email\": \"billing@abcwarehouse.com\",\n        \"phone\": \"+1-555-123-4567\",\n        \"status\": \"ACTIVE\",\n        \"currency\": \"USD\"\n      },\n      \"paymentMethodType\": \"ACH\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"status\": \"ACTIVE\",\n      \"isPreferred\": true,\n      \"email\": \"payments@vendor.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"companyName\": \"Vendor Payments LLC\",\n      \"username\": \"vendor_payments\",\n      \"bankName\": \"Chase Bank\",\n      \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n      \"accountName\": \"Vendor Services Inc\",\n      \"accountNumber\": \"****1234\",\n      \"abaAch\": \"021000021\",\n      \"wire\": \"string\",\n      \"swiftCode\": \"CHASUS33\",\n      \"eftInstitution\": \"001\",\n      \"eftTransit\": \"00010\",\n      \"clabe\": \"string\",\n      \"currency\": \"USD\",\n      \"paymentTerm\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"name\": \"Net 30\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-PAYTERM-NET30\",\n        \"description\": \"Payment due 30 days from invoice date\",\n        \"days\": 30,\n        \"quickPayFee\": 0.05,\n        \"apOnly\": false,\n        \"doNotUse\": false,\n        \"deletedAt\": \"1984-07-10T05:24:24.704Z\"\n      },\n      \"deletedAt\": \"1995-08-20T12:48:28.241Z\",\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2008-12-28T16:50:41.975Z\"\n      }\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e62c008f-5abb-414e-90cb-30072c7d5e64",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    "filter"
-                  ],
+                  "raw": "{{baseUrl}}/vendor-payment-methods/filter",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"vendorId\": {\n          \"equalTo\": \"770e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"isPreferred\": {\n          \"equalTo\": true\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "231da183-408a-4514-9652-48f7cd20b76e",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "vendor-payment-methods",
                     "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"vendorId\": {\n          \"equalTo\": \"770e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"isPreferred\": {\n          \"equalTo\": true\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Query vendor payment methods using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted payment methods are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n\nVendor payment methods define how and where payments are sent for a specific vendor."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "39f2dcb7-5f58-4c28-9072-a10665d02334",
+                  "name": "Filtered vendor payment methods with pagination",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"CHECK\",\n      \"notEqualTo\": \"ACH_WIRE\",\n      \"in\": [\n        \"EFS\",\n        \"CHECK\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"COMCHECK\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPreferred\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"companyName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"bankName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"currency\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"vendorId\": \"<uuid>\",\n      \"vendor\": {\n        \"id\": \"<uuid>\",\n        \"friendlyId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"email\": \"<string,null-email>\",\n        \"phone\": \"<string,null>\",\n        \"status\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"paymentMethodType\": \"ECHECK\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"status\": \"<string,null>\",\n      \"isPreferred\": \"<boolean,null>\",\n      \"email\": \"<string,null-email>\",\n      \"phone\": \"<string,null>\",\n      \"companyName\": \"<string,null>\",\n      \"username\": \"<string,null>\",\n      \"bankName\": \"<string,null>\",\n      \"bankAddress\": \"<string,null>\",\n      \"accountName\": \"<string,null>\",\n      \"accountNumber\": \"<string,null>\",\n      \"abaAch\": \"<string,null>\",\n      \"wire\": \"<string,null>\",\n      \"swiftCode\": \"<string,null>\",\n      \"eftInstitution\": \"<string,null>\",\n      \"eftTransit\": \"<string,null>\",\n      \"clabe\": \"<string,null>\",\n      \"currency\": \"<string,null>\",\n      \"paymentTerm\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"description\": \"<string,null>\",\n        \"days\": \"<integer,null>\",\n        \"quickPayFee\": \"<number,null-float>\",\n        \"apOnly\": \"<boolean,null>\",\n        \"doNotUse\": \"<boolean,null>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"deletedAt\": \"<string,null-date-time>\",\n      \"deletedBy\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<email>\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"name\": \"<string,null>\",\n        \"phone\": \"<string,null>\",\n        \"phoneExt\": \"<string,null>\",\n        \"avatarId\": \"<string,null-uuid>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      }\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"vendorId\": \"<uuid>\",\n      \"vendor\": {\n        \"id\": \"<uuid>\",\n        \"friendlyId\": \"<string>\",\n        \"name\": \"<string>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"email\": \"<string,null-email>\",\n        \"phone\": \"<string,null>\",\n        \"status\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"paymentMethodType\": \"WIRE\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"status\": \"<string,null>\",\n      \"isPreferred\": \"<boolean,null>\",\n      \"email\": \"<string,null-email>\",\n      \"phone\": \"<string,null>\",\n      \"companyName\": \"<string,null>\",\n      \"username\": \"<string,null>\",\n      \"bankName\": \"<string,null>\",\n      \"bankAddress\": \"<string,null>\",\n      \"accountName\": \"<string,null>\",\n      \"accountNumber\": \"<string,null>\",\n      \"abaAch\": \"<string,null>\",\n      \"wire\": \"<string,null>\",\n      \"swiftCode\": \"<string,null>\",\n      \"eftInstitution\": \"<string,null>\",\n      \"eftTransit\": \"<string,null>\",\n      \"clabe\": \"<string,null>\",\n      \"currency\": \"<string,null>\",\n      \"paymentTerm\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"description\": \"<string,null>\",\n        \"days\": \"<integer,null>\",\n        \"quickPayFee\": \"<number,null-float>\",\n        \"apOnly\": \"<boolean,null>\",\n        \"doNotUse\": \"<boolean,null>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"deletedAt\": \"<string,null-date-time>\",\n      \"deletedBy\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<email>\",\n        \"status\": \"PENDING\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"name\": \"<string,null>\",\n        \"phone\": \"<string,null>\",\n        \"phoneExt\": \"<string,null>\",\n        \"avatarId\": \"<string,null-uuid>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      }\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"hasPreviousPage\": \"<boolean>\",\n    \"endCursor\": \"<string,null>\"\n  }\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-39f2dcb7-5f58-4c28-9072-a10665d02334"
+                },
+                {
+                  "id": "b293ad63-12fc-4bd0-a675-e93904061000",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"CHECK\",\n      \"notEqualTo\": \"ACH_WIRE\",\n      \"in\": [\n        \"EFS\",\n        \"CHECK\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"COMCHECK\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPreferred\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"companyName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"bankName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"currency\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-b293ad63-12fc-4bd0-a675-e93904061000"
+                },
+                {
+                  "id": "2817bf10-b4b0-4681-b4bb-70c4500b5539",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"CHECK\",\n      \"notEqualTo\": \"ACH_WIRE\",\n      \"in\": [\n        \"EFS\",\n        \"CHECK\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"COMCHECK\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPreferred\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"companyName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"bankName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"currency\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-2817bf10-b4b0-4681-b4bb-70c4500b5539"
+                },
+                {
+                  "id": "990c06fb-2d9b-495d-889e-2d1bc7520ac2",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorPaymentMethodFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentMethodType\": {\n      \"equalTo\": \"CHECK\",\n      \"notEqualTo\": \"ACH_WIRE\",\n      \"in\": [\n        \"EFS\",\n        \"CHECK\"\n      ],\n      \"notIn\": [\n        \"ACH\",\n        \"COMCHECK\"\n      ]\n    },\n    \"status\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"isPreferred\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"companyName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"bankName\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"currency\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"paymentTermId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-990c06fb-2d9b-495d-889e-2d1bc7520ac2"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "abb48456-2b77-4910-9890-546e2b1bb929",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"vendorId\": {\n          \"equalTo\": \"770e8400-e29b-41d4-a716-446655440000\"\n        }\n      },\n      {\n        \"isPreferred\": {\n          \"equalTo\": true\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-936ba945-0477-44a2-a6c6-eec7b5975d52"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c49899fb-c501-49a7-8b8d-e01c904bcb9e",
+          "createdAt": "2026-10-21T21:12:17.000Z",
+          "updatedAt": "2026-10-21T21:12:17.000Z",
+          "uid": "35240-c49899fb-c501-49a7-8b8d-e01c904bcb9e"
         },
         {
-          "id": "65a4117b-f1fb-42ca-adc4-fe5942091237",
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get vendor payment method",
+              "id": "7e39b1b5-4720-42c9-8919-9268fc1d8952",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-payment-methods",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "44a1e20e-b7d0-49e5-b55c-14d58f6129c9",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Retrieve a single vendor payment method by its unique identifier.\n\nReturns full details including banking information and associated vendor references."
+              },
+              "response": [
+                {
+                  "id": "67311f33-779e-494a-9644-88fe3565c0c3",
+                  "name": "Vendor payment method found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"vendorId\": \"<uuid>\",\n  \"vendor\": {\n    \"id\": \"<uuid>\",\n    \"friendlyId\": \"<string>\",\n    \"name\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"email\": \"<string,null-email>\",\n    \"phone\": \"<string,null>\",\n    \"status\": \"<string,null>\",\n    \"currency\": \"<string,null>\"\n  },\n  \"paymentMethodType\": \"CAD_EFT\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTerm\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"description\": \"<string,null>\",\n    \"days\": \"<integer,null>\",\n    \"quickPayFee\": \"<number,null-float>\",\n    \"apOnly\": \"<boolean,null>\",\n    \"doNotUse\": \"<boolean,null>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"PENDING\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  }\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-67311f33-779e-494a-9644-88fe3565c0c3"
+                },
+                {
+                  "id": "6d5feb52-1092-450a-8b1b-611e00fe8f11",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-6d5feb52-1092-450a-8b1b-611e00fe8f11"
+                },
+                {
+                  "id": "636ee895-153f-47b8-a708-11924be61568",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-636ee895-153f-47b8-a708-11924be61568"
+                },
+                {
+                  "id": "4ea1d626-2af8-4bdb-916b-cd3fe863490f",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-4ea1d626-2af8-4bdb-916b-cd3fe863490f"
+                },
+                {
+                  "id": "362e4213-acf1-4687-900f-5262ce4b0b5c",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-362e4213-acf1-4687-900f-5262ce4b0b5c"
+                }
+              ],
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-7e39b1b5-4720-42c9-8919-9268fc1d8952"
+            },
+            {
+              "name": "Update vendor payment method",
+              "id": "76b2c549-77c8-43d0-800e-b9a1b0eec77a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentMethodType\": \"ECHECK\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-payment-methods",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "055b2198-d9ab-4ab5-967c-f5d8d4d21fd6",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Partially update a vendor payment method. Only provided fields will be updated.\n\n**IMPORTANT**: The `vendorId` field cannot be changed after creation.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable"
+              },
+              "response": [
+                {
+                  "id": "a6b7a18e-fe48-4501-8fbc-8da654450729",
+                  "name": "Vendor payment method updated successfully",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodType\": \"ECHECK\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"vendorId\": \"<uuid>\",\n  \"vendor\": {\n    \"id\": \"<uuid>\",\n    \"friendlyId\": \"<string>\",\n    \"name\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"email\": \"<string,null-email>\",\n    \"phone\": \"<string,null>\",\n    \"status\": \"<string,null>\",\n    \"currency\": \"<string,null>\"\n  },\n  \"paymentMethodType\": \"CAD_EFT\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTerm\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"description\": \"<string,null>\",\n    \"days\": \"<integer,null>\",\n    \"quickPayFee\": \"<number,null-float>\",\n    \"apOnly\": \"<boolean,null>\",\n    \"doNotUse\": \"<boolean,null>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"PENDING\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  }\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-a6b7a18e-fe48-4501-8fbc-8da654450729"
+                },
+                {
+                  "id": "4d807d49-7c34-4ffa-a5b2-340e2b3a82dd",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodType\": \"ECHECK\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-4d807d49-7c34-4ffa-a5b2-340e2b3a82dd"
+                },
+                {
+                  "id": "3ab1b5f6-d5bb-4d73-923d-785a7af5d36c",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodType\": \"ECHECK\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-3ab1b5f6-d5bb-4d73-923d-785a7af5d36c"
+                },
+                {
+                  "id": "90704f99-1912-41d7-b432-f48404e6883a",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodType\": \"ECHECK\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-90704f99-1912-41d7-b432-f48404e6883a"
+                },
+                {
+                  "id": "f1e210c8-8517-417d-86b4-d218bfd2e538",
+                  "name": "Conflict - resource already exists or constraint violation",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodType\": \"ECHECK\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-f1e210c8-8517-417d-86b4-d218bfd2e538"
+                },
+                {
+                  "id": "83567185-0953-46a0-8bfb-d201c3ce686b",
+                  "name": "Validation error - invalid field values",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodType\": \"ECHECK\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-83567185-0953-46a0-8bfb-d201c3ce686b"
+                },
+                {
+                  "id": "d9be3dcc-dc76-4a11-ba5d-63e38346f35e",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"paymentMethodType\": \"ECHECK\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-d9be3dcc-dc76-4a11-ba5d-63e38346f35e"
+                }
+              ],
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-76b2c549-77c8-43d0-800e-b9a1b0eec77a"
+            },
+            {
+              "name": "Delete vendor payment method",
+              "id": "e57bc38b-273c-4e06-a8d2-665fbf993b2f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-payment-methods",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2ed84fb1-2d53-4768-a151-a2fdbe1335b4",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Soft delete a vendor payment method (sets deletedAt timestamp).\n\nThe payment method will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records."
+              },
+              "response": [
+                {
+                  "id": "f5113ae4-1993-4840-855c-b090376da221",
+                  "name": "Vendor payment method deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-f5113ae4-1993-4840-855c-b090376da221"
+                },
+                {
+                  "id": "97bb4d48-0cf4-4a27-ad54-04e5b8c596d0",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-97bb4d48-0cf4-4a27-ad54-04e5b8c596d0"
+                },
+                {
+                  "id": "8c57b177-314c-41bb-9c27-f6de22957eaa",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-8c57b177-314c-41bb-9c27-f6de22957eaa"
+                },
+                {
+                  "id": "3713e102-fe99-4dd0-acdc-8883d5a251bd",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-3713e102-fe99-4dd0-acdc-8883d5a251bd"
+                },
+                {
+                  "id": "d49c872c-cb82-4d34-845c-e4755547cd9d",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-payment-methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-payment-methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:17.000Z",
+                  "updatedAt": "2026-10-21T21:12:17.000Z",
+                  "uid": "35240-d49c872c-cb82-4d34-845c-e4755547cd9d"
+                }
+              ],
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-e57bc38b-273c-4e06-a8d2-665fbf993b2f"
+            }
+          ],
+          "id": "26fdb63c-06ab-4474-8e0a-6d069cc171f4",
+          "createdAt": "2026-10-21T21:12:17.000Z",
+          "updatedAt": "2026-10-21T21:12:17.000Z",
+          "uid": "35240-26fdb63c-06ab-4474-8e0a-6d069cc171f4"
+        },
+        {
           "name": "Create vendor payment method",
+          "id": "5c750927-df24-4c7c-a757-f6b5f7acfefc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create vendor payment method",
-            "description": {
-              "content": "Create a new vendor payment method.\n\n**Important**: The `vendorId` cannot be changed after creation.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-payment-methods"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -294,1422 +1362,374 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"paymentMethodType\": \"<string>\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
+              "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"paymentMethodType\": \"EFS\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendor-payment-methods",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendor-payment-methods"
+              ]
+            },
+            "description": "Create a new vendor payment method.\n\n**Important**: The `vendorId` cannot be changed after creation."
           },
           "response": [
             {
-              "id": "60ed1400-d503-4517-b2ec-41ff828ef89c",
+              "id": "2d3d15d5-f1bf-424c-b5db-a0eeecc457b6",
               "name": "Vendor payment method created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"paymentMethodType\": \"EFS\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-payment-methods"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"paymentMethodType\": \"ACH\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"status\": \"ACTIVE\",\n  \"isPreferred\": true,\n  \"email\": \"payments@vendor.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"companyName\": \"Vendor Payments LLC\",\n  \"username\": \"vendor_payments\",\n  \"bankName\": \"Chase Bank\",\n  \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"****1234\",\n  \"abaAch\": \"021000021\",\n  \"wire\": \"string\",\n  \"swiftCode\": \"CHASUS33\",\n  \"eftInstitution\": \"001\",\n  \"eftTransit\": \"00010\",\n  \"clabe\": \"string\",\n  \"currency\": \"USD\",\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1990-08-30T15:08:54.587Z\"\n  },\n  \"deletedAt\": \"1986-03-23T23:43:21.503Z\",\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1991-12-29T15:33:11.009Z\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"vendorId\": \"<uuid>\",\n  \"vendor\": {\n    \"id\": \"<uuid>\",\n    \"friendlyId\": \"<string>\",\n    \"name\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"email\": \"<string,null-email>\",\n    \"phone\": \"<string,null>\",\n    \"status\": \"<string,null>\",\n    \"currency\": \"<string,null>\"\n  },\n  \"paymentMethodType\": \"CAD_EFT\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTerm\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"description\": \"<string,null>\",\n    \"days\": \"<integer,null>\",\n    \"quickPayFee\": \"<number,null-float>\",\n    \"apOnly\": \"<boolean,null>\",\n    \"doNotUse\": \"<boolean,null>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"PENDING\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  }\n}",
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-2d3d15d5-f1bf-424c-b5db-a0eeecc457b6"
             },
             {
-              "id": "88405f29-7b16-4563-8d7d-b6a28a2d0de3",
+              "id": "7e1984a2-2270-4573-8813-14daf10fb986",
               "name": "Bad request - invalid input",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"paymentMethodType\": \"EFS\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-payment-methods"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-7e1984a2-2270-4573-8813-14daf10fb986"
             },
             {
-              "id": "94b8f28c-f388-487f-9e01-20a95a930441",
+              "id": "a57dfdde-c680-4908-ba56-4bae031973b0",
               "name": "Unauthorized - invalid or missing access token",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"paymentMethodType\": \"EFS\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-payment-methods"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-a57dfdde-c680-4908-ba56-4bae031973b0"
             },
             {
-              "id": "7638d134-6e2c-4b3a-b75d-9f9a88f76063",
+              "id": "1ed2ed8f-aacc-4f61-abee-334772fd556c",
               "name": "Conflict - resource already exists or constraint violation",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"paymentMethodType\": \"EFS\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-payment-methods"
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-1ed2ed8f-aacc-4f61-abee-334772fd556c"
             },
             {
-              "id": "13c0f880-9db3-49b0-bf3a-615e2b04de16",
+              "id": "0ca1b98d-8298-4640-9f1e-709c3242b0fd",
               "name": "Validation error - invalid field values",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"paymentMethodType\": \"EFS\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-payment-methods"
+                  ]
                 }
               },
               "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
               "code": 422,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-0ca1b98d-8298-4640-9f1e-709c3242b0fd"
             },
             {
-              "id": "c92a4223-0c72-4eed-a9e0-d215404c1498",
+              "id": "88b93361-a3a3-4dbe-a682-81b3677e9fe4",
               "name": "Internal server error",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"paymentMethodType\": \"EFS\",\n  \"status\": \"<string>\",\n  \"isPreferred\": \"<boolean>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"username\": \"<string>\",\n  \"bankName\": \"<string>\",\n  \"bankAddress\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"abaAch\": \"<string>\",\n  \"wire\": \"<string>\",\n  \"swiftCode\": \"<string>\",\n  \"eftInstitution\": \"<string>\",\n  \"eftTransit\": \"<string>\",\n  \"clabe\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"paymentTermId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/vendor-payment-methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "vendor-payment-methods"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"paymentMethodType\": \"ACH\",\n  \"isPreferred\": true,\n  \"bankName\": \"Chase Bank\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"1234567890\",\n  \"abaAch\": \"021000021\",\n  \"currency\": \"USD\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "Internal Server Error",
               "code": 500,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:12:17.000Z",
+              "updatedAt": "2026-10-21T21:12:17.000Z",
+              "uid": "35240-88b93361-a3a3-4dbe-a682-81b3677e9fe4"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c2d4191d-9d62-4de0-b5a1-7af1f386dc63",
-          "name": "Get vendor payment method",
-          "request": {
-            "name": "Get vendor payment method",
-            "description": {
-              "content": "Retrieve a single vendor payment method by its unique identifier.\n\nReturns full details including banking information and associated vendor references.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-payment-methods",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "eeb5bac6-05c9-455a-a41b-fd823d0d2073",
-              "name": "Vendor payment method found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"paymentMethodType\": \"ACH\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"status\": \"ACTIVE\",\n  \"isPreferred\": true,\n  \"email\": \"payments@vendor.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"companyName\": \"Vendor Payments LLC\",\n  \"username\": \"vendor_payments\",\n  \"bankName\": \"Chase Bank\",\n  \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"****1234\",\n  \"abaAch\": \"021000021\",\n  \"wire\": \"string\",\n  \"swiftCode\": \"CHASUS33\",\n  \"eftInstitution\": \"001\",\n  \"eftTransit\": \"00010\",\n  \"clabe\": \"string\",\n  \"currency\": \"USD\",\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1990-08-30T15:08:54.587Z\"\n  },\n  \"deletedAt\": \"1986-03-23T23:43:21.503Z\",\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1991-12-29T15:33:11.009Z\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f683eaa6-926a-426e-8e69-ab034bb3971e",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f91b9ee8-641a-464c-b1d6-dc1c37234eca",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "eda6ded0-e311-4514-80ec-a701ab402a47",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "39f80f7f-5699-4bc2-944f-34a58e7e5d75",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ca99b4bf-f11c-4274-96ce-65fc8af9d464",
-          "name": "Update vendor payment method",
-          "request": {
-            "name": "Update vendor payment method",
-            "description": {
-              "content": "Partially update a vendor payment method. Only provided fields will be updated.\n\n**IMPORTANT**: The `vendorId` field cannot be changed after creation.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-payment-methods",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"paymentMethodType\": \"<string>\",\n  \"status\": \"<string,null>\",\n  \"isPreferred\": \"<boolean,null>\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"companyName\": \"<string,null>\",\n  \"username\": \"<string,null>\",\n  \"bankName\": \"<string,null>\",\n  \"bankAddress\": \"<string,null>\",\n  \"accountName\": \"<string,null>\",\n  \"accountNumber\": \"<string,null>\",\n  \"abaAch\": \"<string,null>\",\n  \"wire\": \"<string,null>\",\n  \"swiftCode\": \"<string,null>\",\n  \"eftInstitution\": \"<string,null>\",\n  \"eftTransit\": \"<string,null>\",\n  \"clabe\": \"<string,null>\",\n  \"currency\": \"<string,null>\",\n  \"paymentTermId\": \"<string,null-uuid>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "322a7714-c7a5-459d-a30c-0e2837675b52",
-              "name": "Vendor payment method updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"vendorId\": \"770e8400-e29b-41d4-a716-446655440000\",\n  \"vendor\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"friendlyId\": \"V123456\",\n    \"name\": \"ABC Warehouse Services\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-VENDOR-ABC-001\",\n    \"email\": \"billing@abcwarehouse.com\",\n    \"phone\": \"+1-555-123-4567\",\n    \"status\": \"ACTIVE\",\n    \"currency\": \"USD\"\n  },\n  \"paymentMethodType\": \"ACH\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"status\": \"ACTIVE\",\n  \"isPreferred\": true,\n  \"email\": \"payments@vendor.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"companyName\": \"Vendor Payments LLC\",\n  \"username\": \"vendor_payments\",\n  \"bankName\": \"Chase Bank\",\n  \"bankAddress\": \"123 Bank Street, Dallas, TX 75201\",\n  \"accountName\": \"Vendor Services Inc\",\n  \"accountNumber\": \"****1234\",\n  \"abaAch\": \"021000021\",\n  \"wire\": \"string\",\n  \"swiftCode\": \"CHASUS33\",\n  \"eftInstitution\": \"001\",\n  \"eftTransit\": \"00010\",\n  \"clabe\": \"string\",\n  \"currency\": \"USD\",\n  \"paymentTerm\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"name\": \"Net 30\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-PAYTERM-NET30\",\n    \"description\": \"Payment due 30 days from invoice date\",\n    \"days\": 30,\n    \"quickPayFee\": 0.05,\n    \"apOnly\": false,\n    \"doNotUse\": false,\n    \"deletedAt\": \"1990-08-30T15:08:54.587Z\"\n  },\n  \"deletedAt\": \"1986-03-23T23:43:21.503Z\",\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1991-12-29T15:33:11.009Z\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ef3214af-4974-4086-a0e2-51bd6a37c9f6",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8cdc694d-f014-4ca9-aded-a7efe0968e07",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6d5cf44b-86c5-48db-9e24-603dbd624fa9",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e45da50b-b270-4018-af21-54417d0c14ac",
-              "name": "Conflict - resource already exists or constraint violation",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1f870ca9-251d-4dd1-a65d-0d76170b2123",
-              "name": "Validation error - invalid field values",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1f9d44c9-ab9d-4bfe-b596-ce60c5450348",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"bankName\": \"Bank of America\",\n  \"accountNumber\": \"9876543210\",\n  \"abaAch\": 26009593\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "efd305b5-b37a-4938-9eca-c6a6ce2ff9fd",
-          "name": "Delete vendor payment method",
-          "request": {
-            "name": "Delete vendor payment method",
-            "description": {
-              "content": "Soft delete a vendor payment method (sets deletedAt timestamp).\n\nThe payment method will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-payment-methods",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "e68dede6-9aef-45fa-93fa-d4805971b797",
-              "name": "Vendor payment method deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "5029d9c5-6688-4af9-a61e-1141e8e48016",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "516fd5f0-cfcc-4690-b1f8-85313a029970",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "02d511c6-b8d1-4822-b07e-87bbbfb75433",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bac7e275-a303-402f-b77f-3389bf684088",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-payment-methods",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:12:17.000Z",
+          "updatedAt": "2026-10-21T21:12:17.000Z",
+          "uid": "35240-5c750927-df24-4c7c-a757-f6b5f7acfefc"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.mvmnt.io/v1",
-      "key": "baseUrl"
+      "id": "d459b11b-11dd-4692-923c-b23185fef391",
+      "createdAt": "2026-10-21T21:12:17.000Z",
+      "updatedAt": "2026-10-21T21:12:17.000Z",
+      "uid": "35240-d459b11b-11dd-4692-923c-b23185fef391"
     }
   ],
   "auth": {
@@ -1717,17 +1737,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "0595f4ce-7275-4025-a651-d1e3ef283282",
-    "name": "MVMNT Bill Payments Vendor Payment Methods API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mvmnt.io/v1"
     }
-  }
+  ]
 }

@@ -1,289 +1,1295 @@
 {
+  "info": {
+    "_postman_id": "6e9825c8-6b10-4def-8270-a73747f98f97",
+    "name": "MVMNT Vendor Contacts API",
+    "description": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:12:11.000Z",
+    "updatedAt": "2026-10-21T21:12:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6e9825c8-6b10-4def-8270-a73747f98f97"
+  },
   "item": [
     {
-      "id": "34ec6594-b01e-4051-bd2e-cf7e793cbb99",
-      "name": "Vendor Contacts",
-      "description": {
-        "content": "Vendor contact management operations",
-        "type": "text/plain"
-      },
+      "name": "vendor-contacts",
       "item": [
         {
-          "id": "7c8ec448-2699-4300-82d4-975ae8686e63",
-          "name": "Filter vendor contacts",
-          "request": {
-            "name": "Filter vendor contacts",
-            "description": {
-              "content": "Query vendor contacts using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted contacts are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-contacts",
-                "filter"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phone\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"role\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"roles\": {\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "filter",
+          "item": [
             {
-              "id": "6e012e63-d681-44ec-aeae-1f53497c813b",
-              "name": "Filtered vendor contacts with pagination",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Filter vendor contacts",
+              "id": "50c5b22b-189a-4c5d-a274-ebcaa724acb6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"roles\": {\n          \"includes\": \"BILLING\"\n        }\n      },\n      {\n        \"vendorId\": {\n          \"equalTo\": \"550e8400-e29b-41d4-a716-446655440001\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phone\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"role\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"roles\": {\n      \"includes\": \"OPERATION\",\n      \"notIncludes\": \"AGENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"vendor\": {\n        \"id\": \"29fd513f-d00f-6a06-b9f4-e779179fa421\",\n        \"key\": \"string\"\n      },\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"email\": \"john.smith@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"role\": \"Billing Manager\",\n      \"roles\": [\n        \"BILLING\",\n        \"AGENT\"\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2025-02-13T13:55:26.979Z\"\n      },\n      \"deletedAt\": \"2005-01-30T15:49:03.952Z\"\n    },\n    {\n      \"vendor\": {\n        \"id\": \"2746346d-eb5d-5294-42e5-3c67739da3cc\",\n        \"key\": \"string\"\n      },\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"email\": \"john.smith@abcwarehouse.com\",\n      \"phone\": \"+1-555-123-4567\",\n      \"role\": \"Billing Manager\",\n      \"roles\": [\n        \"BILLING\",\n        \"AGENT\"\n      ],\n      \"deletedBy\": {\n        \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n        \"email\": \"john.doe@example.com\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"2025-01-15T10:00:00Z\",\n        \"updatedAt\": \"2025-01-15T14:30:00Z\",\n        \"key\": \"ERP-USER-12345\",\n        \"name\": \"John Doe\",\n        \"phone\": \"+1-555-123-4567\",\n        \"phoneExt\": \"123\",\n        \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n        \"deletedAt\": \"2011-01-08T12:28:26.305Z\"\n      },\n      \"deletedAt\": \"1960-10-09T08:59:32.557Z\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4bed3d04-85f9-48fd-9fb8-200c8a21524d",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "vendor-contacts",
-                    "filter"
-                  ],
+                  "raw": "{{baseUrl}}/vendor-contacts/filter",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"roles\": {\n          \"includes\": \"BILLING\"\n        }\n      },\n      {\n        \"vendorId\": {\n          \"equalTo\": \"550e8400-e29b-41d4-a716-446655440001\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1707704d-5e4d-481b-9fa5-3f0eca420d90",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "vendor-contacts",
                     "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"roles\": {\n          \"includes\": \"BILLING\"\n        }\n      },\n      {\n        \"vendorId\": {\n          \"equalTo\": \"550e8400-e29b-41d4-a716-446655440001\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Query vendor contacts using flexible filter criteria with AND/OR logic.\n\nBy default, only non-deleted contacts are returned (deletedAt: { isNull: true }).\nOverride this by explicitly setting deletedAt filter criteria."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "32ba45e2-4127-4c9c-895f-cb8c81b002d1",
+                  "name": "Filtered vendor contacts with pagination",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phone\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"role\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"roles\": {\n      \"includes\": \"OPERATION\",\n      \"notIncludes\": \"AGENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"vendor\": {\n        \"id\": \"<uuid>\",\n        \"key\": \"<string,null>\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"email\": \"<string,null-email>\",\n      \"phone\": \"<string,null>\",\n      \"role\": \"<string,null>\",\n      \"roles\": \"<array,null>\",\n      \"deletedBy\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<email>\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"name\": \"<string,null>\",\n        \"phone\": \"<string,null>\",\n        \"phoneExt\": \"<string,null>\",\n        \"avatarId\": \"<string,null-uuid>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"deletedAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"vendor\": {\n        \"id\": \"<uuid>\",\n        \"key\": \"<string,null>\"\n      },\n      \"createdAt\": \"<dateTime>\",\n      \"object\": \"VENDOR_CONTACT\",\n      \"email\": \"<string,null-email>\",\n      \"phone\": \"<string,null>\",\n      \"role\": \"<string,null>\",\n      \"roles\": \"<array,null>\",\n      \"deletedBy\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<email>\",\n        \"status\": \"PENDING\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"key\": \"<string,null>\",\n        \"name\": \"<string,null>\",\n        \"phone\": \"<string,null>\",\n        \"phoneExt\": \"<string,null>\",\n        \"avatarId\": \"<string,null-uuid>\",\n        \"deletedAt\": \"<string,null-date-time>\"\n      },\n      \"deletedAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"pageInfo\": {\n    \"pageSize\": \"<integer>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"hasPreviousPage\": \"<boolean>\",\n    \"endCursor\": \"<string,null>\"\n  }\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-32ba45e2-4127-4c9c-895f-cb8c81b002d1"
+                },
+                {
+                  "id": "12559be5-7927-401d-b98f-114006fa3373",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phone\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"role\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"roles\": {\n      \"includes\": \"OPERATION\",\n      \"notIncludes\": \"AGENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-12559be5-7927-401d-b98f-114006fa3373"
+                },
+                {
+                  "id": "64734d2f-8272-46b3-b40b-283c3de0cd64",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phone\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"role\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"roles\": {\n      \"includes\": \"OPERATION\",\n      \"notIncludes\": \"AGENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-64734d2f-8272-46b3-b40b-283c3de0cd64"
+                },
+                {
+                  "id": "50208071-70da-4625-9d89-3d9dcdf97967",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/VendorContactFilter detected>\"\n      }\n    ],\n    \"vendorId\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"email\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"phone\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"role\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"roles\": {\n      \"includes\": \"OPERATION\",\n      \"notIncludes\": \"AGENT\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedById\": {\n      \"equalTo\": \"<uuid>\",\n      \"notEqualTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"notIn\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-50208071-70da-4625-9d89-3d9dcdf97967"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "819efcdd-40f5-4b99-a6eb-a8c7c44f0a63",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"roles\": {\n          \"includes\": \"BILLING\"\n        }\n      },\n      {\n        \"vendorId\": {\n          \"equalTo\": \"550e8400-e29b-41d4-a716-446655440001\"\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-50c5b22b-189a-4c5d-a274-ebcaa724acb6"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "1adaefe3-a1cf-452e-8508-655811580ab0",
+          "createdAt": "2026-10-21T21:12:11.000Z",
+          "updatedAt": "2026-10-21T21:12:11.000Z",
+          "uid": "35240-1adaefe3-a1cf-452e-8508-655811580ab0"
         },
         {
-          "id": "f9cf23a5-535f-4ad8-af65-032f58f32c0f",
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get a vendor contact by ID",
+              "id": "8e8f4815-7c0f-40a1-ae2c-b34acee6faa9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-contacts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7980a00d-33bd-446b-a195-93da74252583",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Retrieve a single vendor contact by its unique identifier."
+              },
+              "response": [
+                {
+                  "id": "fedbe2ab-a66a-460a-ba72-35534c00ab62",
+                  "name": "Vendor contact found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"vendor\": {\n    \"id\": \"<uuid>\",\n    \"key\": \"<string,null>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"object\": \"VENDOR_CONTACT\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\",\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"INACTIVE\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-fedbe2ab-a66a-460a-ba72-35534c00ab62"
+                },
+                {
+                  "id": "f549906e-fb27-41da-a7a7-92adf9288d64",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-f549906e-fb27-41da-a7a7-92adf9288d64"
+                },
+                {
+                  "id": "a8c50a67-a4e2-4376-844e-d2bc94e54412",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-a8c50a67-a4e2-4376-844e-d2bc94e54412"
+                },
+                {
+                  "id": "228fcbb8-cd3d-4d14-ae9d-bb84158139fd",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-228fcbb8-cd3d-4d14-ae9d-bb84158139fd"
+                },
+                {
+                  "id": "aaf88358-40f5-4c51-aefe-f574f5bfc6d2",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-aaf88358-40f5-4c51-aefe-f574f5bfc6d2"
+                }
+              ],
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-8e8f4815-7c0f-40a1-ae2c-b34acee6faa9"
+            },
+            {
+              "name": "Update a vendor contact",
+              "id": "6a32a12d-b34d-4760-abd8-71286e805f25",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-contacts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "778d2270-bc2e-4224-8706-76657f9eb532",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Partially update a vendor contact. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable"
+              },
+              "response": [
+                {
+                  "id": "c7c0ce3d-4026-4705-9270-a91ccd5047df",
+                  "name": "Vendor contact updated successfully",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"vendor\": {\n    \"id\": \"<uuid>\",\n    \"key\": \"<string,null>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"object\": \"VENDOR_CONTACT\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\",\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"INACTIVE\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-c7c0ce3d-4026-4705-9270-a91ccd5047df"
+                },
+                {
+                  "id": "7fc89be5-d3d3-44ed-bafa-42cfa3d8d703",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-7fc89be5-d3d3-44ed-bafa-42cfa3d8d703"
+                },
+                {
+                  "id": "06fcf83e-851b-4fe0-bae7-4e885ce6ab30",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-06fcf83e-851b-4fe0-bae7-4e885ce6ab30"
+                },
+                {
+                  "id": "3f3c508b-ff82-4566-ac4e-7a076b94c21f",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-3f3c508b-ff82-4566-ac4e-7a076b94c21f"
+                },
+                {
+                  "id": "7249282b-1e16-4671-8868-6666f31b3970",
+                  "name": "Conflict - resource already exists or constraint violation",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-7249282b-1e16-4671-8868-6666f31b3970"
+                },
+                {
+                  "id": "a5333797-4137-43d5-b9d3-6ee425bdf17c",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-a5333797-4137-43d5-b9d3-6ee425bdf17c"
+                }
+              ],
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-6a32a12d-b34d-4760-abd8-71286e805f25"
+            },
+            {
+              "name": "Delete a vendor contact",
+              "id": "b9ae5882-88de-4142-ae8a-07ac0d4488e6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-contacts/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-contacts",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0a632dfe-1e92-454c-a358-d946c8050e1e",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Soft delete a vendor contact (sets deletedAt timestamp).\n\nThe contact will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records."
+              },
+              "response": [
+                {
+                  "id": "90727e07-eaa2-4611-8e71-df8f14307960",
+                  "name": "Vendor contact deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-90727e07-eaa2-4611-8e71-df8f14307960"
+                },
+                {
+                  "id": "98746561-e799-441a-b84e-03ad75b800d7",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-98746561-e799-441a-b84e-03ad75b800d7"
+                },
+                {
+                  "id": "1ad70548-ae90-4b54-b454-8b3f0950c2aa",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-1ad70548-ae90-4b54-b454-8b3f0950c2aa"
+                },
+                {
+                  "id": "2df45d75-21f7-4098-b7c7-bf9b866ada8f",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-2df45d75-21f7-4098-b7c7-bf9b866ada8f"
+                },
+                {
+                  "id": "35df6ed1-48e7-4eec-9a6b-55b8ef146dce",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/vendor-contacts/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "vendor-contacts",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:12:11.000Z",
+                  "updatedAt": "2026-10-21T21:12:11.000Z",
+                  "uid": "35240-35df6ed1-48e7-4eec-9a6b-55b8ef146dce"
+                }
+              ],
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-b9ae5882-88de-4142-ae8a-07ac0d4488e6"
+            }
+          ],
+          "id": "4d805699-9e7a-4328-9d74-aeaf861ccc61",
+          "createdAt": "2026-10-21T21:12:11.000Z",
+          "updatedAt": "2026-10-21T21:12:11.000Z",
+          "uid": "35240-4d805699-9e7a-4328-9d74-aeaf861ccc61"
+        },
+        {
           "name": "Create a new vendor contact",
+          "id": "1e486133-d00b-4f69-93b6-b8b7d2a0e644",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create a new vendor contact",
-            "description": {
-              "content": "Create a new contact for a vendor.\n\nContacts represent individuals at the vendor who can be reached for various purposes.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-contacts"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -294,1311 +1300,318 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ]\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/vendor-contacts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendor-contacts"
+              ]
+            },
+            "description": "Create a new contact for a vendor.\n\nContacts represent individuals at the vendor who can be reached for various purposes."
           },
           "response": [
             {
-              "id": "1fc20b8c-5ec4-4055-abbc-d0a6197f089d",
+              "id": "b1100853-fc7a-430e-a265-32db9cd20280",
               "name": "Vendor contact created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"roles\": [\n    \"BILLING\"\n  ]\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-contacts"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"vendor\": {\n    \"id\": \"1ce2d6d8-3d56-437b-ec88-c41bbe6345eb\",\n    \"key\": \"string\"\n  },\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"object\": \"VENDOR_CONTACT\",\n  \"email\": \"john.smith@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"role\": \"Billing Manager\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ],\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1948-05-23T08:46:15.192Z\"\n  },\n  \"deletedAt\": \"1995-01-15T12:40:13.315Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"vendor\": {\n    \"id\": \"<uuid>\",\n    \"key\": \"<string,null>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"object\": \"VENDOR_CONTACT\",\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": \"<array,null>\",\n  \"deletedBy\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<email>\",\n    \"status\": \"INACTIVE\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"key\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone\": \"<string,null>\",\n    \"phoneExt\": \"<string,null>\",\n    \"avatarId\": \"<string,null-uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\"\n  },\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-b1100853-fc7a-430e-a265-32db9cd20280"
             },
             {
-              "id": "8e18c2bb-4cf7-48e9-b8fe-6bc0c4c36f6d",
+              "id": "eb709cff-92f2-4563-8fee-97ab1242a0a8",
               "name": "Bad request - invalid input",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"roles\": [\n    \"BILLING\"\n  ]\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-contacts"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-eb709cff-92f2-4563-8fee-97ab1242a0a8"
             },
             {
-              "id": "477eb39c-2c11-4703-acee-79b18a3adb6e",
+              "id": "33b41681-c4f0-4e00-a64e-32f4b542785a",
               "name": "Unauthorized - invalid or missing access token",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"roles\": [\n    \"BILLING\"\n  ]\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-contacts"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-33b41681-c4f0-4e00-a64e-32f4b542785a"
             },
             {
-              "id": "65c84846-2e3c-4cf3-a832-ef1ab8667748",
+              "id": "a48a500c-b7e2-4b32-b10a-540f9ad2c781",
               "name": "Conflict - resource already exists or constraint violation",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"roles\": [\n    \"BILLING\"\n  ]\n}",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/vendor-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendor-contacts"
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-a48a500c-b7e2-4b32-b10a-540f9ad2c781"
             },
             {
-              "id": "ad6c2cd3-077d-416f-8820-42f2527f7903",
+              "id": "cc038306-0123-4933-8cfb-d569ef2a6319",
               "name": "Internal server error",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vendorId\": \"<uuid>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\",\n  \"role\": \"<string>\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/vendor-contacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "vendor-contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"vendorId\": \"550e8400-e29b-41d4-a716-446655440001\",\n  \"email\": \"billing@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"roles\": [\n    \"BILLING\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "Internal Server Error",
               "code": 500,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:12:11.000Z",
+              "updatedAt": "2026-10-21T21:12:11.000Z",
+              "uid": "35240-cc038306-0123-4933-8cfb-d569ef2a6319"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a0f425c9-0915-42fa-83d0-b7c3812c6c54",
-          "name": "Get a vendor contact by ID",
-          "request": {
-            "name": "Get a vendor contact by ID",
-            "description": {
-              "content": "Retrieve a single vendor contact by its unique identifier.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-contacts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ba24754a-8a9a-40ab-b01b-34b4c5fba94c",
-              "name": "Vendor contact found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"vendor\": {\n    \"id\": \"1ce2d6d8-3d56-437b-ec88-c41bbe6345eb\",\n    \"key\": \"string\"\n  },\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"object\": \"VENDOR_CONTACT\",\n  \"email\": \"john.smith@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"role\": \"Billing Manager\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ],\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1948-05-23T08:46:15.192Z\"\n  },\n  \"deletedAt\": \"1995-01-15T12:40:13.315Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "681366e0-a55c-4522-b8da-2b816cf0601e",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b2a99484-19ee-4249-90d1-f9fe825eb2ec",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f868dabb-5ebd-45b0-9799-7ba357d6f42f",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "54764f73-3bc9-4a84-81ba-59e146ac3a35",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "13491c46-cb48-45c4-a7f8-e2f684a6fd56",
-          "name": "Update a vendor contact",
-          "request": {
-            "name": "Update a vendor contact",
-            "description": {
-              "content": "Partially update a vendor contact. Only provided fields will be updated.\n\n- **Omitted fields**: Not modified (current value preserved)\n- **Provided fields**: Updated to the new value\n- **Null values**: Clear the field (set to null) where applicable\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-contacts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<string,null-email>\",\n  \"phone\": \"<string,null>\",\n  \"role\": \"<string,null>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f5bac965-4621-443d-841a-90c2602b9910",
-              "name": "Vendor contact updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"vendor\": {\n    \"id\": \"1ce2d6d8-3d56-437b-ec88-c41bbe6345eb\",\n    \"key\": \"string\"\n  },\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"object\": \"VENDOR_CONTACT\",\n  \"email\": \"john.smith@abcwarehouse.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"role\": \"Billing Manager\",\n  \"roles\": [\n    \"BILLING\",\n    \"AGENT\"\n  ],\n  \"deletedBy\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"email\": \"john.doe@example.com\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"2025-01-15T10:00:00Z\",\n    \"updatedAt\": \"2025-01-15T14:30:00Z\",\n    \"key\": \"ERP-USER-12345\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1-555-123-4567\",\n    \"phoneExt\": \"123\",\n    \"avatarId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"deletedAt\": \"1948-05-23T08:46:15.192Z\"\n  },\n  \"deletedAt\": \"1995-01-15T12:40:13.315Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9b868089-371d-42f4-aeaf-b398afd46b5a",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a1a5651d-20fc-4084-b0d8-e5390e81c7c5",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2a8926c0-eee4-48b0-95f8-09066549b208",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "20738230-21f0-453d-9c7f-19c0bf2e50d9",
-              "name": "Conflict - resource already exists or constraint violation",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"conflict\",\n  \"message\": \"A resource with this identifier already exists\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4f97f3cd-6218-48f2-8a34-5d84a84be277",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"newemail@abcwarehouse.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "29accc8e-6a33-4343-a4bc-6b5b74a93075",
-          "name": "Delete a vendor contact",
-          "request": {
-            "name": "Delete a vendor contact",
-            "description": {
-              "content": "Soft delete a vendor contact (sets deletedAt timestamp).\n\nThe contact will no longer appear in default queries but can be retrieved\nby explicitly filtering for deleted records.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendor-contacts",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "82527d5d-c94a-4187-b7ea-5260a2365f73",
-              "name": "Vendor contact deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "c28e0b71-e102-43ab-b6c9-242b884ffbd7",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b3cc96ac-82f3-4949-97f4-32435e52ccbb",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3d4e5ffe-4dee-40fb-bb20-3341dc0e901f",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "297b5eb2-6b46-4f6e-8d52-b1dafdce77dc",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendor-contacts",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"internal_server_error\",\n  \"message\": \"An unexpected error occurred\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:12:11.000Z",
+          "updatedAt": "2026-10-21T21:12:11.000Z",
+          "uid": "35240-1e486133-d00b-4f69-93b6-b8b7d2a0e644"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.mvmnt.io/v1",
-      "key": "baseUrl"
+      "id": "da8bc16a-59bb-4836-91c1-f0626d5e620e",
+      "createdAt": "2026-10-21T21:12:11.000Z",
+      "updatedAt": "2026-10-21T21:12:11.000Z",
+      "uid": "35240-da8bc16a-59bb-4836-91c1-f0626d5e620e"
     }
   ],
   "auth": {
@@ -1606,17 +1619,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "87c976fe-818e-471e-91de-49c31cb3ebca",
-    "name": "MVMNT Bill Payments Vendor Contacts API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mvmnt.io/v1"
     }
-  }
+  ]
 }

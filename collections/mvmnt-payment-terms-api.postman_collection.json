@@ -1,365 +1,1519 @@
 {
+  "info": {
+    "_postman_id": "89e18dc5-ead1-4c37-a30e-cf7c2a2d7c24",
+    "name": "MVMNT Payment Terms API",
+    "description": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:11:01.000Z",
+    "updatedAt": "2026-10-21T21:11:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-89e18dc5-ead1-4c37-a30e-cf7c2a2d7c24"
+  },
   "item": [
     {
-      "id": "c6ce0bfd-0a68-4c87-8c64-474ab50a015c",
-      "name": "Payment Terms",
-      "description": {
-        "content": "Payment term management operations",
-        "type": "text/plain"
-      },
+      "name": "payment-terms",
       "item": [
         {
-          "id": "182ddc34-eeab-4ad2-9710-0b711b584c9e",
-          "name": "Filter payment terms",
-          "request": {
-            "name": "Filter payment terms",
-            "description": {
-              "content": "Filter payment terms using comprehensive query criteria with AND/OR logic and multiple operators.\nSupports complex filtering similar to GraphQL capabilities.\nNote: Soft-deleted payment terms are excluded by default (deletedAt defaults to { isNull: true }).\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "payment-terms",
-                "filter"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"description\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"days\": {\n      \"equalTo\": \"<integer>\",\n      \"notEqualTo\": \"<integer>\",\n      \"lessThan\": \"<integer>\",\n      \"lessThanOrEqualTo\": \"<integer>\",\n      \"greaterThan\": \"<integer>\",\n      \"greaterThanOrEqualTo\": \"<integer>\",\n      \"in\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"notIn\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"quickPayFee\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"apOnly\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"doNotUse\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "filter",
+          "item": [
             {
-              "id": "678b38c3-84fa-42d1-bcac-99af06e60e4b",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Filter payment terms",
+              "id": "437c3641-becf-4b16-bdb4-b5ce4b86c479",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"doNotUse\": {\n          \"equalTo\": false\n        }\n      },\n      {\n        \"days\": {\n          \"greaterThan\": 0\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
+                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"description\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"days\": {\n      \"equalTo\": \"<integer>\",\n      \"notEqualTo\": \"<integer>\",\n      \"lessThan\": \"<integer>\",\n      \"lessThanOrEqualTo\": \"<integer>\",\n      \"greaterThan\": \"<integer>\",\n      \"greaterThanOrEqualTo\": \"<integer>\",\n      \"in\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"notIn\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"quickPayFee\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"apOnly\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"doNotUse\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Net 30\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"description\": \"Payment due 30 days from invoice date\",\n      \"days\": 30,\n      \"quickPayFee\": 0.05,\n      \"apOnly\": false,\n      \"doNotUse\": false,\n      \"key\": \"ERP-PAYTERM-NET30\",\n      \"deletedAt\": \"1987-06-02T14:07:10.136Z\"\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Net 30\",\n      \"createdAt\": \"2025-01-15T10:00:00Z\",\n      \"updatedAt\": \"2025-01-15T14:30:00Z\",\n      \"description\": \"Payment due 30 days from invoice date\",\n      \"days\": 30,\n      \"quickPayFee\": 0.05,\n      \"apOnly\": false,\n      \"doNotUse\": false,\n      \"key\": \"ERP-PAYTERM-NET30\",\n      \"deletedAt\": \"1999-03-12T07:47:15.057Z\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": 50,\n    \"hasNextPage\": true,\n    \"hasPreviousPage\": false,\n    \"endCursor\": \"eyJpZCI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCJ9\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f765ad9a-4a08-4d1d-8dea-5c75248fd36f",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "payment-terms",
-                    "filter"
-                  ],
+                  "raw": "{{baseUrl}}/payment-terms/filter",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"doNotUse\": {\n          \"equalTo\": false\n        }\n      },\n      {\n        \"days\": {\n          \"greaterThan\": 0\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "91eea509-7a72-40c5-b277-7d1cd6b1cd83",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "payment-terms",
                     "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"doNotUse\": {\n          \"equalTo\": false\n        }\n      },\n      {\n        \"days\": {\n          \"greaterThan\": 0\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Filter payment terms using comprehensive query criteria with AND/OR logic and multiple operators.\nSupports complex filtering similar to GraphQL capabilities.\nNote: Soft-deleted payment terms are excluded by default (deletedAt defaults to { isNull: true })."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "7a0fd0b2-8ff5-449a-8894-5e39961eea1f",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"description\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"days\": {\n      \"equalTo\": \"<integer>\",\n      \"notEqualTo\": \"<integer>\",\n      \"lessThan\": \"<integer>\",\n      \"lessThanOrEqualTo\": \"<integer>\",\n      \"greaterThan\": \"<integer>\",\n      \"greaterThanOrEqualTo\": \"<integer>\",\n      \"in\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"notIn\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"quickPayFee\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"apOnly\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"doNotUse\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"days\": \"<integer,null>\",\n      \"quickPayFee\": \"<number,null-float>\",\n      \"apOnly\": \"<boolean,null>\",\n      \"doNotUse\": \"<boolean,null>\",\n      \"key\": \"<string,null>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"days\": \"<integer,null>\",\n      \"quickPayFee\": \"<number,null-float>\",\n      \"apOnly\": \"<boolean,null>\",\n      \"doNotUse\": \"<boolean,null>\",\n      \"key\": \"<string,null>\",\n      \"deletedAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"pagination\": {\n    \"pageSize\": \"<integer>\",\n    \"hasNextPage\": \"<boolean>\",\n    \"hasPreviousPage\": \"<boolean>\",\n    \"endCursor\": \"<string,null>\"\n  }\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-7a0fd0b2-8ff5-449a-8894-5e39961eea1f"
+                },
+                {
+                  "id": "2c21dbc3-7b17-468f-b736-e74478381989",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"description\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"days\": {\n      \"equalTo\": \"<integer>\",\n      \"notEqualTo\": \"<integer>\",\n      \"lessThan\": \"<integer>\",\n      \"lessThanOrEqualTo\": \"<integer>\",\n      \"greaterThan\": \"<integer>\",\n      \"greaterThanOrEqualTo\": \"<integer>\",\n      \"in\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"notIn\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"quickPayFee\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"apOnly\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"doNotUse\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-2c21dbc3-7b17-468f-b736-e74478381989"
+                },
+                {
+                  "id": "43552593-0dfc-428a-bb86-c559e49c3cb4",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"description\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"days\": {\n      \"equalTo\": \"<integer>\",\n      \"notEqualTo\": \"<integer>\",\n      \"lessThan\": \"<integer>\",\n      \"lessThanOrEqualTo\": \"<integer>\",\n      \"greaterThan\": \"<integer>\",\n      \"greaterThanOrEqualTo\": \"<integer>\",\n      \"in\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"notIn\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"quickPayFee\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"apOnly\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"doNotUse\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-43552593-0dfc-428a-bb86-c559e49c3cb4"
+                },
+                {
+                  "id": "e8ed0242-0bc0-4f69-8c4f-e084e1d8ab33",
+                  "name": "Validation error - invalid field values",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"description\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"days\": {\n      \"equalTo\": \"<integer>\",\n      \"notEqualTo\": \"<integer>\",\n      \"lessThan\": \"<integer>\",\n      \"lessThanOrEqualTo\": \"<integer>\",\n      \"greaterThan\": \"<integer>\",\n      \"greaterThanOrEqualTo\": \"<integer>\",\n      \"in\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"notIn\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"quickPayFee\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"apOnly\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"doNotUse\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-e8ed0242-0bc0-4f69-8c4f-e084e1d8ab33"
+                },
+                {
+                  "id": "a1b69944-a647-4b11-930a-9d64dd78166c",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"or\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/PaymentTermFilter detected>\"\n      }\n    ],\n    \"id\": {\n      \"equalTo\": \"<uuid>\",\n      \"in\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    \"name\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"description\": {\n      \"equalTo\": \"<string>\",\n      \"notEqualTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"notIn\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"includes\": \"<string>\",\n      \"notIncludes\": \"<string>\",\n      \"startsWith\": \"<string>\",\n      \"notStartsWith\": \"<string>\",\n      \"endsWith\": \"<string>\",\n      \"notEndsWith\": \"<string>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"days\": {\n      \"equalTo\": \"<integer>\",\n      \"notEqualTo\": \"<integer>\",\n      \"lessThan\": \"<integer>\",\n      \"lessThanOrEqualTo\": \"<integer>\",\n      \"greaterThan\": \"<integer>\",\n      \"greaterThanOrEqualTo\": \"<integer>\",\n      \"in\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"notIn\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"quickPayFee\": {\n      \"equalTo\": \"<float>\",\n      \"notEqualTo\": \"<float>\",\n      \"lessThan\": \"<float>\",\n      \"lessThanOrEqualTo\": \"<float>\",\n      \"greaterThan\": \"<float>\",\n      \"greaterThanOrEqualTo\": \"<float>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"apOnly\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"doNotUse\": {\n      \"equalTo\": \"<boolean>\",\n      \"notEqualTo\": \"<boolean>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"key\": {\n      \"equalTo\": \"<string>\",\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isNull\": \"<boolean>\"\n    },\n    \"createdAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"updatedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    },\n    \"deletedAt\": {\n      \"equalTo\": \"<dateTime>\",\n      \"notEqualTo\": \"<dateTime>\",\n      \"lessThan\": \"<dateTime>\",\n      \"lessThanOrEqualTo\": \"<dateTime>\",\n      \"greaterThan\": \"<dateTime>\",\n      \"greaterThanOrEqualTo\": \"<dateTime>\",\n      \"isNull\": \"<boolean>\"\n    }\n  },\n  \"pageSize\": 50,\n  \"cursor\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/filter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        "filter"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Request limit per minute",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Remaining requests in current window",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Remaining",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp when rate limit resets",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-a1b69944-a647-4b11-930a-9d64dd78166c"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "49ae7bc7-7147-4573-b583-fa950946546f",
-              "name": "Validation error - invalid field values",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"doNotUse\": {\n          \"equalTo\": false\n        }\n      },\n      {\n        \"days\": {\n          \"greaterThan\": 0\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "78991e18-d919-450a-bde8-b40d9fb1cec2",
-              "name": "Rate limit exceeded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    "filter"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"filter\": {\n    \"and\": [\n      {\n        \"doNotUse\": {\n          \"equalTo\": false\n        }\n      },\n      {\n        \"days\": {\n          \"greaterThan\": 0\n        }\n      }\n    ]\n  },\n  \"pageSize\": 50\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "2955"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-437c3641-becf-4b16-bdb4-b5ce4b86c479"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c375863c-6657-4706-b0f6-562b5bcb2873",
+          "createdAt": "2026-10-21T21:11:01.000Z",
+          "updatedAt": "2026-10-21T21:11:01.000Z",
+          "uid": "35240-c375863c-6657-4706-b0f6-562b5bcb2873"
         },
         {
-          "id": "acc0a936-f04a-4578-a482-d57ad18e4e16",
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get payment term",
+              "id": "0828c7a3-fca8-445e-9a76-88a9ca809fc3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-terms",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "e0179476-583d-4b46-8c8f-c7b4ef174ba5",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Retrieve a payment term by ID or client key"
+              },
+              "response": [
+                {
+                  "id": "24b1d728-27a6-4305-98cb-267fe2592589",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\",\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-24b1d728-27a6-4305-98cb-267fe2592589"
+                },
+                {
+                  "id": "68834da1-effd-4305-b83a-50edadf37b58",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-68834da1-effd-4305-b83a-50edadf37b58"
+                },
+                {
+                  "id": "53dae96a-84c8-4b01-869d-b4dbf300da65",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-53dae96a-84c8-4b01-869d-b4dbf300da65"
+                },
+                {
+                  "id": "e8b2a6a7-51b3-464a-96b0-265141e1740b",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Request limit per minute",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Remaining requests in current window",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Remaining",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp when rate limit resets",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-e8b2a6a7-51b3-464a-96b0-265141e1740b"
+                }
+              ],
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-0828c7a3-fca8-445e-9a76-88a9ca809fc3"
+            },
+            {
+              "name": "Update payment term",
+              "id": "9efb2980-7e99-4155-b78f-96e8e4a94190",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-terms",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "5405b840-2962-4333-9c9b-e9946cfec721",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Partially update a payment term. Only provided fields will be updated."
+              },
+              "response": [
+                {
+                  "id": "ea1ab020-73ae-4a81-94e3-299da07bf271",
+                  "name": "Payment term updated successfully",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\",\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-ea1ab020-73ae-4a81-94e3-299da07bf271"
+                },
+                {
+                  "id": "be2503d4-d0bf-4d35-98ce-2827acd2ee8a",
+                  "name": "Bad request - invalid input",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-be2503d4-d0bf-4d35-98ce-2827acd2ee8a"
+                },
+                {
+                  "id": "71bd9a52-6c9b-4d01-b813-2949c9fdf130",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-71bd9a52-6c9b-4d01-b813-2949c9fdf130"
+                },
+                {
+                  "id": "17bc8c3c-d28e-4ba9-8ba7-1ef1cb72bd73",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-17bc8c3c-d28e-4ba9-8ba7-1ef1cb72bd73"
+                },
+                {
+                  "id": "6e42b53e-36b7-45a7-92a6-8e736537e43d",
+                  "name": "Validation error - invalid field values",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-6e42b53e-36b7-45a7-92a6-8e736537e43d"
+                },
+                {
+                  "id": "82616bd3-c5a0-4307-a872-c0c069eae35d",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Request limit per minute",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Remaining requests in current window",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Remaining",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp when rate limit resets",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-82616bd3-c5a0-4307-a872-c0c069eae35d"
+                }
+              ],
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-9efb2980-7e99-4155-b78f-96e8e4a94190"
+            },
+            {
+              "name": "Delete payment term",
+              "id": "f9d6e157-41dc-4b80-b031-7b1bef925118",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-terms",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                      "key": "by",
+                      "value": "key"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "8d687dda-e9e2-46d9-add0-6265af132318",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Resource ID (UUID) or client key"
+                    }
+                  ]
+                },
+                "description": "Soft delete a payment term (sets deletedAt timestamp)"
+              },
+              "response": [
+                {
+                  "id": "7e2637ec-304b-4e77-8b3e-663c32eca070",
+                  "name": "Payment term deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-7e2637ec-304b-4e77-8b3e-663c32eca070"
+                },
+                {
+                  "id": "0f4f1c0d-2b36-4841-bf67-62090acf779d",
+                  "name": "Unauthorized - invalid or missing access token",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-0f4f1c0d-2b36-4841-bf67-62090acf779d"
+                },
+                {
+                  "id": "fdb46595-e5f1-4dc8-aa55-be0ee6cfa031",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-fdb46595-e5f1-4dc8-aa55-be0ee6cfa031"
+                },
+                {
+                  "id": "f8723a32-179c-4be9-924b-373436689547",
+                  "name": "Rate limit exceeded",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment-terms/:id?by=key",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment-terms",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n",
+                          "key": "by",
+                          "value": "key"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Request limit per minute",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Remaining requests in current window",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Remaining",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unix timestamp when rate limit resets",
+                        "type": "text/plain"
+                      },
+                      "key": "X-RateLimit-Reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:11:02.000Z",
+                  "updatedAt": "2026-10-21T21:11:02.000Z",
+                  "uid": "35240-f8723a32-179c-4be9-924b-373436689547"
+                }
+              ],
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-f9d6e157-41dc-4b80-b031-7b1bef925118"
+            }
+          ],
+          "id": "17fb4cba-9f87-4753-8a1d-76d9057c24ae",
+          "createdAt": "2026-10-21T21:11:01.000Z",
+          "updatedAt": "2026-10-21T21:11:01.000Z",
+          "uid": "35240-17fb4cba-9f87-4753-8a1d-76d9057c24ae"
+        },
+        {
           "name": "Create payment term",
+          "id": "1da6fd43-c28c-470c-bcf5-2f74dfba6b63",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create payment term",
-            "description": {
-              "content": "Create a new payment term configuration in your organization",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "payment-terms"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -370,1394 +1524,354 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"days\": \"<integer>\",\n  \"quickPayFee\": \"<float>\",\n  \"apOnly\": \"<boolean>\",\n  \"doNotUse\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/payment-terms",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payment-terms"
+              ]
+            },
+            "description": "Create a new payment term configuration in your organization"
           },
           "response": [
             {
-              "id": "79c65bc1-9623-464d-a8f2-5b092b4b8461",
+              "id": "cfc1ac53-2678-4d7c-a77b-a582b8a3f5f9",
               "name": "Payment term created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"days\": \"<integer>\",\n  \"quickPayFee\": \"<float>\",\n  \"apOnly\": \"<boolean>\",\n  \"doNotUse\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment-terms",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-terms"
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"Net 30\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\",\n  \"deletedAt\": \"1982-04-06T23:05:02.858Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\",\n  \"deletedAt\": \"<string,null-date-time>\"\n}",
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-cfc1ac53-2678-4d7c-a77b-a582b8a3f5f9"
             },
             {
-              "id": "51427585-ce11-4b0b-8e68-a9bd4df44583",
+              "id": "8462aa26-6564-4f68-82d4-367aa4e18320",
               "name": "Bad request - invalid input",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"days\": \"<integer>\",\n  \"quickPayFee\": \"<float>\",\n  \"apOnly\": \"<boolean>\",\n  \"doNotUse\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment-terms",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-terms"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-8462aa26-6564-4f68-82d4-367aa4e18320"
             },
             {
-              "id": "0010767f-fa74-4a18-bfd8-6a21b929618a",
+              "id": "12df9806-1ee9-4b78-98d2-7217b40dca53",
               "name": "Unauthorized - invalid or missing access token",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"days\": \"<integer>\",\n  \"quickPayFee\": \"<float>\",\n  \"apOnly\": \"<boolean>\",\n  \"doNotUse\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment-terms",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-terms"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-12df9806-1ee9-4b78-98d2-7217b40dca53"
             },
             {
-              "id": "9d369710-59bf-4fce-9f04-15177a3cfbcd",
+              "id": "c94148fa-4cc1-4cc5-bb74-675d6a20434b",
               "name": "Validation error - invalid field values",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"days\": \"<integer>\",\n  \"quickPayFee\": \"<float>\",\n  \"apOnly\": \"<boolean>\",\n  \"doNotUse\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment-terms",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment-terms"
+                  ]
                 }
               },
               "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
               "code": 422,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-c94148fa-4cc1-4cc5-bb74-675d6a20434b"
             },
             {
-              "id": "d57cdd04-a51d-45ee-b8d5-c351a2ccdf7f",
+              "id": "cc3857c2-a057-4487-9165-59fcb339491e",
               "name": "Rate limit exceeded",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"days\": \"<integer>\",\n  \"quickPayFee\": \"<float>\",\n  \"apOnly\": \"<boolean>\",\n  \"doNotUse\": \"<boolean>\",\n  \"key\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/payment-terms",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "payment-terms"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "Too Many Requests",
               "code": 429,
+              "_postman_previewlanguage": "json",
               "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "2955"
-                },
                 {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Request limit per minute",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Remaining requests in current window",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Remaining",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Unix timestamp when rate limit resets",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Reset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
                 }
               ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:02.000Z",
+              "updatedAt": "2026-10-21T21:11:02.000Z",
+              "uid": "35240-cc3857c2-a057-4487-9165-59fcb339491e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3bf1d9f9-cdfb-4efc-b423-1594c4ee789c",
-          "name": "Get payment term",
-          "request": {
-            "name": "Get payment term",
-            "description": {
-              "content": "Retrieve a payment term by ID or client key",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "payment-terms",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "by",
-                  "value": "<string>",
-                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d79ecf7d-4e94-4f44-8a25-e826ea9d3bf3",
-              "name": "Successful response",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"Net 30\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\",\n  \"deletedAt\": \"1982-04-06T23:05:02.858Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "38d496fe-b33e-4050-8145-726398ceaada",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b602e1f6-6a8f-4495-b66b-a1f6ab9f7661",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "84f6063d-66dd-4272-ba38-b7d9254aaea7",
-              "name": "Rate limit exceeded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "2955"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ee41b335-b422-4d76-a149-bdc4094177ed",
-          "name": "Update payment term",
-          "request": {
-            "name": "Update payment term",
-            "description": {
-              "content": "Partially update a payment term. Only provided fields will be updated.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "payment-terms",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "by",
-                  "value": "<string>",
-                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string,null>\",\n  \"days\": \"<integer,null>\",\n  \"quickPayFee\": \"<number,null-float>\",\n  \"apOnly\": \"<boolean,null>\",\n  \"doNotUse\": \"<boolean,null>\",\n  \"key\": \"<string,null>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "8831b228-4d8c-475a-a1da-dd97664e2eea",
-              "name": "Payment term updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"name\": \"Net 30\",\n  \"createdAt\": \"2025-01-15T10:00:00Z\",\n  \"updatedAt\": \"2025-01-15T14:30:00Z\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\",\n  \"deletedAt\": \"1982-04-06T23:05:02.858Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "31f0e342-3149-4b46-9d6b-8a78b90c5ecb",
-              "name": "Bad request - invalid input",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "90e16702-7e71-474d-a3ab-7b7c3c572f5f",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "50574637-26bb-49f3-9c7e-9f49feec3c34",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0c6c303e-146a-4ba1-af38-8ea1c62bf942",
-              "name": "Validation error - invalid field values",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "50d657ef-b4cb-4067-bda2-5c684d011d96",
-              "name": "Rate limit exceeded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Net 30\",\n  \"description\": \"Payment due 30 days from invoice date\",\n  \"days\": 30,\n  \"quickPayFee\": 0.05,\n  \"apOnly\": false,\n  \"doNotUse\": false,\n  \"key\": \"ERP-PAYTERM-NET30\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "2955"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a2ebf2b1-7a34-4f1e-a2fe-532e373de9f9",
-          "name": "Delete payment term",
-          "request": {
-            "name": "Delete payment term",
-            "description": {
-              "content": "Soft delete a payment term (sets deletedAt timestamp)",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "payment-terms",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "by",
-                  "value": "<string>",
-                  "description": "Specify lookup type for faster retrieval.\nIf omitted, defaults to looking up by ID first, then falls back to client key if not found.\nUse `by=key` when you know you're providing a client key for best performance.\n"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Resource ID (UUID) or client key"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "662163dc-936a-4d09-ad00-920a0b9cbb75",
-              "name": "Payment term deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "48c2b4df-7e3d-4372-9e7d-5096fa2265aa",
-              "name": "Unauthorized - invalid or missing access token",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fbd304f1-dd7e-454e-88c4-1b49843c3ca7",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"not_found\",\n  \"message\": \"Resource not found\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a74ec362-7356-44d7-882c-669f0d34541b",
-              "name": "Rate limit exceeded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payment-terms",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "by",
-                      "value": "key"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Resource ID (UUID) or client key"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Too Many Requests",
-              "code": 429,
-              "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "2955"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "2955"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:11:02.000Z",
+          "updatedAt": "2026-10-21T21:11:02.000Z",
+          "uid": "35240-1da6fd43-c28c-470c-bcf5-2f74dfba6b63"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.mvmnt.io/v1",
-      "key": "baseUrl"
+      "id": "0002024f-9614-4cd0-8b5a-5d834922dc9a",
+      "createdAt": "2026-10-21T21:11:01.000Z",
+      "updatedAt": "2026-10-21T21:11:01.000Z",
+      "uid": "35240-0002024f-9614-4cd0-8b5a-5d834922dc9a"
     }
   ],
   "auth": {
@@ -1765,17 +1879,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "041e6746-f9a9-4204-bc9d-59e65a867985",
-    "name": "MVMNT Bill Payments Payment Terms API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mvmnt.io/v1"
     }
-  }
+  ]
 }

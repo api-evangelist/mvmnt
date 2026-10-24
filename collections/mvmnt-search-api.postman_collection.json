@@ -1,32 +1,26 @@
 {
+  "info": {
+    "_postman_id": "c061f0d4-a075-4b69-bca4-299dfdb0bb28",
+    "name": "MVMNT Search API",
+    "description": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:11:35.000Z",
+    "updatedAt": "2026-10-21T21:11:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c061f0d4-a075-4b69-bca4-299dfdb0bb28"
+  },
   "item": [
     {
-      "id": "830852a1-b554-403e-8f08-3d5ddd8824b9",
-      "name": "Search",
-      "description": {
-        "content": "Global search operations",
-        "type": "text/plain"
-      },
+      "name": "global-search",
       "item": [
         {
-          "id": "b5f21022-8a45-4dff-863b-c4008734e93b",
           "name": "Search globally",
+          "id": "a55579b1-a9d5-46d8-ba2c-e337a5dffa8b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Search globally",
-            "description": {
-              "content": "Search across multiple entity types simultaneously (shipments, customers, carriers, users, vendors).\n\n**Use Cases:**\n- Unified search bar for finding any type of record\n- Quick lookup by name, ID, or reference number\n- Cross-entity discovery\n\n**Search Behavior:**\n- Searches across default searchable fields for each entity type\n- Results are sorted by object type priority: SHIPMENT → CUSTOMER → CARRIER → USER → VENDOR\n- Within each object type, results are sorted by most recently updated\n\n**Prefix Filtering:**\nUse \"type:query\" syntax to search specific object types:\n- `carrier:acme` - searches only carriers\n- `shipment:12345` - searches only shipments\n- `customer:west` - searches only customers\n\n**IMPORTANT: Eventually Consistent**\nThis endpoint queries OpenSearch indices which are updated asynchronously.\nChanges typically appear within 2 seconds, but this is not guaranteed.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "global-search"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -37,314 +31,354 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"query\": \"<string>\",\n  \"objects\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  }\n}",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"objects\": [\n    \"VENDOR\",\n    \"VENDOR\"\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  }\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/global-search",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "global-search"
+              ]
+            },
+            "description": "Search across multiple entity types simultaneously (shipments, customers, carriers, users, vendors).\n\n**Use Cases:**\n- Unified search bar for finding any type of record\n- Quick lookup by name, ID, or reference number\n- Cross-entity discovery\n\n**Search Behavior:**\n- Searches across default searchable fields for each entity type\n- Results are sorted by object type priority: SHIPMENT \u2192 CUSTOMER \u2192 CARRIER \u2192 USER \u2192 VENDOR\n- Within each object type, results are sorted by most recently updated\n\n**Prefix Filtering:**\nUse \"type:query\" syntax to search specific object types:\n- `carrier:acme` - searches only carriers\n- `shipment:12345` - searches only shipments\n- `customer:west` - searches only customers\n\n**IMPORTANT: Eventually Consistent**\nThis endpoint queries OpenSearch indices which are updated asynchronously.\nChanges typically appear within 2 seconds, but this is not guaranteed."
           },
           "response": [
             {
-              "id": "d55562e8-6580-489b-95ac-1650bbef92b4",
+              "id": "634cdcaf-1e02-4f35-a507-7fb95f4810bf",
               "name": "Search results",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "global-search"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"query\": \"acme\"\n}",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"objects\": [\n    \"VENDOR\",\n    \"VENDOR\"\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/global-search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "global-search"
+                  ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"object\": \"SHIPMENT\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n      \"key\": \"ERP-SHIP-001\",\n      \"entityName\": \"SHIPMENT\",\n      \"title\": \"SHIP-12345\",\n      \"subtitle\": \"Acme Corporation\",\n      \"field\": \"Customer\",\n      \"highlight\": \"<em>Acme</em> Corporation\"\n    },\n    {\n      \"object\": \"CUSTOMER\",\n      \"id\": \"550e8400-e29b-41d4-a716-446655440002\",\n      \"key\": \"ERP-CUST-001\",\n      \"entityName\": \"SHIPPER_PROFILE\",\n      \"title\": \"Acme Corporation\",\n      \"subtitle\": \"CUST-001\",\n      \"field\": \"Name\",\n      \"highlight\": \"<em>Acme</em> Corporation\"\n    }\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 20,\n    \"totalPages\": 3\n  },\n  \"totalResults\": 42\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"object\": \"CARRIER\",\n      \"id\": \"<uuid>\",\n      \"entityName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"field\": \"<string>\",\n      \"key\": \"<string,null>\",\n      \"subtitle\": \"<string,null>\",\n      \"highlight\": \"<string,null>\"\n    },\n    {\n      \"object\": \"VENDOR\",\n      \"id\": \"<uuid>\",\n      \"entityName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"field\": \"<string>\",\n      \"key\": \"<string,null>\",\n      \"subtitle\": \"<string,null>\",\n      \"highlight\": \"<string,null>\"\n    }\n  ],\n  \"pagination\": {\n    \"pageNumber\": \"<integer>\",\n    \"pageSize\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  },\n  \"totalResults\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T21:11:36.000Z",
+              "updatedAt": "2026-10-21T21:11:36.000Z",
+              "uid": "35240-634cdcaf-1e02-4f35-a507-7fb95f4810bf"
             },
             {
-              "id": "b54ea687-9fed-4100-8561-bb0335d382fd",
+              "id": "6a2c9510-1bd5-4b9f-9cc3-fac26c7dbf8c",
               "name": "Bad request - invalid input",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "global-search"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"query\": \"acme\"\n}",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"objects\": [\n    \"VENDOR\",\n    \"VENDOR\"\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/global-search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "global-search"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"bad_request\",\n  \"message\": \"Invalid request parameters\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:36.000Z",
+              "updatedAt": "2026-10-21T21:11:36.000Z",
+              "uid": "35240-6a2c9510-1bd5-4b9f-9cc3-fac26c7dbf8c"
             },
             {
-              "id": "e60591ba-3ce7-4749-b20e-4a0cf65a49c8",
+              "id": "409675af-fccf-4267-a262-d2f302bb3b74",
               "name": "Unauthorized - invalid or missing access token",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "global-search"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"query\": \"acme\"\n}",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"objects\": [\n    \"VENDOR\",\n    \"VENDOR\"\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/global-search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "global-search"
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid or expired access token\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:36.000Z",
+              "updatedAt": "2026-10-21T21:11:36.000Z",
+              "uid": "35240-409675af-fccf-4267-a262-d2f302bb3b74"
             },
             {
-              "id": "f21814b3-b4fb-4e7e-a4ec-c0b577f7bbb4",
+              "id": "bc8d6211-3114-4b54-876e-ffcb7ee97d30",
               "name": "Validation error - invalid field values",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "global-search"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"query\": \"acme\"\n}",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"objects\": [\n    \"VENDOR\",\n    \"VENDOR\"\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/global-search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "global-search"
+                  ]
                 }
               },
               "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
               "code": 422,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"validation_error\",\n  \"message\": \"Invalid field values\",\n  \"details\": [\n    {\n      \"field\": \"email\",\n      \"message\": \"Must be a valid email address\"\n    },\n    {\n      \"field\": \"status\",\n      \"message\": \"Must be one of PENDING, ACTIVE, INACTIVE\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T21:11:36.000Z",
+              "updatedAt": "2026-10-21T21:11:36.000Z",
+              "uid": "35240-bc8d6211-3114-4b54-876e-ffcb7ee97d30"
             },
             {
-              "id": "66c05374-bd6a-467a-b8e6-73d59439490e",
+              "id": "da292937-0d2d-49ba-b9cc-46e4e5f36236",
               "name": "Rate limit exceeded",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "global-search"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"query\": \"acme\"\n}",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"objects\": [\n    \"VENDOR\",\n    \"VENDOR\"\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 50\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/global-search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "global-search"
+                  ]
                 }
               },
               "status": "Too Many Requests",
               "code": 429,
+              "_postman_previewlanguage": "json",
               "header": [
-                {
-                  "disabled": false,
-                  "description": "Request limit per minute",
-                  "key": "X-RateLimit-Limit",
-                  "value": "8351"
-                },
-                {
-                  "disabled": false,
-                  "description": "Remaining requests in current window",
-                  "key": "X-RateLimit-Remaining",
-                  "value": "8351"
-                },
-                {
-                  "disabled": false,
-                  "description": "Unix timestamp when rate limit resets",
-                  "key": "X-RateLimit-Reset",
-                  "value": "8351"
-                },
-                {
-                  "disabled": false,
-                  "description": "Seconds to wait before retrying",
-                  "key": "Retry-After",
-                  "value": "8351"
-                },
                 {
                   "key": "Content-Type",
                   "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Request limit per minute",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Remaining requests in current window",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Remaining",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Unix timestamp when rate limit resets",
+                    "type": "text/plain"
+                  },
+                  "key": "X-RateLimit-Reset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
                 }
               ],
-              "body": "{\n  \"error\": \"rate_limit_exceeded\",\n  \"message\": \"Too many requests. Please retry after 60 seconds.\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T21:11:36.000Z",
+              "updatedAt": "2026-10-21T21:11:36.000Z",
+              "uid": "35240-da292937-0d2d-49ba-b9cc-46e4e5f36236"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T21:11:36.000Z",
+          "updatedAt": "2026-10-21T21:11:36.000Z",
+          "uid": "35240-a55579b1-a9d5-46d8-ba2c-e337a5dffa8b"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.mvmnt.io/v1",
-      "key": "baseUrl"
+      "id": "592334b4-71a3-4366-a909-df043e5ef9e9",
+      "createdAt": "2026-10-21T21:11:36.000Z",
+      "updatedAt": "2026-10-21T21:11:36.000Z",
+      "uid": "35240-592334b4-71a3-4366-a909-df043e5ef9e9"
     }
   ],
   "auth": {
@@ -352,17 +386,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "584fc3b8-1a1f-4abe-8e50-01a661cbb920",
-    "name": "MVMNT Bill Payments Search API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The MVMNT API enables you to automate freight brokerage workflows by integrating\ndirectly with our Transportation Management System.\n\n## Authentication\n\nOAuth 2.0 client credentials flow. See [Authentication Guide](/getting-started/authentication)\nfor details.\n\n### Token Endpoint\n\n```\nPOST https://api.mvmnt.io/oauth2/token\n```\n\n#### Request\n\n**Headers:**\n```http\nContent-Type: application/x-www-form-urlencoded\n```\n\n**Body Parameters:**\n```\ngrant_type=client_credentials\nclient_id=YOUR_CLIENT_ID\nclient_secret=YOUR_CLIENT_SECRET\n```\n\n#### Example Request\n\n```bash\ncurl -X POST https://api.mvmnt.io/oauth2/token \\\n  -H \"Content-Type: application/x-www-form-urlencoded\" \\\n  -d \"grant_type=client_credentials\" \\\n  -d \"client_id=YOUR_CLIENT_ID\" \\\n  -d \"client_secret=YOUR_CLIENT_SECRET\"\n```\n\n#### Success Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}\n```\n\n**Response Fields:**\n- `access_token`: JWT Bearer token to use for API requests\n- `token_type`: Always `Bearer`\n- `expires_in`: Token lifetime in seconds (3600 = 1 hour)\n\n\nContact Support:\n Name: MVMNT Support\n Email: support@mvmnt.io",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mvmnt.io/v1"
     }
-  }
+  ]
 }
